@@ -7,9 +7,12 @@
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "license": "AGPL-3",
     "summary": "Website Sale UI",
-    "depends": ["website_sale"],
+    "depends": [
+        "website_sale",
+        "website_sale_comparison",
+    ],
     "data": [
-      "views/website_sale_view.xml", 
+      "views/website_sale_comparison.xml", 
     ],
     "installable": True,
 }
