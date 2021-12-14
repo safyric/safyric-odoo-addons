@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_product" inherit_id="website_sale_comparison.product_product">
+        <xpath expr="//h6/span" position="attributes">
+            <attribute name="t-if">website.website_show_price</attribute>
+        </xpath>
+    </template>
+
+    <template id="product_compare" inherit_id="website_sale_comparison.product_compare">
+        <xpath expr="//div[@class='product_summary']/span" position="attributes">
+            <attribute name="t-if">website.website_show_price</attribute>
+        </xpath>
+        <!--<xpath expr="//div[@class='product_summary']/form" position="attributes">
+            <attribute name="t-if">website.website_show_price</attribute>
+        </xpath>-->
+    </template>
+</odoo>
