@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="product_attributes_body" inherit_id="website_sale_comparison.product_attributes_body">
+    <xpath expr="//h3" position="attributes">
+      <attribute name="style">text-transform: uppercase</attribute>
+    </xpath>
+    <xpath expr="//tr[@t-as='att']" position="attributes">
+      <attribute name="t-if">att.value_ids.filtered(lambda r: r.code != '0' and r.code != 'X')</attribute>
+    </xpath>
+    <xpath expr="//tr/td/t[2]" position="attributes">
+      <attribute name="t-esc">('%s ' % or_separator).join(att.value_ids.filtered(lambda r: r.code != '0' and r.code != 'X').mapped('name'))</attribute>
+    </xpath>
+  </template>
+</odoo>
