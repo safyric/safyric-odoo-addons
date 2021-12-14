@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="portal_my_invoices" inherit_id="account.portal_my_invoices">
+    <xpath expr="//thead/tr/th[1]" position="after">
+      <th>Reference</th>
+      <th>Source Document</th>
+    </xpath>
+    <xpath expr="//tbody//tr/td[1]" position="after">
+      <td><span t-field="invoice.name"/></td>
+      <td><span t-field="invoice.origin"/></td>
+    </xpath>
+  </template>
+</odoo>
