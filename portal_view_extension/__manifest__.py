@@ -10,6 +10,7 @@
     'depends': [
         'portal',
         'sale',
+        'account',
     ],
     'data': [
         'views/sale_portal_template.xml'
