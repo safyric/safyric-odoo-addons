@@ -62,7 +62,7 @@
         </template>
         <template id="product_quantity" inherit_id="website_sale.product_quantity">
                 <xpath expr="//div[hasclass('css_quantity')]" position="attributes">
-                        <attribute name="t-if"/>
+                    <attribute name="t-if"/>
                 </xpath>
         </template>
 </odoo>
