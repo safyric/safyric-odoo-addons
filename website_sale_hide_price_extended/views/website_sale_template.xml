@@ -60,4 +60,19 @@
                 </attribute>
             </xpath>
         </template>
+        <template id="product_quantity" inherit_id="website_sale.product_quantity">
+                <xpath expr="//div[hasclass('css_quantity')]" position="attributes">
+                    <attribute name="t-if"/>
+                </xpath>
+        </template>
+        <template id="products_item" inherit_id="website_sale.products_item">
+                <xpath expr="//div[@itemprop='offers']" position="attributes">
+                        <attribute name="t-if"/>
+                </xpath>
+        </template>
+        <template id="variants" inherit_id="sale.variants">
+                <xpath expr="//span[@t-if='value_id.price_extra']" position="attributes">
+                        <attribute name="t-if" add="and website.website_show_price" separator=" "/>
+                </xpath>
+        </template>
 </odoo>
