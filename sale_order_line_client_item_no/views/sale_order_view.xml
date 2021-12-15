@@ -9,7 +9,18 @@
                 <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="before">
                     <field name="client_item"/>
                 </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="before">
+                    <field name="client_item"/>
+                </xpath>
             </field>
         </record>
 
+        <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//th[@name='th_description']" position="before">
+                <th name="th_item" class="text-left">Item #</th>
+            </xpath>
+            <xpath expr="//td[@name='td_name']" position="before">
+                <td name="td_item"><span t-field="line.client_item"/></td>
+            </xpath>
+        </template>
 </odoo>
