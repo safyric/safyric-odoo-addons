@@ -18,7 +18,7 @@
             <xpath expr="//thead/tr/th[1]" position="before">
                 <th>Item #</th>
             </xpath>
-            <xpath expr="//tr/td[1]" position="before">
+            <xpath expr="//tbody//tr//td[1]" position="before">
                 <td>
                     <span t-field="order_line.item"/>
                 </td>
@@ -29,9 +29,9 @@
             <xpath expr="//thead/tr/th[1]" position="before">
                 <th>Item #</th>
             </xpath>
-            <xpath expr="//tr/td[1]" position="before">
+            <xpath expr="//tbody//tr//td[1]" position="before">
                 <td>
-                    <span t-field="order_line.item"/>
+                    <span t-field="line.item"/>
                 </td>
             </xpath>
         </template>
