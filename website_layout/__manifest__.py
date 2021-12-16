@@ -4,7 +4,7 @@
     'summary': """Customize website layout""",
     'description': """Customize website layout""",
     'author': "Safyric Co., Ltd.",
-    'website': "https://www.safyric.com",
+    'website': "https://github.com/safyric/safyric-odoo-addons",
     'category': 'Tools',
     'version': '0.2',
     'depends': [
