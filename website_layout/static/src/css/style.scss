@@ -5,7 +5,7 @@ $weightnames: Thin 100, ExtraLight 200, Light 300, Regular 400, Medium 500, Semi
 
 @mixin font-include($name, $weight, $style) {
   font-family: $font-family;
-  src: url(../font/#{$name}.ttf) format('truetype');
+  src: url(../fonts/#{$name}.ttf) format('truetype');
   font-weight: $weight;
   font-style: $style;
 }
