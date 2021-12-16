@@ -77,21 +77,23 @@
             </tr>
             <tr>
               <td id="information">
-                <div class="row">
-                  <strong>Date:</strong>
-                  <p t-field="o.date_order" class="m-0"/>
-                </div>
-                <div class="row">
-                  <strong>Company:</strong>
-                  <p t-field="o.company_id" class="m-0"/>
-                </div>
-                <div class="row">
-                  <strong>Buyer:</strong>
-                  <p t-field="o.user_id" class="m-0"/>
-                </div>
-                <div t-if="o.user_id.phone" class="row">
-                  <strong>Phone:</strong>
-                  <p t-field="o.user_id.phone" class="m-0"/>
+                <div class="container">
+                  <div class="row">
+                    <strong>Date: </strong>
+                    <p t-field="o.date_order" class="m-0"/>
+                  </div>
+                  <div class="row">
+                    <strong>Company: </strong>
+                    <p t-field="o.company_id" class="m-0"/>
+                  </div>
+                  <div class="row">
+                    <strong>Buyer: </strong>
+                    <p t-field="o.user_id" class="m-0"/>
+                  </div>
+                  <div t-if="o.user_id.phone" class="row">
+                    <strong>Phone: </strong>
+                    <p t-field="o.user_id.phone" class="m-0" t-options='{"widget": "date"}'/>
+                  </div>
                 </div>
               </td>
             </tr>
