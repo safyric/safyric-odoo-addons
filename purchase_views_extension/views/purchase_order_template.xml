@@ -105,7 +105,7 @@
                     <p t-field="o.user_id.phone" class="m-0"/>
                   </div>
                   <div t-if="o.user_id.email" class="row">
-                    <span>Phone:&#160;</span>
+                    <span>Email:&#160;</span>
                     <p t-field="o.user_id.email" class="m-0"/>
                   </div>
                   <div t-if="o.incoterm_id" class="row">
@@ -162,7 +162,10 @@
             </tr>
           </table>          
         </div>
-      </div>    </xpath>
+      </div>
+      <div class="clearfix"/>
+    </xpath>
+    
     <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
