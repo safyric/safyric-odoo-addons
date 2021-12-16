@@ -8,7 +8,7 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//img[@t-if='company.logo']" position="attributes">
-      <attribute name="style">eight:50px;</attribute>
+      <attribute name="style">eight:30px;</attribute>
     </xpath>
   </template>
   <template id="external_layout_boxed" inherit_id="web.external_layout_boxed">
@@ -20,7 +20,7 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//img[@t-if='company.logo']" position="attributes">
-      <attribute name="style">eight:50px;</attribute>
+      <attribute name="style">eight:30px;</attribute>
     </xpath>
   </template>
   <template id="external_layout_clean" inherit_id="web.external_layout_clean">
@@ -31,7 +31,7 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//img[@t-if='company.logo']" position="attributes">
-      <attribute name="style">eight:50px;</attribute>
+      <attribute name="style">eight:30px;</attribute>
     </xpath>
   </template>
   <template id="external_layout_standard" inherit_id="web.external_layout_standard">
@@ -43,7 +43,7 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//img[@t-if='company.logo']" position="attributes">
-      <attribute name="style">eight:50px;</attribute>
+      <attribute name="style">eight:30px;</attribute>
     </xpath>
   </template>
 </odoo>
