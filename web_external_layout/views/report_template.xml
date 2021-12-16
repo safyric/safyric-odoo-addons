@@ -16,7 +16,7 @@
       <attribute name="style">height:50px;</attribute>
     </xpath>
     <xpath expr="//img" position="after">
-      <div class="pull-left">
+      <div class="pull-left" t-if="company.report_header_name">
         <span style="font-family: 'Prompt', ans-serif; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
       </div>
     </xpath>
@@ -32,7 +32,7 @@
       <attribute name="style">height:50px;</attribute>
     </xpath>
     <xpath expr="//img" position="after">
-      <div class="pull-left">
+      <div class="pull-left"  t-if="company.report_header_name">
         <span style="font-family: 'Prompt', ans-serif; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
       </div>
     </xpath>
@@ -48,7 +48,7 @@
       <attribute name="style">height:50px;</attribute>
     </xpath>
     <xpath expr="//img" position="after">
-      <div class="pull-left">
+      <div class="pull-left" t-if="company.report_header_name">
         <span style="font-family: 'Prompt', ans-serif; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
       </div>
     </xpath>
@@ -64,7 +64,7 @@
       <attribute name="style">height:50px;</attribute>
     </xpath>
     <xpath expr="//img" position="after">
-      <div class="pull-left">
+      <div class="pull-left" t-if="company.report_header_name">
         <span style="font-family: 'Prompt', ans-serif; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
       </div>
     </xpath>
