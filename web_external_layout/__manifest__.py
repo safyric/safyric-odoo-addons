@@ -2,7 +2,7 @@
 
 
 {
-    'name': 'Web Document Template',
+    'name': 'Web External Layout',
     'version': '12.0.1.0.0',
     'category': 'Tools',
     'license': 'AGPL-3',
