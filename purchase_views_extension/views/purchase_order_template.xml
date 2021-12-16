@@ -65,7 +65,7 @@
               <td>Seller</td>
             </tr>
             <tr>
-              <td name="seller">
+              <td id="seller">
               </td>
             </tr>
           </table>
@@ -76,12 +76,31 @@
               <td>Information</td>
             </tr>
             <tr>
-              <td name="information">
+              <td id="information">
+                <div class="row">
+                  <strong>Date:</strong>
+                  <p t-field="o.date_order" class="m-0"/>
+                </div>
+                <div class="row">
+                  <strong>Company:</strong>
+                  <p t-field="o.company_id" class="m-0"/>
+                </div>
+                <div class="row">
+                  <strong>Buyer:</strong>
+                  <p t-field="o.user_id" class="m-0"/>
+                </div>
+                <div t-if="o.user_id.phone" class="row">
+                  <strong>Phone:</strong>
+                  <p t-field="o.user_id.phone" class="m-0"/>
+                </div>
               </td>
             </tr>
           </table>          
         </div>
       </div>
+    </xpath>
+    <xpath expr="//td[@name='seller']" position="inside">
+      <xpath expr="//t[@t-set='address']" position="move"/>
     </xpath>
   </template>
 </odoo>
