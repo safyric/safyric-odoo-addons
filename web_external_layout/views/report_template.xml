@@ -15,6 +15,7 @@
     <xpath expr="//div[@name='company_address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
+
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
@@ -37,6 +38,7 @@
     <xpath expr="//div[@name='company_address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
+
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
