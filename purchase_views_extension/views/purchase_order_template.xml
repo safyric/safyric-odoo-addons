@@ -99,7 +99,7 @@
         </div>
       </div>
     </xpath>
-    <xpath expr="//td[@name='seller']" position="inside">
+    <xpath expr="//td[@id='seller']" position="inside">
       <xpath expr="//t[@t-set='address']" position="move"/>
     </xpath>
   </template>
