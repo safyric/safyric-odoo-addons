@@ -62,7 +62,7 @@
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td>Seller</td>
+              <td><strong>Seller</strong></td>
             </tr>
             <tr>
               <td id="seller">
@@ -73,26 +73,34 @@
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td>Information</td>
+              <td><strong>Information</strong></td>
             </tr>
             <tr>
               <td id="information">
                 <div class="container">
                   <div class="row">
-                    <strong>Date: </strong>
-                    <p t-field="o.date_order" class="m-0"/>
+                    <p>Date: </p>
+                    <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                   </div>
                   <div class="row">
-                    <strong>Company: </strong>
+                    <p>Company: </p>
                     <p t-field="o.company_id" class="m-0"/>
                   </div>
                   <div class="row">
-                    <strong>Buyer: </strong>
+                    <p>Buyer: </p>
                     <p t-field="o.user_id" class="m-0"/>
                   </div>
                   <div t-if="o.user_id.phone" class="row">
-                    <strong>Phone: </strong>
-                    <p t-field="o.user_id.phone" class="m-0" t-options='{"widget": "date"}'/>
+                    <p>Phone: </p>
+                    <p t-field="o.user_id.phone" class="m-0"/>
+                  </div>
+                  <div t-if="o.incoterm_id" class="row">
+                    <p>INCOTERMS: </p>
+                    <p t-field="o.incoterm_id" class="m-0"/>
+                  </div>
+                  <div t-if="o.payment_term_id" class="row">
+                    <p>Payment Term: </p>
+                    <p t-field="o.payment_term_id" class="m-0"/>
                   </div>
                 </div>
               </td>
