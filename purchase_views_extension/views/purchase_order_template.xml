@@ -122,7 +122,47 @@
           </table>          
         </div>
       </div>
-    </xpath>
+      <div class="row">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td><strong>Shiping Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <t t-if="o.dest_address_id">
+                      <div t-if="o.dest_address_id">
+                        <div t-field="o.dest_address_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
+                      </div>
+                    </t>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td><strong>Invoicing Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <div t-field="o.company_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    <p t-if="o.company_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.company_id.vat"/></p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>          
+        </div>
+      </div>    </xpath>
     <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
