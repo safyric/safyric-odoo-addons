@@ -11,7 +11,7 @@
               <attribute name="align">left</attribute>
           </xpath>
           <xpath expr="//span[@t-field='res_company.logo']" position="after">
-            <span style="font-family: 'Prompt', sans-serif; vertical-align: middle;" t-field="res_company.report_header_name"/>
+            <span style="font-family: 'Prompt', sans-serif; font-weight: 200; vertical-align: middle;" t-field="res_company.report_header_name"/>
           </xpath>
         </template>
     </data>
