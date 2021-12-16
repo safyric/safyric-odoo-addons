@@ -83,27 +83,27 @@
               <td id="information">
                 <div class="container">
                   <div class="row">
-                    <span>Date: </span>
+                    <span>Date: &#160;</span>
                     <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                   </div>
                   <div class="row">
-                    <span>Company: &nbsp;</span>
+                    <span>Company: &#160;</span>
                     <p t-field="o.company_id" class="m-0"/>
                   </div>
                   <div class="row">
-                    <span>Buyer: &nbsp;</span>
+                    <span>Buyer: &#160;</span>
                     <p t-field="o.user_id" class="m-0"/>
                   </div>
                   <div t-if="o.user_id.phone" class="row">
-                    <span>Phone: &nbsp;</span>
+                    <span>Phone: &#160;</span>
                     <p t-field="o.user_id.phone" class="m-0"/>
                   </div>
                   <div t-if="o.incoterm_id" class="row">
-                    <span>INCOTERMS: &nbsp;</span>
+                    <span>INCOTERMS: &#160;</span>
                     <p t-field="o.incoterm_id.code" class="m-0"/>
                   </div>
                   <div t-if="o.payment_term_id" class="row">
-                    <span>Payment Term: &nbsp;</span>
+                    <span>Payment Term: &#160;</span>
                     <p t-field="o.payment_term_id" class="m-0"/>
                   </div>
                 </div>
