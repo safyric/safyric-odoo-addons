@@ -65,7 +65,11 @@
               <td><strong>Seller</strong></td>
             </tr>
             <tr>
-              <td id="seller">
+              <td>
+                <div class="container">
+                  <div class="row" id="seller">
+                  </div>
+                </div>
               </td>
             </tr>
           </table>
@@ -83,23 +87,23 @@
                     <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                   </div>
                   <div class="row">
-                    <span>Company: </span>
+                    <span>Company: &nbsp;</span>
                     <p t-field="o.company_id" class="m-0"/>
                   </div>
                   <div class="row">
-                    <span>Buyer: </span>
+                    <span>Buyer: &nbsp;</span>
                     <p t-field="o.user_id" class="m-0"/>
                   </div>
                   <div t-if="o.user_id.phone" class="row">
-                    <span>Phone: </span>
+                    <span>Phone: &nbsp;</span>
                     <p t-field="o.user_id.phone" class="m-0"/>
                   </div>
                   <div t-if="o.incoterm_id" class="row">
-                    <span>INCOTERMS: </span>
-                    <p t-field="o.incoterm_id" class="m-0"/>
+                    <span>INCOTERMS: &nbsp;</span>
+                    <p t-field="o.incoterm_id.code" class="m-0"/>
                   </div>
                   <div t-if="o.payment_term_id" class="row">
-                    <span>Payment Term: </span>
+                    <span>Payment Term: &nbsp;</span>
                     <p t-field="o.payment_term_id" class="m-0"/>
                   </div>
                 </div>
@@ -109,7 +113,7 @@
         </div>
       </div>
     </xpath>
-    <xpath expr="//td[@id='seller']" position="inside">
+    <xpath expr="//div[@id='seller']" position="inside">
       <xpath expr="//t[@t-set='address']" position="move"/>
     </xpath>
   </template>
