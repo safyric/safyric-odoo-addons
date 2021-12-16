@@ -11,12 +11,18 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right">
-          <h2 t-if="o.state == 'draft'">Request for Quotation <br/><span t-field="o.name"/></h2>
-          <h2 t-if="o.state in ['sent', 'to approve']">Purchase Order <br/><span t-field="o.name"/></h2>
-          <h2 t-if="o.state in ['purchase', 'done']">Purchase Order Confirmation <br/><span t-field="o.name"/></h2>
-          <h2 t-if="o.state == 'cancel'">Cancelled Purchase Order <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state == 'draft'">REQUEST FOR QUOTATION <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state in ['sent', 'to approve']">PURCHASE ORDER <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state in ['purchase', 'done']">PURCHASE ORDER (DONE) <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h2>
         </div>
+        <div class="clearfix mb8"/>
       </div>
+    </div>
+
+    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+      <t t-call="web.address_layout"/>
+      <t t-raw="0"/>
     </div>
 
     <div class="footer o_background_footer">
