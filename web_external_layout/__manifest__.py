@@ -15,6 +15,7 @@
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'data': [
         'views/report_template.xml',
+        'views/res_company.xml',
     ],
     'installable': True,
 }
