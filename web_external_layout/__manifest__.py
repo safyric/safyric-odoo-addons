@@ -9,6 +9,7 @@
     'summary': 'Extend and change layout of document templates',
     'depends': [
         'web',
+        'base',
     ],
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
