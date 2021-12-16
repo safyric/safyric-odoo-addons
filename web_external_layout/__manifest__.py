@@ -2,18 +2,20 @@
 
 
 {
-    'name': 'Web Document Template',
+    'name': 'Web External Layout',
     'version': '12.0.1.0.0',
     'category': 'Tools',
     'license': 'AGPL-3',
     'summary': 'Extend and change layout of document templates',
     'depends': [
         'web',
+        'base',
     ],
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'data': [
         'views/report_template.xml',
+        'views/res_company.xml',
     ],
     'installable': True,
 }
