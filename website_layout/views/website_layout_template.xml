@@ -1,4 +1,4 @@
-<odoo>
+<odoo>https://github.com/safyric/safyric-odoo-addons/tree/12.0/website_layout/views
     <data>
         <template id="assets_frontend" inherit_id="website.assets_frontend">
             <xpath expr="//link[last()]" position="after">
