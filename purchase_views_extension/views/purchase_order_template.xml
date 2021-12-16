@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+    <xpath expr="//t[@t-set='o']" position="after">
+      <div class="header" t-att-style="report_header_style">
+        <div class="float-right">
+          <h2 t-if="o.state == 'draft'">Request for Quotation <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state in ['sent', 'to approve']">Purchase Order <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state in ['purchase', 'done']">Purchase Order Confirmation <br/><span t-field="o.name"/></h2>
+          <h2 t-if="o.state == 'cancel'">Cancelled Purchase Order <br/><span t-field="o.name"/></h2>
+        </div>
+      </div>
+    </xpath>
+  </template>
+</odoo>
