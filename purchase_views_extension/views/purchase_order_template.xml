@@ -10,11 +10,11 @@
         <div class="float-left" t-if="company.report_header_name">
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
-        <div class="float-right text-right">
-          <h3 t-if="o.state == 'draft'">REQUEST FOR QUOTATION <br/><span t-field="o.name"/></h3>
-          <h3 t-if="o.state in ['sent', 'to approve']">PURCHASE ORDER <br/><span t-field="o.name"/></h3>
-          <h3 t-if="o.state in ['purchase', 'done']">PURCHASE ORDER (DONE) <br/><span t-field="o.name"/></h3>
-          <h3 t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h3>
+        <div class="float-right">
+          <h2 class="text-right" t-if="o.state == 'draft'">REQUEST FOR QUOTATION <br/><span t-field="o.name"/></h2
+          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">PURCHASE ORDER <br/><span t-field="o.name"/></h2
+          <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER (DONE) <br/><span t-field="o.name"/></h2
+          <h2lass="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h2
         </div>
         <div class="clearfix mb8"/>
       </div>
