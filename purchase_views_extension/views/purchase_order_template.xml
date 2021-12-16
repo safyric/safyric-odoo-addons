@@ -132,9 +132,9 @@
               <td>
                 <div class="container">
                   <div class="row">
-                    <t t-if="o.dest_address_id">
-                      <div t-if="o.dest_address_id">
-                        <div t-field="o.dest_address_id"
+                    <t t-if="o.picking_type_id">
+                      <div t-if="o.picking_type_id">
+                        <div t-field="o.picking_type_id"
                              t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
                       </div>
                     </t>
@@ -153,11 +153,11 @@
               <td>
                 <div class="container">
                   <div class="row">
-                    <div>
-                      <span t-field="o.company_id.partner_id.name"/>
-                    </div>
-                    <span t-field="o.company_id.partner_id"
-                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                    <div t-field="o.company_id.partner_id.name"/>
+                  </div>
+                  <div class="row">
+                    <div t-field="o.company_id.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
                   </div>
                 </div>
               </td>
