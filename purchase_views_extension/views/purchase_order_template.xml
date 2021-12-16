@@ -166,7 +166,10 @@
     <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
-    <xpath expr="//div[@class='page']/h2" position="replace"/>
+    <xpath expr="//div[@class='page']/h2[4]" position="replace"/>
+    <xpath expr="//div[@class='page']/h2[3]" position="replace"/>
+    <xpath expr="//div[@class='page']/h2[2]" position="replace"/>
+    <xpath expr="//div[@class='page']/h2[1]" position="replace"/>
     <xpath expr="//div[@id='informations']" position="replace"/>
   </template>
 </odoo>
