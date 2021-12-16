@@ -7,6 +7,9 @@
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
+    <xpath expr="//img[@t-if='company.logo']" position="attributes">
+      <attribute name="style">eight:50px;</attribute>
+    </xpath>
   </template>
   <template id="external_layout_boxed" inherit_id="web.external_layout_boxed">
     <xpath expr="//div[@name='company_address']" position="attributes">
@@ -15,6 +18,9 @@
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
+    <xpath expr="//img[@t-if='company.logo']" position="attributes">
+      <attribute name="style">eight:50px;</attribute>
+    </xpath>
   </template>
   <template id="external_layout_clean" inherit_id="web.external_layout_clean">
     <xpath expr="//div[@name='company_address']" position="attributes">
@@ -22,7 +28,10 @@
     </xpath>
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
-    </xpath> 
+    </xpath>
+    <xpath expr="//img[@t-if='company.logo']" position="attributes">
+      <attribute name="style">eight:50px;</attribute>
+    </xpath>
   </template>
   <template id="external_layout_standard" inherit_id="web.external_layout_standard">
     <xpath expr="//div[@name='company_address']" position="attributes">
@@ -30,6 +39,9 @@
     </xpath>
     <xpath expr="//div[hasclass('footer')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
+    </xpath>
+    <xpath expr="//img[@t-if='company.logo']" position="attributes">
+      <attribute name="style">eight:50px;</attribute>
     </xpath>
   </template>
 </odoo>
