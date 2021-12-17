@@ -31,7 +31,7 @@ class PurchaseOrder(models.Model):
                 if zflag:
                     words.append(map[0])
                     zflag = 0                    
-                    ords.append(map[nums[start-i]])
+                    words.append(map[nums[start-i]])
                     words.append(unit[i+2])
                 elif 0 == i or (0 == i % 4 and zflag < 3): # 控制‘万/元’
                     words.append(unit[i+2])
