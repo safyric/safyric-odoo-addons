@@ -11,12 +11,12 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right">
-          <h2 class="text-right" t-if="o.state == 'draft'">REQUEST FOR QUOTATION <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">PURCHASE ORDER <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER (DONE) <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right" t-if="o.state == 'draft'">PURCHASE ORDER (DRAFT) <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">PURCHASE ORDER (TO APPROVE) <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER <br/><span t-field="o.name"/></h2>
           <h2 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h2>
         </div>
-        <div class="clearfix mb8"/>
+        <div class="clearfix"/>
       </div>
     </div>
 
@@ -80,7 +80,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-6">
+        <div class="col-6 pull-right">
           <table class="table-sm border-black" width="90%">
             <tr>
               <td><strong>Information</strong></td>
@@ -142,7 +142,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-6">
+        <div class="col-6 pull-right">
           <table class="table-sm border-black" width="90%">
             <tr>
               <td><strong>Invoicing Address</strong></td>
@@ -164,8 +164,7 @@
         </div>
       </div>
       <div class="clearfix"/>
-    </xpath>
-    
+    </xpath>    
     <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
@@ -174,5 +173,9 @@
     <xpath expr="//div[@class='page']/h2[2]" position="replace"/>
     <xpath expr="//div[@class='page']/h2[1]" position="replace"/>
     <xpath expr="//div[@id='informations']" position="replace"/>
+    
+    <xpath expr="//span[@t-field='line.date_planned']" position="attributes">
+      <attribute namem="t-options">'{"widget": "date"}'</attribute>
+    </xpath>
   </template>
 </odoo>
