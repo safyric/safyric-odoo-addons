@@ -20,9 +20,6 @@ class PurchaseOrder(models.Model):
         elif isinstance(change_number, (int, long)):
             real_numbers = [int(i) for i in str(change_number) + '00']
 
-        else:
-            raise ValueError, '%s   can\'t change' % change_number
-
         zflag = 0  # 标记连续0次数，以删除万字，或适时插入零字
         start = len(real_numbers) - 3
         change_words = []
