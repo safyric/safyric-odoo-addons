@@ -105,8 +105,14 @@
     <xpath expr="//span[@t-field='order_line.date_planned']" position="attributes">
       <attribute name="t-options">{"widget": "date"}</attribute>
     </xpath>
+    <xpath expr="//span[@t-field='order_line.date_planned']/.." position="attributes">
+      <attribute name="style">white-space: nowrap;</attribute>
+    </xpath>
     <xpath expr="//span[@t-field='order_line.product_qty']" position="replace">
       <span t-esc="int(float(order_line.product_qty))"/>
+    </xpath>
+    <xpath expr="//thead/tr" position="attributes">
+      <attribute name="style">white-space: nowrap;</attribute>
     </xpath>
   </template>
 </odoo>
