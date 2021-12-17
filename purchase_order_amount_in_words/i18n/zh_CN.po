@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_views_extension
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-17 11:06+0000\n"
+"PO-Revision-Date: 2021-12-17 11:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<span>Buyer: </span>"
+msgstr "<span>买家: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<span>Company: </span>"
+msgstr "<span>公司: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<span>Date: </span>"
+msgstr "<span>日期: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<span>Email: </span>"
+msgstr "<span>Email: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+msgid "<span>INCOTERMS: </span>"
+msgstr ""
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+msgid "<span>Payment Term: </span>"
+msgstr "<span>付款条件: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<span>Phone: </span>"
+msgstr "<span>电话: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+msgid "<span>Your Ref: </span>"
+msgstr "<span>你的参考: </span>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<strong>Information</strong>"
+msgstr "<strong>信息</strong>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+msgid "<strong>Invoicing Address</strong>"
+msgstr "<strong>开票信息</strong>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+msgid "<strong>Seller</strong>"
+msgstr "<strong>卖家</strong>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<strong>Shipping Address</strong>"
+msgstr "<strong>送货地址</strong>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchasequotation_document
+msgid "<strong>Vendor</strong>"
+msgstr "<strong>供应商</strong>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "Logo"
+msgstr "徽标"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "PURCHASE ORDER (CANCELLED) <br/>"
+msgstr "采购订单 (取消) <br/>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "PURCHASE ORDER <br/>"
+msgstr "采购订单 <br/>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "Page:\n"
+"          <span class=\"page\"/>\n"
+"          of\n"
+"          <span class=\"topage\"/>"
+msgstr "第 <span class=\"page\"/> 页\n"
+"          共\n"
+"          <span class=\"topage\"/> 页"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "RFQ (DRAFT) <br/>"
+msgstr "询价单 (草稿) <br/>"
+
+#. module: purchase_views_extension
+#: model_terms:ir.ui.view,arch_db:purchase_views_extension.external_layout_purchase
+msgid "RFQ <br/>"
+msgstr "询价单 <br/>"
+
