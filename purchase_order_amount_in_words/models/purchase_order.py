@@ -1,3 +1,6 @@
+from odoo import api, fields, models
+from datetime import datetime
+
 class PurchaseOrder(models.Model):
 
     _inherit = 'purchase.order'
