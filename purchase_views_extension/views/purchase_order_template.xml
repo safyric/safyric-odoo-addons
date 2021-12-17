@@ -123,7 +123,7 @@
     <xpath expr="//div[@id='informations']" position="replace"/>
     
     <xpath expr="//span[@t-field='line.date_planned']" position="attributes">
-      <attribute namem="t-options">'{"widget": "date"}'</attribute>
+      <attribute name="t-options">'{"widget": "date"}'</attribute>
     </xpath>
   </template>
 </odoo>
