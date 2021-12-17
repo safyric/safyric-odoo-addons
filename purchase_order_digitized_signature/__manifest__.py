@@ -13,7 +13,7 @@
         "web_widget_digitized_signature",
     ],
     "data": [
-        "report/report_purchaseorder.xml",
+        "views/report_purchaseorder.xml",
         "views/purchase_views.xml",
     ],
     "installable": True,
