@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="external_layout_purchase">
-    <div class="header" t-att-style="report_header_style">
+    <div class="header">
       <div class="o_background_header">
         <div class="float-right">
           <h3 class="mt0 text-right" t-field="company.report_header"/>
