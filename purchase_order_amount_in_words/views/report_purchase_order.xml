@@ -7,7 +7,7 @@
         <div class="container col-3">
           <div class="row">
             <span>Amount In Word:&#160;</span>
-            <p t-field="o.num_word"/>
+            <p t-field="o.amount_words"/>
           </div>
         </div>
       </xpath>
