@@ -10,7 +10,7 @@ class PurchaseOrder(models.Model):
     _RMB_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' ]
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
-    def to_rmb_upper(price):
+    def to_rmb_upper(self,price):
         price = round(price, 2)
         integer_part = int(price)
         wanyi_part = integer_part // 1000000000000
