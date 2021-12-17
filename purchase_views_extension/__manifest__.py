@@ -8,8 +8,10 @@
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "depends": ["purchase"],
     "data": [
+        "views/purchase_report_layout.xml",
         "views/purchase_order_views.xml",
         "views/purchase_order_template.xml",
+        "views/purchase_quotation_template.xml",
     ],
     "license": "AGPL-3",
     "installable": True,
