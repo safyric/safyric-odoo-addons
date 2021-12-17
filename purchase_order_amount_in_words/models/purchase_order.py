@@ -5,7 +5,24 @@ import math
 class PurchaseOrder(models.Model):
 
     _inherit = 'purchase.order'
-    
+
+    def _parse_decimal(strio, integer_part, value, zero_count):
+        assert value > 0 and value <= 99
+        jiao = value // 10
+        fen = value % 10
+        if zero_count > 0 and (jiao > 0 or fen > 0) and integer_part > 0:
+            strio.write('零')
+        if jiao > 0:
+            strio.write(_RMB_DIGITS[jiao])
+            strio.write('角')
+        if zero_count == 0 and jiao == 0 and fen > 0 and integer_part > 0:
+            strio.write('零')
+        if fen > 0:
+            strio.write(_RMB_DIGITS[fen])
+            strio.write('分')
+        else:
+            strio.write('整')
+
 
     _RMB_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' ]
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
@@ -76,23 +93,6 @@ class PurchaseOrder(models.Model):
                 zero_count += 1
             value -= value // factor * factor
         return zero_count
-
-    def _parse_decimal(strio, integer_part, value, zero_count):
-        assert value > 0 and value <= 99
-        jiao = value // 10
-        fen = value % 10
-        if zero_count > 0 and (jiao > 0 or fen > 0) and integer_part > 0:
-            strio.write('零')
-        if jiao > 0:
-            strio.write(_RMB_DIGITS[jiao])
-            strio.write('角')
-        if zero_count == 0 and jiao == 0 and fen > 0 and integer_part > 0:
-            strio.write('零')
-        if fen > 0:
-            strio.write(_RMB_DIGITS[fen])
-            strio.write('分')
-        else:
-            strio.write('整')
 
     @api.multi
     def _compute_amount_in_words(self):
