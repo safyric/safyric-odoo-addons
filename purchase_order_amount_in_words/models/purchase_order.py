@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from datetime import datetime
+from decimal import Decimal
 
 class PurchaseOrder(models.Model):
 
@@ -8,38 +8,67 @@ class PurchaseOrder(models.Model):
     @api.multi
     def _compute_amount_in_words(self):
         for rec in self:
-            rec.amount_words = str(rec._rmb_upper(rec.amount_total))
+            rec.amount_words = str(rec.currency_id.Num2MoneyFormat(rec.amount_total))
 
-    def _rmb_upper(self, value):
+    def Num2MoneyFormat(self, change_number):
         """
-        人民币大写
-        传入浮点类型的值返回 unicode 字符串
+        .转换数字为大写货币格式( format_word.__len__() - 3 + 2位小数 )
+        change_number 支持 float, int, long, string
         """
-        map = [u"零", u"壹", u"贰", u"叁", u"肆", u"伍", u"陆", u"柒", u"捌", u"玖"]
-        unit = [u"分", u"角", u"元", u"拾", u"百", u"千", u"万", u"拾", u"百", u"千", u"亿", u"拾", u"百", u"千", u"万", u"拾", u"百", u"千", u"兆"]
+        format_word = ["分", "角", "元",
+                       "拾", "百", "千", "万",
+                       "拾", "百", "千", "亿",
+                       "拾", "百", "千", "万",
+                       "拾", "百", "千", "兆"]
 
-        nums = [] # 取出每一位数字，整数用字符方式转换避大数出现误差
-        for i in range(len(unit)-3, -3, -1):
-            if value >= 10**i or i < 1:
-                nums.append(int(round(value/(10**i), 2)) % 10)
+        format_num = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"]
+        if type(change_number) == str:
+            # - 如果是字符串,先尝试转换成float或int.
+            if '.' in change_number:
+                try:
+                    change_number = float(change_number)
+                except:
+                    raise ValueError, '%s   can\'t change' % change_number
+            else:
+                try:
+                    change_number = int(change_number)
+                except:
+                    raise ValueError, '%s   can\'t change' % change_number
 
-        words = []
-        zflag = 0 # 标记连续0次数，以删除万字，或适时插入零字
-        start = len(nums)-3
-        for i in range(start, -3, -1): # 使i对应实际位数，负数为角分
-            if 0 != nums[start-i] or len(words) == 0:
+        if type(change_number) == float:
+            real_numbers = []
+            for i in range(len(format_word) - 3, -3, -1):
+                if change_number >= 10 ** i or i < 1:
+                    real_numbers.append(
+                        int(round(change_number/(10**i), 2) % 10))
+
+        elif isinstance(change_number, (int, long)):
+            real_numbers = [int(i) for i in str(change_number) + '00']
+
+        else:
+            raise ValueError, '%s   can\'t change' % change_number
+
+        zflag = 0  # 标记连续0次数，以删除万字，或适时插入零字
+        start = len(real_numbers) - 3
+        change_words = []
+        for i in range(start, -3, -1):  # 使i对应实际位数，负数为角分
+            if 0 <> real_numbers[start-i] or len(change_words) == 0:
                 if zflag:
-                    words.append(map[0])
-                    zflag = 0                    
-                    words.append(map[nums[start-i]])
-                    words.append(unit[i+2])
-                elif 0 == i or (0 == i % 4 and zflag < 3): # 控制‘万/元’
-                    words.append(unit[i+2])
+                    change_words.append(format_num[0])
                     zflag = 0
-                else:
-                    zflag += 1
+                change_words.append(format_num[real_numbers[start - i]])
+                change_words.append(format_word[i+2])
 
-            if words[-1] != unit[0]: # 结尾非‘分’补整字 words.append(u"整")
-                return ''.join(words)
+            elif 0 == i or (0 == i % 4 and zflag < 3):  # 控制 万/元
+                change_words.append(format_word[i+2])
+                zflag = 0
+            else:
+                zflag += 1
+
+        if change_words[-1] not in (format_word[0], format_word[1]):
+            # - 最后两位非"角,分"则补"整"
+            change_words.append("整")
+
+        return ''.join(change_words)
 
     amount_words = fields.Char(string="金额大写", compute='_compute_amount_in_words')
