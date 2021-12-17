@@ -10,6 +10,7 @@ class PurchaseOrder(models.Model):
     _RMB_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' ]
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
+    @api.multi
     def _parse_integer(strio, value, zero_count = 0, is_first_section = False):
         assert value > 0 and value <= 9999
         ndigits = int(math.floor(math.log10(value))) + 1
@@ -29,6 +30,7 @@ class PurchaseOrder(models.Model):
             value -= value // factor * factor
         return zero_count
 
+    @api.multi
     def _parse_decimal(strio, integer_part, value, zero_count):
         assert value > 0 and value <= 99
         jiao = value // 10
@@ -46,7 +48,7 @@ class PurchaseOrder(models.Model):
         else:
             strio.write('整')
 
-    @api.model
+    @api.multi
     def to_rmb_upper(self, price):
         price = round(price, 2)
         integer_part = int(price)
