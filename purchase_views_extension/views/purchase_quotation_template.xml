@@ -22,7 +22,7 @@
                     <div class="row" t-if="o.partner_id.vat">
                       <span>
                         <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
-                        <t t-if="not o.company_id.country_id.vat_label">Tax ID</t>:&#160;
+                        <t t-if="not o.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
                       </span>
                       <p t-field="o.partner_id.vat" class="m-0"/>
                     </div>
@@ -33,7 +33,7 @@
           </table>
         </div>
         <div class="col-6">
-          <table class="table-sm border-black pull-right" width="90%">
+          <table class="table-sm border-black pull-right" width="100%">
             <tr>
               <td class="bg-light"><strong>Information</strong></td>
             </tr>
@@ -42,23 +42,26 @@
                 <div class="container">
                   <div class="pull-right">
                     <div class="row">
-                      <span>Date:&#160;</span>
+                      <span>Date: </span>
                       <span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                     </div>
                     <div class="row">
-                      <span>Company:&#160;</span>
+                      <span>Company: </span>
                       <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Buyer:&#160;</span>
-                      <span t-field="o.user_id" class="m-0"/>
+                      <span>Buyer: </span>
+                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
+                      <t t-if="o.user_id.partner_id.mobile">
+                        <i class="fa fa-phone"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
+                      </t>
                     </div>
                     <div t-if="o.user_id.phone" class="row">
-                      <span>Phone:&#160;</span>
+                      <span>Phone: </span>
                       <span t-field="o.user_id.phone" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.email" class="row">
-                      <span>Email:&#160;</span>
+                      <span>Email: </span>
                       <span t-field="o.user_id.email" class="m-0"/>
                     </div>
                   </div>
