@@ -24,7 +24,7 @@ class PurchaseOrder(models.Model):
         start = len(real_numbers) - 3
         change_words = []
         for i in range(start, -3, -1):  # 使i对应实际位数，负数为角分
-            if 0 <> real_numbers[start-i] or len(change_words) == 0:
+            if real_numbers[start-i] <> 0 or len(change_words) == 0:
                 if zflag:
                     change_words.append(format_num[0])
                     zflag = 0
