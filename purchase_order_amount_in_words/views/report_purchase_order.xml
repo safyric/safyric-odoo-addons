@@ -6,7 +6,7 @@
       <xpath expr="//p[@t-field='o.notes']/p" position="before">
         <div class="container col-3">
           <div class="row">
-            <span>Amount In Word:&#160;</span>
+            <span>Amount In Words:&#160;</span>
             <p t-field="o.amount_words"/>
           </div>
         </div>
