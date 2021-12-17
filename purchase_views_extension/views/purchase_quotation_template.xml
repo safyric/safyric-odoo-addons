@@ -25,7 +25,7 @@
           </table>
         </div>
         <div class="col-6">
-          <table class="table-sm border-black" width="90%">
+          <table class="table-sm border-black pull-right" width="90%">
             <tr>
               <td><strong>Information</strong></td>
             </tr>
