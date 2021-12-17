@@ -42,4 +42,4 @@ class PurchaseOrder(models.Model):
         if words[-1] != unit[0]: # 结尾非‘分’补整字 words.append(u"整")
             return ''.join(words)
 
-        amount_words = fields.Char(string="金额大写", compute='_compute_amount_in_words')
+    amount_words = fields.Char(string="金额大写", compute='_compute_amount_in_words')
