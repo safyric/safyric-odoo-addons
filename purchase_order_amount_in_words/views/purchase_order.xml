@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Purchase Order Form View -->
+    <record id="purchase_form_view" model="ir.ui.view">
+      <field name="name">Amount To Words Purchase Order</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='notes']" position="before">
+          <group colspan="2"  attrs="{'invisible': [('amount_total', '&lt;=', 0)]}">
+            <div class="oe_inline o_td_label">
+              <label for="amount_words"/>
+              <field name="amount_words" string="Amount In Words"/>
+            </div>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
