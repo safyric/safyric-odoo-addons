@@ -74,7 +74,7 @@ msgstr "<strong>开票信息</strong>"
 #. module: purchase_views_extension
 #: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
 msgid "<strong>Seller</strong>"
-msgstr "<strong>卖家</strong>"
+msgstr "<strong>联系人</strong>"
 
 #. module: purchase_views_extension
 #: model_terms:ir.ui.view,arch_db:purchase_views_extension.report_purchaseorder_document
