@@ -43,23 +43,23 @@
                   <div class="pull-right">
                     <div class="row">
                       <span>Date:&#160;</span>
-                      <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                      <span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                     </div>
                     <div class="row">
                       <span>Company:&#160;</span>
-                      <p t-field="o.company_id" class="m-0"/>
+                      <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
                       <span>Buyer:&#160;</span>
-                      <p t-field="o.user_id" class="m-0"/>
+                      <span t-field="o.user_id" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.phone" class="row">
                       <span>Phone:&#160;</span>
-                      <p t-field="o.user_id.phone" class="m-0"/>
+                      <span t-field="o.user_id.phone" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.email" class="row">
                       <span>Email:&#160;</span>
-                      <p t-field="o.user_id.email" class="m-0"/>
+                      <span t-field="o.user_id.email" class="m-0"/>
                     </div>
                   </div>
                 </div>
