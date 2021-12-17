@@ -43,7 +43,7 @@
                   <div class="pull-right">
                     <div class="row">
                       <span>Date:&#160;</span>
-                      <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}' class="m-0"/>
+                      <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                     </div>
                     <div class="row">
                       <span>Company:&#160;</span>
