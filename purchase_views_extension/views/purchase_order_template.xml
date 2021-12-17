@@ -16,7 +16,7 @@
                 <div class="container">
                   <div id="seller">
                     <div class="row">
-                      <p t-field="o.partner_id"
+                      <span t-field="o.partner_id"
                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                     <div class="row" t-if="o.partner_id.vat">
@@ -43,35 +43,35 @@
                   <div class="pull-right">
                     <div class="row">
                       <span>Date:&#160;</span>
-                      <p t-field="o.date_order" t-options='{"widget": "date"}' class="m-0"/>
+                      <span t-field="o.date_order" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="o.partner_ref">
                       <span>Your Ref:&#160;</span>
-                      <p t-esc="o.partner_ref" class="m-0"/>
+                      <span t-esc="o.partner_ref" class="m-0"/>
                     </div>
                     <div class="row">
                       <span>Company:&#160;</span>
-                      <p t-field="o.company_id" class="m-0"/>
+                      <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
                       <span>Buyer:&#160;</span>
-                      <p t-field="o.user_id.partner_id.name" class="m-0"/>
+                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.partner_id.phone" class="row">
                       <span>Phone:&#160;</span>
-                      <p t-field="o.user_id.partner_id.phone" class="m-0"/>
+                      <span t-field="o.user_id.partner_id.phone" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.partner_id.email" class="row">
                       <span>Email:&#160;</span>
-                      <p t-field="o.user_id.partner_id.email" class="m-0"/>
+                      <span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <div t-if="o.incoterm_id" class="row">
                       <span>INCOTERMS:&#160;</span>
-                      <p t-field="o.incoterm_id.code" class="m-0"/>
+                      <span t-field="o.incoterm_id.code" class="m-0"/>
                     </div>
                     <div t-if="o.payment_term_id" class="row">
                       <span>Payment Term:&#160;</span>
-                      <p t-field="o.payment_term_id" class="m-0"/>
+                      <span t-field="o.payment_term_id" class="m-0"/>
                     </div>
                   </div>
                 </div>
