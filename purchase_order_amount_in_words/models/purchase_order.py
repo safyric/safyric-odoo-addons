@@ -1,5 +1,4 @@
 from odoo import api, fields, models
-from decimal import Decimal
 
 class PurchaseOrder(models.Model):
 
@@ -22,18 +21,6 @@ class PurchaseOrder(models.Model):
                        "拾", "百", "千", "兆"]
 
         format_num = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"]
-        if type(change_number) == str:
-            # - 如果是字符串,先尝试转换成float或int.
-            if '.' in change_number:
-                try:
-                    change_number = float(change_number)
-                except:
-                    raise ValueError, '%s   can\'t change' % change_number
-            else:
-                try:
-                    change_number = int(change_number)
-                except:
-                    raise ValueError, '%s   can\'t change' % change_number
 
         if type(change_number) == float:
             real_numbers = []
