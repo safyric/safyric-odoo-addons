@@ -8,7 +8,7 @@ class PurchaseOrder(models.Model):
     @api.multi
     def _compute_amount_in_words(self):
         for rec in self:
-            rec.amount_words = str(rec.currency_id.Num2MoneyFormat(rec.amount_total))
+            rec.amount_words = str(rec.Num2MoneyFormat(rec.amount_total))
 
     def Num2MoneyFormat(self, change_number):
         """
@@ -27,13 +27,9 @@ class PurchaseOrder(models.Model):
             if '.' in change_number:
                 try:
                     change_number = float(change_number)
-                except:
-                    raise ValueError, '%s   can\'t change' % change_number
             else:
                 try:
                     change_number = int(change_number)
-                except:
-                    raise ValueError, '%s   can\'t change' % change_number
 
         if type(change_number) == float:
             real_numbers = []
@@ -44,9 +40,6 @@ class PurchaseOrder(models.Model):
 
         elif isinstance(change_number, (int, long)):
             real_numbers = [int(i) for i in str(change_number) + '00']
-
-        else:
-            raise ValueError, '%s   can\'t change' % change_number
 
         zflag = 0  # 标记连续0次数，以删除万字，或适时插入零字
         start = len(real_numbers) - 3
