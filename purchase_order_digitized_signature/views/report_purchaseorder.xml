@@ -3,7 +3,7 @@
 
     <template id="report_purchasequotation_document"
               inherit_id="purchase.report_purchasequotation_document">
-      <xpath expr="//p[@t-field='o.notes]'" position="after">
+      <xpath expr="//p[@t-field='o.notes']" position="after">
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
