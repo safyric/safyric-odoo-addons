@@ -57,7 +57,7 @@
                       <span>Buyer: </span>
                       <span t-field="o.user_id.partner_id.name" class="m-0"/>
                       <t t-if="o.user_id.partner_id.phone">
-                        <span>, </span><i class="fa fa-phone"><span t-field="o.user_id.partner_id.phone" class="m-0"/>
+                        <span>, </span><i class="fa fa-phone"><span t-field="o.user_id.partner_id.phone" class="m-0"/></i>
                       </t>
                     </div>
                     <div t-if="o.user_id.partner_id.email" class="row">
