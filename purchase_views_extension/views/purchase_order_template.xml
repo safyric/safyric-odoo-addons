@@ -20,7 +20,10 @@
                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                     <div class="row" t-if="o.partner_id.vat">
-                      <span><t t-esc="o.company_id.country_id.vat_label or '税号'"/>: &#160;</span>
+                      <span>
+                        <t if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
+                        <t if="not o.company_id.country_id.vat_label">税号</t>: &#160;
+                      </span>
                       <p t-field="o.partner_id.vat"/>
                     </div>
                   </div>
