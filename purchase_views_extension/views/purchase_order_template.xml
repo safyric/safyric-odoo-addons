@@ -33,7 +33,7 @@
           </table>
         </div>
         <div class="col-6">
-          <table class="table-sm border-black pull-right" width="90%">
+          <table class="table-sm border-black pull-right" width="100%">
             <tr>
               <td class="bg-light"><strong>Information</strong></td>
             </tr>
@@ -56,8 +56,8 @@
                     <div class="row">
                       <span>Buyer: </span>
                       <span t-field="o.user_id.partner_id.name" class="m-0"/>
-                      <t t-if="o.user_id.partner_id.phone">
-                        <span>, </span><i class="fa fa-phone"><span t-field="o.user_id.partner_id.phone" class="m-0"/></i>
+                      <t t-if="o.user_id.partner_id.mobile">
+                        <i class="fa fa-phone"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
                       </t>
                     </div>
                     <div t-if="o.user_id.partner_id.email" class="row">
@@ -106,7 +106,7 @@
           </table>
         </div>
         <div class="col-6">
-          <table class="table-sm border-black pull-right" width="90%">
+          <table class="table-sm border-black pull-right" width="100%">
             <tr>
               <td class="bg-light"><strong>Invoicing Address</strong></td>
             </tr>
