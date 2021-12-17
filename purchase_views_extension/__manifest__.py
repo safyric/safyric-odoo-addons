@@ -6,7 +6,10 @@
     "version": "12.0.1.0.1",
     "category": "Purchase Management",
     "website": "https://github.com/safyric/safyric-odoo-addons",
-    "depends": ["purchase"],
+    "depends": [
+        "purchase",
+        "purchase_stock",
+    ],
     "data": [
         "views/purchase_report_layout.xml",
         "views/purchase_order_views.xml",
