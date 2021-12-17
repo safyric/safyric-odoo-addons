@@ -11,8 +11,8 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right">
-          <h2 class="text-right" t-if="o.state == 'draft'">REQUEST FOR QUOTATION (DRAFT) <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">REQUEST FOR QUOTATION <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right" t-if="o.state == 'draft'">RFQ (DRAFT) <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">RFQ <br/><span t-field="o.name"/></h2>
           <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER <br/><span t-field="o.name"/></h2>
           <h2 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h2>
         </div>
