@@ -9,7 +9,7 @@
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td><strong>Vendor</strong></td>
+              <td class="bg-light"><strong>Vendor</strong></td>
             </tr>
             <tr>
               <td>
@@ -35,7 +35,7 @@
         <div class="col-6">
           <table class="table-sm border-black pull-right" width="90%">
             <tr>
-              <td><strong>Information</strong></td>
+              <td class="bg-light"><strong>Information</strong></td>
             </tr>
             <tr>
               <td id="information">
@@ -71,7 +71,7 @@
           <div class="col-6">
             <table class="table-sm border-black" width="90%">
               <tr>
-                <td><strong>Shipping Address</strong></td>
+                <td class="bg-light"><strong>Shipping Address</strong></td>
               </tr>
               <tr>
                 <td>
