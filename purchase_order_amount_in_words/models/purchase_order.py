@@ -11,6 +11,44 @@ class PurchaseOrder(models.Model):
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
     @api.model
+    def _parse_integer(strio, value, zero_count = 0, is_first_section = False):
+        assert value > 0 and value <= 9999
+        ndigits = int(math.floor(math.log10(value))) + 1
+        if value < 1000 and not is_first_section:
+            zero_count += 1
+        for i in range(0, ndigits):
+            factor = int(pow(10, ndigits - 1 - i))
+            digit = int(value / factor)
+            if digit != 0:
+                if zero_count > 0:
+                    strio.write('零')
+                strio.write(_RMB_DIGITS[digit])
+                strio.write(_SECTION_CHARS[ndigits - i - 1])
+                zero_count = 0
+            else:
+                zero_count += 1
+            value -= value // factor * factor
+        return zero_count
+
+    @api.model
+    def _parse_decimal(strio, integer_part, value, zero_count):
+        assert value > 0 and value <= 99
+        jiao = value // 10
+        fen = value % 10
+        if zero_count > 0 and (jiao > 0 or fen > 0) and integer_part > 0:
+            strio.write('零')
+        if jiao > 0:
+            strio.write(_RMB_DIGITS[jiao])
+            strio.write('角')
+        if zero_count == 0 and jiao == 0 and fen > 0 and integer_part > 0:
+            strio.write('零')
+        if fen > 0:
+            strio.write(_RMB_DIGITS[fen])
+            strio.write('分')
+        else:
+            strio.write('整')
+
+    @api.model
     def to_rmb_upper(self, price):
         price = round(price, 2)
         integer_part = int(price)
@@ -58,44 +96,6 @@ class PurchaseOrder(models.Model):
             strio.write('零元整')
 
         return strio.getvalue()
-
-    @api.model
-    def _parse_integer(strio, value, zero_count = 0, is_first_section = False):
-        assert value > 0 and value <= 9999
-        ndigits = int(math.floor(math.log10(value))) + 1
-        if value < 1000 and not is_first_section:
-            zero_count += 1
-        for i in range(0, ndigits):
-            factor = int(pow(10, ndigits - 1 - i))
-            digit = int(value / factor)
-            if digit != 0:
-                if zero_count > 0:
-                    strio.write('零')
-                strio.write(_RMB_DIGITS[digit])
-                strio.write(_SECTION_CHARS[ndigits - i - 1])
-                zero_count = 0
-            else:
-                zero_count += 1
-            value -= value // factor * factor
-        return zero_count
-
-    @api.model
-    def _parse_decimal(strio, integer_part, value, zero_count):
-        assert value > 0 and value <= 99
-        jiao = value // 10
-        fen = value % 10
-        if zero_count > 0 and (jiao > 0 or fen > 0) and integer_part > 0:
-            strio.write('零')
-        if jiao > 0:
-            strio.write(_RMB_DIGITS[jiao])
-            strio.write('角')
-        if zero_count == 0 and jiao == 0 and fen > 0 and integer_part > 0:
-            strio.write('零')
-        if fen > 0:
-            strio.write(_RMB_DIGITS[fen])
-            strio.write('分')
-        else:
-            strio.write('整')
 
     @api.multi
     def _compute_amount_in_words(self):
