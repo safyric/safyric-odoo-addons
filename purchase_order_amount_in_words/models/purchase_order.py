@@ -11,7 +11,7 @@ class PurchaseOrder(models.Model):
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
     @api.model
-    def to_rmb_upper(price):
+    def to_rmb_upper(self, price):
         price = round(price, 2)
         integer_part = int(price)
         wanyi_part = integer_part // 1000000000000
