@@ -25,11 +25,9 @@ class PurchaseOrder(models.Model):
         if type(change_number) == str:
             # - 如果是字符串,先尝试转换成float或int.
             if '.' in change_number:
-                try:
-                    change_number = float(change_number)
+                change_number = float(change_number)
             else:
-                try:
-                    change_number = int(change_number)
+                change_number = int(change_number)
 
         if type(change_number) == float:
             real_numbers = []
