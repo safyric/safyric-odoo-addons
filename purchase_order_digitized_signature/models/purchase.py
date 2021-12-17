@@ -19,7 +19,7 @@ class PurchaseOrder(models.Model):
         purchase = super(PurchaseOrder, self).create(values)
         if purchase.seller_signature:
             values = {'seller_signature': purchase.seller_signature, 'buyer_signature': purchase.buyer_signature}
-            purchase._track_signature(values, 'seller_signature')
+            purchase._track_signature(values, 'seller_signature', 'buyer_signature')
         return purchase
 
     @api.multi
