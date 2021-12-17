@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Purchase Order Report -->
+    <template id="purchse_report_inherit" inherit_id="purchase.report_purchaseorder_document">
+      <xpath expr="//div[@class='page']/p" position="before">
+        <div class="container col-3">
+          <table class="table-sm border-black" width="100%">
+            <tr>
+              <td>
+                <div class="row">
+                  <span>Amount In Word: </span>
+                  <p t-field="o.num_word"/>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </xpath>
+    </template>
+  </data>
+</odoo>
