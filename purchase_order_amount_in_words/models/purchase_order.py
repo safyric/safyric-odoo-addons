@@ -10,7 +10,6 @@ class PurchaseOrder(models.Model):
     _RMB_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' ]
     _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
-    @api.model
     def _parse_integer(strio, value, zero_count = 0, is_first_section = False):
         assert value > 0 and value <= 9999
         ndigits = int(math.floor(math.log10(value))) + 1
@@ -30,7 +29,6 @@ class PurchaseOrder(models.Model):
             value -= value // factor * factor
         return zero_count
 
-    @api.model
     def _parse_decimal(strio, integer_part, value, zero_count):
         assert value > 0 and value <= 99
         jiao = value // 10
