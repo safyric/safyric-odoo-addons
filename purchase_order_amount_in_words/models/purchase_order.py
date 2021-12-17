@@ -25,9 +25,15 @@ class PurchaseOrder(models.Model):
         if type(change_number) == str:
             # - 如果是字符串,先尝试转换成float或int.
             if '.' in change_number:
-                change_number = float(change_number)
+                try:
+                    change_number = float(change_number)
+                except:
+                    raise ValueError, '%s   can\'t change' % change_number
             else:
-                change_number = int(change_number)
+                try:
+                    change_number = int(change_number)
+                except:
+                    raise ValueError, '%s   can\'t change' % change_number
 
         if type(change_number) == float:
             real_numbers = []
@@ -38,6 +44,9 @@ class PurchaseOrder(models.Model):
 
         elif isinstance(change_number, (int, long)):
             real_numbers = [int(i) for i in str(change_number) + '00']
+
+        else:
+            raise ValueError, '%s   can\'t change' % change_number
 
         zflag = 0  # 标记连续0次数，以删除万字，或适时插入零字
         start = len(real_numbers) - 3
