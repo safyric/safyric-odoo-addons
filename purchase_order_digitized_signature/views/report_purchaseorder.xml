@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <template id="report_purchasequotation_document"
-              inherit_id="purchase.report_purchasequotation_document">
+    <template id="report_purchaseorderdocument"
+              inherit_id="purchase.report_purchaseorder_document">
       <xpath expr="//div[@class='oe_structure'][last()]" position="before">
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
