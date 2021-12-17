@@ -148,5 +148,8 @@
     <xpath expr="//span[@t-field='line.date_planned']" position="attributes">
       <attribute name="t-options">{"widget": "date"}</attribute>
     </xpath>
+    <xpath expr="//span[@t-field='line.product_qty']" position="replace">
+      <span t-esc="int(float(line.product_qty))"/>
+    </xpath>
   </template>
 </odoo>
