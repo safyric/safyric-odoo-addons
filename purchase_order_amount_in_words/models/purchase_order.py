@@ -1,105 +1,130 @@
 from odoo import api, fields, models
-from io import StringIO
-import math
+import warnings
+from decimal import Decimal
 
 
 class PurchaseOrder(models.Model):
 
     _inherit = 'purchase.order'
 
-    _RMB_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖' ]
-    _SECTION_CHARS = ['', '拾', '佰', '仟', '万' ]
 
-    @api.multi
-    def _parse_integer(strio, value, zero_count = 0, is_first_section = False):
-        assert value > 0 and value <= 9999
-        ndigits = int(math.floor(math.log10(value))) + 1
-        if value < 1000 and not is_first_section:
-            zero_count += 1
-        for i in range(0, ndigits):
-            factor = int(pow(10, ndigits - 1 - i))
-            digit = int(value / factor)
-            if digit != 0:
-                if zero_count > 0:
-                    strio.write('零')
-                strio.write(_RMB_DIGITS[digit])
-                strio.write(_SECTION_CHARS[ndigits - i - 1])
-                zero_count = 0
-            else:
-                zero_count += 1
-            value -= value // factor * factor
-        return zero_count
+    def cncurrency(self, value, capital=True, prefix=False, classical=None):
+        '''
+        参数:
+        capital:    True   大写汉字金额
+                    False  一般汉字金额
+        classical:  True   元
+                    False  圆
+        prefix:     True   以'人民币'开头
+                    False, 无开头
+        '''
+        if not isinstance(value, (Decimal, str, int)):
+            msg = '''
+            由于浮点数精度问题，请考虑使用字符串，或者 decimal.Decimal 类。
+            因使用浮点数造成误差而带来的可能风险和损失作者概不负责。
+            '''
+            warnings.warn(msg, UserWarning)
+        # 默认大写金额用圆，一般汉字金额用元
+        if classical is None:
+            classical = True if capital else False
 
-    @api.multi
-    def _parse_decimal(strio, integer_part, value, zero_count):
-        assert value > 0 and value <= 99
-        jiao = value // 10
-        fen = value % 10
-        if zero_count > 0 and (jiao > 0 or fen > 0) and integer_part > 0:
-            strio.write('零')
-        if jiao > 0:
-            strio.write(_RMB_DIGITS[jiao])
-            strio.write('角')
-        if zero_count == 0 and jiao == 0 and fen > 0 and integer_part > 0:
-            strio.write('零')
-        if fen > 0:
-            strio.write(_RMB_DIGITS[fen])
-            strio.write('分')
+        # 汉字金额前缀
+        if prefix is True:
+            prefix = '人民币'
         else:
-            strio.write('整')
+            prefix = ''
 
-    @api.multi
-    def to_rmb_upper(self, price):
-        price = round(price, 2)
-        integer_part = int(price)
-        wanyi_part = integer_part // 1000000000000
-        yi_part = integer_part % 1000000000000 // 100000000
-        wan_part = integer_part % 100000000 // 10000
-        qian_part = integer_part % 10000
-        dec_part = int(price * 100 % 100)
-
-        strio = StringIO()
-
-        zero_count = 0
-        #处理万亿以上的部分
-        if integer_part >= 1000000000000 and wanyi_part > 0:
-            zero_count = _parse_integer(strio, wanyi_part, zero_count, True)
-            strio.write('万')
-
-        #处理亿到千亿的部分
-        if integer_part >= 100000000 and yi_part > 0:
-            is_first_section = integer_part >= 100000000 and integer_part < 1000000000000 
-            zero_count = _parse_integer(strio, yi_part, zero_count, is_first_section)
-            strio.write('亿')
-
-        #处理万的部分
-        if integer_part >= 10000 and wan_part > 0:
-            is_first_section = integer_part >= 1000 and integer_part < 10000000 
-            zero_count = _parse_integer(strio, wan_part, zero_count, is_first_section)
-            strio.write('万')
-
-        #处理千及以后的部分
-        if qian_part > 0:
-            is_first_section = integer_part < 1000
-            zero_count = _parse_integer(strio, qian_part, zero_count, is_first_section)
+        # 汉字金额字符定义
+        dunit = ('角', '分')
+        if capital:
+            num = ('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖')
+            iunit = [None, '拾', '佰', '仟', '万', '拾', '佰', '仟','亿', '拾', '佰', '仟', '万', '拾', '佰', '仟']
         else:
-            zero_count += 1
-        if integer_part > 0:
-            strio.write('元')
+            num = ('〇', '一', '二', '三', '四', '五', '六', '七', '八', '九')
+            iunit = [None, '十', '百', '千', '万', '十', '百', '千','亿', '十', '百', '千', '万', '十', '百', '千']
+        if classical:
+            iunit[0] = '元' if classical else '圆'
+        # 转换为Decimal，并截断多余小数
 
-        #处理小数
-        if dec_part > 0: 
-            _parse_decimal(strio, integer_part, dec_part, zero_count)
-        elif dec_part == 0 and integer_part > 0:
-            strio.write('整')
+        if not isinstance(value, Decimal):
+            value = Decimal(value).quantize(Decimal('0.01'))
+
+        # 处理负数
+        if value < 0:
+            prefix += '负'          # 输出前缀，加负
+            value = - value         # 取正数部分，无须过多考虑正负数舍入
+                                    # assert - value + value == 0
+        # 转化为字符串
+        s = str(value)
+        if len(s) > 19:
+            raise ValueError('金额太大了，不知道该怎么表达。')
+        istr, dstr = s.split('.')           # 小数部分和整数部分分别处理
+        istr = istr[::-1]                   # 翻转整数部分字符串
+        so = []     # 用于记录转换结果
+
+        # 零
+        if value == 0:
+            return prefix + num[0] + iunit[0]
+        haszero = False     # 用于标记零的使用
+        if dstr == '00':
+            haszero = True  # 如果无小数部分，则标记加过零，避免出现“圆零整”
+
+        # 处理小数部分
+        # 分
+        if dstr[1] != '0':
+            so.append(dunit[1])
+            so.append(num[int(dstr[1])])
         else:
-            strio.write('零元整')
+            so.append('整')         # 无分，则加“整”
+        # 角
+        if dstr[0] != '0':
+            so.append(dunit[0])
+            so.append(num[int(dstr[0])])
+        elif dstr[1] != '0':
+            so.append(num[0])       # 无角有分，添加“零”
+            haszero = True          # 标记加过零了
 
-        return strio.getvalue()
+        # 无整数部分
+        if istr == '0':
+            if haszero:             # 既然无整数部分，那么去掉角位置上的零
+                so.pop()
+            so.append(prefix)       # 加前缀
+            so.reverse()            # 翻转
+            return ''.join(so)
+
+        # 处理整数部分
+        for i, n in enumerate(istr):
+            n = int(n)
+            if i % 4 == 0:          # 在圆、万、亿等位上，即使是零，也必须有单位
+                if i == 8 and so[-1] == iunit[4]:   # 亿和万之间全部为零的情况
+                    so.pop()                        # 去掉万
+                so.append(iunit[i])
+                if n == 0:                          # 处理这些位上为零的情况
+                    if not haszero:                 # 如果以前没有加过零
+                        so.insert(-1, num[0])       # 则在单位后面加零
+                        haszero = True              # 标记加过零了
+                else:                               # 处理不为零的情况
+                    so.append(num[n])
+                    haszero = False                 # 重新开始标记加零的情况
+            else:                                   # 在其他位置上
+                if n != 0:                          # 不为零的情况
+                    so.append(iunit[i])
+                    so.append(num[n])
+                    haszero = False                 # 重新开始标记加零的情况
+                else:                               # 处理为零的情况
+                    if not haszero:                 # 如果以前没有加过零
+                        so.append(num[0])
+                        haszero = True
+
+        # 最终结果
+        so.append(prefix)
+        so.reverse()
+        return ''.join(so)
+
 
     @api.multi
     def _compute_amount_in_words(self):
         for rec in self:
-            rec.amount_words = str(rec.to_rmb_upper(rec.amount_total))
+            rec.amount_words = str(rec.cncurrency(rec.amount_total))
 
     amount_words = fields.Char(string="金额大写", compute='_compute_amount_in_words')
