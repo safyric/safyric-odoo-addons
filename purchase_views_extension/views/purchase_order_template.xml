@@ -43,7 +43,7 @@
                   <div class="pull-right">
                     <div class="row">
                       <span>Date:&#160;</span>
-                      <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                      <p t-field="o.date_order" t-options='{"widget": "date"}'/>
                     </div>
                     <div class="row" t-if="o.partner_ref">
                       <span>Your Ref:&#160;</span>
@@ -51,27 +51,27 @@
                     </div>
                     <div class="row">
                       <span>Company:&#160;</span>
-                      <p t-field="o.company_id" class="m-0"/>
+                      <p t-field="o.company_id"/>
                     </div>
                     <div class="row">
                       <span>Buyer:&#160;</span>
-                      <p t-field="o.user_id.partner_id.name" class="m-0"/>
+                      <p t-field="o.user_id.partner_id.name"/>
                     </div>
                     <div t-if="o.user_id.partner_id.phone" class="row">
                       <span>Phone:&#160;</span>
-                      <p t-field="o.user_id.partner_id.phone" class="m-0"/>
+                      <p t-field="o.user_id.partner_id.phone"/>
                     </div>
                     <div t-if="o.user_id.partner_id.email" class="row">
                       <span>Email:&#160;</span>
-                      <p t-field="o.user_id.partner_id.email" class="m-0"/>
+                      <p t-field="o.user_id.partner_id.email"/>
                     </div>
                     <div t-if="o.incoterm_id" class="row">
                       <span>INCOTERMS:&#160;</span>
-                      <p t-field="o.incoterm_id.code" class="m-0"/>
+                      <p t-field="o.incoterm_id.code"/>
                     </div>
                     <div t-if="o.payment_term_id" class="row">
                       <span>Payment Term:&#160;</span>
-                      <p t-field="o.payment_term_id" class="m-0"/>
+                      <p t-field="o.payment_term_id"/>
                     </div>
                   </div>
                 </div>
@@ -122,7 +122,10 @@
                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
                   </div>
                   <div class="row" t-if="o.company_id.partner_id.vat">
-                    <span><t t-esc="o.company_id.country_id.vat_label or '税号'"/>:&#160;</span>
+                    <span>
+                      <t t=if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
+                      <t t=if="not o.company_id.country_id.vat_label">税号</t>:&#160;
+                    </span>
                     <p t-field="o.company_id.partner_id.vat"/>
                   </div>
                 </div>
