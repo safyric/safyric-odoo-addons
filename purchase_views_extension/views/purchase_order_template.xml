@@ -22,7 +22,7 @@
                     <div class="row" t-if="o.partner_id.vat">
                       <span>
                         <t if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
-                        <t if="not o.company_id.country_id.vat_label">税号</t>: &#160;
+                        <t if="not o.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
                       </span>
                       <p t-field="o.partner_id.vat"/>
                     </div>
