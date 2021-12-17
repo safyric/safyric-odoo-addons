@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+    <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+      <attribute name="t-call">purchase_views_extension.external_layout</attribute>
+    </xpath>
+    <xpath expr="//t[@t-set='o']" position="after">
+      <div class="row">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td><strong>Vendor</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row" id="seller">
+                    <div t-field="o.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6 pull-right">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td><strong>Information</strong></td>
+            </tr>
+            <tr>
+              <td id="information">
+                <div class="container">
+                  <div class="row">
+                    <span>Date:&#160;</span>
+                    <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                  </div>
+                  <div class="row">
+                    <span>Company:&#160;</span>
+                    <p t-field="o.company_id" class="m-0"/>
+                  </div>
+                  <div class="row">
+                    <span>Buyer:&#160;</span>
+                    <p t-field="o.user_id" class="m-0"/>
+                  </div>
+                  <div t-if="o.user_id.phone" class="row">
+                    <span>Phone:&#160;</span>
+                    <p t-field="o.user_id.phone" class="m-0"/>
+                  </div>
+                  <div t-if="o.user_id.email" class="row">
+                    <span>Email:&#160;</span>
+                    <p t-field="o.user_id.email" class="m-0"/>
+                  </div>
+                  <div t-if="o.incoterm_id" class="row">
+                    <span>INCOTERMS:&#160;</span>
+                    <p t-field="o.incoterm_id.code" class="m-0"/>
+                  </div>
+                  <div t-if="o.payment_term_id" class="row">
+                    <span>Payment Term:&#160;</span>
+                    <p t-field="o.payment_term_id" class="m-0"/>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td><strong>Shiping Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <t t-if="o.dest_address_id">
+                      <div t-field="o.dest_address_id"
+                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
+                    </t>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      <div class="clearfix"/>
+    </xpath>    
+    <xpath expr="//t[@t-set='address']" position="attributes">
+      <attribute name="t-att-style">'display: none;'</attribute>
+    </xpath>
+    <xpath expr="//div[@class='page']/h2" position="replace"/>
+    
+    <xpath expr="//span[@t-field='order_line.date_planned']" position="attributes">
+      <attribute namem="t-options">'{"widget": "date"}'</attribute>
+    </xpath>
+  </template>
+</odoo>
