@@ -19,10 +19,6 @@
                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
                   </div>
-                  <div t-if="o.partner_ref" class="row">
-                    <span>Your Ref:&#160;</span>
-                    <div t-field="o.partner_ref"/>
-                  </div>
                 </div>
               </td>
             </tr>
@@ -39,6 +35,10 @@
                   <div class="row">
                     <span>Date:&#160;</span>
                     <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                  </div>
+                  <div t-if="o.partner_ref">
+                    <span>Your Ref:&#160;</span>
+                    <p t-field="o.partner_ref"/>
                   </div>
                   <div class="row">
                     <span>Company:&#160;</span>
