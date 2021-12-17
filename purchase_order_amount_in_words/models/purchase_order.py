@@ -6,10 +6,6 @@ class PurchaseOrder(models.Model):
     
     @api.model
     def Num2MoneyFormat(self, change_number):
-    """
-    .转换数字为大写货币格式( format_word.__len__() - 3 + 2位小数 )
-    change_number 支持 float, int, long, string
-    """
     format_word = ["分", "角", "元",
                    "拾", "百", "千", "万",
                    "拾", "百", "千", "亿",
