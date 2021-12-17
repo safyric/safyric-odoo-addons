@@ -59,28 +59,29 @@
             </tr>
           </table>          
         </div>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <table class="table-sm border-black" width="90%">
-            <tr>
-              <td><strong>Shiping Address</strong></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="container">
-                  <div class="row">
-                    <t t-if="o.dest_address_id">
-                      <div t-field="o.dest_address_id"
-                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
-                    </t>
+        <div class="row">
+          <div class="col-6">
+            <table class="table-sm border-black" width="90%">
+              <tr>
+                <td><strong>Shiping Address</strong></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="container">
+                    <div class="row">
+                      <t t-if="o.dest_address_id">
+                        <div t-field="o.dest_address_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
+                      </t>
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          </table>
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
-      <div class="clearfix"/>
+        <div class="clearfix"/>
+      </div>
     </xpath>    
     <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
