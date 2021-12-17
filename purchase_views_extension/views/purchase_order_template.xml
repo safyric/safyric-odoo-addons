@@ -14,9 +14,11 @@
             <tr>
               <td>
                 <div class="container">
-                  <div class="row" id="seller">
-                    <div class="row" t-field="o.partner_id"
+                  <div id="seller">
+                    <div class="row">
+                      <p t-field="o.partner_id"
                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
                     <div class="row" t-if="o.partner_id.vat">
                       <span><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: &#160;</span>
                       <p t-field="o.partner_id.vat"/>
@@ -40,7 +42,7 @@
                       <span>Date:&#160;</span>
                       <p t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
                     </div>
-                    <div t-if="o.partner_ref">
+                    <div class="row" t-if="o.partner_ref">
                       <span>Your Ref:&#160;</span>
                       <p t-field="o.partner_ref"/>
                     </div>
