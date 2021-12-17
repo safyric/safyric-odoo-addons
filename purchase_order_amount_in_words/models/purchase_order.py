@@ -94,9 +94,9 @@ class PurchaseOrder(models.Model):
         else:
             strio.write('整')
 
-        @api.multi
-        def _compute_amount_in_words(self):
-            for rec in self:
-                rec.amount_words = str(rec.to_rmb_upper(rec.amount_total))
+    @api.multi
+    def _compute_amount_in_words(self):
+        for rec in self:
+            rec.amount_words = str(rec.to_rmb_upper(rec.amount_total))
 
     amount_words = fields.Char(string="金额大写", compute='_compute_amount_in_words')
