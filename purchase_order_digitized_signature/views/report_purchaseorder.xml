@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <template id="report_purchasequotation_document"
+              inherit_id="purchase.report_purchasequotation_document">
+      <xpath expr="//p[@id='fiscal_position_remark']" position="after">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td class="bg-light"><strong>Seller acceptance</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <span t-if="o.seller_signature">
+                      <img class="image"
+                           t-att-src="'data:image/png;base64,%s' % to_text(o.seller_signature)"
+                           style="border:auto;"/>
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6">
+          <table class="table-sm border-black pull-right" width="80%">
+            <tr>
+              <td class="bg-light"><strong>Buyer signature</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <span t-if="o.buyer_signature">
+                      <img class="image"
+                           t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)"
+                           style="border:auto;"/>
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </xpath>
+    </template>
+
+</odoo>
