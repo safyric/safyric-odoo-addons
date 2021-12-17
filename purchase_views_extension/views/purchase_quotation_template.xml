@@ -78,6 +78,12 @@
                         <div t-field="o.dest_address_id"
                              t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
                       </t>
+                      <t t-else="">
+                        <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
+                          <span t-field="o.picking_type_id.warehouse_id.name"/>
+                          <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                        </div>
+                      </t>
                     </div>
                   </div>
                 </td>
