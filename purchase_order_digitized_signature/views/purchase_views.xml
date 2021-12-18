@@ -5,21 +5,25 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='notes']" position="after">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="seller_signature" string='Seller Signature'/>
-                            <field name="seller_signature" widget="signature"/>
-                            <field name="seller_sign_date" class="oe_read_only"/>
-                        </div>
-                        <div class="col-6">
-                            <label for="buyer_signature" string='Buyer Signature'/>
-                            <field name="buyer_signature" widget="signature"/>
-                            <field name="buyer_sign_date" class="oe_read_only"/>
-                        </div>
-                    </div>
-                </div>
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page string="Signatures" name="signatures">
+                    <group>
+                        <group>
+                            <label for="seller_signature"/>
+                            <div class="row">
+                                <field name="seller_signature" widget="signature"/>
+                                <field name="seller_sign_date" readonly="1"/>
+                            </div>
+                        </group>
+                        <group>
+                            <label for="buyer_signature"/>
+                            <div class="row">
+                                <field name="buyer_signature" widget="signature"/>
+                                <field name="buyer_sign_date" readonly="1"/>
+                            </div>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>
