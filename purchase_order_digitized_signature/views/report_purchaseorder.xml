@@ -11,14 +11,12 @@
                   <td><strong>Seller acceptance</strong></td>
                 </tr>
                 <tr>
-                  <td class="bg-light" style="min-height: 200px">
+                  <td class="bg-light" style="height: 120px">
                     <div class="container">
                       <div>
                         <span t-if="o.seller_signature">
-                          <img class="image"
-                               t-att-src="'data:image/png;base64,%s' % to_text(o.seller_signature)"
-                               style="border:auto; max-width: 300px"/>
-                          <t t-field="o.seller_sign_date"/>
+                          <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.seller_signature)" style="border:auto;"/>
+                          <p t-field="o.seller_sign_date" class="oe_inline"/>
                         </span>
                       </div>
                     </div>
@@ -27,19 +25,17 @@
               </table>
             </div>
             <div class="col-6">
-              <table class="table-sm border-black pull-right" width="80%">
+              <table class="table-sm border-black pull-right" width="90%">
                 <tr>
                   <td class="bg-light"><strong>Buyer signature</strong></td>
                 </tr>
                 <tr>
-                  <td class="bg-light" style="min-height: 200px">
+                  <td class="bg-light" style="height: 120px">
                     <div class="container">
-                      <div class="row">
+                      <div>
                         <span t-if="o.buyer_signature">
-                          <img class="image"
-                               t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)"
-                               style="border:auto; max-width: 300px"/>
-                          <t t-field="o.buyer_sign_date"/>
+                          <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)" style="border:auto;"/>
+                          <p t-field="o.buyer_sign_date" class="oe_inline"/>
                         </span>
                       </div>
                     </div>
