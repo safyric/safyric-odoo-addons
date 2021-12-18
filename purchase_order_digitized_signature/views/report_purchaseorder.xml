@@ -13,11 +13,12 @@
                 <tr>
                   <td class="bg-light" style="min-height: 200px">
                     <div class="container">
-                      <div class="row">
+                      <div>
                         <span t-if="o.seller_signature">
                           <img class="image"
                                t-att-src="'data:image/png;base64,%s' % to_text(o.seller_signature)"
                                style="border:auto; max-width: 300px"/>
+                          <t t-field="o.seller_sign_date"/>
                         </span>
                       </div>
                     </div>
@@ -38,6 +39,7 @@
                           <img class="image"
                                t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)"
                                style="border:auto; max-width: 300px"/>
+                          <t t-field="o.buyer_sign_date"/>
                         </span>
                       </div>
                     </div>
