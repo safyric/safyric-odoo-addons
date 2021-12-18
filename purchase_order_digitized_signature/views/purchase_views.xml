@@ -10,9 +10,9 @@
                 <label for="seller_signature" string='Seller Signature'
                        class="oe_edit_only"/>
                 <field name="seller_signature" widget="signature"/>
-                <!--<label for="buyer_signature" string='Buyer Signature'
+                <label for="buyer_signature" string='Buyer Signature'
                        class="oe_edit_only"/>
-                <field name="buyer_signature" widget="signature"/>-->
+                <field name="buyer_signature" widget="signature"/>
             </xpath>
         </field>
     </record>
