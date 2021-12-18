@@ -32,8 +32,8 @@ class PurchaseOrder(models.Model):
     def write(self, values):
         if self.seller_signature:
             self._track_signature(values, 'seller_signature')
-            self.seller_sign_date(values, fields.Datetime.now())
+            values['seller_sign_date'] = fields.Datetime.now()
         if self.buyer_signature:
             self._track_signature(values, 'buyer_signature')
-            self.buyer_sign_date(values, fields.Datetime.now())
+            values['buyer_sign_date'] = fields.Datetime.now()            
         return super(PurchaseOrder, self).write(values)
