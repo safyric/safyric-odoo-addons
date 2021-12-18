@@ -30,13 +30,13 @@
               <td class="bg-light"><strong>Buyer signature</strong></td>
             </tr>
             <tr>
-              <td>
+              <td class="bg-light" style="min-height: 200px">
                 <div class="container">
                   <div class="row">
                     <span t-if="o.buyer_signature">
                       <img class="image"
                            t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)"
-                           style="border:auto;"/>
+                           style="border:auto; max-width: 300px"/>
                     </span>
                   </div>
                 </div>
