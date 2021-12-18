@@ -9,18 +9,12 @@
                 <page string="Signatures" name="signatures">
                     <group>
                         <group>
-                            <label for="seller_signature"/>
-                            <div class="row">
-                                <field name="seller_signature" widget="signature"/>
-                                <field name="seller_sign_date" readonly="1"/>
-                            </div>
+                            <field name="seller_signature" widget="signature"/>
+                            <field name="seller_sign_date" readonly="1"/>
                         </group>
                         <group>
-                            <label for="buyer_signature"/>
-                            <div class="row">
-                                <field name="buyer_signature" widget="signature"/>
-                                <field name="buyer_sign_date" readonly="1"/>
-                            </div>
+                            <field name="buyer_signature" widget="signature"/>
+                            <field name="buyer_sign_date" readonly="1"/>
                         </group>
                     </group>
                 </page>
