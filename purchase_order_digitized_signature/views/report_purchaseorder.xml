@@ -25,7 +25,7 @@
               </table>
             </div>
             <div class="col-6">
-              <table class="table-sm border-black pull-right" width="90%">
+              <table class="table-sm border-black pull-right" width="10%">
                 <tr>
                   <td class="bg-light"><strong>Buyer signature</strong></td>
                 </tr>
