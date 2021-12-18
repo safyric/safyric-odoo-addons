@@ -30,5 +30,5 @@ class PurchaseOrder(models.Model):
         if self.seller_signature:
             self._track_signature(values, 'seller_signature')
         if self.buyer_signature:
-            elf._track_signature(values, 'buyer_signature')
+            self._track_signature(values, 'buyer_signature')
         return super(PurchaseOrder, self).write(values)
