@@ -11,12 +11,12 @@
                         <div class="col-6">
                             <label for="seller_signature" string='Seller Signature'/>
                             <field name="seller_signature" widget="signature"/>
-                            <field name="seller_sign_date" class="oe_inline" attrs="{'readonly'}"/>
+                            <field name="seller_sign_date" class="oe_inline" readonly="1"/>
                         </div>
                         <div class="col-6">
                             <label for="buyer_signature" string='Buyer Signature'/>
                             <field name="buyer_signature" widget="signature"/>
-                            <field name="buyer_sign_date" class="oe_inline" attrs="{'readonly'}"/>
+                            <field name="buyer_sign_date" class="oe_inline" readonly="1"/>
                         </div>
                     </div>
                 </div>
