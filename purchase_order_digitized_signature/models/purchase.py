@@ -20,9 +20,15 @@ class PurchaseOrder(models.Model):
         if purchase.seller_signature:
             values = {'seller_signature': purchase.seller_signature}
             purchase._track_signature(values, 'seller_signature')
+        if purchase.buyer_signature:
+            values = {'buyer_signature': purchase.buyer_signature}
+            purchase._track_signature(values, 'buyer_signature')
         return purchase
 
     @api.multi
     def write(self, values):
-        self._track_signature(values, 'seller_signature')
+        if self.seller_signature:
+            self._track_signature(values, 'seller_signature')
+        if self.buyer_signature:
+            elf._track_signature(values, 'buyer_signature')
         return super(PurchaseOrder, self).write(values)
