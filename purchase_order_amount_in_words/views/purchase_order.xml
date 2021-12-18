@@ -8,7 +8,7 @@
       <field name="inherit_id" ref="purchase.purchase_order_form"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='notes']" position="before">
-          <group colspan="2"  attrs="{'invisible': [('amount_total', '&lt;=', 0)]}">
+          <group colspan="2"  invisible="1">
             <div class="oe_inline o_td_label">
               <label for="amount_words"/>
               <field name="amount_words" string="Amount In Words"/>
