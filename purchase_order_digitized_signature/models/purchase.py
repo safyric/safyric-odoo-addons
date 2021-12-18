@@ -13,7 +13,10 @@ class PurchaseOrder(models.Model):
     buyer_signature = fields.Binary(
         string='Buyer signature',
         attachment=True)
-    
+
+    seller_sign_date = fields.Datetime('Date')
+    buyer_sign_date = fields.Datetime('Date')
+
     @api.model
     def create(self, values):
         purchase = super(PurchaseOrder, self).create(values)
@@ -29,6 +32,8 @@ class PurchaseOrder(models.Model):
     def write(self, values):
         if self.seller_signature:
             self._track_signature(values, 'seller_signature')
+            
         if self.buyer_signature:
             self._track_signature(values, 'buyer_signature')
+            self.buyerr_sign_date(values, fields.Datetime.now())
         return super(PurchaseOrder, self).write(values)
