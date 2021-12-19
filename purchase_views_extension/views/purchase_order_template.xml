@@ -157,7 +157,7 @@
       <span t-esc="int(float(line.product_qty))"/>
     </xpath>
     <xpath expr="//thead/tr" position="attributes">
-      <attribute name="style">white-space: nowrap;</attribute>
+      <attribute name="class" add="text-nowrap" separator=" "/>
     </xpath>
   </template>
 </odoo>
