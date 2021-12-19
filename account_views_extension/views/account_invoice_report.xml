@@ -137,5 +137,11 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
+    <xpath expr="//thead/tr" position="attributes">
+      <attribute name="class" add="align-top text-nowrap" separator=" "/>
+    </xpath>
+    <xpath expr="//span[@t-field='line.quantity']" position="replace">
+      <span t-esc="int(float(line.quantity))"/>
+    </xpath>
   </template>
 </odoo>
