@@ -7,3 +7,4 @@ class ResCompany(models.Model):
 
     email_sale = fields.Char('Email Sales')
     email_invoicing = fields.Char('Email Invoicing')
+    email_purchase = fields.Char('Email Purchase')
