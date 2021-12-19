@@ -137,4 +137,144 @@
       <div class="clearfix"/
     </xpath>
   </template>
+</odoo><?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+      <attribute name="t-call">sale_views_extension.external_layout</attribute>
+    </xpath>
+    <xpath expr="//t[@t-set='doc']" position="after">
+      <div class="row">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td class="bg-light"><strong>Customer</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div id="customer">
+                    <div class="row">
+                      <span t-field="doc.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
+                    <div class="row" t-if="doc.partner_id.email">
+                        <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_id.email"/>
+                    </div>
+                    <!--<div class="row" t-if="doc.partner_id.vat">
+                      <span>
+                        <t if="doc.company_id.country_id.vat_label" t-esc="doc.company_id.country_id.vat_label"/>
+                        <t if="not doc.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
+                      </span>
+                      <p t-field="doc.partner_id.vat"/>
+                    </div>-->
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6">
+          <table class="table-sm border-black pull-right" width="100%">
+            <tr>
+              <td class="bg-light"><strong>Information</strong></td>
+            </tr>
+            <tr>
+              <td id="information">
+                <div class="container">
+                  <div class="pull-right">
+                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class="row" >
+                      <span>Quotation Date: </span>
+                      <span t-field="doc.date_order" t-options='{"widget": "date"}' class="m-0"/>
+                    </div>
+                    <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="row" >
+                      <span>Order Date: </span>
+                      <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
+                    </div>
+                    <div class="row" t-if="doc.client_order_ref">
+                      <span>Your Ref: </span>
+                      <span t-esc="doc.client_order_ref" class="m-0"/>
+                    </div>
+                    <div class="row">
+                      <span>Company: </span>
+                      <span t-field="doc.company_id" class="m-0"/>
+                    </div>
+                    <div class="row">
+                      <span>Sales Rep: </span>
+                      <span t-field="doc.user_id.partner_id.name" class="m-0"/>
+                      <t t-if="doc.user_id.partner_id.mobile">
+                        <i class="fa fa-phone"/><span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
+                      </t>
+                    </div>
+                    <div t-if="doc.user_id.partner_id.email" class="row">
+                      <span>Email: </span>
+                      <span t-field="doc.user_id.partner_id.email" class="m-0"/>
+                    </div>
+                    <div t-if="doc.incoterm" class="row">
+                      <span>INCOTERMS: </span>
+                      <span t-field="doc.incoterm.code" class="m-0"/>
+                    </div>
+                    <div t-if="doc.payment_term_id" class="row">
+                      <span>Payment Term: </span>
+                      <span t-field="doc.payment_term_id" class="m-0"/>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <table class="table-sm border-black" width="90%">
+            <tr>
+              <td class="bg-light"><strong>Shipping Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <t t-if="doc.partner_shipping_id">
+                      <div t-field="doc.partner_shipping_id"
+                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </t>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6">
+          <table class="table-sm border-black pull-right" width="100%">
+            <tr>
+              <td class="bg-light"><strong>Invoicing Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <div class="row">
+                    <div t-field="doc.partner_invoice_id.name"/>
+                  </div>
+                  <div class="row">
+                    <div t-field="doc.partner_invoice_id"
+                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                  </div>
+                  <div class="row" t-if="doc.partner_invoice_id.vat">
+                    <span>
+                      <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
+                      <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
+                    </span>
+                    <p t-field="doc.partner_invoice_id.partner_id.vat"/>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>          
+        </div>
+      </div>
+      <div class="clearfix"/>
+    </xpath>
+  </template>
 </odoo>
+
