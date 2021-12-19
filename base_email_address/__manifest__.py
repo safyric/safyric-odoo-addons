@@ -2,7 +2,7 @@
 
 
 {
-    'name': 'Email Address for Reports',
+    'name': 'Base Company Email Addresses',
     'version': '12.0.1.0.0',
     'category': 'Sales',
     'license': 'AGPL-3',
