@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_incoterms_ext_all,stock.delivery.place all,model_stock_delivery_place,,1,0,0,0
+access_incoterms_ext_manager,stock.delivery.place manager,model_stock_delivery_place,stock.group_stock_manager,1,1,1,1
