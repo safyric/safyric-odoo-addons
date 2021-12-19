@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ports_CNSHA" model="stock.delivery.place">
+            <field name="code">CNSHA</field>
+            <field name="name">Shanghai</field>
+        </record>
+        <record id="ports_CNNGB" model="stock.delivery.place">
+            <field name="code">CNNGB</field>
+            <field name="name">Ningbo</field>
+        </record>
+        <record id="ports_CNTXG" model="stock.delivery.place">
+            <field name="code">CNTXG</field>
+            <field name="name">Tianjin</field>
+        </record>
+        <record id="ports_HKHKG" model="stock.delivery.place">
+            <field name="code">HKHKG</field>
+            <field name="name">Hong Kong</field>
+        </record>
+        <record id="ports_NGAPP" model="stock.delivery.place">
+            <field name="code">NGAPP</field>
+            <field name="name">Apapa</field>
+        </record>    
+        <record id="ports_NGPHC" model="stock.delivery.place">
+            <field name="code">NGPHC</field>
+            <field name="name">Port Harcourt</field>
+        </record>
+        <record id="ports_Johor" model="stock.delivery.place">
+            <field name="code">Johor</field>
+            <field name="name">Johor</field>
+        </record>
+    </data>
+</odoo>
