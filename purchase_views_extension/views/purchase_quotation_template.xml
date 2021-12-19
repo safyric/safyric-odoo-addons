@@ -60,11 +60,11 @@
                       </t>
                     </div>
                     <div t-if="o.user_id.phone" class="row">
-                      <span>Phone: </span>
+                      <i class="fa fa-phone"/>
                       <span t-field="o.user_id.phone" class="m-0"/>
                     </div>
                     <div t-if="o.user_id.email" class="row">
-                      <span>Email: </span>
+                      <i class="fa fa-envelope-o fa-fw"/>
                       <span t-field="o.user_id.email" class="m-0"/>
                     </div>
                   </div>
