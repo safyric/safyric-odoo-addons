@@ -10,16 +10,16 @@
         <div class="float-left" t-if="company.report_header_name">
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
-        <div class="float-right" style="font-size: 13px !important;">
+        <div>
           <h2 class="pull-right">
             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-              <span t-if="doc.state not in ['draft','sent']">SALEES ORDER<br/></span>
-              <span t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
+              <span class="pull-right" style="font-size: 13px !important;" t-if="doc.state not in ['draft','sent']">SALES ORDER<br/></span>
+              <span class="pull-right" style="font-size: 13px !important;" t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
             </t>
             <t t-if="env.context.get('proforma', False) or is_pro_forma">
-              <span>PRO-FORMA INVOICE<br/></span>
+              <span class="pull-right" style="font-size: 13px !important;">PRO-FORMA INVOICE<br/></span>
             </t>
-            <span t-field="doc.name"/>
+            <span class="pull-right" style="font-size: 13px !important;" t-field="doc.name"/>
           </h2>
         </div>
         <div class="clearfix"/>
@@ -35,9 +35,9 @@
       <div class="text-center">
         <div t-if="report_type == 'pdf'" class="text-muted">
           Page:
-          <span class="page"/>
+          <span class="page" style="font-size: 13px !important;"/>
           of
-          <span class="topage"/>
+          <span class="topage" style="font-size: 13px !important;"/>
         </div>
       </div>
     </div>
