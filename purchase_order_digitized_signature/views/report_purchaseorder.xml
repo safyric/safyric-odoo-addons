@@ -6,7 +6,7 @@
       <xpath expr="//div[@class='oe_structure'][last()]" position="before">
           <div class="row">
             <div class="col-6">
-              <table class="table-sm border-black" width="90%">
+              <table class="table-sm border-black" width="90%" style="page-break-inside: avoid">
                 <tr>
                   <td><strong>Seller acceptance</strong></td>
                 </tr>
@@ -25,7 +25,7 @@
               </table>
             </div>
             <div class="col-6">
-              <table class="table-sm border-black pull-right" width="10%">
+              <table class="table-sm border-black pull-right" width="10%" style="page-break-inside: avoid">
                 <tr>
                   <td class="bg-light"><strong>Buyer signature</strong></td>
                 </tr>
