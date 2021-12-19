@@ -10,10 +10,11 @@
     'depends': [
         'sale',
     ],
-    'author': 'Camptocamp, Odoo Community Association (OCA)',
+    'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'data': [
         'views/sale_order_views.xml',
+        'views/sale_report_template.xml',
     ],
     'installable': True,
 }
