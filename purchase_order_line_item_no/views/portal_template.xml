@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="portal_my_purchase_order" inherit_id="purchase.portal_my_purchase_order">
+    <xpath expr="//div[hasclass('card-body')]/div[hasclass('row')]/div[hasclass('col-lg-6')]" position="attributes">
+      <attribute name="class">col-lg-5</attribute>
+    </xpath>
     <xpath expr="//div[hasclass('card-body')]/div[hasclass('row')]/div[1]" position="before">
-      <div>
+      <div class="col-lg-1">
         <strong>Item #</strong>
       </div>
     </xpath>
+    <xpath expr="//t[@t-foreach='order.order_line']/div[1]/div[1]" position="replace"/>
     <xpath expr="//t[@t-foreach='order.order_line']/div[1]/div[1]" position="before">
-      <div id='item'>
+      <div class="col-lg-1" id="item">
         <span t-esc="ol.item"/>
       </div>
     </xpath>
