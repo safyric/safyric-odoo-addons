@@ -4,9 +4,9 @@
     <template id="report_purchaseorder_document"
               inherit_id="purchase.report_purchaseorder_document">
       <xpath expr="//div[@class='oe_structure'][last()]" position="before">
-          <div class="row">
+          <div class="row" style="page-break-inside: avoid">
             <div class="col-6">
-              <table class="table-sm border-black" width="90%" style="page-break-inside: avoid">
+              <table class="table-sm border-black" width="90%">
                 <tr>
                   <td><strong>Seller acceptance</strong></td>
                 </tr>
@@ -25,7 +25,7 @@
               </table>
             </div>
             <div class="col-6">
-              <table class="table-sm border-black pull-right" width="10%" style="page-break-inside: avoid">
+              <table class="table-sm border-black pull-right" width="10%">
                 <tr>
                   <td class="bg-light"><strong>Buyer signature</strong></td>
                 </tr>
