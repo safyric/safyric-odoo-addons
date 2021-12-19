@@ -13,7 +13,7 @@
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'data': [
-        'views/res_config.xml',
+        'views/res_company.xml',
     ],
     'installable': True,
 }
