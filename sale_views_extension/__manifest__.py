@@ -3,7 +3,7 @@
 
 {
     'name': 'Sale Views Extension',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Sales',
     'license': 'AGPL-3',
     'summary': 'Extend views to customize as per company',
