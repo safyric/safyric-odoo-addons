@@ -4,7 +4,7 @@
     <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
       <attribute name="t-call">account_views_extension.external_layout</attribute>
     </xpath>
-    <xpath expr="//t[@t-set='doc']" position="after">
+    <xpath expr="//t[@t-set='o']" position="after">
       <div class="row">
         <div class="col-4">
           <table class="table-sm border-black" width="95%">
