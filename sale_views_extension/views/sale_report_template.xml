@@ -160,9 +160,9 @@
                     </div>
                     <div class="row">
                       <span>Contact: </span><t t-if="doc.partner_invoice_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_invoice_id.mobile" class="m-0"/></t>
-                      <div class="row" t-if="doc.partner_invoice_id.email">
-                        <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_invoice_id.email"/>
-                      </div>
+                    </div>
+                    <div class="row" t-if="doc.partner_invoice_id.email">
+                      <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_invoice_id.email"/>
                     </div>
                   </t>
                   <t t-else="">
