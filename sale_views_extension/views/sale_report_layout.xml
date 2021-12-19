@@ -34,7 +34,7 @@
     <div class="footer o_background_footer" style="font-size: 13px !important;">
       <div class="text-center">
         <div t-if="report_type == 'pdf'" class="text-muted">
-          Page:
+          Page
           <span class="page" style="font-size: 13px !important;"/>
           of
           <span class="topage" style="font-size: 13px !important;"/>
