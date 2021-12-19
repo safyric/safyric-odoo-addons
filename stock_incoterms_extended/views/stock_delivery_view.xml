@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Stock ports -->
+        <record id="view_delivery_place_tree" model="ir.ui.view">
+            <field name="name">stock.delivery.place.tree</field>
+            <field name="model">stock.delivery.place</field>
+            <field name="arch" type="xml">
+                <tree string="Delivery Place">
+                    <field name="active" invisible="1"/>
+                    <field name="code"/>
+                    <field colspan="4" name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_delivery_place_form" model="ir.ui.view">
+            <field name="name">stock.delivery.place.form</field>
+            <field name="model">stock.delivery.place</field>
+            <field name="arch" type="xml">
+                <form string="Delivery Place">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_delivery_place_view_search" model="ir.ui.view">
+        <field name="name">stock.delivery.place.search</field>
+        <field name="model">stock.delivery.place</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Place">
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_delivery_place_tree" model="ir.actions.act_window">
+        <field name="name">Delivery Place</field>
+        <field name="res_model">stock.delivery.place</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_delivery_place_tree" id="menu_action_delivery_place_open" parent="stock.menu_warehouse_config" sequence="6" groups="base.group_no_one"/>
+    </data>
+</odoo>
