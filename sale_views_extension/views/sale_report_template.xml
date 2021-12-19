@@ -169,10 +169,10 @@
       </div>
       <div class="clearfix"/>
     </xpath>
-    <xpath expr="//t[@t-se='address']" position="attributes">
+    <xpath expr="//t[@t-set='address']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
-    <xpath expr="//t[@t-se='information_block']" position="attributes">
+    <xpath expr="//t[@t-set='information_block']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//div[@class='page']//h2" position="replace"/>
