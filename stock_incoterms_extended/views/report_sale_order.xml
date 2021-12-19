@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document" inherit_id="sale_order_layout.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div class="row">
+                <div style="width: 40%;">
+                    <strong>Incoterms:</strong>
+                </div>
+                <div style="width: 60%;">
+                    <span class="m-0" t-field="doc.incoterm.code" style="padding-right: 6px;"/>
+                    <span class="m-0" t-field="doc.delivery_place"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
