@@ -47,7 +47,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-6">
+        <div class="col-6" id="informations">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
               <td class="bg-light"><strong>Information</strong></td>
@@ -175,7 +175,8 @@
     <xpath expr="//t[@t-set='information_block']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
-    <xpath expr="//div[@class='page']//h2" position="replace"/>
+    <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
+    <xpath expr="//div[hasclass('page')]//[@id='informations']" position="replace"/>
   </template>
 </odoo>
 
