@@ -177,7 +177,7 @@
     </xpath>
     <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
     <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="replace"/>
-    <xpath expr="//thead/th" position="attributes">
+    <xpath expr="//thead/tr" position="attributes">
       <attribute name="class" add="align-top" separator=" "/>
     </xpath>
     <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
