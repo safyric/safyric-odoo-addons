@@ -2,7 +2,7 @@
 
 {
     "name": "Sale Order Line Client Item No",
-    "version": "12.0.0.1",
+    "version": "12.0.0.2",
     "summary": "Adds client's item number to each sale order line.",
     "author": "Safyric Co., Ltd.",
     "website": "https://www.safyric.com",
