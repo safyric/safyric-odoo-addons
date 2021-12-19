@@ -11,9 +11,9 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right" style="font-size: 14px !important;">
-          <h2>
+          <h2 class="pull-right">
             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-              <span t-if="doc.state not in ['draft','sent']">ORDER<br/></span>
+              <span t-if="doc.state not in ['draft','sent']">SALEES ORDER<br/></span>
               <span t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
             </t>
             <t t-if="env.context.get('proforma', False) or is_pro_forma">
