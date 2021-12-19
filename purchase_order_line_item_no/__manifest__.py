@@ -13,6 +13,7 @@
     ],
     "data": [
         "views/purchase_order_view.xml",
+        "views/portal_template.xml",
     ],
     "installable": True,
 }
