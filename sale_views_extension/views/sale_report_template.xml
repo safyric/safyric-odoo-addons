@@ -96,15 +96,9 @@
               <td>
                 <div class="container">
                   <div class="row">
-                    <t t-if="doc.dest_address_id">
-                      <div t-field="doc.dest_address_id"
-                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
-                    </t>
-                    <t t-else="">
-                      <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
-                        <span t-field="o.picking_type_id.warehouse_id.name"/>
-                        <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
-                      </div>
+                    <t t-if="doc.partner_shipping_id">
+                      <div t-field="doc.partner_shipping_id"
+                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </t>
                   </div>
                 </div>
@@ -132,7 +126,7 @@
                       <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
                       <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
                     </span>
-                    <p t-field="o.partner_invoice_id.partner_id.vat"/>
+                    <p t-field="doc.partner_invoice_id.partner_id.vat"/>
                   </div>
                 </div>
               </td>
