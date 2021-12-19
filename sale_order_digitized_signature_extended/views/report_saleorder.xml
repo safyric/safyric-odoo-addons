@@ -4,7 +4,7 @@
     <template id="report_saleorder_document"
               inherit_id="sale.report_saleorder_document">
       <xpath expr="//span[@t-if='doc.customer_signature']/.." position="replace">
-          <div class="row">
+          <div class="row" style="page-break-inside: avoid">
             <div class="col-6">
               <table class="table-sm border-black" width="90%">
                 <tr>
