@@ -151,7 +151,7 @@
       <attribute name="t-options">{"widget": "date"}</attribute>
     </xpath>
     <xpath expr="//span[@t-field='line.date_planned']/.." position="attributes">
-      <attribute name="style">white-space: nowrap;</attribute>
+      <attribute name="class" add="text-nowrap" separator=" "/>
     </xpath>
     <xpath expr="//span[@t-field='line.product_qty']" position="replace">
       <span t-esc="int(float(line.product_qty))"/>
