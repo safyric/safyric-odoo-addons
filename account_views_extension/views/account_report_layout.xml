@@ -11,7 +11,7 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right">
-          <h2>
+          <h2 class="text-right text-nowrap">
               <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">INVOICE<br/></span>
               <span t-if="o.type == 'out_invoice' and o.state == 'draft'">DRAFT INVOICE<br/></span>
               <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">CANCELLED INVOICE<br/></span>
