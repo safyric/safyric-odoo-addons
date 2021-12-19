@@ -15,13 +15,28 @@
               <td>
                 <div class="container">
                   <div id="customer">
-                    <div class="row">
-                      <span t-field="doc.partner_id"
-                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                    </div>
-                    <div class="row" t-if="doc.partner_id.email">
-                        <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_id.email"/>
-                    </div>
+                    <t t-if="doc.partner_id.parent_id">
+                      <div class="row">
+                        <span t-field="doc.partner_id.parent_id" 
+                              t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                      </div>
+                      <div class="row">
+                        <span>Contact: </span><span t-field="doc.partner_id.name"/>
+                        <t t-if="doc.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_id.mobile" class="m-0"/></t>
+                      </div>
+                      <div class="row" t-if="doc.partner_id.email">
+                        <i class="fa fa-envelope-o fa-fw"/><span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
+                      </div>
+                    </t>
+                    <t t-else="">
+                      <div class="row">
+                        <span t-field="doc.partner_id" 
+                              t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                      </div>
+                      <div class="row" t-if="doc.partner_id.email">
+                        <i class="fa fa-envelope-o fa-fw"/><span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
+                      </div>
+                    </t>
                     <!--<div class="row" t-if="doc.partner_id.vat">
                       <span>
                         <t if="doc.company_id.country_id.vat_label" t-esc="doc.company_id.country_id.vat_label"/>
@@ -95,11 +110,24 @@
             <tr>
               <td>
                 <div class="container">
-                  <div class="row">
-                    <t t-if="doc.partner_shipping_id">
+                  <t t-if="doc.partner_shipping_id.parent_id">
+                    <div class="row">                      
+                      <div t-field="doc.partner_shipping_id.parent_id"
+                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
+                    <div class="row">
+                      <span>Contact: </span><span t-field="doc.partner_shipping_id.name"/>
+                      <t t-if="doc.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_id.mobile" class="m-0"/></t>
+                    </div>
+                  </t>
+                  <t t-else="">
+                    <div class="row">
                       <div t-field="doc.partner_shipping_id"
                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                    </t>
+                    </div>
+                  </t>
+                  <div class="row" t-if="doc.partner_id.email">
+                    <i class="fa fa-envelope-o fa-fw"/><span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
                   </div>
                 </div>
               </td>
