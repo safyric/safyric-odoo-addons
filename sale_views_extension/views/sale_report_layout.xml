@@ -10,16 +10,16 @@
         <div class="float-left" t-if="company.report_header_name">
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
-        <div>
-          <h2 class="pull-right">
+        <div class="float-right">
+          <h2 class="text-right" >
             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
               <span class="text-right" t-if="doc.state not in ['draft','sent']">SALES ORDER<br/></span>
               <span class="text-right" t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
             </t>
             <t t-if="env.context.get('proforma', False) or is_pro_forma">
-              <span class="pull-right">PRO-FORMA INVOICE<br/></span>
+              <span class="text-right">PRO-FORMA INVOICE<br/></span>
             </t>
-            <span class="text-right" t-field="doc.name"/>
+            <span t-field="doc.name"/>
           </h2>
         </div>
         <div class="clearfix"/>
