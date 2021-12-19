@@ -65,7 +65,7 @@
                       <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div t-if="doc.validity_date" class="row" >
-                      <span>Order Date: </span>
+                      <span>Validity: </span>
                       <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
