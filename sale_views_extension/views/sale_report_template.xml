@@ -80,7 +80,7 @@
                       <span>Sales Rep: </span>
                       <span t-field="doc.user_id.partner_id.name" class="m-0"/>
                       <t t-if="doc.user_id.partner_id.mobile">
-                        <i class="fa fa-phone"/><span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
+                        <i class="fa fa-mobile"/><span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
                       </t>
                     </div>
                     <div t-if="doc.user_id.partner_id.email" class="row">
