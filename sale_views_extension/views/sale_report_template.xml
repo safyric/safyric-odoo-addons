@@ -176,7 +176,7 @@
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
-    <xpath expr="//div[hasclass('page')]//[@id='informations']" position="replace"/>
+    <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="replace"/>
   </template>
 </odoo>
 
