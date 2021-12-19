@@ -91,13 +91,13 @@
               <td id="information">
                 <div class="container">
                   <div class="pull-right">
-                    <div t-if="o.date_invoice" class="row" >
+                    <div t-if="o.date_invoice" class="row" name="invoice_date">
                       <span t-if="o.type == 'out_invoice'">Invoice Date: </span>
                       <span t-if="o.type == 'out_refund' or o.type == 'in_refund'">Note Date: </span>
                       <span t-if="o.type == 'in_invoice'">Bill Date: </span>
                       <span t-field="o.date_invoice" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
-                    <div t-if="o.date_due and o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')" class="row" >
+                    <div t-if="o.date_due and o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')" class="row" name="due_date">
                       <span>Due Date: </span>
                       <span t-field="o.date_due" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
@@ -116,11 +116,11 @@
                       <i class="fa fa-envelope-o fa-fw"/>
                       <span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>
-                    <div t-if="o.name" class="row">
+                    <div t-if="o.name" class="row" name="description">
                       <span>Reference: </span>
                       <span t-field="o.name" class="m-0"/>
                     </div>
-                    <div t-if="o.origin" class="row">
+                    <div t-if="o.origin" class="row" name="origin">
                       <span>Source Document: </span>
                       <span t-field="o.origin" class="m-0"/>
                     </div>
