@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "depends": [
         "sale",
+        "sale_views_extension",
     ],
     "data": [
         "views/sale_order_view.xml",
