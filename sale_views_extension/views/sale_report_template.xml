@@ -88,7 +88,7 @@
                       <span t-field="doc.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <div t-if="doc.incoterm" class="row">
-                      <span>INCOTERMS: </span>
+                      <span>Incoterms: </span>
                       <span t-field="doc.incoterm.code" class="m-0"/>
                     </div>
                     <div t-if="doc.payment_term_id" class="row">
