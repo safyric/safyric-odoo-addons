@@ -58,15 +58,15 @@
                   <div class="pull-right">
                     <div t-if="doc.date_order and doc.state in ['draft','sent']" class="row" >
                       <span>Quotation Date: </span>
-                      <span t-field="doc.date_order" t-options='{"widget": "date"}' class="m-0"/>
+                      <span t-field="doc.date_order" t-options='{"widget": "date", "format": "MMMM dd, yyyy"}' class="m-0"/>
                     </div>
                     <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="row" >
                       <span>Order Date: </span>
-                      <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
+                      <span t-field="doc.confirmation_date" t-options='{"widget": "date", "format": "MMMM dd, yyyy"}' class="m-0"/>
                     </div>
                     <div t-if="doc.validity_date" class="row" >
                       <span>Validity: </span>
-                      <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
+                      <span t-field="doc.validity_date" t-options='{"widget": "date", "format": "MMMM dd, yyyy"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
                       <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Ref: </span>
