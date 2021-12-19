@@ -10,7 +10,7 @@
         <div class="float-left" t-if="company.report_header_name">
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
-        <div class="float-right" style="font-size: 14px !important;">
+        <div class="float-right" style="font-size: 13px !important;">
           <h2 class="pull-right">
             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
               <span t-if="doc.state not in ['draft','sent']">SALEES ORDER<br/></span>
@@ -31,7 +31,7 @@
       <t t-raw="0"/>
     </div>
 
-    <div class="footer o_background_footer" style="font-size: 14px !important;">
+    <div class="footer o_background_footer" style="font-size: 13px !important;">
       <div class="text-center">
         <div t-if="report_type == 'pdf'" class="text-muted">
           Page:
