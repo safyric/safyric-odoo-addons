@@ -69,7 +69,8 @@
                       <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
-                      <span>Your Ref: </span>
+                      <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Ref: </span>
+                      <span t-if="doc.confirmation_date and doc.state not in ['draft','sent']">PO Number: </span>
                       <span t-esc="doc.client_order_ref" class="m-0"/>
                     </div>
                     <div class="row">
@@ -84,7 +85,7 @@
                       </t>
                     </div>
                     <div t-if="doc.user_id.partner_id.email" class="row">
-                      <span>Email: </span>
+                      <i class="fa fa-envelope-o fa-fw"/>
                       <span t-field="doc.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <div t-if="doc.incoterm" class="row">
