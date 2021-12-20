@@ -7,7 +7,7 @@
         <field name="priority">15</field>
         <field name="arch" type="xml">
             <xpath expr="//header" postion='inside'>
-                <button name="create_revision"  states="cancel" string="New Revision" type="object"/>
+                <button name="create_revision" string="New Revision" type="object"/>
             </xpath>
             <notebook position="inside">
                 <page string="Revisions" attrs="{'invisible': ['&amp;',('has_old_revisions', '=', False), ('current_revision_id', '=', False)]}">
