@@ -33,10 +33,16 @@
                   <td class="bg-light" style="height: 120px">
                     <div class="container">
                       <div>
-                        <span t-if="o.buyer_signature">
-                          <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)" style="border:auto;max-width:300px"/>
-                          <p t-field="o.buyer_sign_date" class="oe_inline"/>
-                        </span>
+                        <t t-if="o.user_id.digital_signature">
+                            <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.user_id.digital_signature)" style="border:auto;max-width:300px"/>
+                            <p t-field="o.date_order" class="oe_inline"/>
+                        </t>
+                        <t t-else="">
+                          <span t-if="o.buyer_signature">
+                            <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)" style="border:auto;max-width:300px"/>
+                            <p t-field="o.buyer_sign_date" class="oe_inline"/>
+                          </span>
+                        </t>
                       </div>
                     </div>
                   </td>
