@@ -106,7 +106,7 @@ class PurchaseOrder(models.Model):
 
         action = {
             'type': 'ir.actions.act_window',
-            'name': _('New Purchase Order Revisions'),
+            'name': _('New Revisions'),
             'res_model': 'purchase.order',
             'domain': "[('id', 'in', %s)]" % revision_ids,
             'auto_search': True,
