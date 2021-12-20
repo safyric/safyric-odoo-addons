@@ -9,7 +9,7 @@
     'author': "Safyric Co., Ltd.",
     'website': 'https://github.com/OCA/bank-payment',
     'depends': [
-        'account_payment_partner'
+        'account_payment_partner',
         'account',
     ],
     'data': [
