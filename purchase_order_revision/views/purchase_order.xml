@@ -9,7 +9,7 @@
         <xpath expr="//form/header/button[@name='button_cancel']" position="after">
           <button name="action_revision" states="sent" type="object" string="Revision"/>
         </xpath>
-        <xpath expr="//form/sheet/notebook/page[2]" position="after">
+        <xpath expr="//sheet/notebook/page[2]" position="after">
           <page string="Revisions">
             <field name="old_revision_ids">
               <tree>
