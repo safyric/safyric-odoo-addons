@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="report_invoice_payment_mode" inherit_id="account_payment_partner.report_invoice_payment_mode">
-    <xpath expr="//p[@t-if='o.payment_mode_id.note']" position="replace"/>
+    <xpath expr="//p[1]" position="replace"/>
     <xpath expr="//t[1]" position="replace"/>
   </template>
   <template id="report_invoice_document" inherit_id="account_views_extension.report_invoice_document">
