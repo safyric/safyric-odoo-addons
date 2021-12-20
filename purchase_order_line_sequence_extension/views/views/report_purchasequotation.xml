@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchase_quote_sequence_qweb"
+              inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//table/thead/tr/th[1]"
+               position="before">
+            <th><strong>Line #</strong></th>
+        </xpath>
+    </template>
+</odoo>
