@@ -13,7 +13,7 @@
           <table class="table-sm border-black" width="90%">
             <tr>
               <td class="bg-light">
-                <t t-if="o.type == 'out_invoice'"><strong>Invoicing Address</strong></t>
+                <t t-if="o.type == 'out_invoice' or o.type == 'in_invoice'"><strong>Invoicing Address</strong></t>
                 <t t-else=""><strong>Vendor</strong></t>
               </td>
             </tr>
@@ -102,7 +102,7 @@
           </table>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6" t-if="o.type == 'out_invoice'">
         <table class="table-sm border-black" width="90%">
           <tr>
               <td class="bg-light"><strong>Shipping Address</strong></td>
@@ -134,7 +134,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-6">
+        <div class="col-6" t-if="o.type == 'out_invoice'">
           <table class="table-sm border-black" width="100%">
             <tr>
               <td class="bg-light"><strong>Beneficiary Information</strong></td>
