@@ -28,7 +28,7 @@ class PurchaseOrder(models.Model):
             purchase._track_signature(values, 'buyer_signature')
         return purchase
 
-    @api.multi
+    @api.one
     def write(self, values):
         if self.seller_signature:
             self._track_signature(values, 'seller_signature')
