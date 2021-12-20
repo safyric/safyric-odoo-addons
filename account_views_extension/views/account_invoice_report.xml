@@ -12,7 +12,10 @@
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td class="bg-light"><strong>Invoicing Address</strong></td>
+              <td class="bg-light">
+                <t t-if="o.type == 'out_invoice'"><strong>Invoicing Address</strong></t>
+                <t t-else=""><strong>Vendor</strong></t>
+              </td>
             </tr>
             <tr>
               <td>
@@ -96,12 +99,12 @@
                 </div>
               </td>
             </tr>
-          </table>          
+          </table>
         </div>
       </div>
-        <div class="col-6">
-          <table class="table-sm border-black" width="90%">
-            <tr>
+      <div class="col-6">
+        <table class="table-sm border-black" width="90%">
+          <tr>
               <td class="bg-light"><strong>Shipping Address</strong></td>
             </tr>
             <tr>
