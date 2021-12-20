@@ -17,7 +17,7 @@
     ],
     "depends": [
         "stock",
-        "sale",
+        "sale_views_extension",
         "account",
     ],
     "installable": True,
