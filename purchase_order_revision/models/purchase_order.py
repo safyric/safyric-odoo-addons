@@ -3,12 +3,6 @@ from odoo import api, fields, models, _
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    current_revision_id = fields.Many2one('purchase.order', 'Current revision', readonly=True, copy=True)
-    old_revision_ids = fields.One2many('purchase.order', 'current_revision_id', 'Old revisions', readonly=True)
-    revision_number = fields.Integer('Revision',copy=False)
-    unrevisioned_name = fields.Char('Order Reference', copy=False, readonly=True)
-    active = fields.Boolean('Active', default=True, copy=True)
-
     @api.model
     def create(self, vals):
         if 'unrevisioned_name' not in vals:
@@ -53,3 +47,10 @@ class PurchaseOrder(models.Model):
             self.write({'revision_number': revno + 1,'name': '%s-%02d' % (self.unrevisioned_name,revno + 1)})
             defaults.update({'name': prev_name,'revision_number': revno,'active': False,'state': 'cancel','current_revision_id': self.id,'unrevisioned_name': self.unrevisioned_name,})
         return super(PurchaseOrder, self).copy(defaults)
+
+    current_revision_id = fields.Many2one('purchase.order', 'Current revision', readonly=True, copy=True)
+    old_revision_ids = fields.One2many('purchase.order', 'current_revision_id', 'Old revisions', readonly=True)
+    revision_number = fields.Integer('Revision', copy=False)
+    unrevisioned_name = fields.Char('Order Reference', copy=False, readonly=True)
+    active = fields.Boolean('Active', default=True, copy=True)
+
