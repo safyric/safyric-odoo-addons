@@ -154,7 +154,7 @@
                         <span>Account Holder: </span><span t-field="o.partner_bank_id.acc_holder_name"/>
                       </div>
                       <div class="row" t-if="o.partner_bank_id.currency_id">
-                        <span>Account Holder: </span><span t-field="o.o.partner_bank_id.currency_id"/>
+                        <span>Account Holder: </span><span t-field="o.partner_bank_id.currency_id"/>
                       </div>                     
                     </t>
                 </div>
