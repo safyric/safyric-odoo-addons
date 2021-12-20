@@ -4,7 +4,7 @@
     <xpath expr="//p[@t-if='o.payment_mode_id.note']" position="replace"/>
     <xpath expr="//p[@t-as='partner_bank']/.." position="replace"/>
   </template>
-  <template id="report_invoice_document" inherit_id="account_views_extension.report_invoice_document">
+  <!--<template id="report_invoice_document" inherit_id="account_views_extension.report_invoice_document">
     <xpath expr="//div[@name='beneficiary']" position="inside">
       <div class="row" t-if="o.payment_mode_id and o.payment_mode_id.show_bank_account != 'no'">
         <p t-foreach="o.partner_banks_to_show()" t-as="partner_bank">
@@ -24,6 +24,6 @@
           </t>
         </p>
       </div>
-    </xpath>
+    </xpath>-->
   </template>
 </odoo>
