@@ -143,6 +143,20 @@
             <tr>
               <td>
                 <div class="container" name="beneficiary">
+                    <t t-if="o.partner_bank_id">
+                      <div class="row">
+                        <span>Bank Name: </span><span t-field="o.partner_bank_id.bank_id"/>                       
+                      </div>
+                      <div class="row">
+                        <span>Account Number: </span><span t-field=".partner_bank_id.acc_number"/>
+                      </div>
+                      <div class="row" t-if="o.partner_bank_id.acc_holder_name">
+                        <span>Account Holder: </span><span t-field="o.partner_bank_id.acc_holder_name"/>
+                      </div>
+                      <div class="row" t-if="o.partner_bank_id.currency_id">
+                        <span>Account Holder: </span><span t-field="o.o.partner_bank_id.currency_id"/>
+                      </div>                     
+                    </t>
                 </div>
               </td>
             </tr>
