@@ -8,7 +8,10 @@
     'summary': 'Adds payment mode on partners and invoices',
     'author': "Safyric Co., Ltd.",
     'website': 'https://github.com/OCA/bank-payment',
-    'depends': ['account_payment_partner'],
+    'depends': [
+        'account_payment_partner'
+        'account',
+    ],
     'data': [
         'views/report_invoice.xml',
     ],
