@@ -9,7 +9,7 @@
        <xpath expr="//form/header/button[@name='button_cancel']" position="after">
           <button name="action_revision" states="sent" type="object" string="Revision"/>
         </xpath>
-        <!--<xpath expr="//sheet/notebook/page[2]" position="after">
+        <xpath expr="//sheet/notebook/page[2]" position="after">
           <page string="Revisions">
             <field name="old_revision_ids">
               <tree>
@@ -24,7 +24,7 @@
               <field name="active" invisible='1'/>
             </group>
           </page>
-        </xpath>-->
+        </xpath>
         
         <!-- Readonly in Sent State -->
         <xpath expr="//field[@name='order_line']" position="attributes">
