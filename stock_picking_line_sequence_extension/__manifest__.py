@@ -9,7 +9,7 @@
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'depends': ['stock_picking_line_sequence'],
     'data': [
-        'report/report_deliveryslip.xml',
+        'views/report_deliveryslip.xml',
     ],
     'installable': True,
     'license': "AGPL-3",
