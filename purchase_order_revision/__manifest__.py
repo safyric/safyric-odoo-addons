@@ -15,4 +15,5 @@
     ],
     "license": "AGPL-3",
     "installable": True,
+    "post_init_hook": "populate_unrevisioned_name",
 }
