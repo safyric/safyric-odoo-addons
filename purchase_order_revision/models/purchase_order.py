@@ -58,7 +58,7 @@ class PurchaseOrder(models.Model):
             default['name'] = seq.next_by_code('purchase.order') or '/'
             default['revision_number'] = 0
             default['unrevisioned_name'] = default['name']
-        return super(PurchaseOrder, self).copy(default=default)
+        return super(PurchaseOrder, self).create(default=default)
 
     def copy_revision_with_context(self):
         default_data = self.default_get([])
