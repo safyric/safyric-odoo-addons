@@ -19,6 +19,7 @@
         "stock",
         "sale_views_extension",
         "account",
+        'purchase'
     ],
     "installable": True,
 }
