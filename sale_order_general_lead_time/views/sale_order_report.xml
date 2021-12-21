@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-    <xpath expr="//span[@t-field='doc.payment_term_id']/.." position="after">
+    <xpath expr="//div[@t-if='doc.payment_term_id']" position="after">
       <div t-if="doc.general_lead_time" class="row">
         <span>Lead Time: </span>
         <span t-field="doc.general_lead_time" class="m-0"/>
