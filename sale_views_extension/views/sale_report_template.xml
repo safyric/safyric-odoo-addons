@@ -203,15 +203,5 @@
       <span t-esc="int(float(line.product_uom_qty))"/>
     </xpath>
   </template>
-  <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-    <xpath expr="//th[@name='th_option_price_unit']" position="after">
-      <th name="th_option_customer_lead" class="text-right" t-if="option.customer_lead">Lead Time</th>
-    </xpath>
-    <xpath expr="//td[@name='td_option_price_unit']" position="after">
-      <td name="td_option_customer_lead" t-if="option.customer_lead">
-        <span t-field="option.customer_lead"/>
-      </td>
-    </xpath>
-  </template>
 </odoo>
 
