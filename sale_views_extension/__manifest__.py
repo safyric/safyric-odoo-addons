@@ -9,6 +9,7 @@
     'summary': 'Extend views to customize as per company',
     'depends': [
         'sale',
+        'sale_management',
     ],
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
