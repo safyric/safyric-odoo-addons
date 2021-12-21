@@ -69,7 +69,7 @@
                       <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
-                      <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Ref: </span>
+                      <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Reference: </span>
                       <span t-if="doc.confirmation_date and doc.state not in ['draft','sent']">PO Number: </span>
                       <span t-esc="doc.client_order_ref" class="m-0"/>
                     </div>
@@ -78,7 +78,7 @@
                       <span t-field="doc.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Sales Rep: </span>
+                      <span>Sales Representative: </span>
                       <span t-field="doc.user_id.partner_id.name" class="m-0"/>
                       <t t-if="doc.user_id.partner_id.mobile">
                         <i class="fa fa-mobile"/><span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
