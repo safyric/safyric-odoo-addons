@@ -12,3 +12,5 @@ class StockMove(models.Model):
     sequence2 = fields.Integer('Line #',
                                help="Shows the sequence in the Stock Move.",
                                related='sequence', readonly=True, store=True)
+
+    item = fields.Char('Item #')
