@@ -13,6 +13,7 @@
     ],
     "depends": [
         "sale_order_line_sequence",
+        "purchase_order_line_sequence_extension",
     ],
     "installable": True,
 }
