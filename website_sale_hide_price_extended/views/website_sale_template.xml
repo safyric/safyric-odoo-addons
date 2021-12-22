@@ -72,7 +72,7 @@
         </template>
         <template id="variants" inherit_id="sale.variants">
                 <xpath expr="//span[@t-if='value_id.price_extra']" position="attributes">
-                        <attribute name="t-if" add="and website.website_show_price" separator=" "/>
+                        <attribute name="t-att-style">'display: none;'</attribute>
                 </xpath>
         </template>
 </odoo>
