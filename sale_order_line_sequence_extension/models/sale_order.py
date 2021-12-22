@@ -16,3 +16,5 @@ class SaleOrderLine(models.Model):
         readonly=True,
         store=True
     )
+
+    item = fields.Char('Item #')
