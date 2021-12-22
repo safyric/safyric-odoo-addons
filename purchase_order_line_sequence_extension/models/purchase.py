@@ -12,3 +12,5 @@ class PurchaseOrderLine(models.Model):
                                help="Displays the sequence of the line in "
                                     "the purchase order.",
                                related='sequence', readonly=True)
+    
+    item = fields.Char('Item #')
