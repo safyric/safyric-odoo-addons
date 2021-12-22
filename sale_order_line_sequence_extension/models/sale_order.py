@@ -23,3 +23,4 @@ class SaleOrderLine(models.Model):
         res = super()._prepare_procurement_values(group_id=False)
         if item:
             res.update({'item': self.item})
+        return res
