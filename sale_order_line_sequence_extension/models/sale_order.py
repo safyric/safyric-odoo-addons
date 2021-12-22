@@ -18,3 +18,8 @@ class SaleOrderLine(models.Model):
     )
 
     item = fields.Char('Item #')
+    
+    def _prepare_procurement_values(self, group_id=False):
+        res = super()._prepare_procurement_values(group_id=False)
+        if item:
+            res.update({'item': self.item})
