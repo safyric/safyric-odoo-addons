@@ -5,6 +5,7 @@
         <xpath expr="//table/thead/tr/th[1]"
                position="before">
             <th><strong>Line #</strong></th>
+            <th><strong>Item #</strong></th>
         </xpath>
         <!--complicated expr to be compatible with other modules-->
         <xpath expr="//table/tbody//span[1]/.."
@@ -12,6 +13,9 @@
              <td>
                 <span t-field="line.sequence2"/>
              </td>
+            <td>
+                <span t-field="line.item"/>
+            </td>
         </xpath>
     </template>
 </odoo>
