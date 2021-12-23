@@ -14,3 +14,10 @@ class PurchaseOrderLine(models.Model):
                                related='sequence', readonly=True)
     
     item = fields.Char('Item #')
+
+    @api.multi
+    def _prepare_stock_moves(self, picking):
+        res = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
+        for move, line in zip(res, self):
+            move.update(item=line.item)
+        return res
