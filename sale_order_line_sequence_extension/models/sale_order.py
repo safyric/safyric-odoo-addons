@@ -21,6 +21,8 @@ class SaleOrderLine(models.Model):
     
     def _prepare_procurement_values(self, group_id=False):
         res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=False)
-        if item:
-            res.update({'item': self.item})
+        if self.item:
+            res.update({
+                'item': self.item,
+            })
         return res
