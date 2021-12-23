@@ -14,7 +14,7 @@
     ],
     'data': [
         'views/report_deliveryslip.xml',
-        'vies/stock_picking.xml',
+        'vies/stock_view.xml',
     ],
     'installable': True,
     'license': "AGPL-3",
