@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_picking_form" />
             <field name="priority" eval="255"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@nbame='sequence2']"
+                <xpath expr="//field[@name='sequence2']"
                        position="after">
                     <field name="item"/>
                 </xpath>
