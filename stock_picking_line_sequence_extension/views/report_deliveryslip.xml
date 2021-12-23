@@ -9,7 +9,7 @@
         </xpath>
         <xpath expr="//table[2]/tbody/tr/td[1]" position="before">
             <td>
-                <span t-field="item"/>
+                <span t-field="move_line.item"/>
             </td>
         </xpath>
         <xpath expr="//table[3]/thead/tr/th[1]" position="replace">
@@ -18,7 +18,7 @@
         </xpath>
         <xpath expr="//table[3]/tbody/tr/td[1]" position="before">
             <td>
-                <span t-field="item"/>
+                <span t-field="move_line.item"/>
             </td>            
         </xpath>
     </template>
