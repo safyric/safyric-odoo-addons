@@ -177,11 +177,10 @@
                     </div>
                     <div class="row" t-if="doc.partner_invoice_id.vat">
                       <span>
-                          <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
-                          <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
-                        </span>
-                        <p t-field="doc.partner_invoice_id.partner_id.vat"/>
-                      </div>
+                        <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
+                        <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
+                      </span>
+                      <p t-field="doc.partner_invoice_id.partner_id.vat"/>
                     </div>
                   </t>
                 </div>
