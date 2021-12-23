@@ -9,7 +9,8 @@
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "license": "AGPL-3",
     'data': [
-        'views/report_saleorder.xml'
+        'views/report_saleorder.xml',
+        'views/sale_order_view.xml',
     ],
     "depends": [
         "sale_stock",
