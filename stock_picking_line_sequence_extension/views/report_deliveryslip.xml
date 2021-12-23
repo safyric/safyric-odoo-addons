@@ -5,9 +5,21 @@
               inherit_id="stock.report_delivery_document">
         <xpath expr="//table[2]/thead/tr/th[1]" position="replace">
             <th><strong>Line #</strong></th>
+            <th><strong>Item #</strong></th>
+        </xpath>
+        <xpath expr="//table[2]/tbody/tr/td[1]" position="before">
+            <td>
+                <span t-field="item"/>
+            </td>
         </xpath>
         <xpath expr="//table[3]/thead/tr/th[1]" position="replace">
             <th><strong>Line #</strong></th>
+            <th><strong>Item #</strong></th>
+        </xpath>
+        <xpath expr="//table[3]/tbody/tr/td[1]" position="before">
+            <td>
+                <span t-field="item"/>
+            </td>            
         </xpath>
     </template>
 
