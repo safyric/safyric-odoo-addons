@@ -7,9 +7,14 @@
     'category': 'Warehouse Management',
     'author': "Safyric Co., Ld.",
     'website': 'https://github.com/safyric/safyric-odoo-addons',
-    'depends': ['stock_picking_line_sequence'],
+    'depends': [
+        'stock_picking_line_sequence',
+        'stock',
+        'sale_stock',
+    ],
     'data': [
         'views/report_deliveryslip.xml',
+        'vies/stock_picking.xml',
     ],
     'installable': True,
     'license': "AGPL-3",
