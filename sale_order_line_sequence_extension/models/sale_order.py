@@ -18,12 +18,13 @@ class SaleOrderLine(models.Model):
     )
 
     item = fields.Char('Item #')
-    
+
+    @api.multi
     def _prepare_procurement_values(self, group_id=False):
         res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=False)
-        if self.item:
+        for line in self:
             res.update({
-                'item': self.item,
+                'item': line.item,
             })
         return res
 
