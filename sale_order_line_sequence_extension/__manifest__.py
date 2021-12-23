@@ -12,6 +12,7 @@
         'views/report_saleorder.xml'
     ],
     "depends": [
+        "sale_stock",
         "sale_order_line_sequence",
         "purchase_order_line_sequence_extension",
     ],
