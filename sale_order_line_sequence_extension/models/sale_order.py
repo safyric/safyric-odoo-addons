@@ -33,8 +33,7 @@ class SaleOrderLine(models.Model):
 class StockRule(models.Model):
     _inherit = 'stock.rule'
 
-    def _get_stock_move_values(self, product_id, product_qty, product_uom, location_id, name, origin, values, group_id):
-        res = super(StockRule, self)._get_stock_move_values(product_id, product_qty, product_uom, location_id,
-                                                           name, origin, values, group_id)
-        res['item'] = values.get('item', False)
-        return res
+    def _get_custom_move_fields(self):
+        fields = super(StockRule, self)._get_custom_move_fields()
+        fields += ['item']
+        return fields
