@@ -21,12 +21,14 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def _prepare_procurement_values(self, group_id=False):
-        res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=False)
-        for line in self:
-            res.update({
-                'item': line.item,
+        vals = super(SaleOrderLine, self).\
+            _prepare_procurement_values(group_id)
+        # has ensure_one already
+        if self.item:
+            vals.update({
+                'item': self.item,
             })
-        return res
+        return vals
 
 class StockRule(models.Model):
     _inherit = 'stock.rule'
