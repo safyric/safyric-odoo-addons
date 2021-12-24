@@ -11,6 +11,7 @@
     'data': [
         'views/report_saleorder.xml',
         'views/sale_order_view.xml',
+        'views/sale_portal_template.xml',
     ],
     "depends": [
         "sale_stock",
