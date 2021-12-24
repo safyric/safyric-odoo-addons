@@ -18,7 +18,12 @@ class SaleOrderLine(models.Model):
         store=True
     )
 
-    item = fields.Char('Item #')
+    def _get_default_sequence(self):
+        num = self._context['default_sequence']
+        if num:
+            return num
+
+    item = fields.Char(string='Item #', default=_get_default_sequence)
 
     @api.multi
     def _prepare_procurement_values(self, group_id=False):
