@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  </template>
   <template id="report_purchasequotation_document"
             inherit_id="purchase.report_purchasequotation_document">
     <xpath expr="//table/thead/tr/th[1]" position="replace">
