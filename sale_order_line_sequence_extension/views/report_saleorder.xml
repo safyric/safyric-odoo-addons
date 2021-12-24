@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="report_saleorder_document_sequence" inherit_id="sale_order_line_sequence.report_saleorder_document_sequence">
-    <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[1]" position="replace">
-      <th><strong>Line #</strong></th>
-    </xpath>
-    <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_description']" position="before">
+  <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//th[@name='th_description']" position="before">
       <th><strong>Item #</strong></th>
     </xpath>
-    <xpath expr="//table[hasclass('table', 'table-sm')]/tbody/t/tr[1]/t[1]/td[@name='td_name']" position="before">
+    <xpath expr="//td[@name='td_name']" position="before">
       <td>
         <span t-field="line.item"/>
       </td>
