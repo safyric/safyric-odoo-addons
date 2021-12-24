@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+  <template id="report_saleorder_document_sequence" inherit_id="sale_order_line_sequence.report_saleorder_document_sequence">
     <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[1]" position="replace">
       <th><strong>Line #</strong></th>
     </xpath>
