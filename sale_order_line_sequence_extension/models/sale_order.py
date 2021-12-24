@@ -31,6 +31,11 @@ class SaleOrderLine(models.Model):
             })
         return vals
 
+    @api.multi
+    def _prepare_invoice_line(self, qty):
+        res = super(SaleOrderLine, self)._prepare_invoice_line(qty)
+        res.update({'item': self.item})
+        return res
 
 class StockRule(models.Model):
     _inherit = 'stock.rule'
@@ -40,9 +45,3 @@ class StockRule(models.Model):
         fields = super(StockRule, self)._get_custom_move_fields()
         fields += ['item']
         return fields
-
-    @api.multi
-    def _prepare_invoice_line(self, qty):
-        res = super(SaleOrderLine, self)._prepare_invoice_line(qty)
-        res.update({'item': self.item})
-        return res
