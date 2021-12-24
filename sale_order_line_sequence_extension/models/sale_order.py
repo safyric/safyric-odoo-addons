@@ -1,14 +1,15 @@
 from odoo import api, fields, models
 
+
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
-    
+
     sequence = fields.Integer(
         help="Gives the sequence of this line when displaying the sale order.",
         default=1,
         string="Sequence"
     )
-    
+
     sequence2 = fields.Integer(
         help="Shows the sequence of this line in the sale order.",
         related='sequence',
@@ -21,7 +22,7 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def _prepare_procurement_values(self, group_id=False):
-        vals = super(SaleOrderLine, self).\
+        vals = super(SaleOrderLine, self). \
             _prepare_procurement_values(group_id)
         # has ensure_one already
         if self.item:
@@ -29,6 +30,7 @@ class SaleOrderLine(models.Model):
                 'item': self.item,
             })
         return vals
+
 
 class StockRule(models.Model):
     _inherit = 'stock.rule'
