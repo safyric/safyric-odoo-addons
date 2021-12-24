@@ -6,6 +6,7 @@
     </xpath>
     <xpath expr="//th[@name='th_description']" position="before">
       <th><strong>Item #</strong></th>
+    </xpath>
     <xpath expr="//td[@name='td_name']" position="before">
       <td>
         <span t-field="line.item"/>
