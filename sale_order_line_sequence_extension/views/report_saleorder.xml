@@ -9,5 +9,8 @@
         <span t-field="line.item"/>
       </td>
     </xpath>
+    <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[1]" position="replace">
+      <th><strong>Item #</strong></th>
+    </xpath>
   </template>
 </odoo>
