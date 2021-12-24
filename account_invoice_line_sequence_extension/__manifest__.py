@@ -7,8 +7,14 @@
     'category': 'Accounting',
     'author': "Safyric Co., Ltd.",
     'website': 'https://github.com/safyric/safyric-odoo-addons',
-    'data': ['views/report_invoice.xml'],
-    'depends': ['account_invoice_line_sequence'],
+    'data': [
+        'views/report_invoice.xml',
+        'views/account_invoice_view.xml',
+    ],
+    'depends': [
+        'account_invoice_line_sequence',
+        'account'
+    ],
     'license': 'AGPL-3',
     'installable': True,
 }
