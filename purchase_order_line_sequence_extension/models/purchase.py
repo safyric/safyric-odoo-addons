@@ -13,7 +13,12 @@ class PurchaseOrderLine(models.Model):
                                     "the purchase order.",
                                related='sequence', readonly=True)
     
-    item = fields.Char('Item #')
+    def _get_default_sequence(self):
+        num = self._context['default_sequence']
+        if num:
+            return num
+
+    item = fields.Char(string='Item #', default=_get_default_sequence)
 
     @api.multi
     def _prepare_stock_moves(self, picking):
