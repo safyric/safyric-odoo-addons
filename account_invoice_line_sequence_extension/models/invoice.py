@@ -13,3 +13,5 @@ class AccountInvoiceLine(models.Model):
     sequence2 = fields.Integer(help="Shows the sequence of this line in the "
                                " invoice.", related='sequence',
                                string="Line #", store=True)
+
+    item = fields.Char('Item #')
