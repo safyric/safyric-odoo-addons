@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_invoice_sequence_qweb" inherit_id="account.report_invoice_document">
+    <template id="report_invoice_sequence_qweb" inherit_id="account_invoice_line_sequence.report_invoice_sequence_qweb">
         <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[1]" position="replace">
             <th><strong>Line #</strong></th>
+        </xpath>
+    </template>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th><strong>Item #</strong></th>
+        </xpath>
+        <xpath expr="//td[@name='account_invoice_line_name']" position="before">
+            <td><span t-field="line.item"/></td>            
         </xpath>
     </template>
 </odoo>
