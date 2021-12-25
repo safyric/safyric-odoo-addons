@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_stock">
+  <template id="external_layout_deliveryslip">
     <div class="header">
       <div class="o_background_header">
         <div class="float-right">
@@ -11,10 +11,7 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right" style="font-size: 14px !important;">
-          <h2 class="text-right" t-if="o.state == 'draft'">RFQ (DRAFT) <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state in ['sent', 'to approve']">RFQ <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER <br/><span t-field="o.name"/></h2>
-          <h2 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED) <br/><span t-field="o.name"/></h2>
+          <h2 class="text-right">DELIVERY SLIP<br/><span t-field="o.name"/></h2>
         </div>
         <div class="clearfix"/>
       </div>
@@ -36,7 +33,40 @@
       </div>
     </div>
   </template>
-  <template id="external_layout">
+  <template id="external_layout_picking">
+    <div class="header">
+      <div class="o_background_header">
+        <div class="float-right">
+          <h3 class="mt0 text-right" t-field="company.report_header"/>
+        </div>
+        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo" height="50px;"/>
+        <div class="float-left" t-if="company.report_header_name">
+          <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
+        </div>
+        <div class="float-right" style="font-size: 14px !important;">
+          <h2 class="text-right">PICKING OPERATION<br/><span t-field="o.name"/></h2>
+        </div>
+        <div class="clearfix"/>
+      </div>
+    </div>
+
+    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
+         t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
+      <t t-raw="0"/>
+    </div>
+
+    <div class="footer o_background_footer" style="font-size: 14px !important;">
+      <div class="text-center">
+        <div t-if="report_type == 'pdf'" class="text-muted">
+          Page:
+          <span class="page"/>
+          of
+          <span class="topage"/>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="external_layout_deliveryslip">
     <t t-if="not o" t-set="o" t-value="doc"/>
     <t t-if="not company">
       <!-- Multicompany -->
@@ -50,6 +80,22 @@
         <t t-set="company" t-value="res_company"/>
       </t>
     </t>
-    <t t-call="stock_views_extension.external_layout_stock"><t t-raw="0"/></t>
+    <t t-call="stock_views_extension.external_layout_deliveryslip"><t t-raw="0"/></t>
+  </template>
+  <template id="external_layout_picking">
+    <t t-if="not o" t-set="o" t-value="doc"/>
+    <t t-if="not company">
+      <!-- Multicompany -->
+      <t t-if="company_id">
+        <t t-set="company" t-value="company_id"/>
+      </t>
+      <t t-elif="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+      </t>
+      <t t-else="else">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+    </t>
+    <t t-call="stock_views_extension.external_layout_picking"><t t-raw="0"/></t>
   </template>
 </odoo>
