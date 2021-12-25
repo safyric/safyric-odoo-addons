@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_purchase">
+  <template id="external_layout_stock">
     <div class="header">
       <div class="o_background_header">
         <div class="float-right">
@@ -50,6 +50,6 @@
         <t t-set="company" t-value="res_company"/>
       </t>
     </t>
-    <t t-call="purchase_views_extension.external_layout_purchase"><t t-raw="0"/></t>
+    <t t-call="stock_views_extension.external_layout_stock"><t t-raw="0"/></t>
   </template>
 </odoo>
