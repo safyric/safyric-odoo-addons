@@ -7,8 +7,7 @@
     "category": "Warehouse",
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "depends": [
-        "purchase",
-        "purchase_stock",
+        "stock",
     ],
     "data": [
         "views/stock_report_layout.xml",
