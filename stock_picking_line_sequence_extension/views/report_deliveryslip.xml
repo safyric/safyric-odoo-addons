@@ -7,7 +7,7 @@
             <th><strong>Line #</strong></th>
             <th><strong>Item #</strong></th>
         </xpath>
-        <xpath expr="//table[2]/tbody/tr/td[1]" position="before">
+        <xpath expr="//table[2]/tbody/tr/td[1]" position="after">
             <td>
                 <span t-field="move.item"/>
             </td>
