@@ -164,12 +164,12 @@
         <t t-set="uom" t-value="move_line.product_uom_id[0]"/>
       </t>
       <t t-foreach="sorted(set(pack), key=lambda k: k.name)" t-as="package">
-        <t t-set="dim" t-value="' x '.join([str(package.packaging_id.length),str(package.packaging_id.width),str(package.packaging_id.height)])"/>
+        <t t-set="dim" t-if="package.packaging_id" t-value="' x '.join([str(package.packaging_id.length),str(package.packaging_id.width),str(package.packaging_id.height)])"/>
         <tr>
           <td colspan="999" class="bg-dark">
             <div class="row">
               <div class="col-4"><strong><span t-field="package.name"/></strong></div>
-              <div class="col-4" t-if="package.packaging_id.length > 0"><strong><span t-esc="dim"/>mm</strong></div>
+              <div class="col-4" t-if="package.packaging_id and package.packaging_id.length > 0"><strong><span t-esc="dim"/>mm</strong></div>
               <div class="col-4 text-right" t-if="package.shipping_weight > 0"><strong><span t-field="package.shipping_weight"/><span t-field="o.weight_uom_id"/></strong></div>
             </div>
           </td>
