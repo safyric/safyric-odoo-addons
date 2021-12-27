@@ -8,6 +8,7 @@
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "depends": [
         "stock",
+        "sale_stock"
     ],
     "data": [
         "views/stock_report_layout.xml",
