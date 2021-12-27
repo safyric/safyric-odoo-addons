@@ -126,5 +126,38 @@
       </div>
       <div class="clearfix"/>
     </xpath>
+    <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
+      <t t-set="pack" t-value="[]"/>
+      <t t-foreach="o.move_line_ids" t-as="move_line">
+        <t t-set="pack" t-value="pack+[move_line.result_package_id]"/>
+      </t>
+      <t t-foreach="sorted(set(pack), key=lambda k: k.name)" t-as="package">
+        <tr>
+          <td colspan="999">
+            <strong><span t-field="package.name"/></strong>
+          </td>
+        </tr>
+        <t t-set="sum_qty" t-value="0"/>
+        <t t-foreach="o.move_line_ids" t-as="move_line" t-if="package.id==move_line.result_package_id.id">
+          <t t-set="sum_qty" t-value="sum_qty+move_line.qty_done"/>
+        </t>
+        <tr>
+          <td colspan="999" class="font-italic">
+            <div class="pull-left"><span>Package Summary</span></div>
+            <div class="pull-right" t-esc="int(float(sum_qty))"/><t t-esc="uom"/>
+          </td>
+        </tr>
+      </t>
+    </xpath>
+    <xpath expr="//t[@t-as='package']/t[@t-as='move_line']" position="inside">
+      <xpath expr="//tr[@t-as='move_line']" position="move"/>
+    </xpath>
+    <xpath expr="//tr[@t-as='move_line']" position="attributes">
+      <attribute name="t-foreach"/>
+      <attribute name="t-as"/>
+    </xpath>
+    <xpath expr="//span[@t-field='move_line.qty_done']" position="replace">
+      <span t-esc="int(float(move_line.qty_done))"/>
+    </xpath>
   </template>
 </odoo>
