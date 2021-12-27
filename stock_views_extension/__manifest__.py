@@ -1,7 +1,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
     "name": "Inventory Views Extension",
-    'summary': 'Extend views to customize as per company',
+    'summary': "Extend views to customize as per company",
     "author": "Safyric Co., Ltd.",
     "version": "12.0.1.0.0",
     "category": "Warehouse",
