@@ -173,8 +173,10 @@
         </t>
         <tr>
           <td colspan="999" class="font-italic text-muted">
-            <div class="pull-left"><span>Package Summary</span></div>
-            <div class="pull-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
+            <div class="row">
+              <div class="pull-left"><span t-field="package.name"/><span> Summary: </span></div>
+              <div class="pull-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
+            </div>
           </td>
         </tr>
       </t>
