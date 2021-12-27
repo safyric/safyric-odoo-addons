@@ -163,7 +163,7 @@
       </t>
       <t t-foreach="sorted(set(pack), key=lambda k: k.name)" t-as="package">
         <tr>
-          <td colspan="999" class="bg-light">
+          <td colspan="999" class="bg-dark">
             <strong><span t-field="package.name"/></strong>
           </td>
         </tr>
