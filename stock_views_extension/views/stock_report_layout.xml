@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
+    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name"
          t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
       <t t-raw="0"/>
     </div>
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
+    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name"
          t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
       <t t-raw="0"/>
     </div>
@@ -80,7 +80,7 @@
         <t t-set="company" t-value="res_company"/>
       </t>
     </t>
-    <t t-call="stock_views_extension.external_layout_deliveryslip"><t t-raw="0"/></t>
+    <t t-call="stock_views_extension.external_layout_delivery"><t t-raw="0"/></t>
   </template>
   <template id="external_layout_pickingoperation">
     <t t-if="not o" t-set="o" t-value="doc"/>
