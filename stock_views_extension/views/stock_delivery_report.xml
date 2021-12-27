@@ -4,11 +4,11 @@
           <div class="row" t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id">
             <span>Carrier: </span><span t-field="o.carrier_id"/>
           </div>
-          <div class="row" t-if="o.shipping_weight">
-            <span>Shipping Weight: </span><span t-field="o.shipping_weight"/><span t-field="o.weight_uom_id"/>
-          </div>
           <div class="row" t-if="o.carrier_tracking_ref">
             <span>Tracking Number: </span><span t-field="o.carrier_tracking_ref"/>
+          </div>
+          <div class="row" t-if="o.shipping_weight">
+            <span>Shipping Weight: </span><span t-field="o.shipping_weight"/><span t-field="o.weight_uom_id"/>
           </div>
         </xpath>
     </template>
