@@ -20,17 +20,10 @@
                   <div id="seller">
                     <div class="row">
                       <span t-field="o.partner_id"
-                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                     <div class="row" t-if="o.partner_id.email">
-                        <i class="fa fa-envelope-o fa-fw"/><span t-field="o.partner_id.email"/>
-                    </div>
-                    <div class="row" t-if="o.partner_id.vat">
-                      <span>
-                        <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
-                        <t t-if="not o.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
-                      </span>
-                      <p t-field="o.partner_id.vat" class="m-0"/>
+                      <i class="fa fa-envelope-o fa-fw"/><span t-field="o.partner_id.email"/>
                     </div>
                   </div>
                 </div>
@@ -49,61 +42,74 @@
                   <div class="pull-right">
                     <div class="row">
                       <span>Date: </span>
-                      <span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                      <t t-if="o.state == 'done'">
+                        <span t-field="o.date_done" class="m-0" t-options='{"widget": "date"}'/>
+                      </t>
+                      <t t-if="o.state != 'done'">
+                        <span t-field="o.scheduled_date" class="m-0" t-options='{"widget": "date"}'/>
+                      </t>
                     </div>
                     <div class="row">
                       <span>Company: </span>
                       <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Buyer: </span>
-                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
-                      <t t-if="o.user_id.partner_id.mobile">
-                        <i class="fa fa-mobile"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
+                      <span>Sales Representative: </span>
+                      <span t-field="o.sale_id.user_id.partner_id.name" class="m-0"/>
+                      <t t-if="o.sale_id.user_id.partner_id.mobile">
+                        <i class="fa fa-mobile"/><span t-field="o.sale_id.user_id.partner_id.mobile" class="m-0"/>
                       </t>
                     </div>
-                    <div t-if="o.user_id.phone" class="row">
+                    <div t-if="o.sale_id.user_id.phone" class="row">
                       <i class="fa fa-phone"/>
-                      <span t-field="o.user_id.phone" class="m-0"/>
+                      <span t-field="o.sale_id.user_id.phone" class="m-0"/>
                     </div>
-                    <div t-if="o.user_id.email" class="row">
+                    <div t-if="o.sale_id.user_id.email" class="row">
                       <i class="fa fa-envelope-o fa-fw"/>
-                      <span t-field="o.user_id.email" class="m-0"/>
+                      <span t-field="o.sale_id.user_id.email" class="m-0"/>
+                    </div>
+                    <div t-if="o.origin" class="row">
+                      <span>Source Document: </span>
+                      <span t-field="o.origin"/>
+                    </div>
+                    <div t-if="o.client_order_ref" class="row">
+                      <span>Customer Reference: </span>
+                      <span t-field="o.client_order_ref"/>
                     </div>
                   </div>
                 </div>
               </td>
             </tr>
-          </table>          
+          </table>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td class="bg-light"><strong>Invoicing Address</strong></td>
+              <td class="bg-light"><strong>Customer</strong></td>
             </tr>
             <tr>
               <td>
                 <div class="container">
-                  <t t-if="doc.partner_shipping_id.parent_id">
-                    <div class="row">                      
-                      <div t-field="doc.partner_shipping_id.parent_id"
+                  <t t-if="o.sale_id.partner_id.parent_id">
+                    <div class="row">
+                      <div t-field="o.sale_id.partner_id.parent_id"
                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                     <div class="row">
-                      <span>Contact: </span><span t-field="doc.partner_shipping_id.name"/>
-                      <t t-if="doc.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_id.mobile" class="m-0"/></t>
+                      <span>Contact: </span><span t-field="o.sale_id.partner_id.name"/>
+                      <t t-if="o.sale_id.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="o.partner_id.mobile" class="m-0"/></t>
                     </div>
                   </t>
                   <t t-else="">
                     <div class="row">
-                      <div t-field="doc.partner_shipping_id"
+                      <div t-field="o.sale_id.partner_id"
                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                   </t>
-                  <div class="row" t-if="doc.partner_shipping_id.email">
-                    <i class="fa fa-envelope-o fa-fw"/><span t-if="doc.partner_shipping_id.email" t-field="doc.partner_id.email"/>
+                  <div class="row" t-if="o.sale_id.partner_id.email">
+                    <i class="fa fa-envelope-o fa-fw"/><span t-if="o.sale_id.partner_id.email" t-field="o.sale_id.partner_id.email"/>
                   </div>
                 </div>
               </td>
@@ -113,27 +119,51 @@
         <div class="col-6">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
-              <td class="bg-light"><strong>SHIPPING NOTES</strong></td>
+              <td class="bg-light"><strong>Shipment Information</strong></td>
             </tr>
             <tr>
               <td>
-                <div class="container">
+                <div class="container" name="shipment">
+
                 </div>
               </td>
             </tr>
-          </table>          
+          </table>
         </div>
       </div>
       <div class="clearfix"/>
     </xpath>
+    <xpath expr="//h2[1]" position="attributes">
+      <attribute name="style">display:none</attribute>
+    </xpath>
+    <xpath expr="//table[@class='table table-sm']" position="attributes">
+      <attribute name="style">display:none</attribute>
+    </xpath>
+    <xpath expr="//table[hasclass('mt48')][2]/thead/tr" position="attributes">
+      <attribute name="class">text-nowrap</attribute>
+    </xpath>
+    <xpath expr="//table[hasclass('mt48')][1]/thead/tr" position="attributes">
+      <attribute name="class">text-nowrap</attribute>
+    </xpath>
+    <xpath expr="//span[@t-field='move.product_uom_qty']" position="replace">
+      <span t-esc="int(float(move.product_uom_qty))"/>
+    </xpath>
+    <xpath expr="//span[@t-field='move_line.qty_done']" position="replace">
+      <span t-esc="int(float(move_line.qty_done))"/>
+    </xpath>
+    <xpath expr="//div[hasclass('justify-content-end')]" position="attributes">
+      <attribute name="style">display:none</attribute>
+    </xpath>
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="pack" t-value="[]"/>
+      <t t-set="uom" t-value="[]"/>
       <t t-foreach="o.move_line_ids" t-as="move_line">
         <t t-set="pack" t-value="pack+[move_line.result_package_id]"/>
+        <t t-set="uom" t-value="move_line.product_uom_id[0]"/>
       </t>
       <t t-foreach="sorted(set(pack), key=lambda k: k.name)" t-as="package">
         <tr>
-          <td colspan="999">
+          <td colspan="999" class="bg-light">
             <strong><span t-field="package.name"/></strong>
           </td>
         </tr>
@@ -142,9 +172,9 @@
           <t t-set="sum_qty" t-value="sum_qty+move_line.qty_done"/>
         </t>
         <tr>
-          <td colspan="999" class="font-italic">
+          <td colspan="999" class="font-italic text-muted">
             <div class="pull-left"><span>Package Summary</span></div>
-            <div class="pull-right" t-esc="int(float(sum_qty))"/><t t-esc="uom"/>
+            <div class="pull-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
           </td>
         </tr>
       </t>
@@ -155,9 +185,6 @@
     <xpath expr="//tr[@t-as='move_line']" position="attributes">
       <attribute name="t-foreach"/>
       <attribute name="t-as"/>
-    </xpath>
-    <xpath expr="//span[@t-field='move_line.qty_done']" position="replace">
-      <span t-esc="int(float(move_line.qty_done))"/>
     </xpath>
   </template>
 </odoo>
