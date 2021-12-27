@@ -125,7 +125,9 @@
               <td>
                 <div class="container" name="shipment">
                   <t t-if="o.note">
-                    <div t-field="o.note"/>
+                    <div class="row">
+                      <strong><p t-field="o.note"/></strong>
+                    </div>
                   </t>
                 </div>
               </td>
