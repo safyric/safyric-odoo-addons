@@ -172,9 +172,11 @@
           <t t-set="sum_qty" t-value="sum_qty+move_line.qty_done"/>
         </t>
         <tr>
-          <td colspan="999" class="font-italic text-muted">
-            <div><span t-field="package.name"/><span> Summary: </span></div>
-            <div class="float-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
+          <td colspan="999">
+            <div class="bg-light text-muted clearfix">
+              <div class="float-left"><span t-field="package.name"/><span> Summary: </span></div>
+              <div class="float-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
+            </div>
           </td>
         </tr>
       </t>
