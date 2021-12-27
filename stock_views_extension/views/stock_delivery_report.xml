@@ -1,0 +1,19 @@
+<odoo>
+    <template id="report_delivery_document2" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='shipment']" position="inside">
+          <div class="row" t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id">
+            <span>Carrier: </span><span t-field="o.carrier_id"/>
+          </div>
+          <div class="row" t-if="o.shipping_weight">
+            <span>Shipping Weight: </span><span t-field="o.shipping_weight"/>
+          </div>
+          <div class="row" t-if="o.carrier_tracking_ref"><span t-field="o.weight_uom_id"/>
+            <span>Tracking Number: </span><span t-field="o.carrier_tracking_ref"/>
+          </div>
+            <th t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id">Carrier</strong></th>
+            <th t-if="o.shipping_weight"><strong>Shipping Weight</strong></th>
+            <th ><strong>Tracking Number</strong></th>
+          </div>
+        </xpath>
+    </template>
+</odoo>
