@@ -169,8 +169,8 @@
           <td colspan="999" class="bg-dark">
             <div class="row">
               <div class="col-4"><strong><span t-field="package.name"/></strong></div>
-              <div class="col-4"><strong><span t-esc="dim"/>mm</strong></div>
-              <div class="col-4 text-right"><strong><span t-field="package.shipping_weight"/><span t-field="o.weight_uom_id"/></strong></div>
+              <div class="col-4" t-if="package.packaging_id.length > 0"><strong><span t-esc="dim"/>mm</strong></div>
+              <div class="col-4 text-right" t-if="package.shipping_weight > 0"><strong><span t-field="package.shipping_weight"/><span t-field="o.weight_uom_id"/></strong></div>
             </div>
           </td>
         </tr>
