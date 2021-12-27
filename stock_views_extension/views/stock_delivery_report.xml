@@ -10,6 +10,9 @@
           <div class="row" t-if="o.shipping_weight">
             <span>Shipping Weight: </span><span t-field="o.shipping_weight"/><span t-field="o.weight_uom_id"/>
           </div>
+          <div class="row" t-if="o.volume > 0">
+            <span>Volume: </span><span t-field="o.volume"/>m3
+          </div>
         </xpath>
     </template>
 </odoo>
