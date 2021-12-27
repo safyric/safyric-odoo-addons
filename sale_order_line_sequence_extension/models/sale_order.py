@@ -19,7 +19,9 @@ class SaleOrderLine(models.Model):
     )
 
     def _get_default_sequence(self):
-        num = self._context['default_sequence']
+        num = 0
+        if self._context['default_sequence']:
+            num = self._context['default_sequence']
         if num:
             return num
 
