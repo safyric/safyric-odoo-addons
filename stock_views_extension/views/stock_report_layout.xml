@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_deliveryslip">
+  <template id="external_layout_delivery">
     <div class="header">
       <div class="o_background_header">
         <div class="float-right">
@@ -82,7 +82,7 @@
     </t>
     <t t-call="stock_views_extension.external_layout_deliveryslip"><t t-raw="0"/></t>
   </template>
-  <template id="external_layout_picking">
+  <template id="external_layout_pickingoperation">
     <t t-if="not o" t-set="o" t-value="doc"/>
     <t t-if="not company">
       <!-- Multicompany -->
