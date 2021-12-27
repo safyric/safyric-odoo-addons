@@ -124,7 +124,9 @@
             <tr>
               <td>
                 <div class="container" name="shipment">
-
+                  <t t-if="o.note">
+                    <div t-field="o.note"/>
+                  </t>
                 </div>
               </td>
             </tr>
