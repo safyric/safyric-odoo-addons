@@ -14,7 +14,10 @@ class PurchaseOrderLine(models.Model):
                                related='sequence', readonly=True)
     
     def _get_default_sequence(self):
-        num = self._context['default_sequence']
+        num = 0
+        context = self.env.context
+        if context.get('default_sequence'):
+            num = self._context['default_sequence']
         if num:
             return num
 
