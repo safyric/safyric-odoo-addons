@@ -7,12 +7,6 @@
           <div class="row" t-if="o.carrier_tracking_ref">
             <span>Tracking Number: </span><span t-field="o.carrier_tracking_ref"/>
           </div>
-          <div class="row" t-if="o.shipping_weight + o.weight > 0">
-            <span>Shipping Weight: </span><span t-esc="o.shipping_weight+o.weight"/><span t-field="o.weight_uom_id"/>
-          </div>
-          <div class="row" t-if="o.volume > 0">
-            <span>Volume: </span><span t-field="o.volume"/>m3
-          </div>
         </xpath>
     </template>
 </odoo>
