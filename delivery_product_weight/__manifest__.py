@@ -1,17 +1,19 @@
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
-    "name": "Delivery Add Weight",
-    'summary': "Add weight to stock move line",
-    "author": "Safyric Co., Ltd.",
-    "version": "12.0.1.0.0",
-    "category": "Warehouse",
-    "website": "https://github.com/safyric/safyric-odoo-addons",
-    "depends": [
-        "delivery",
+    'name': 'Delivery Product Weight',
+    'summary': 'Add weight manually in picking line.',
+    'author': 'Safyric Co., Ltd.',
+    'website': 'https://github.com/safyric/safyric-odoo-addons',
+    'license': 'AGPL-3',
+    'category': 'Delivery',
+    'version': '12.0.1.0.0',
+    'depends': [
+        'stock',
+        'delivery',
     ],
-    "data": [
-        "views/delivery_view.xml",
+    'data': [
+        'views/delivery_view.xml',
+        'views/stock_picking.xml',
+        'views/product_packaging.xml',
+        'report/report_deliveryslip.xml'
     ],
-    "license": "AGPL-3",
-    "installable": True,
 }
