@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//table[2]//thead//tr/th[last()]" position="after">
+            <th><strong>Weight</strong></th>
+        </xpath>
+        <xpath expr="//table[2]//tbody//tr/td[last()]" position="after">
+            <td>
+                <span t-esc="move.product_weight * move.product_uom_qty"/><span t-field="move.picking_id.weight_uom_id"/>
+            </td>
+        </xpath>
+        <xpath expr="//table[3]//thead//tr/th[last()]" position="after">
+            <th><strong>Weight</strong></th>
+        </xpath>
+        <xpath expr="//span[@t-field='move_line.product_uom_id']/.." position="after">
+            <td>
+                <span t-esc="move_line.product_weight * move_line.qty_done"/><span t-field="move_line.picking_id.weight_uom_id"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
