@@ -10,10 +10,10 @@
             </td>
         </xpath>
         <xpath expr="//table[3]//thead//tr/th[last()]" position="after">
-            <th><strong>Weight</strong></th>
+            <th class="text-right"><strong>Weight</strong></th>
         </xpath>
         <xpath expr="//span[@t-field='move_line.product_uom_id']/.." position="after">
-            <td>
+            <td class="text-right">
                 <span t-esc="move_line.product_weight * move_line.qty_done"/><span t-field="move_line.picking_id.weight_uom_id"/>
             </td>
         </xpath>
