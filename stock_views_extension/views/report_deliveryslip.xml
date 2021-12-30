@@ -56,17 +56,6 @@
                     <div class="row">
                       <span>Sales Representative: </span>
                       <span t-field="o.sale_id.user_id.partner_id.name" class="m-0"/>
-                      <t t-if="o.sale_id.user_id.partner_id.mobile">
-                        <i class="fa fa-mobile"/><span t-field="o.sale_id.user_id.partner_id.mobile" class="m-0"/>
-                      </t>
-                    </div>
-                    <div t-if="o.sale_id.user_id.phone" class="row">
-                      <i class="fa fa-phone"/>
-                      <span t-field="o.sale_id.user_id.phone" class="m-0"/>
-                    </div>
-                    <div t-if="o.sale_id.user_id.email" class="row">
-                      <i class="fa fa-envelope-o fa-fw"/>
-                      <span t-field="o.sale_id.user_id.email" class="m-0"/>
                     </div>
                     <div t-if="o.origin" class="row">
                       <span>Source Document: </span>
