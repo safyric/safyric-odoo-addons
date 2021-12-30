@@ -158,7 +158,7 @@
     <xpath expr="//div[hasclass('justify-content-end')]" position="attributes">
       <attribute name="style">display:none</attribute>
     </xpath>
-    <xpath expr="//table[@class='table table-sm mt48'][1]/tbody" position="inside">
+    <xpath expr="//t[@t-set='lines']" position="after">
       <t t-set="p_pack" t-value="[]"/>
       <t t-set="p_uom" t-value="[]"/>
       <t t-set="p_count" t-value="0"/>
