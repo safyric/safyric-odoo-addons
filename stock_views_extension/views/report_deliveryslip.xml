@@ -175,7 +175,7 @@
             <div class="row">
               <div class="col-3"><strong><span t-field="p.name"/></strong></div>
               <div class="col-3 text-right">
-                <strong><span t-esc="p_dim"/> mm</strong>
+                <t t-if="p_dim"><strong><span t-esc="p_dim"/> mm</strong></t>
               </div>
               <div class="col-3 text-right">
                 <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
@@ -228,7 +228,7 @@
             <div class="row">
               <div class="col-3"><strong><span t-field="pd.name"/></strong></div>
               <div class="col-3 text-right">
-                <strong><span t-esc="pd_dim"/> mm</strong>
+                <t t-if="pd_dim"><strong><span t-esc="pd_dim"/> mm</strong></t>
               </div>
               <div class="col-3 text-right">
                 <strong><span t-esc="'%.2f'%(pd.packaging_id.volume)"/> CBM</strong>
