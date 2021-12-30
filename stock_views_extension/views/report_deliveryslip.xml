@@ -180,7 +180,7 @@
               <div class="col-3 text-right" t-if="p.packaging_id and p.packaging_id.volume > 0">
                 <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
               </div>
-              <div class="col-3 text-right" t-if="p.packaging_id.shipping_weight > 0">
+              <div class="col-3 text-right" t-if="p.shipping_weight > 0">
                 <strong><span t-esc="p.shipping_weight + p.weight"/>
                 <span t-field="o.weight_uom_id"/></strong>
               </div>
