@@ -9,4 +9,5 @@
         <field name="show_serial"/>
       </field>
     </field>
+  </record>
 </odoo>
