@@ -214,6 +214,7 @@
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="pd_pack" t-value="[]"/>
       <t t-set="pd_uom" t-value="[]"/>
+      <t t-set="pd_count" t-value="0"/>
       <t t-foreach="o.move_line_ids" t-as="move_line">
         <t t-set="pd_pack" t-value="pd_pack+[move_line.result_package_id]"/>
         <t t-set="pd_uom" t-value="move_line.product_uom_id[0]"/>
