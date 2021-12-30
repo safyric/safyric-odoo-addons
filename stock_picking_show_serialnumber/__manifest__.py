@@ -10,7 +10,7 @@
         "stock",
     ],
     "data": [
-        "views/stock_report_layout.xml",
+        "views/report_deliveryslip.xml",
         "views/stock_picking_view.xml",
     ],
     "license": "AGPL-3",
