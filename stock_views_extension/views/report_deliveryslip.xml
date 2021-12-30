@@ -162,8 +162,8 @@
       <t t-set="p_pack" t-value="[]"/>
       <t t-set="p_uom" t-value="[]"/>
       <t t-set="p_count" t-value="0"/>
-      <t t-foreach="lines" t-as="move">
-        <t t-set="p_pack" t-value="p_pack+[move.move_line_ids.result_package_id]"/>
+      <t t-foreach="lines.move_line_ids" t-as="move">
+        <t t-set="p_pack" t-value="p_pack+[move.result_package_id]"/>
         <t t-set="p_uom" t-value="move.move_line_ids.product_uom_id[0]"/>
       </t>
       <t t-foreach="sorted(set(p_pack), key=lambda k: k.name)" t-as="p">
@@ -201,7 +201,7 @@
         </tr>
       </t>
       <tr>
-        <td colspan="999" class="bg-secondary"><span>Total <strong><t t-esc="p_count"/></strong> Package(s)</span></td>
+        <td colspan="999" class="bg-success"><span>Total <strong><t t-esc="p_count"/></strong> Package(s)</span></td>
       </tr>
     </xpath>
     <xpath expr="//t[@t-as='p']//t[@t-as='move']" position="inside">
@@ -254,7 +254,7 @@
         </tr>
       </t>
       <tr>
-        <td colspan="999" class="bg-secondary">
+        <td colspan="999" class="bg-success">
           <span>Total <strong><t t-esc="pd_count"/></strong> Package(s)</span>
         </td>
       </tr>
