@@ -221,6 +221,7 @@
       <t t-foreach="sorted(set(pd_pack), key=lambda k: k.name)" t-as="pd">
         <t t-set="pd_dim" t-if="pd.packaging_id" 
            t-value="' x '.join([str(pd.packaging_id.length),str(pd.packaging_id.width),str(pd.packaging_id.height)])"/>
+        <t t-set="pd_count" t-value="pd_index+1"/>
         <tr>
           <td t-if="pd" colspan="999" class="bg-dark">
             <div class="row">
