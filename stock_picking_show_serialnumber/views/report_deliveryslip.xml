@@ -4,14 +4,11 @@
     <xpath expr="//th[@name='lot_serial']" position="attributes">
       <attribute name="t-if" add="and o.show_serial" separator=" "/>
     </xpath>
-    <xpath expr="//span[@t-field='move_line.product_uom_id']">
-      <p t-if="o.show_serial" name="td_show_serial">
-        
-      </p>
+    <xpath expr="//span[@t-field='move_line.lot_name']/.." position="attributes">
+      <attribute name="t-if" add="and o.show_serial" separator=" "/>
     </xpath>
-    <xpath expr="//p[@name='td_show_serial']" position="inside">
-      <xpath expr="//span[@t-field='move_line.lot_name']/.." position="move"/>
-      <xpath expr="//span[@t-field='move_line.lot_id.name']/.." position="move"/>
+    <xpath expr="//span[@t-field='move_line.lot_id.name']/.." position="attributes">
+      <attribute name="t-if" add="and o.show_serial" separator=" "/>
     </xpath>
   </template>
 </odoo>
