@@ -219,7 +219,8 @@
         <t t-set="pd_uom" t-value="move_line.product_uom_id[0]"/>
       </t>
       <t t-foreach="sorted(set(pd_pack), key=lambda k: k.name)" t-as="pd">
-        <t t-set="pd_dim" t-if="pd.packaging_id" t-value="' x '.join([str(pd.packaging_id.length),str(pd.packaging_id.width),str(pd.packaging_id.height)])"/>
+        <t t-set="pd_dim" t-if="pd.packaging_id" 
+           t-value="' x '.join([str(pd.packaging_id.length),str(pd.packaging_id.width),str(pd.packaging_id.height)])"/>
         <tr>
           <td t-if="pd" colspan="999" class="bg-dark">
             <div class="row">
@@ -231,7 +232,10 @@
                 <strong><span t-esc="'%.2f'%(pd.packaging_id.volume)"/> CBM</strong>
               </div>
               <div class="col-3 text-right" t-if="pd.shipping_weight > 0">
-                <strong><span t-esc="pd.packaging_id.shipping_weight + pd.packaging_id.weight"/><span t-field="o.weight_uom_id"/></strong>
+                <strong>
+                  <span t-esc="pd.packaging_id.shipping_weight + pd.packaging_id.weight"/>
+                  <span t-field="o.weight_uom_id"/>
+                </strong>
               </div>
             </div>
           </td>
@@ -252,7 +256,6 @@
       <tr>
         <td colspan="999" class="bg-info">
           <span>Total <t t-esc="pd_count"/> Package(s)</span>
-          <span>Total Net Weight: <t t-esc=""/><t t-esc="pd_uom.name"/></span>
         </td>
       </tr>
     </xpath>
