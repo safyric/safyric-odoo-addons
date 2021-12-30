@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+  <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+    <xpath expr="//th[@name='lot_serial']" position="attributes">
+      <attribute name="t-if" add="and o.show_serial" separator=" "/>
+    </xpath>
+    <xpath expr="//span[@t-field='move_line.lot_name']/.." position="attributes">
+      <attribute name="t-if" add="and o.show_serial" separator=" "/>
+    </xpath>
+    <xpath expr="//span[@t-field='move_line.lot_id.name']/.." position="attributes">
+      <attribute name="t-if" add="and o.show_serial" separator=" "/>
+    </xpath>
+  </template>
 </odoo>
