@@ -188,7 +188,7 @@
           </td>
         </tr>
         <t t-set="p_qty" t-value="0"/>
-        <t t-foreach="lines" t-as="move" t-if="pd.id==move.move_line_ids.result_package_id.id">
+        <t t-foreach="lines" t-as="move" t-if="p.id==move.move_line_ids.result_package_id.id">
           <t t-set="p_qty" t-value="p_qty+move.product_uom_qty"/>
         </t>
         <tr>
@@ -204,7 +204,7 @@
         <td colspan="999" class="bg-info"><span>Total <t t-esc="p_count"/> Package(s)</span></td>
       </tr>
     </xpath>
-    <xpath expr="//t[@t-as='p']/t[@t-as='move']" position="inside">
+    <xpath expr="//t[@t-as='p']//t[@t-as='move']" position="inside">
       <xpath expr="//tr[@t-as='move']" position="move"/>
     </xpath>
     <xpath expr="//tr[@t-as='move']" position="attributes">
