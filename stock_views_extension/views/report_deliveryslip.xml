@@ -158,40 +158,105 @@
     <xpath expr="//div[hasclass('justify-content-end')]" position="attributes">
       <attribute name="style">display:none</attribute>
     </xpath>
-    <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
-      <t t-set="pack" t-value="[]"/>
-      <t t-set="uom" t-value="[]"/>
-      <t t-foreach="o.move_line_ids" t-as="move_line">
-        <t t-set="pack" t-value="pack+[move_line.result_package_id]"/>
-        <t t-set="uom" t-value="move_line.product_uom_id[0]"/>
+    <xpath expr="//table[@class='table table-sm mt48'][1]/tbody" position="inside">
+      <t t-set="p_pack" t-value="[]"/>
+      <t t-set="p_uom" t-value="[]"/>
+      <t t-set="p_count" t-value="0"/>
+      <t t-foreach="lines" t-as="move">
+        <t t-set="p_pack" t-value="p_pack+[move.move_line_ids.result_package_id]"/>
+        <t t-set="p_uom" t-value="move.move_line_ids.product_uom_id[0]"/>
       </t>
-      <t t-foreach="sorted(set(pack), key=lambda k: k.name)" t-as="package">
-        <t t-set="dim" t-if="package.packaging_id" t-value="' x '.join([str(package.packaging_id.length),str(package.packaging_id.width),str(package.packaging_id.height)])"/>
+      <t t-foreach="sorted(set(p_pack), key=lambda k: k.name)" t-as="p">
+        <t t-set="p_dim" t-if="p.packaging_id"
+           t-value="' x '.join([str(p.packaging_id.length),str(p.packaging_id.width),str(p.packaging_id.height)])"/>
+        <t t-set="p_count" t-value="p_index+1"/>
         <tr>
-          <td t-if="package" colspan="999" class="bg-dark">
+          <td t-if="p" colspan="999" class="bg-dark">
             <div class="row">
-              <div class="col-3"><strong><span t-field="package.name"/></strong></div>
-              <div class="col-3 text-right" t-if="package.packaging_id and package.packaging_id.length > 0"><strong><span t-esc="dim"/> mm</strong></div>
-              <div class="col-3 text-right" t-if="package.packaging_id and package.packaging_id.volume > 0"><strong><span t-esc="'%.2f'%(package.packaging_id.volume)"/> CBM</strong></div>
-              <div class="col-3 text-right" t-if="package.shipping_weight > 0"><strong><span t-esc="package.shipping_weight + package.weight"/><span t-field="o.weight_uom_id"/></strong></div>
+              <div class="col-3"><strong><span t-field="p.name"/></strong></div>
+              <div class="col-3 text-right" t-if="p.packaging_id and p.packaging_id.length > 0">
+                <strong><span t-esc="p_dim"/> mm</strong>
+              </div>
+              <div class="col-3 text-right" t-if="p.packaging_id and p.packaging_id.volume > 0">
+                <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
+              </div>
+              <div class="col-3 text-right" t-if="p.packaging_id.shipping_weight > 0">
+                <strong><span t-esc="p.packaging_id.shipping_weight + p.packaging_id.weight"/>
+                <span t-field="o.weight_uom_id"/></strong>
+              </div>
             </div>
           </td>
         </tr>
-        <t t-set="sum_qty" t-value="0"/>
-        <t t-foreach="o.move_line_ids" t-as="move_line" t-if="package.id==move_line.result_package_id.id">
-          <t t-set="sum_qty" t-value="sum_qty+move_line.qty_done"/>
+        <t t-set="p_qty" t-value="0"/>
+        <t t-foreach="lines" t-as="move" t-if="pd.id==move.move_line_ids.result_package_id.id">
+          <t t-set="p_qty" t-value="p_qty+move.product_uom_qty"/>
         </t>
         <tr>
           <td colspan="999" class="font-italic mb-3">
             <div  class="bg-light text-muted">
-              <div class="float-left"><span t-field="package.name"/><span> Summary: </span></div>
-              <div class="float-right"><t t-esc="int(float(sum_qty))"/><span> </span><t t-esc="uom.name"/></div>
+              <div class="float-left"><span t-field="p.name"/><span> Summary: </span></div>
+              <div class="float-right"><t t-esc="int(float(p_qty))"/><span> </span><t t-esc="p_uom.name"/></div>
             </div>
           </td>
         </tr>
       </t>
+      <tr>
+        <td colspan="999" class="bg-info"><span>Total <t t-esc="p_count"/> Package(s)</span></td>
+      </tr>
     </xpath>
-    <xpath expr="//t[@t-as='package']/t[@t-as='move_line']" position="inside">
+    <xpath expr="//t[@t-as='p']/t[@t-as='move']" position="inside">
+      <xpath expr="//tr[@t-as='move']" position="move"/>
+    </xpath>
+    <xpath expr="//tr[@t-as='move']" position="attributes">
+      <attribute name="t-foreach"/>
+      <attribute name="t-as"/>
+    </xpath>    
+    <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
+      <t t-set="pd_pack" t-value="[]"/>
+      <t t-set="pd_uom" t-value="[]"/>
+      <t t-foreach="o.move_line_ids" t-as="move_line">
+        <t t-set="pd_pack" t-value="pd_pack+[move_line.result_package_id]"/>
+        <t t-set="pd_uom" t-value="move_line.product_uom_id[0]"/>
+      </t>
+      <t t-foreach="sorted(set(pd_pack), key=lambda k: k.name)" t-as="pd">
+        <t t-set="pd_dim" t-if="pd.packaging_id" t-value="' x '.join([str(pd.packaging_id.length),str(pd.packaging_id.width),str(pd.packaging_id.height)])"/>
+        <tr>
+          <td t-if="pd" colspan="999" class="bg-dark">
+            <div class="row">
+              <div class="col-3"><strong><span t-field="pd.name"/></strong></div>
+              <div class="col-3 text-right" t-if="pd.packaging_id and pd.packaging_id.length > 0">
+                <strong><span t-esc="pd_dim"/> mm</strong>
+              </div>
+              <div class="col-3 text-right" t-if="pd.packaging_id and pd.packaging_id.volume > 0">
+                <strong><span t-esc="'%.2f'%(pd.packaging_id.volume)"/> CBM</strong>
+              </div>
+              <div class="col-3 text-right" t-if="pd.shipping_weight > 0">
+                <strong><span t-esc="pd.packaging_id.shipping_weight + pd.packaging_id.weight"/><span t-field="o.weight_uom_id"/></strong>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <t t-set="pd_qty" t-value="0"/>
+        <t t-foreach="o.move_line_ids" t-as="move_line" t-if="pd.id==move_line.result_package_id.id">
+          <t t-set="pd_qty" t-value="pd_qty+move_line.qty_done"/>
+        </t>
+        <tr>
+          <td colspan="999" class="font-italic mb-3">
+            <div  class="bg-light text-muted">
+              <div class="float-left"><span t-field="pd.name"/><span> Summary: </span></div>
+              <div class="float-right"><t t-esc="int(float(pd_qty))"/><span> </span><t t-esc="pd_uom.name"/></div>
+            </div>
+          </td>
+        </tr>
+      </t>
+      <tr>
+        <td colspan="999" class="bg-info">
+          <span>Total <t t-esc="pd_count"/> Package(s)</span>
+          <span>Total Net Weight: <t t-esc=""/><t t-esc="pd_uom.name"/></span>
+        </td>
+      </tr>
+    </xpath>
+    <xpath expr="//t[@t-as='pd']/t[@t-as='move_line']" position="inside">
       <xpath expr="//tr[@t-as='move_line']" position="move"/>
     </xpath>
     <xpath expr="//tr[@t-as='move_line']" position="attributes">
