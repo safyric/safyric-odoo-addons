@@ -11,7 +11,10 @@ class StockMove(models.Model):
     @api.depends('product_id', 'product_uom_qty', 'product_uom')
     def _cal_move_weight(self):
         for move in self:
-            move.weight = (move.product_qty * move.product_weight)
+            if move.product_weight > 0:
+                move.weight = (move.product_qty * move.product_weight)
+            else:
+                move.weight = (move.product_qty * move.product_id.weight)
 
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
