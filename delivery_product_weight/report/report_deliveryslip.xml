@@ -5,7 +5,7 @@
             <th><strong>Weight</strong></th>
         </xpath>
         <xpath expr="//span[@t-field='move.product_uom']/.." position="after">
-            <td>
+            <td class="text-nowrap">
                 <span t-esc="move.product_weight * move.product_uom_qty"/><span t-field="move.picking_id.weight_uom_id"/>
             </td>
         </xpath>
@@ -13,7 +13,7 @@
             <th class="text-right"><strong>Weight</strong></th>
         </xpath>
         <xpath expr="//span[@t-field='move_line.product_uom_id']/.." position="after">
-            <td class="text-right">
+            <td class="text-right text-nowrap">
                 <span t-esc="move_line.product_weight * move_line.qty_done"/><span t-field="move_line.picking_id.weight_uom_id"/>
             </td>
         </xpath>
