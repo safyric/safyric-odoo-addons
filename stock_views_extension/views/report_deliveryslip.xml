@@ -108,8 +108,8 @@
                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                   </t>
-                  <div class="row" t-if="o.sale_id.partner_id.email">
-                    <i class="fa fa-envelope-o fa-fw"/><span t-if="o.sale_id.partner_shipping_id.email" t-field="o.sale_id.partner_shipping_id.email"/>
+                  <div class="row" t-if="o.sale_id.partner_shipping_id.email">
+                    <i class="fa fa-envelope-o fa-fw"/><span t-field="o.sale_id.partner_shipping_id.email"/>
                   </div>
                 </div>
               </td>
@@ -174,13 +174,13 @@
           <td t-if="p" colspan="999" class="bg-dark">
             <div class="row">
               <div class="col-3"><strong><span t-field="p.name"/></strong></div>
-              <div class="col-3 text-right" t-if="p.packaging_id and p.packaging_id.length > 0">
+              <div class="col-3 text-right">
                 <strong><span t-esc="p_dim"/> mm</strong>
               </div>
-              <div class="col-3 text-right" t-if="p.packaging_id and p.packaging_id.volume > 0">
+              <div class="col-3 text-right">
                 <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
               </div>
-              <div class="col-3 text-right" t-if="p.shipping_weight > 0">
+              <div class="col-3 text-right">
                 <strong><span t-esc="p.shipping_weight + p.weight"/>
                 <span t-field="o.weight_uom_id"/></strong>
               </div>
@@ -201,7 +201,7 @@
         </tr>
       </t>
       <tr>
-        <td colspan="999" class="bg-info"><span>Total <t t-esc="p_count"/> Package(s)</span></td>
+        <td colspan="999" class="bg-secondary"><span>Total <strong><t t-esc="p_count"/></strong> Package(s)</span></td>
       </tr>
     </xpath>
     <xpath expr="//t[@t-as='p']//t[@t-as='move']" position="inside">
@@ -225,13 +225,13 @@
           <td t-if="pd" colspan="999" class="bg-dark">
             <div class="row">
               <div class="col-3"><strong><span t-field="pd.name"/></strong></div>
-              <div class="col-3 text-right" t-if="pd.packaging_id and pd.packaging_id.length > 0">
+              <div class="col-3 text-right">
                 <strong><span t-esc="pd_dim"/> mm</strong>
               </div>
-              <div class="col-3 text-right" t-if="pd.packaging_id and pd.packaging_id.volume > 0">
+              <div class="col-3 text-right">
                 <strong><span t-esc="'%.2f'%(pd.packaging_id.volume)"/> CBM</strong>
               </div>
-              <div class="col-3 text-right" t-if="pd.shipping_weight > 0">
+              <div class="col-3 text-right">
                 <strong>
                   <span t-esc="pd.shipping_weight + pd.weight"/>
                   <span t-field="o.weight_uom_id"/>
@@ -254,8 +254,8 @@
         </tr>
       </t>
       <tr>
-        <td colspan="999" class="bg-info">
-          <span>Total <t t-esc="pd_count"/> Package(s)</span>
+        <td colspan="999" class="bg-secondary">
+          <span>Total <strong><t t-esc="pd_count"/></strong> Package(s)</span>
         </td>
       </tr>
     </xpath>
