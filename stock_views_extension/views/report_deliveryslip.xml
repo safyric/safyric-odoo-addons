@@ -181,7 +181,7 @@
                 <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
               </div>
               <div class="col-3 text-right" t-if="p.packaging_id.shipping_weight > 0">
-                <strong><span t-esc="p.packaging_id.shipping_weight + p.packaging_id.weight"/>
+                <strong><span t-esc="p.shipping_weight + p.weight"/>
                 <span t-field="o.weight_uom_id"/></strong>
               </div>
             </div>
@@ -233,7 +233,7 @@
               </div>
               <div class="col-3 text-right" t-if="pd.shipping_weight > 0">
                 <strong>
-                  <span t-esc="pd.packaging_id.shipping_weight + pd.packaging_id.weight"/>
+                  <span t-esc="pd.shipping_weight + pd.weight"/>
                   <span t-field="o.weight_uom_id"/>
                 </strong>
               </div>
