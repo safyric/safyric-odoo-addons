@@ -15,8 +15,3 @@ class StockPicking(models.Model):
             else:
                 weight += move_line.product_uom_id._compute_quantity(move_line.qty_done, move_line.product_id.uom_id) * move_line.product_id.weight
         self.weight_bulk = weight
-
-    @api.depends('move_lines', 'move_ids_without_package')
-    def _cal_weight(self):
-        for picking in self:
-            picking.weight = sum(move.weight for move in picking.move_lines if move.state != 'cancel')
