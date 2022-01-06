@@ -35,5 +35,3 @@ class StockQuantPackage(models.Model):
             for quant in self.quant_ids:
                 weight += quant.quantity * quant.product_id.weight
         self.weight = weight
-        
-    product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
