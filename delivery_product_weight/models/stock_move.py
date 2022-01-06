@@ -12,11 +12,10 @@ class StockMove(models.Model):
     def _cal_move_weight(self):
         for move in self:
             if move.product_weight > 0:
-                move.weight = (move.product_qty * move.product_weight)
+                move.weight = (move.product_qty * move.product_id.weight)
             else:
                 move.weight = (move.product_qty * move.product_id.weight)
 
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
 
-    product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
