@@ -6,7 +6,7 @@ from odoo.addons import decimal_precision as dp
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
     
-    product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')    
+    product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'))    
     
 
 class StockQuantPackage(models.Model):
