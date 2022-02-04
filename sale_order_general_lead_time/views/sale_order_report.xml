@@ -8,5 +8,13 @@
         <span> days</span>
       </div>
     </xpath>
+    <xpath expr="//th[@name='th_quantity']" position="after">
+      <th class="text-right">Lead Time</th>
+    </xpath>
+    <xpath expr="//td[@name='td_quantity']" position="after">
+      <td class="text-right">
+        <span t-field="line.customer_lead"/><span> Days</span>
+      </td>
+    </xpath>
   </template>
 </odoo>
