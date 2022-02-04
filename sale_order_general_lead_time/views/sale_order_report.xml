@@ -13,7 +13,7 @@
     </xpath>
     <xpath expr="//td[@name='td_quantity']" position="after">
       <td class="text-right">
-        <span t-field="line.customer_lead"/><span> Days</span>
+        <span t-esc="int(float(line.customer_lead))"/><span> Days</span>
       </td>
     </xpath>
   </template>
