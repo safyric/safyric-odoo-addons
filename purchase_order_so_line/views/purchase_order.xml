@@ -5,10 +5,11 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_line']//field[@name='name']" position="before">
+            <xpath expr="//field[@name='order_line']/form/sheet/page[1]/field[@name='name']" position="before">
+                <label for="sale_line_id"/>
                 <field name="sale_line_id"/>
             </xpath>
-            <xpath expr="//field[@name='order_line']//field[@name='company_id']" position="after">
+            <xpath expr="//field[@name='order_line']/form/sheet//field[@name='company_id']" position="after">
                 <field name="sale_order_id"/>
             </xpath>
         </field>
