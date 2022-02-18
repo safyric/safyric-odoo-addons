@@ -8,7 +8,7 @@
             <xpath expr="//field[@name='order_line']//field[@name='name']" position="before">
                 <field name="sale_line_id"/>
             </xpath>
-            <xpath name="//field[@name='order_line']//field[@name='company_id']" position="after">
+            <xpath expr="//field[@name='order_line']//field[@name='company_id']" position="after">
                 <field name="sale_order_id"/>
             </xpath>
         </field>
