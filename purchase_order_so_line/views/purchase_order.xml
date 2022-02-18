@@ -9,7 +9,7 @@
                 <label for="sale_line_id"/>
                 <field name="sale_line_id"/>
             </xpath>
-            <xpath expr="//field[@name='order_line']/form/sheet/group//field[@name='company_id']" position="after">
+            <xpath expr="//field[@name='order_line']/form/sheet/group/group[2]/field[@name='company_id']" position="after">
                 <field name="sale_order_id"/>
             </xpath>
         </field>
