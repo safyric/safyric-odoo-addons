@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_purchasequotation">
+  <template id="layout_purchasequotation">
     <div class="header">
       <div class="o_background_header">
         <div class="float-right">
@@ -36,7 +36,7 @@
     </div>
   </template>
 
-  <template id="external_layout_purchaseorder">
+  <template id="layout_purchaseorder">
     <div class="header">
       <div class="o_background_header">
         <div class="float-right">
@@ -86,7 +86,7 @@
         <t t-set="company" t-value="res_company"/>
       </t>
     </t>
-    <t t-call="purchase_views_extension.external_layout_purchasequotation"><t t-raw="0"/></t>
+    <t t-call="purchase_views_extension.layout_purchasequotation"><t t-raw="0"/></t>
   </template>
 
   <template id="external_layout_purchaseorder">
@@ -103,6 +103,6 @@
         <t t-set="company" t-value="res_company"/>
       </t>
     </t>
-    <t t-call="purchase_views_extension.external_layout_purchaseorder"><t t-raw="0"/></t>
+    <t t-call="purchase_views_extension.layout_purchaseorder"><t t-raw="0"/></t>
   </template>
 </odoo>
