@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <label for="general_lead_time"/>
-                <div class="oe_inline">
+                <div class="o_row">
                     <field name="general_lead_time"/>
                     <button name="action_update_lead_time" class="oe_link oe_edit_only fa fa-refresh" type="object" help="Update lead time"/>
                 </div>
