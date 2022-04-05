@@ -9,6 +9,8 @@ class SaleOrder(models.Model):
     general_lead_time = fields.Integer(
         string='Lead Time'
     )
+    
+    weeks_in_report = fields.Boolean('Display weeks in reports')
 
     def action_update_lead_time(self):
         self.mapped('order_line').update({
