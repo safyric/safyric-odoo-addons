@@ -11,6 +11,7 @@
                     <field name="general_lead_time"/>
                     <button name="action_update_lead_time" class="oe_link oe_edit_only fa fa-refresh" type="object" help="Update lead time"/>
                 </div>
+                <field name="weeks_in_reports"/>
             </xpath>
         </field>
     </record>
