@@ -4,8 +4,14 @@
     <xpath expr="//div[@t-if='doc.payment_term_id']" position="after">
       <div t-if="doc.general_lead_time" class="row">
         <span>Lead Time: </span>
-        <span t-field="doc.general_lead_time" class="m-0"/>
-        <span> days</span>
+        <t t-if="doc.weeks_in_reports">
+          <span t-ese="int(float(round(doc.general_lead_time/7+1,0)))" class="m-0"/>
+          <span> weeks</span>
+        </t>
+        <t t-else="">
+          <span t-field="doc.general_lead_time" class="m-0"/>
+          <span> days</span>
+        </t>
       </div>
     </xpath>
     <xpath expr="//th[@name='th_quantity']" position="after">
