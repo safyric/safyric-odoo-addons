@@ -5,8 +5,8 @@
       <div t-if="doc.general_lead_time" class="row">
         <span>Lead Time: </span>
         <t t-if="doc.weeks_in_reports">
-          <span t-ese="int(float(round(doc.general_lead_time/7+1,0)))" class="m-0"/>
-          <span> weeks</span>
+          <span t-esc="int(float(round(doc.general_lead_time/7+1,0)))" class="m-0"/>
+          <span> Weeks</span>
         </t>
         <t t-else="">
           <span t-field="doc.general_lead_time" class="m-0"/>
