@@ -13,7 +13,12 @@
     </xpath>
     <xpath expr="//td[@name='td_quantity']" position="after">
       <td class="text-right">
-        <span t-esc="int(float(line.customer_lead))"/><span> Days</span>
+        <t t-if="doc.weeks_in_reports">
+          <span t-esc="int(float(round(line.customer_lead/7+1,0)))"/><span> Weeks</span>
+        </t>
+        <t t-else="">
+          <span t-esc="int(float(line.customer_lead))"/><span> Days</span>
+        </t>
       </td>
     </xpath>
   </template>
