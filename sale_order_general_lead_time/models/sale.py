@@ -10,8 +10,7 @@ class SaleOrder(models.Model):
         string='Lead Time'
     )
 
-    @api.onchange('general_lead_time')
-    def onchange_general_lead_time(self):
+    def action_update_lead_time(self):
         self.mapped('order_line').update({
             'customer_lead': self.general_lead_time,
         })
