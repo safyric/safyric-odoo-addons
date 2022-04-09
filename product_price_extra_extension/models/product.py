@@ -12,4 +12,4 @@ class ProductPriceExtra(models.Model):
                 else:
                     price_extra += attribute_id.price_extra
 
-            product.price_extra = sum(price_extra)
+            product.price_extra = price_extra
