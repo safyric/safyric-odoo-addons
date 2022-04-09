@@ -1,4 +1,4 @@
-from odoo import api, fields
+from odoo import api, fields, models
 
 class ProductPriceExtra(models.Model):
     _inherit = 'product.product'
