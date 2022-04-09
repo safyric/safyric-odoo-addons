@@ -1,4 +1,4 @@
-from odoo import api, fields
+from odoo import api, fields, models
 
 class ProductTemplateAttributeValueInherit(models.Model):
     _inherit = "product.template.attribute.value"
