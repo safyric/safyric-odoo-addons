@@ -8,8 +8,8 @@ class ProductPriceExtra(models.Model):
             price_extra = 0.0
             for attribute_id in product.mapped('product_template_attribute_value_ids'):
                 if attribute_id.price_extra_pct:
-                    price_extra = product.standard_price * attribute_id.price_extra / 100
+                    price_extra += product.price * attribute_id.price_extra / 100
                 else:
-                    price_extra = attribute_id.price_extra
+                    price_extra += attribute_id.price_extra
 
             product.price_extra = price_extra
