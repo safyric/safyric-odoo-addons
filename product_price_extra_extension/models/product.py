@@ -3,7 +3,17 @@ from odoo import api, fields, models
 class ProductPriceExtra(models.Model):
     _inherit = 'product.product'
 
-    @api.depends('list_price', 'price_extra', 'product_template_attribute_value_ids.price_extra_pct')
+    price_extra_pct = fields.Float(
+        'Variant Price Extra %', compute='_compute_product_price_extra_pct',
+        digits=dp.get_precision('Product Price'),
+        help="This is the sum of the extra price in % of all attributes")
+    
+    @api.depends('product_template_attribute_value_ids.price_extra_pct')
+    def _compute_product_price_extra_pct(self):
+        for product in self:
+            product.price_extra_pct = sum(product.mapped('product_template_attribute_value_ids.price_extra_pct'))
+
+    @api.depends('list_price', 'price_extra', 'price_extra_pct')
     def _compute_product_lst_price(self):
         to_uom = None
         if 'uom' in self._context:
@@ -14,7 +24,6 @@ class ProductPriceExtra(models.Model):
                 list_price = product.uom_id._compute_price(product.list_price, to_uom)
             else:
                 list_price = product.list_price
-            price_extra_pct = sum(product.mapped('product_template_attribute_value_ids.price_extra_pct'))
-            product.lst_price = list_price + list_price * price_extra_pct / 100 + product.price_extra
+            product.lst_price = (list_price + product.price_extra) * (1 + product.price_extra_pct / 100)
 
-        return super(ProductProduct,self)._compute_product_lst_price(self)
+        return super(ProductProductExtra,self)._compute_product_lst_price()
