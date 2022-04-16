@@ -35,7 +35,7 @@ class ProductPriceExtra(models.Model):
             prices[product.id] = product[price_type] or 0.0
             if price_type == 'list_price':
                 prices[product.id] += product.price_extra
-                prices[product.id] *= 1 + product.price_extra_pct
+                prices[product.id] = (1 + product.price_extra_pct / 100)
                 # we need to add the price from the attributes that do not generate variants
                 # (see field product.attribute create_variant)
                 if self._context.get('no_variant_attributes_price_extra'):
