@@ -8,7 +8,7 @@ class ProductPriceExtra(models.Model):
         'Variant Price Extra %', compute='_compute_product_price_extra_pct',
         digits=dp.get_precision('Product Price'),
         help="This is the sum of the extra price in % of all attributes")
-    
+
     @api.depends('product_template_attribute_value_ids.price_extra_pct')
     def _compute_product_price_extra_pct(self):
         for product in self:
@@ -16,6 +16,7 @@ class ProductPriceExtra(models.Model):
 
     @api.multi
     def price_compute(self, price_type, uom=False, currency=False, company=False):
+        res = super(ProductPriceExtra, self).price_compute(price_type, uom=False, currency=False, company=False)
         # TDE FIXME: delegate to template or not ? fields are reencoded here ...
         # compatibility about context keys used a bit everywhere in the code
         if not uom and self._context.get('uom'):
@@ -53,3 +54,4 @@ class ProductPriceExtra(models.Model):
                     prices[product.id], currency, product.company_id, fields.Date.today())
 
         return prices
+        return res
