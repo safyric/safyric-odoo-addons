@@ -8,7 +8,7 @@
         <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
                 <button name='dup_line'
                         type='object'
-                        class="fa fa-files-o"
+                        class="fa fa-files-o oe_edit_only"
                 />
         </xpath>
         </field>
