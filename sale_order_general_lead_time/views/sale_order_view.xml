@@ -9,7 +9,7 @@
                 <label for="general_lead_time"/>
                 <div class="o_row">
                     <field name="general_lead_time"/>
-                    <button name="action_update_lead_time" class="oe_link oe_edit_only fa fa-refresh" type="object" help="Update lead time"/>
+                    <button name="action_update_lead_time" class="oe_link oe_edit_only fa fa-refresh" type="object" help="Update lead time" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
                 </div>
                 <field name="weeks_in_reports"/>
             </xpath>
