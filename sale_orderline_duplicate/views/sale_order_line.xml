@@ -9,6 +9,7 @@
                 <button name='dup_line'
                         type='object'
                         class="fa fa-files-o oe_edit_only"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"
                 />
         </xpath>
         </field>
