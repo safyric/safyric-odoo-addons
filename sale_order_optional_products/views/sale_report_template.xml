@@ -9,5 +9,8 @@
             <span t-esc="int(float(option.customer_lead))"/><span> Days</span>
         </td>
     </xpath>
+    <xpath expr="//div[hasclass('clearfix')]" position="after">
+        <xpath expr="//h4[@name='h_optional_products']/.." position="move"/>
+    </xpath>
 </template>
 </odoo>
