@@ -10,7 +10,7 @@
         </td>
     </xpath>
     <xpath expr="//div[hasclass('clearfix')]" position="after">
-        <xpath expr="//h4[hasclass('h_optional_products')]/.." position="move"/>
+        <xpath expr="//h4[hasclass('h_optional_products')]/ancestor::div" position="move"/>
     </xpath>
 </template>
 </odoo>
