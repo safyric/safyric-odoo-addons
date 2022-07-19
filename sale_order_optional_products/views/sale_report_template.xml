@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+<template id="report_saleorder_document_inherit" inherit_id="sale_management.report_saleorder_document_inherit_sale_management">
     <xpath expr="//th[@name='th_option_price_unit']" position="after">
         <th name="th_option_customer_lead" class="text-right">Lead Time</th>
     </xpath>
