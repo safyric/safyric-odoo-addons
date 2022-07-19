@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
-    <xpath expr="//th[@name='th_option_price_unit']" position="after">
+    <xpath expr="//th[@name='th_option_price_unit']" position="before">
+        <th name="th_option_quantity" class="text-right">Quantity</th>
         <th name="th_option_customer_lead" class="text-right">Lead Time</th>
     </xpath>
-    <xpath expr="//td[@name='td_option_price_unit']" position="after">
+    <xpath expr="//td[@name='td_option_price_unit']" position="before">
+        <td name="td_option_quantity" class="text-right">
+            <span t-esc="int(float(option.quantity))"/>
+            <span t-field="option.uom_id" groups="uom.group_uom"/>
+        </td>
         <td name="td_option_customer_lead" class="text-right">
             <span t-esc="int(float(option.customer_lead))"/><span> Days</span>
         </td>
     </xpath>
-    <xpath expr="//div[@id='total']/ancestor::div" position="after">
-        <xpath expr="//h4[@name='h_optional_products']/ancestor::div" position="move"/>
+    <xpath expr="//div[@id='total']" position="after">
+        <xpath expr="//h4[@name='h_optional_products']/.." position="move"/>
     </xpath>
 </template>
 </odoo>
