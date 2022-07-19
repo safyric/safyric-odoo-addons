@@ -13,7 +13,7 @@
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'data': [
-        'views/sale_report_layout.xml',
+        'views/sale_report_template.xml',
         'views/sale_order_views.xml',
     ],
     'installable': True,
