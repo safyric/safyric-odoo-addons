@@ -1,1 +1,13 @@
-
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//th[@name='th_option_price_unit']" position="after">
+        <th name="th_option_customer_lead" class="text-right">Lead Time</th>
+    </xpath>
+    <xpath expr="//td[@name='td_option_price_unit']" position="after">
+        <td name="td_option_customer_lead" class="text-right">
+            <span t-esc="int(float(option.customer_lead))"/><span> Days</span>
+        </td>
+    </xpath>
+</template>
+</odoo>
