@@ -205,6 +205,14 @@
     <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
       <span t-esc="int(float(line.product_uom_qty))"/>
     </xpath>
+    <xpath expr="//tr[hasclass('o_total')]" position="after">
+      <tr class="border-black o_total">
+        <td name="td_currency_label"><strong>Currency</strong></td>
+        <td name="td_currency" class="text-right">
+          <span t-field="doc.pricelist_id.currency_id.name"/>
+        </td>
+      </tr>
+    </xpath>
   </template>
 </odoo>
 
