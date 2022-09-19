@@ -4,7 +4,7 @@
     "depends": ['base'],
     "website": 'https://github.com/safyric/safyric-odoo-addons',
     "summary": "Translate Country Address",
-    'author': 'www.safyric.com',
+    'author': 'Safyric Co., Ltd.',
     "category": "Localisation",
     'license': 'AGPL-3',
     'installable': True,
