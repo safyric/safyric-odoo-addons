@@ -1,9 +1,9 @@
 {
-    "name": "Translate Country States",
+    "name": "Translate Country Address",
     "version": "12.0.1",
     "depends": ['base'],
-    "website": 'https://www.github.com/safyric',
-    "summary": "Translate Country States",
+    "website": 'https://github.com/safyric/safyric-odoo-addons',
+    "summary": "Translate Country Address",
     'author': 'www.safyric.com',
     "category": "Localisation",
     'license': 'AGPL-3',
