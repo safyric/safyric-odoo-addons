@@ -149,17 +149,27 @@
     </xpath>
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="move_package" t-value="[]"/>
+      <t t-set="shipped_qty" t-value="0"/>
+      <t t-set="product_uom" t-value="[]"/>
       <t t-foreach="o.move_line_ids" t-as="move_line">
         <t t-set="move_package" t-value="move_package+[move_line.result_package_id]"/>
+        <t t-set="shipped_qty" t-value="shipped_qty+move_line.qty_done"/>
+        <t t-set="product_uom" t-value="move_line.product_uom_id.name"/>
       </t>
+      <t t-set="pkg_qty" t-value="0"/>
+      <t t-set="pkg_vol" t-value="0"/>
+      <t t-set="pkg_weight" t-value="0"/>
       <t t-foreach="sorted(set(move_package), key=lambda k: k.name)" t-as="package">
         <t t-set="move_dim" t-if="package.packaging_id" t-value="' x '.join([str(package.packaging_id.length),str(package.packaging_id.width),str(package.packaging_id.height)])"/>
+        <t t-set="pkg_qty" t-value="package_index+1"/>
+        <t t-set="pkg_vol" t-value="pkg_vol+package.packaging_id.volume"/>
+        <t t-set="pkg_weight" t-value="pkg_weight+package.shipping_weight"/>
         <tr t-if="package">
           <td colspan="999" class="bg-dark">
             <div class="row">
               <div class="col-2"><strong><span t-field="package.name"/></strong></div>
               <div class="col-4 text-center"><strong t-if="move_dim"><span t-esc="move_dim"/> mm</strong></div>
-              <div class="col-3 text-right"><strong t-if="package.packaging_id.volume!=0">Volume: <span t-esc="package.packaging_id.volume" t-options='{"widget": "float", "precision": 3}'/> M3</strong></div>
+              <div class="col-3 text-right"><strong t-if="package.packaging_id.volume!=0">Volume: <span t-esc="package.packaging_id.volume" t-options='{"widget": "float", "precision": 3}'/> M<sup>3</sup></strong></div>
               <div class="col-3 text-right">
                 <strong t-if="package.shipping_weight!=0">G.W.: <span t-field="package.shipping_weight"/> <span t-field="o.weight_uom_id"/></strong>
               </div>
@@ -203,12 +213,24 @@
               <span t-field="move_line.product_uom"/>
             </td>
             <td class="text-right text-nowrap">
-              <span t-esc="move_line.product_weight * move_qty"/>
+              <span t-esc="move_line.product_weight * move_qty" t-options='{"widget": "float", "precision": 1}'/>
               <span t-field="move_line.product_id.weight_uom_id"/>
             </td>
           </tr>
         </t>
       </t>
+      <tr>
+        <td colspan="999" class="bg-info text-light pt-4 pb-4">
+          <div class="float-left">
+            <div><strong>Packing Summary:</strong></div>
+            <div class="pl-4" t-if="pkg_qty!=0">Total Packages: <span class="font-italic"><span t-esc="pkg_qty"/> Piece(s)</span></div>
+            <div class="pl-4" t-if="pkg_vol!=0">Total Volume: <span class="font-italic"><span t-esc="pkg_vol" t-options='{"widget": "float", "precision": 3}'/> M<sup>3</sup></span></div>
+            <div class="pl-4" t-if="pkg_weight">Total Gross Weight: <span class="font-italic"><span t-esc="pkg_weight" t-options='{"widget": "float", "precision": 1}'/> <span t-field="o.weight_uom_id"/></span></div>
+            <div class="pl-4" t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
+          </div>
+
+        </td>
+      </tr>
     </xpath>
     <xpath expr="//tr[@t-as='move_line']" position="attributes">
       <attribute name="style">display:none</attribute>
