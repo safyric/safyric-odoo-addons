@@ -147,115 +147,71 @@
     <xpath expr="//div[hasclass('justify-content-end')]" position="attributes">
       <attribute name="style">display:none</attribute>
     </xpath>
-    <xpath expr="//t[@t-set='lines']" position="after">
-      <t t-set="p_pack" t-value="[]"/>
-      <t t-set="p_uom" t-value="[]"/>
-      <t t-set="p_count" t-value="0"/>
-      <t t-foreach="lines" t-as="move">
-        <t t-set="p_pack" t-value="p_pack+[move.move_line_ids.result_package_id]"/>
-        <t t-set="p_uom" t-value="move.product_uom[0]"/>
-      </t>
-      <t t-foreach="sorted(set(p_pack), key=lambda k: k.name)" t-as="p">
-        <t t-set="p_dim" t-if="p.packaging_id"
-           t-value="' x '.join([str(p.packaging_id.length),str(p.packaging_id.width),str(p.packaging_id.height)])"/>
-        <t t-set="p_count" t-value="p_index+1"/>
-        <tr>
-          <td t-if="p" colspan="999" class="bg-dark">
-            <div class="row">
-              <div class="col-3"><strong><span t-field="p.name"/></strong></div>
-              <div class="col-3 text-right">
-                <t t-if="p_dim"><strong><span t-esc="p_dim"/> mm</strong></t>
-              </div>
-              <div class="col-3 text-right">
-                <strong><span t-esc="'%.2f'%(p.packaging_id.volume)"/> CBM</strong>
-              </div>
-              <div class="col-3 text-right">
-                <strong><span t-esc="p.shipping_weight + p.weight"/>
-                <span t-field="o.weight_uom_id"/></strong>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <t t-set="p_qty" t-value="0"/>
-        <t t-foreach="lines" t-as="move" t-if="p.id==move.move_line_ids.result_package_id.id">
-          <t t-set="p_qty" t-value="p_qty+move.product_uom_qty"/>
-        </t>
-        <tr>
-          <td colspan="999" class="font-italic mb-3">
-            <div  class="bg-light text-muted">
-              <div class="float-left"><span t-field="p.name"/><span> Summary: </span></div>
-              <div class="float-right"><t t-esc="int(float(p_qty))"/><span> </span><t t-esc="p_uom.name"/></div>
-            </div>
-          </td>
-        </tr>
-      </t>
-      <tr>
-        <td colspan="999" class="bg-success"><span>Total <strong><t t-esc="p_count"/></strong> Package(s)</span></td>
-      </tr>
-    </xpath>
-    <xpath expr="//t[@t-as='p']//t[@t-as='move']" position="inside">
-      <xpath expr="//tr[@t-as='move']" position="move"/>
-    </xpath>
-    <xpath expr="//tr[@t-as='move']" position="attributes">
-      <attribute name="t-foreach"/>
-      <attribute name="t-as"/>
-    </xpath>    
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
-      <t t-set="pd_pack" t-value="[]"/>
-      <t t-set="pd_uom" t-value="[]"/>
-      <t t-set="pd_count" t-value="0"/>
+      <t t-set="move_package" t-value="[]"/>
       <t t-foreach="o.move_line_ids" t-as="move_line">
-        <t t-set="pd_pack" t-value="pd_pack+[move_line.result_package_id]"/>
-        <t t-set="pd_uom" t-value="move_line.product_uom_id[0]"/>
+        <t t-set="move_package" t-value="move_package+[move_line.result_package_id]"/>
       </t>
-      <t t-foreach="sorted(set(pd_pack), key=lambda k: k.name)" t-as="pd">
-        <t t-set="pd_dim" t-if="pd.packaging_id" 
-           t-value="' x '.join([str(pd.packaging_id.length),str(pd.packaging_id.width),str(pd.packaging_id.height)])"/>
-        <t t-set="pd_count" t-value="pd_index+1"/>
-        <tr>
-          <td t-if="pd" colspan="999" class="bg-dark">
+      <t t-foreach="sorted(set(move_package), key=lambda k: k.name)" t-as="package">
+        <t t-set="move_dim" t-if="package.packaging_id" t-value="' x '.join([str(package.packaging_id.length),str(package.packaging_id.width),str(package.packaging_id.height)])"/>
+        <tr t-if="package">
+          <td colspan="999" class="bg-dark">
             <div class="row">
-              <div class="col-3"><strong><span t-field="pd.name"/></strong></div>
+              <div class="col-2"><strong><span t-field="package.name"/></strong></div>
+              <div class="col-4 text-center"><strong t-if="move_dim"><span t-esc="move_dim"/> mm</strong></div>
+              <div class="col-3 text-right"><strong t-if="package.packaging_id.volume!=0">Volume: <span t-esc="package.packaging_id.volume" t-options='{"widget": "float", "precision": 3}'/> M3</strong></div>
               <div class="col-3 text-right">
-                <t t-if="pd_dim"><strong><span t-esc="pd_dim"/> mm</strong></t>
-              </div>
-              <div class="col-3 text-right">
-                <strong><span t-esc="'%.2f'%(pd.packaging_id.volume)"/> CBM</strong>
-              </div>
-              <div class="col-3 text-right">
-                <strong>
-                  <span t-esc="pd.shipping_weight + pd.weight"/>
-                  <span t-field="o.weight_uom_id"/>
-                </strong>
+                <strong t-if="package.shipping_weight!=0">G.W.: <span t-field="package.shipping_weight"/> <span t-field="o.weight_uom_id"/></strong>
               </div>
             </div>
           </td>
         </tr>
-        <t t-set="pd_qty" t-value="0"/>
-        <t t-foreach="o.move_line_ids" t-as="move_line" t-if="pd.id==move_line.result_package_id.id">
-          <t t-set="pd_qty" t-value="pd_qty+move_line.qty_done"/>
+        <t t-set="move_move" t-value="[]"/>
+        <t t-foreach="o.move_line_ids.filtered(lambda l: l.result_package_id.id==package.id)" t-as="move">
+          <t t-set="move_move" t-value="move_move+[move.move_id]"/>
         </t>
-        <tr>
-          <td colspan="999" class="font-italic mb-3">
-            <div  class="bg-light text-muted">
-              <div class="float-left"><span t-field="pd.name"/><span> Summary: </span></div>
-              <div class="float-right"><t t-esc="int(float(pd_qty))"/><span> </span><t t-esc="pd_uom.name"/></div>
-            </div>
-          </td>
-        </tr>
+        <t t-foreach="sorted(set(move_move), key=lambda k: k.sequence)" t-as="move_line">
+          <t t-set="move_qty" t-value="0"/>
+          <t t-set="move_lot" t-value="[]"/>
+          <t t-foreach="o.move_line_ids.filtered(lambda x: x.move_id.id==move_line.id and x.result_package_id.id==package.id)" t-as="product">
+            <t t-set="move_qty" t-value="move_qty+product.qty_done"/>
+            <t t-set="move_lot" t-value="move_lot+[product.lot_id]"/>
+          </t>
+          <tr>
+            <td>
+              <span t-field="move_line.sequence"/>
+            </td>
+            <td>
+              <span t-field="move_line.item"/>
+            </td>
+            <td>
+              <span t-field="move_line.product_id"/>
+              <p t-if="o.picking_type_code == 'outgoing'">
+                <span t-field="move_line.product_id.sudo().description_pickingout"/>
+              </p>
+              <p t-if="o.picking_type_code == 'incoming'">
+                <span t-field="move_line.product_id.sudo().description_pickingin"/>
+              </p>
+            </td>
+            <td width="20%" t-if="has_serial_number and o.show_serial" groups="stock.group_lot_on_delivery_slip">
+              <t t-foreach="sorted(set(move_lot), key=lambda k: k.name)" t-as="lot">
+                <span t-esc="lot.name"/>
+              </t>
+            </td>
+            <td class="text-right text-nowrap">
+              <span t-esc="move_qty"/>
+              <span t-field="move_line.product_uom"/>
+            </td>
+            <td class="text-right text-nowrap">
+              <span t-esc="move_line.product_weight * move_qty"/>
+              <span t-field="move_line.product_id.weight_uom_id"/>
+            </td>
+          </tr>
+        </t>
       </t>
-      <tr>
-        <td colspan="999" class="bg-success">
-          <span>Total <strong><t t-esc="pd_count"/></strong> Package(s)</span>
-        </td>
-      </tr>
-    </xpath>
-    <xpath expr="//t[@t-as='pd']/t[@t-as='move_line']" position="inside">
-      <xpath expr="//tr[@t-as='move_line']" position="move"/>
     </xpath>
     <xpath expr="//tr[@t-as='move_line']" position="attributes">
-      <attribute name="t-foreach"/>
-      <attribute name="t-as"/>
+      <attribute name="style">display:none</attribute>
     </xpath>
   </template>
 </odoo>
