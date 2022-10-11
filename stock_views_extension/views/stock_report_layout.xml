@@ -11,7 +11,12 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right" style="font-size: 14px !important;">
-          <h2 class="text-right">DELIVERY SLIP<br/><span t-field="o.name"/></h2>
+          <h2 class="text-right">
+            <t t-if="o.state!='done'">DELIVERY SLIP (DRAFT)</t>
+            <t t-else="">DELIVERY SLIP</t>
+            <br/>
+            <span t-field="o.name"/>
+          </h2>
         </div>
         <div class="clearfix"/>
       </div>
