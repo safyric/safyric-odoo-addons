@@ -180,7 +180,7 @@
         <t t-foreach="o.move_line_ids.filtered(lambda l: l.result_package_id.id==package.id)" t-as="move">
           <t t-set="move_move" t-value="move_move+[move.move_id]"/>
         </t>
-        <t t-foreach="sorted(set(move_move), key=lambda k: k.sequence)" t-as="move_line">
+        <t t-foreach="sorted(set(move_move), key=lambda k: k.id)" t-as="move_line">
           <t t-set="move_qty" t-value="0"/>
           <t t-set="move_lot" t-value="[]"/>
           <t t-foreach="o.move_line_ids.filtered(lambda x: x.move_id.id==move_line.id and x.result_package_id.id==package.id)" t-as="product">
@@ -234,6 +234,12 @@
     </xpath>
     <xpath expr="//tr[@t-as='move_line']" position="attributes">
       <attribute name="style">display:none</attribute>
+    </xpath>
+    <xpath expr="//table[@class='table table-sm mt48'][1]" position="attributes">
+      <attribute name="style">display:none</attribute>
+    </xpath>
+    <xpath expr="//table[@class='table table-sm mt48'][2]" position="attributes">
+      <attribute name="t-if"/>
     </xpath>
   </template>
 </odoo>
