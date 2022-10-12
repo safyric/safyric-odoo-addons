@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='length']"
                        position="after">
+                    <field name="weight"/>
                     <field name="volume"/>
                 </xpath>
             </field>
@@ -20,6 +21,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='length']"
                        position="after">
+                    <field name="weight"/>
                     <field name="volume"/>
                 </xpath>
             </field>
