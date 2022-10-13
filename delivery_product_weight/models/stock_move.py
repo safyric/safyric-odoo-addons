@@ -20,4 +20,8 @@ class StockMove(models.Model):
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
 
-    product_weight = fields.Float('Product Weight', default=lambda self: self.product_id.weight, digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
+    product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        self.product_weight = lambda self: self.product_id.weight
