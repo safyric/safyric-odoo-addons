@@ -57,8 +57,14 @@
                 <div class="container">
                   <div class="pull-right">
                     <div t-if="doc.date_order and doc.state in ['draft','sent']" class="row" >
-                      <span>Quotation Date: </span>
-                      <span t-field="doc.date_order" t-options='{"widget": "date"}' class="m-0"/>
+                      <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                        <span>Invoice Date: </span>
+                        <span t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}" class="m-0"/>                        
+                      </t>
+                      <t t-else="">
+                        <span>Quotation Date: </span>
+                        <span t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}" class="m-0"/>                        
+                      </t>
                     </div>
                     <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="row" >
                       <span>Order Date: </span>
