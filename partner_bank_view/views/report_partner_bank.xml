@@ -3,7 +3,7 @@
 <template id="report_bank_document">
     <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
-        <div class="page">
+        <div class="page text-nowrap">
             <div clss="oe_structure"/>
             <h2>
                 <span>Bank Details</span>
@@ -18,7 +18,7 @@
                             <td>
                                 <div class="container">
                                     <div class="pull-right">
-                                        <div class="row text-nowrap">
+                                        <div class="row">
                                             <span t-field="doc.acc_holder_name" class="bg-warning"/>
                                         </div>
                                         <div class="row">
@@ -41,45 +41,45 @@
                             <td id="information">
                                 <div class="container">
                                     <div class="pull-right">
-                                        <div class="row text-nowrap">
+                                        <div class="row">
                                             <span t-field="doc.bank_id.name" class="bg-warning"/>
                                         </div>
                                         <t t-set="address_block" t-value="doc.bank_id.state.name, doc.bank_id.city, doc.bank_id.street, doc.bank_id.street2"/>
                                         <t t-set="address_cn" t-value="''.join([x for x in address_block if x])"/>
                                         <t t-set="city_block" t-value="doc.bank_id.city, doc.bank_id.state.name"/>
                                         <t t-if="doc.partner_id.lang=='zh_CN'">
-                                            <div class="row text-nowrap">
+                                            <div class="row">
                                                 <span t-esc="address_cn"/>
                                             </div>
                                         </t>
                                         <t t-else="">
-                                            <div class="row text-nowrap">
+                                            <div class="row">
                                                 <span t-if="doc.bank_id.street" t-field="doc.bank_id.street"/>
                                             </div>
-                                            <div class="row text-nowrap">
+                                            <div class="row">
                                                 <span t-if="doc.bank_id.street2" t-field="doc.bank_id.street2"/>
                                             </div>
                                             <t t-set="location" t-value="', '.join([y for y in city_block if y])"/>
-                                            <div class="row text-nowrap">
+                                            <div class="row">
                                                 <t t-esc="location"/> <span t-field="doc.bank_id.zip"/>
                                             </div>
-                                            <div class="row text-nowrap" t-if="doc.bank_id.country">
+                                            <div class="row" t-if="doc.bank_id.country">
                                                 <span t-field="doc.bank_id.country"/>
                                             </div>
                                         </t>
-                                        <div t-if="doc.bank_id.bic" class="row text-nowrap">
+                                        <div t-if="doc.bank_id.bic" class="row">
                                             <span>BIC/SWIFT: </span>
                                             <span t-field="doc.bank_id.bic" class="m-0 bg-warning"/>
                                         </div>
-                                        <div t-if="doc.bank_id.code" class="row text-nowrap">
+                                        <div t-if="doc.bank_id.code" class="row">
                                             <span>IBAN: </span>
                                             <span t-field="doc.bank_id.code" class="m-0 bg-warning"/>
                                         </div>
-                                        <div class="row text-nowrap">
+                                        <div class="row">
                                             <span>Account #: </span>
                                             <span t-field="doc.acc_number" class="m-0 bg-warning"/>
                                         </div>
-                                        <div class="row text-nowrap">
+                                        <div class="row">
                                             <span>Currency: </span>
                                             <span t-field="doc.currency_id" class="m-0"/>
                                         </div>
@@ -99,14 +99,14 @@
                         <tr>
                             <td>
                                 <div class="container">
-                                    <div class="row text-nowrap">
+                                    <div class="row">
                                         <span t-field="doc.intermediary_bank_id.name" class="bg-warning"/>
                                     </div>
-                                    <div t-if="doc.intermediary_bank_id.bic" class="row text-nowrap">
+                                    <div t-if="doc.intermediary_bank_id.bic" class="row">
                                         <span>BIC/SWIFT: </span>
                                         <span t-field="doc.intermediary_bank_id.bic" class="m-0 bg-warning"/>
                                     </div>
-                                    <div t-if="doc.intermediary_bank_id.code" class="row text-nowrap">
+                                    <div t-if="doc.intermediary_bank_id.code" class="row">
                                         <span>IBAN: </span>
                                         <span t-field="doc.intermediary_bank_id.code" class="m-0 bg-warning"/>
                                     </div>
