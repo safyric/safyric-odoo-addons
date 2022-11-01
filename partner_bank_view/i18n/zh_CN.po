@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_bank_view
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-01 02:56+0000\n"
+"PO-Revision-Date: 2022-11-01 02:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>Account #: </span>"
+msgstr "<span>帐号: </span>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>BIC/SWIFT: </span>"
+msgstr ""
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>Bank Account Details</span>"
+msgstr "<span>银行帐号信息</span>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>Currency: </span>"
+msgstr "<span>币种: </span>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>IBAN: </span>"
+msgstr ""
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<strong>Beneficiary Information</strong>"
+msgstr "<strong>受益人信息</strong>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<strong>Beneficiary's Bank</strong>"
+msgstr "<strong>受益人银行</strong>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<strong>Intermediary Bank</strong>"
+msgstr "<strong>中间行</strong>"
+
