@@ -18,12 +18,7 @@ class PurchaseOrder(models.Model):
         prefix:     True   以'人民币'开头
                     False, 无开头
         '''
-        if not isinstance(value, (Decimal, str, int)):
-            msg = '''
-            由于浮点数精度问题，请考虑使用字符串，或者 decimal.Decimal 类。
-            因使用浮点数造成误差而带来的可能风险和损失作者概不负责。
-            '''
-            warnings.warn(msg, UserWarning)
+
         # 默认大写金额用圆，一般汉字金额用元
         if classical is None:
             classical = True if capital else False
