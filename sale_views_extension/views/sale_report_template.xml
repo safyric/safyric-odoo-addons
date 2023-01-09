@@ -207,8 +207,12 @@
     <xpath expr="//t[@t-set='information_block']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
-    <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
-    <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="replace"/>
+    <xpath expr="//div[hasclass('page')]//h2" position="attributes">
+      <attribute name="t-att-style">'display: none;'</attribute>
+    </xpath>
+    <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="attributes">
+      <attribute name="t-att-style">'display: none;'</attribute>
+    </xpath>
     <xpath expr="//thead/tr" position="attributes">
       <attribute name="class" add="align-top text-nowrap" separator=" "/>
     </xpath>
