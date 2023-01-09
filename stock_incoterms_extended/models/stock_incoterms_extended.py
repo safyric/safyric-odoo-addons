@@ -5,6 +5,7 @@ from odoo import fields, models
 class DeliveryPlace(models.Model):
     _name = "stock.delivery.place"
     _description = "Stock Delivery Place"
+    _order = 'sequence, id'
 
     name = fields.Char(
         'Name', required=True, translate=True,
