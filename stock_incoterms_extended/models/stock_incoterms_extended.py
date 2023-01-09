@@ -15,3 +15,4 @@ class DeliveryPlace(models.Model):
     active = fields.Boolean(
         'Active', default=True,
         help="By unchecking the active field, you may hide a delivery point you will not use.")
+    sequence = fields.Integer(help="Determine the display order", default=10)
