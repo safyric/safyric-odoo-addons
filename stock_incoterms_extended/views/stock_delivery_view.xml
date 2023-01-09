@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <tree string="Delivery Place">
                     <field name="active" invisible="1"/>
+                    <field name="sequence" widget="handle" />
                     <field name="code"/>
                     <field colspan="4" name="name"/>
                 </tree>
