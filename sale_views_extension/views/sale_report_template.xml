@@ -98,6 +98,10 @@
                       <span>Incoterms: </span>
                       <span t-field="doc.incoterm.code" class="m-0"/>
                     </div>
+                    <div t-if="doc.carrier_id" class="row">
+                      <span>Shipping Method: </span>
+                      <span t-field="doc.carrier_id" class="m-0"/>
+                    </div>                    
                     <div t-if="doc.payment_term_id" class="row">
                       <span>Payment Term: </span>
                       <span t-field="doc.payment_term_id" class="m-0"/>
