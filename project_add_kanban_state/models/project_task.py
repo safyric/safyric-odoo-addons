@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import _, api, fields, models
 
 
 class ProjectTask(models.Model):
@@ -10,6 +10,7 @@ class ProjectTask(models.Model):
 
     kanban_state = fields.Selection(selection_add=[('inprogress', 'Yellow')])
     
+    @api.multi
     def _compute_kanban_state_label(self):
         res = super(ProjectTask, self)._compute_kanban_state_label()
         for task in self:
