@@ -28,7 +28,7 @@
         <field name="inherit_id" ref="project.task_type_edit"/>
         <field name="arch" type="xml">
             <field name="legend_blocked" position="after">
-                <label for="legend_inprogress" string=" " class="o_status o_status_yellow oe_project_kanban_legend"
+                <label for="legend_inprogress" string=" " class="o_status o_status_black oe_project_kanban_legend"
                        title="This step is in progress. Click to block or set in new."
                        aria-label="This step is inprogress. Click to block or set as new." role="img"/>
                 <field name="legend_inprogress" nolabel="1"/>
