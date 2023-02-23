@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, _
 
 class ProjectTaskType(models.Model):
     """Added state in the Project Task Type."""
