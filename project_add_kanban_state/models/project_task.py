@@ -10,7 +10,6 @@ class ProjectTask(models.Model):
 
     kanban_state = fields.Selection(selection_add=[('inprogress', 'Yellow')])
     
-    @api.depends('stage_id', 'kanban_state')
     def _compute_kanban_state_label(self):
         res = super(ProjectTask, self)._compute_kanban_state_label()
         for task in self:
