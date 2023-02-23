@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">project.task.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="legend_done" position="before">
+                <field name="legend_inprogress" invisible="1"/>
+            </field>
+        </field>
+    </record>
     
+    <record model="ir.ui.view" id="view_task_kanban">
+        <field name="name">project.task.kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <field name="legend_done" position="before">
+                <field name="legend_inprogress"/>
+            </field>
+        </field>
+    </record>
+    
+    <record id="task_type_edit" model="ir.ui.view">
+        <field name="name">project.task.type.form</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <field name="legend_blocked" position="after">
+                <label for="legend_inprogress" string=" " class="o_status o_status_yellow oe_project_kanban_legend"
+                       title="This step is in progress. Click to block or set in new."
+                       aria-label="This step is inprogress. Click to block or set as new." role="img"/>
+                <field name="legend_inprogress" nolabel="1"/>
+            </field>
+        </field>
+    </record>
 </odoo>
