@@ -10,10 +10,14 @@ class ProjectTask(models.Model):
 
     kanban_state = fields.Selection(selection_add=[('inprogress', 'Yellow')])
     
-    @api.multi
+    @api.depends('stage_id', 'kanban_state')
     def _compute_kanban_state_label(self):
-        res = super(ProjectTask, self)._compute_kanban_state_label()
         for task in self:
-            if task.kanban_state == 'inprogress':
+            if task.kanban_state == 'normal':
+                task.kanban_state_label = task.legend_normal
+            elif task.kanban_state == 'blocked':
+                task.kanban_state_label = task.legend_blocked
+            elif task.kanban_state == 'inprogress':
                 task.kanban_state_label = task.legend_inprogress
-        return res
+            else:
+                task.kanban_state_label = task.legend_done
