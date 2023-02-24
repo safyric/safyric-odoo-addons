@@ -1,4 +1,4 @@
-odoo.define('web_widget_state_selection.state_selection', function (require) {
+odoo.define('web_widget_state_selection.state_selection2', function (require) {
     "use strict";
     
     var BasicFields = require('web.basic_fields');
