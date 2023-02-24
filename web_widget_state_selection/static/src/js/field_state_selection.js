@@ -1,7 +1,7 @@
 odoo.define('web_widget_state_selection.field_state_selection', function (require) {
     "use strict";
     
-    var BaseFields = require('web.basic_fields');
+    var BasicFields = require('web.basic_fields');
     
     var StateSelectionWidget2 = BasicFields.StateSelectionWidget.include({
         
@@ -74,7 +74,7 @@ odoo.define('web_widget_state_selection.field_state_selection', function (requir
             var $dropdown = this.$('.dropdown-menu');
             $dropdown.children().remove(); // remove old items
             $items.appendTo($dropdown);
-        },
+        }
     });
 
 });
