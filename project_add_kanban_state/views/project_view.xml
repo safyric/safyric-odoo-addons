@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
             <field name="legend_done" position="before">
-                <field name="legend_inprogress" invisible="1"/>
+                <field name="legend_in_progress" invisible="1"/>
             </field>
         </field>
     </record>
@@ -17,7 +17,7 @@
         <field name="inherit_id" ref="project.view_task_kanban"/>
         <field name="arch" type="xml">
             <field name="legend_done" position="before">
-                <field name="legend_inprogress"/>
+                <field name="legend_in_progress"/>
             </field>
         </field>
     </record>
@@ -28,10 +28,10 @@
         <field name="inherit_id" ref="project.task_type_edit"/>
         <field name="arch" type="xml">
             <field name="legend_blocked" position="after">
-                <label for="legend_inprogress" string=" " class="o_status o_status_black oe_project_kanban_legend"
+                <label for="legend_in_progress" string=" " class="o_status o_status_blue oe_project_kanban_legend"
                        title="This step is in progress. Click to block or set in new."
-                       aria-label="This step is inprogress. Click to block or set as new." role="img"/>
-                <field name="legend_inprogress" nolabel="1"/>
+                       aria-label="This step is in progress. Click to block or set as new." role="img"/>
+                <field name="legend_in_progress" nolabel="1"/>
             </field>
         </field>
     </record>
