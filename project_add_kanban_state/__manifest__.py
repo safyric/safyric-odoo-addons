@@ -9,6 +9,7 @@
     'installable': True,
     'depends': [
         'project',
+        'web_widget_state_selection'
     ],
     'data': [
         'views/project_view.xml',
