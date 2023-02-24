@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
+    <t t-name="FormSelection">
+        <div class="btn-group o_selection" aria-atomic="true">
+            <a href="#" data-toggle="dropdown" aria-expanded="false" role="button" title="Dropdown menu"><span class="o_status"/></a>
+            <div class="dropdown-menu state" role="menu"/>
+        </div>
+    </t>
     <t t-name="FormSelection.items">
         <t t-foreach="states" t-as="rec">
             <a role="menuitem" href="#" class="dropdown-item" t-att-data-value="rec.name">
