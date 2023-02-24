@@ -1,9 +1,30 @@
-odoo.define('web_widget_state_selection.field_state_selection', function (require) {
+odoo.define('web_widget_state_selection.state_selection', function (require) {
     "use strict";
     
-    var BasicFields = require('web.basic_fields');
+    var core = require('web.core');
+    var AbstractField = require('web.AbstractField');
+    var field_registry = require('web.field_registry');
     
-    var StateSelectionWidget2 = BasicFields.StateSelectionWidget.include({
+    var StateSelectionWidget2 = AbstractField.extend({
+        template: 'FormSelection',
+        events: {
+            'click .dropdown-item': '_setSelection',
+        },
+        supportedFieldTypes: ['selection'],
+        
+        //--------------------------------------------------------------------------
+        // Public
+        
+        //--------------------------------------------------------------------------
+        
+        /**
+        * Returns the drop down button.
+        *
+        * @override
+        */
+        getFocusableElement: function () {
+            return this.$("a[data-toggle='dropdown']");
+        },
         
         //--------------------------------------------------------------------------
         // Private
@@ -74,8 +95,30 @@ odoo.define('web_widget_state_selection.field_state_selection', function (requir
             var $dropdown = this.$('.dropdown-menu');
             $dropdown.children().remove(); // remove old items
             $items.appendTo($dropdown);
-        }
+        },
+        
+        //--------------------------------------------------------------------------
+        // Handlers
+        //--------------------------------------------------------------------------
+        
+        /**
+        * Intercepts the click on the FormSelection.Item to set the widget value.
+        *
+        * @private
+        * @param {MouseEvent} ev
+        */
+        _setSelection: function (ev) {
+            ev.preventDefault();
+            var $item = $(ev.currentTarget);
+            var value = String($item.data('value'));
+            this._setValue(value);
+            if (this.mode === 'edit') {
+                this._render();
+            }
+        },
     });
+    field_registry.add('state_selection2', StateSelectionWidget2);
 
+    return StateSelectionWidget2;
 });
 
