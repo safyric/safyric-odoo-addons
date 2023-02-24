@@ -1,4 +1,4 @@
-<templates>
+<template>
     <t t-name="FormSelection">
         <div class="btn-group o_selection" aria-atomic="true">
             <a href="#" data-toggle="dropdown" aria-expanded="false" role="button" title="Dropdown menu"><span class="o_status"/></a>
@@ -13,4 +13,4 @@
             </a>
         </t>
     </t>
-</templates>
+</template>
