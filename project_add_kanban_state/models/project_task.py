@@ -12,7 +12,7 @@ class ProjectTask(models.Model):
     
     @api.depends('stage_id', 'kanban_state')
     def _compute_kanban_state_label(self):
-        res = super(ProjectTask, sself)._compute_kanban_state_label()
+        res = super(ProjectTask, self)._compute_kanban_state_label()
         for task in self:
             if task.kanban_state == 'inprogress':
                 task.kanban_state_label = task.legend_inprogress
