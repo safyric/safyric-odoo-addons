@@ -8,7 +8,7 @@ class ProjectTask(models.Model):
 
     legend_in_progress = fields.Char(related='stage_id.legend_in_progress', string='Kanban Ongoing Explanation', readonly=True, related_sudo=False)
 
-    kanban_state = fields.Selection(selection_add=[('in_progress', 'Grey')])
+    kanban_state = fields.Selection(selection_add=[('in_progress', 'Blue')])
     
     @api.depends('stage_id', 'kanban_state')
     def _compute_kanban_state_label(self):
