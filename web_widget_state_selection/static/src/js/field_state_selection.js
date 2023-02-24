@@ -42,7 +42,10 @@ odoo.define('web_widget_state_selection.state_selection2', function (require) {
                 } else if (selection_item[0] === 'in_progress') {
                     value.state_class = 'o_status_blue';
                     value.state_name = stage_data.legend_in_progress ? stage_data.legend_in_progress : selection_item[1];
-
+                } else if (selection_item[0] === 'warning') {
+                    value.state_class = 'o_status_yellow';
+                    value.state_name = stage_data.legend_warning ? stage_data.legend_warning : selection_item[1];
+                    
                 } else {
                     value.state_class = 'o_status_red';
                     value.state_name = stage_data.legend_blocked ? stage_data.legend_blocked : selection_item[1];
@@ -65,7 +68,7 @@ odoo.define('web_widget_state_selection.state_selection2', function (require) {
             // Like priority, default on the first possible value if no value is given.
             var currentState = _.findWhere(states, {name: self.value}) || states[0];
             this.$('.o_status')
-                .removeClass('o_status_red o_status_green o_status_blue')
+                .removeClass('o_status_red o_status_green o_status_blue o_status_warning')
                 .addClass(currentState.state_class)
                 .prop('special_click', true)
                 .parent().attr('title', currentState.state_name)
