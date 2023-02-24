@@ -7,9 +7,6 @@
         <field name="arch" type="xml">
             <field name="legend_done" position="before">
                 <field name="legend_in_progress" invisible="1"/>
-                <xpath expr="//field[@name='kanban_state']" position="attributes">
-                    <attribute name="widget">state_selection2</attribute>
-                </xpath>
             </field>
         </field>
     </record>
