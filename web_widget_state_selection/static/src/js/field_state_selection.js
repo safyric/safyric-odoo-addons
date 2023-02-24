@@ -21,7 +21,7 @@ odoo.define('web_widget_state_selection.field_state_selection', function (requir
             var stage_data = {
                 id: current_stage_id,
                 legend_normal: this.recordData.legend_normal || undefined,
-                legend_blocked : this.recordData.legend_in_progress || undefined,
+                legend_in_progress : this.recordData.legend_in_progress || undefined,
                 legend_blocked : this.recordData.legend_blocked || undefined,
                 legend_done: this.recordData.legend_done || undefined,
             };
