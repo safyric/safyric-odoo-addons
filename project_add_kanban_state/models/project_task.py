@@ -6,14 +6,14 @@ class ProjectTask(models.Model):
 
     _inherit = 'project.task'
 
-    legend_inprogress = fields.Char(related='stage_id.legend_inprogress', string='Kanban Ongoing Explanation', readonly=True, related_sudo=False)
+    legend_in_progress = fields.Char(related='stage_id.legend_in_progress', string='Kanban Ongoing Explanation', readonly=True, related_sudo=False)
 
-    kanban_state = fields.Selection(selection_add=[('inprogress', 'Grey')])
+    kanban_state = fields.Selection(selection_add=[('in_progress', 'Grey')])
     
     @api.depends('stage_id', 'kanban_state')
     def _compute_kanban_state_label(self):
         res = super(ProjectTask, self)._compute_kanban_state_label()
         for task in self:
-            if task.kanban_state == 'inprogress':
-                task.kanban_state_label = task.legend_inprogress
+            if task.kanban_state == 'in_progress':
+                task.kanban_state_label = task.legend_in_progress
         return res
