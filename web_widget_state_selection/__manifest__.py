@@ -12,5 +12,8 @@
     'data': [
         'views/web_widget_state_selection.xml',
     ],
+    "qweb": [
+        "static/src/xml/state_selection.xml",
+    ],
     'installable': True,
 }
