@@ -7,7 +7,7 @@ class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     legend_in_progress = fields.Char(related='stage_id.legend_in_progress', string='Kanban Ongoing Explanation', readonly=True, related_sudo=False)
-    legend_warning = fields.Char(related='stage_id.legend_warning', string='Kanban Ongoing Explanation', readonly=True, related_sudo=False)
+    legend_warning = fields.Char(related='stage_id.legend_warning', string='Kanban Warning Explanation', readonly=True, related_sudo=False)
 
     kanban_state = fields.Selection(selection_add=[('in_progress', 'Blue'), ('warning', 'Yellow')])
     
