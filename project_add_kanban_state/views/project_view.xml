@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="legend_done" position="before">
                 <field name="legend_in_progress" invisible="1"/>
+                <field name="legend_warning" invisible="1"/>
             </field>
         </field>
     </record>
@@ -18,6 +19,7 @@
         <field name="arch" type="xml">
             <field name="legend_done" position="before">
                 <field name="legend_in_progress"/>
+                <field name="legend_warning"/>
             </field>
         </field>
     </record>
@@ -32,6 +34,10 @@
                        title="This step is in progress. Click to block or set in new."
                        aria-label="This step is in progress. Click to block or set as new." role="img"/>
                 <field name="legend_in_progress" nolabel="1"/>
+                <label for="legend_warning" string=" " class="o_status o_status_yellow oe_project_kanban_legend"
+                       title="This step is in progress. Click to block or set in new."
+                       aria-label="This step is warning. Click to block or set as new." role="img"/>
+                <field name="legend_warning" nolabel="1"/>
             </field>
         </field>
     </record>
