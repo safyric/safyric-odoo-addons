@@ -1,5 +1,8 @@
 .o_status {
     &.o_status_blue {
-        background-color: #006699;
+        background-color: theme-color('primary');
+    }
+    &.o_status_yellow {
+        background-color: theme-color('warning');
     }
 }
