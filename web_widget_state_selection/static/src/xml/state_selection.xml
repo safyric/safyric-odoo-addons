@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="FormSelection.items">
+        <t t-foreach="states" t-as="rec">
+            <a role="menuitem" href="#" class="dropdown-item" t-att-data-value="rec.name">
+                <span t-att-class="'o_status ' + (rec.state_class &amp;&amp; rec.state_class || '')"/>
+                <t t-raw="rec.state_name"/>
+            </a>
+        </t>
+    </t>
+</templates>
