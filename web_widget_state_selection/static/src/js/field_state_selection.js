@@ -3,6 +3,8 @@ odoo.define('web_widget_state_selection.state_selection2', function (require) {
     
     var BasicFields = require('web.basic_fields');
     
+    var qweb = core.qweb;
+    
     var StateSelectionWidget2 = BasicFields.StateSelectionWidget.include({
         
         //--------------------------------------------------------------------------
