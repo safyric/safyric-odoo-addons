@@ -10,5 +10,9 @@ class ProjectTaskType(models.Model):
         help='Override the default value displayed for the normal state for kanban selection, when the task or issue is in that stage.')
     
     legend_in_progress = fields.Char(
-        'Grey Kanban Label', default=lambda s: _('In Progress'), translate=True, required=True,
+        'Blue Kanban Label', default=lambda s: _('In Progress'), translate=True, required=True,
         help='Override the default value displayed for the in progress state for kanban selection, when the task or issue is in that stage.')
+
+    legend_warning = fields.Char(
+        'Yellow Kanban Label', default=lambda s: _('Warning'), translate=True, required=True,
+        help='Override the default value displayed for the warning state for kanban selection, when the task or issue is in that stage.')
