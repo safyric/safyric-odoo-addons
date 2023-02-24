@@ -1,6 +1,8 @@
 odoo.define('web_widget_state_selection.state_selection2', function (require) {
     "use strict";
     
+    
+    var core = require('web.core');
     var BasicFields = require('web.basic_fields');
     
     var qweb = core.qweb;
