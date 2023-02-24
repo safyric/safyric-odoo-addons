@@ -10,7 +10,7 @@
         'web',
     ],
     'data': [
-        'templates/assets.xml',
+        'views/web_widget_state_selection.xml',
     ],
     'installable': True,
 }
