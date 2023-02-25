@@ -1,1 +1,1 @@
-from . import http
+from odoo import http
