@@ -17,6 +17,21 @@
         
         <xpath expr="//tbody//tr/td[last()]" position="replace">
             <td class="text-left">
+                <t t-if="task.kanban_state=='in_progress'">
+                    <span class="text-primary"><i class="fas fa-circle"></i></span>
+                </t>
+                <t t-elif="task.kanban_state=='blocked'">
+                    <span class="text-danger"><i class="fas fa-circle"></i></span>
+                </t>
+                <t t-elif="task.kanban_state=='normal'">
+                    <span><i class="fas fa-circle"></i></span>
+                </t>
+                <t t-elif="task.kanban_state=='warning'">
+                    <span class="text-warning"><i class="fas fa-circle"></i></span>
+                </t>
+                <t t-else="">
+                    <span class="text-success"><i class="fas fa-circle"></i></span>
+                </t>
                 <span class="badge badge-pill badge-info" title="Current state of the task" t-esc="task.kanban_state_label"/>
             </td>
         </xpath>
