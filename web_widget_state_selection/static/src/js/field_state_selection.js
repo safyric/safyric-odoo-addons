@@ -27,6 +27,7 @@ odoo.define('web_widget_state_selection.state_selection2', function (require) {
                 legend_normal: this.recordData.legend_normal || undefined,
                 legend_in_progress : this.recordData.legend_in_progress || undefined,
                 legend_blocked : this.recordData.legend_blocked || undefined,
+                legend_warning : this.recordData.legend_warning || undefined,
                 legend_done: this.recordData.legend_done || undefined,
             };
             _.map(this.field.selection || [], function (selection_item) {
