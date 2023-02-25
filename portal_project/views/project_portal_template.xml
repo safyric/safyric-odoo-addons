@@ -1,1 +1,34 @@
-
+<odoo>
+    <template id="my_tasks" inherit_id="project.portal_my_tasks">
+        <xpath expr="//th[last()]" position="replace">
+            <th class="text-left">State</th>
+        </xpath>
+        <xpath expr="//th[3]" position="attributes">
+            <attribute name="class">text-left</attribute>
+        </xpath>
+        <xpath expr="//th[last()]" position="before">
+            <th class="text-left">Start</th>
+            <th class="text-left">Finish</th>
+        </xpath>
+        <xpath expr="//t[@t-as='task']" position="attributes">
+            <attribute name="t-foreach">tasks.sorted(key=lambda x: (x.stage_id.sequence, x.sequence))</attribute>
+        </xpath>
+        <xpath expr="//tbody//tr/td[last()]" position="replace">
+            <span class="badge badge-pill badge-info" title="Current state of the task" t-esc="task.kanban_state_label"/>
+        </xpath>
+        <xpath expr="//tbody//tr/td[2]" position="attributes">
+            <attribute name="class">text-left</attribute>
+        </xpath>
+        <xpath expr="//span[@t-esc='task.stage_id.name']" position="attributes">
+            <attribute name="class" />
+        </xpath>        
+        <xpath expr="//tbody//tr/td[last()]" position="before">
+            <td class="text-left">
+                <span t-field="task.date_start" t-options="{'widget': 'date'}"/>
+            </td>
+            <td class="text-left">
+                <span t-field="task.date_end" t-options="{'widget': 'date'}"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
