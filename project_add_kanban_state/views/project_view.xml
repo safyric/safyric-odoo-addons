@@ -21,6 +21,9 @@
                 <field name="legend_in_progress"/>
                 <field name="legend_warning"/>
             </field>
+            <xpath expr="//progressbar[@field='kanban_state']" position="attributes">
+                <attribute name="colors">{"done": "success", "blocked": "danger", "in_progress": "primary", "warning": "warning"}</attribute>
+            </xpath>            
         </field>
     </record>
     
