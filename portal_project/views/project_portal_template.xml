@@ -54,9 +54,7 @@
         </xpath>
         <xpath expr="//tbody//tr/td[last()]" position="after">
             <td class="text-left">
-                <t t-foreach="task.tag_ids" t-as="tag">
-                  <span t-field="tag.name"/>
-                </t>
+                <t t-esc="', '.join(str(i) for i in task.tag_ids.mapped('name'))"/>
             </td>
         </xpath>
     </template>
