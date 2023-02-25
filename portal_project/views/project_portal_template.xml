@@ -10,11 +10,15 @@
             <th class="text-left">Start</th>
             <th class="text-left">Finish</th>
         </xpath>
+        
         <xpath expr="//t[@t-as='task']" position="attributes">
             <attribute name="t-foreach">tasks.sorted(key=lambda x: (x.stage_id.sequence, x.sequence))</attribute>
         </xpath>
+        
         <xpath expr="//tbody//tr/td[last()]" position="replace">
-            <span class="badge badge-pill badge-info" title="Current state of the task" t-esc="task.kanban_state_label"/>
+            <td class="text-left">
+                <span class="badge badge-pill badge-info" title="Current state of the task" t-esc="task.kanban_state_label"/>
+            </td>
         </xpath>
         <xpath expr="//tbody//tr/td[2]" position="attributes">
             <attribute name="class">text-left</attribute>
