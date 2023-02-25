@@ -10,6 +10,9 @@
             <th class="text-left">Start</th>
             <th class="text-left">Finish</th>
         </xpath>
+        <xpath expr="//th[last()]" position="after">
+            <th class="text-left">Tags</th>
+        </xpath>
         
         <xpath expr="//t[@t-as='task']" position="attributes">
             <attribute name="t-foreach">tasks.sorted(key=lambda x: (x.stage_id.sequence, x.sequence))</attribute>
@@ -47,6 +50,13 @@
             </td>
             <td class="text-left">
                 <span t-field="task.date_end" t-options="{'widget': 'date'}"/>
+            </td>
+        </xpath>
+        <xpath expr="//tbody//tr/td[last()]" position="after">
+            <td class="text-left">
+                <t t-foreach="task.tag_ids" t-as="tag">
+                  <span t-field="tag.name"/>
+                </t>
             </td>
         </xpath>
     </template>
