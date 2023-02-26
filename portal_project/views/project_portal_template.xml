@@ -58,4 +58,40 @@
             </td>
         </xpath>
     </template>
+    
+    <template id="my_task" inherit_id="project.portal_my_task">
+        <xpath expr="//span[@t-field='task.stage_id.name']" position="before">
+            <t t-if="task.kanban_state=='in_progress'">
+                <span class="text-primary"><i class="fas fa-circle"/></span>
+            </t>
+            <t t-elif="task.kanban_state=='blocked'">
+                <span class="text-danger"><i class="fas fa-circle"/></span>
+            </t>
+            <t t-elif="task.kanban_state=='normal'">
+                <span><i class="far fa-circle"/></span>
+            </t>
+            <t t-elif="task.kanban_state=='warning'">
+                <span class="text-warning"><i class="fas fa-circle"/></span>
+            </t>
+            <t t-else="">
+                <span class="text-success"><i class="fas fa-circle"/></span>
+            </t>
+        </xpath>
+        <xpath expr="//span[@t-field='task.stage_id.name']" position="attributes">
+            <attribute name="t-field">task.kanban_state_label</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='card_body']/div[2]" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='card_body']/div[2]" position="after">
+            <div class="row mb-4">
+                <div class="col-12 col-md-6 mb-1" t-if="task.date_start">
+                    <strong>Start Date:</strong> <span t-field="task.date_start" t-options='{"widget": "date"}'/>
+                </div>
+                <div class="col-12 col-md-6" t-if="task.date_end">
+                    <strong>Finish Date:</strong> <span t-field="task.date_end" t-options='{"widget": "date"}'/>
+                </div>
+            </div>
+        </xpath>
+    </template>
 </odoo>
