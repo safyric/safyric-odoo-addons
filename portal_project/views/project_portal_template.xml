@@ -1,7 +1,7 @@
 <odoo>
     <template id="my_tasks" inherit_id="project.portal_my_tasks">
         <xpath expr="//th[last()]" position="replace">
-            <th class="text-left">State</th>
+            <th class="text-left">Status</th>
         </xpath>
         <xpath expr="//th[3]" position="attributes">
             <attribute name="class">text-left</attribute>
