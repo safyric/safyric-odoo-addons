@@ -22,7 +22,7 @@
             <td class="text-left">
                 <t t-if="task.kanban_state=='in_progress'">
                     <t t-set="label_color" t-value="'primary'"/>
-                    <t t-set="label_icon" t-value="'fa fa-play-circle'"/>
+                    <t t-set="label_icon" t-value="'far fa-play-circle'"/>
                 </t>
                 <t t-elif="task.kanban_state=='blocked'">
                     <t t-set="label_color" t-value="'danger'"/>
@@ -38,7 +38,7 @@
                 </t>
                 <t t-else="">
                     <t t-set="label_color" t-value="'success'"/>
-                    <t t-set="label_icon" t-value="'fa fa-check-circle'"/>
+                    <t t-set="label_icon" t-value="'far fa-check-circle'"/>
                 </t>
                 <span t-attf-class="badge badge-pill badge-#{label_color}">
                     <i t-attf-class="#{label_icon}"/>
