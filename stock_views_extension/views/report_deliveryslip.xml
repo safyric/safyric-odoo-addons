@@ -151,7 +151,7 @@
       <th name="hscode">HS Code</th>
     </xpath>
     <xpath expr="//td[@t-if='has_serial_number and move_line.lot_name']" position="before">
-      <span t-field="move_line.product_id.hs_code"/>
+      <td><span t-field="move_line.product_id.hs_code"/></td>
     </xpath>
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="move_package" t-value="[]"/>
