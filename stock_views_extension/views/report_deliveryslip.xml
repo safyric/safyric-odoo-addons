@@ -150,9 +150,6 @@
     <xpath expr="//th[@name='lot_serial']" position="before">
       <th name="hscode">HS Code</th>
     </xpath>
-    <xpath expr="//td[@t-if='has_serial_number and move_line.lot_name']" position="before">
-      <td><span t-field="move_line.product_id.hs_code"/></td>
-    </xpath>
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="move_package" t-value="[]"/>
       <t t-set="shipped_qty" t-value="0"/>
@@ -209,6 +206,7 @@
                 <span t-field="move_line.product_id.sudo().description_pickingin"/>
               </p>
             </td>
+            <td><span t-field="move_line.product_id.hs_code"/></td>
             <td width="20%" t-if="has_serial_number and o.show_serial" groups="stock.group_lot_on_delivery_slip">
               <t t-foreach="sorted(set(move_lot), key=lambda k: k.name)" t-as="lot">
                 <span t-esc="lot.name"/>
