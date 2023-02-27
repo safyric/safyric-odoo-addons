@@ -19,7 +19,7 @@
             <t t-if="env.context.get('proforma', False) or is_pro_forma">
               <span class="text-right">PRO-FORMA INVOICE<br/></span>
             </t>
-            <span t-field="doc.name"/>
+            <h3 class="float-right text-muted"><span t-field="doc.name"/></h3>
           </h2>
         </div>
         <div class="clearfix"/>
