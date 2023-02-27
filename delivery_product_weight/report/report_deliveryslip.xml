@@ -17,16 +17,21 @@
         </xpath>
         <xpath expr="//table[3]//thead//tr/th[last()]" position="after">
             <th class="text-right"><strong>Weight</strong></th>
+            <th class="text-right"><strong>Total</strong></th>
         </xpath>
         <xpath expr="//span[@t-field='move_line.product_uom_id']/.." position="after">
             <td class="text-right text-nowrap">
+                <span t-field="move_line.product_weight" t-options='{"widget": "float", "precision": 1}'/>
+                <span t-field="move_line.product_id.weight_uom_id"/>
+            </td>
+            <td class="text-right text-nowrap">
                 <t t-if="move_line.product_weight > 0">
-                    <span t-esc="move_line.product_weight * move_line.qty_done"/>
+                    <span t-esc="move_line.product_weight * move_line.qty_done" t-options='{"widget": "float", "precision": 1}'/>
                 </t>
                 <t t-else="">
-                    <span t-esc="move_line.product_id.weight * move_line.qty_done"/>
+                    <span t-esc="move_line.product_id.weight * move_line.qty_done" t-options='{"widget": "float", "precision": 1}'/>
                 </t>
-                <span t-field="move_line.picking_id.weight_uom_id"/>
+                <span t-field="move_line.product_id.weight_uom_id"/>
             </td>
         </xpath>
     </template>
