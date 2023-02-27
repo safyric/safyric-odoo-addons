@@ -247,10 +247,5 @@
     <xpath expr="//table[@class='table table-sm mt48'][2]" position="attributes">
       <attribute name="t-if"/>
     </xpath>
-    <xpath expr="//p[last()]" position="after">
-      <p t-if="o.note2">
-        <span t-field="o.note2"/>
-      </p>
-    </xpath>
   </template>
 </odoo>
