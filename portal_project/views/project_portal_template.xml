@@ -21,21 +21,29 @@
         <xpath expr="//tbody//tr/td[last()]" position="replace">
             <td class="text-left">
                 <t t-if="task.kanban_state=='in_progress'">
-                    <span class="text-primary"><i class="fas fa-circle"></i></span>
+                    <t t-set="label_color" t-value="'primary'"/>
+                    <t t-set="label_icon" t-value="'fa fa-play-circle'"/>
                 </t>
                 <t t-elif="task.kanban_state=='blocked'">
-                    <span class="text-danger"><i class="fas fa-circle"></i></span>
+                    <t t-set="label_color" t-value="'danger'"/>
+                    <t t-set="label_icon" t-value="'fa fa-ban'"/>
                 </t>
                 <t t-elif="task.kanban_state=='normal'">
-                    <span><i class="far fa-circle"></i></span>
+                    <t t-set="label_color" t-value="'info'"/>
+                    <t t-set="label_icon" t-value="'far fa-circle'"/>
                 </t>
                 <t t-elif="task.kanban_state=='warning'">
-                    <span class="text-warning"><i class="fas fa-circle"></i></span>
+                    <t t-set="label_color" t-value="'warning'"/>
+                    <t t-set="label_icon" t-value="'fa fa-exclamation-circle'"/>
                 </t>
                 <t t-else="">
-                    <span class="text-success"><i class="fas fa-circle"></i></span>
+                    <t t-set="label_color" t-value="'success'"/>
+                    <t t-set="label_icon" t-value="'fa fa-check-circle'"/>
                 </t>
-                <span class="badge badge-pill badge-info" title="Current state of the task" t-esc="task.kanban_state_label"/>
+                <span t-attf-class="badge badge-pill badge-#{label_color}">
+                    <i t-attf-class="#{label_icon}"/>
+                    <span t-esc="task.kanban_state_label"/>
+                </span>
             </td>
         </xpath>
         <xpath expr="//tbody//tr/td[2]" position="attributes">
