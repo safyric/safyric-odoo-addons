@@ -9,6 +9,7 @@
     'depends': [
         'stock',
         'delivery',
+        'stock_views_extension'
     ],
     'data': [
         'views/delivery_view.xml',
