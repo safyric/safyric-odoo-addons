@@ -26,6 +26,11 @@
 
     <div class="footer o_background_footer" style="font-size: 14px !important;">
       <div class="text-center">
+        <ul class="list-inline">
+          <li t-if="company.partner_id"><span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_tag_br": true}'/></li>
+          <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>
+          <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
+        </ul>
         <div t-if="report_type == 'pdf'" class="text-muted">
           Page:
           <span class="page"/>
@@ -62,6 +67,11 @@
 
     <div class="footer o_background_footer" style="font-size: 14px !important;">
       <div class="text-center">
+        <ul class="list-inline">
+          <li t-if="company.partner_id"><span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_tag_br": true}'/></li>
+          <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>
+          <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
+        </ul>
         <div t-if="report_type == 'pdf'" class="text-muted">
           Page:
           <span class="page"/>
