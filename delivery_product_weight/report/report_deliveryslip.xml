@@ -25,7 +25,7 @@
                 <span t-field="move_line.product_id.weight_uom_id"/>
             </td>
             <td class="text-right text-nowrap">
-                <t t-if="o.state='done'">
+                <t t-if="o.state=='done'">
                     <t t-if="move_line.product_weight > 0">
                         <span t-esc="move_line.product_weight * move_line.quantity_done" t-options='{"widget": "float", "precision": 1}'/>
                     </t>
