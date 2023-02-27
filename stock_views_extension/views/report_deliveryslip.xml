@@ -216,10 +216,6 @@
               <span t-esc="move_qty"/>
               <span t-field="move_line.product_uom"/>
             </td>
-            <td class="text-right text-nowrap">
-              <span t-esc="move_line.product_weight * move_qty" t-options='{"widget": "float", "precision": 1}'/>
-              <span t-field="move_line.product_id.weight_uom_id"/>
-            </td>
           </tr>
         </t>
       </t>
