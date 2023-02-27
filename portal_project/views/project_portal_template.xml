@@ -54,7 +54,7 @@
         </xpath>
         <xpath expr="//tbody//tr/td[last()]" position="after">
             <td class="text-left">
-                <t t-esc="', '.join(str(i) for i in task.tag_ids.mapped('name'))"/>
+                <span t-field="task.tag_ids" t-field-options='{"widget": "many2many_tags"}'/>
             </td>
         </xpath>
     </template>
