@@ -25,11 +25,21 @@
                 <span t-field="move_line.product_id.weight_uom_id"/>
             </td>
             <td class="text-right text-nowrap">
-                <t t-if="move_line.product_weight > 0">
-                    <span t-esc="move_line.product_weight * move_line.quantity_done" t-options='{"widget": "float", "precision": 1}'/>
+                <t t-if="o.state='done'">
+                    <t t-if="move_line.product_weight > 0">
+                        <span t-esc="move_line.product_weight * move_line.quantity_done" t-options='{"widget": "float", "precision": 1}'/>
+                    </t>
+                    <t t-else="">
+                        <span t-esc="move_line.product_id.weight * move_line.quantity_done" t-options='{"widget": "float", "precision": 1}'/>
+                    </t>
                 </t>
                 <t t-else="">
-                    <span t-esc="move_line.product_id.weight * move_line.quantity_done" t-options='{"widget": "float", "precision": 1}'/>
+                    <t t-if="move_line.product_weight > 0">
+                        <span t-esc="move_line.product_weight * move_line.product_uom_qty" t-options='{"widget": "float", "precision": 1}'/>
+                    </t>
+                    <t t-else="">
+                        <span t-esc="move_line.product_id.weight * move_line.product_uom_qty" t-options='{"widget": "float", "precision": 1}'/>
+                    </t>
                 </t>
                 <span t-field="move_line.product_id.weight_uom_id"/>
             </td>
