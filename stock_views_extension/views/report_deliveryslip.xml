@@ -213,8 +213,8 @@
               </t>
             </td>
             <td class="text-right text-nowrap">
-              <t t-if="o.state='done'"><span t-esc="move_qty"/></t>
-              <t t-else=""><span t-esc="move_line.product_uom_qty"/></t>
+              <span t-if="o.state=='done'" t-esc="move_qty"/>
+              <span t-else="" t-esc="move_line.product_uom_qty"/>
               <span t-field="move_line.product_uom"/>
             </td>
           </tr>
