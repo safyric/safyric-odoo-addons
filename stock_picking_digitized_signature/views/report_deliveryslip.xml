@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div class="row" style="page-break-inside: avoid;">
+                <div class="col-6">
+                    <table class="table-sm border-black" width="90%">
+                        <tr>
+                            <td><strong>I declare that all information contained in this packing list is true and correct.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Signature</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-light" style="height: 120px">
+                                <div class="container">
+                                    <div>
+                                        <span t-if="o.signature">
+                                            <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.signature)" 
+                                                 style="border:auto;max-width:300px"/>
+                                            <p t-field="o.sign_date" class="oe_inline"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
