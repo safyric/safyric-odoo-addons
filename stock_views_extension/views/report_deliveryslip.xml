@@ -50,21 +50,29 @@
                       </t>
                     </div>
                     <div class="row">
-                      <span>Company: </span>
+                      <span>Shipper: </span>
                       <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Sales Representative: </span>
+                      <span>Shipper Contact: </span>
                       <span t-field="o.sale_id.user_id.partner_id.name" class="m-0"/>
                     </div>
                     <div t-if="o.origin" class="row">
                       <span>Source Document: </span>
                       <span t-field="o.origin"/>
                     </div>
+                    <div t-else="" class="row">
+                      <span>Sales Order: </span>
+                      <span t-field="o.sale_id.name"/>
+                    </div>
                     <div t-if="o.client_order_ref" class="row">
                       <span>Customer Reference: </span>
                       <span t-field="o.client_order_ref"/>
                     </div>
+                    <div t-if="o.sale_id.incoterm" class="row">
+                      <span>Incoterms: </span>
+                      <span t-field="o.sale_id.incoterm"/>
+                    </div>                    
                   </div>
                 </div>
               </td>
