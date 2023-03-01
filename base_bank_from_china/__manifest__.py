@@ -1,5 +1,5 @@
 {
-    "name": "Bank from IBAN",
+    "name": "Bank from China",
     "version": "12.0.1.0.0",
     "author": "Safyric Co., Ltd.",
     "website": "https://github.com/safyric/safyric-odoo-addons",
