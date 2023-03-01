@@ -10,4 +10,5 @@
                 <field name="purchase_id" attrs="{'invisible': [('picking_type_code','!=','incoming')]}"/>
             </field>
         </field>
+    </record>
 </odoo>
