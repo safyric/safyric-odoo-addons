@@ -45,7 +45,7 @@
     </div>
   </template>
 
-  <template id="external_layout_invoice_header">
+  <template id="external_layout">
     <t t-if="not o" t-set="o" t-value="doc"/>
     <t t-if="not company">
       <!-- Multicompany -->
