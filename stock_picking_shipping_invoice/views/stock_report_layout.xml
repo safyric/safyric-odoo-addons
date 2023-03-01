@@ -11,10 +11,10 @@
           <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
         </div>
         <div class="float-right" style="font-size: 14px !important;">
-          <h2 class="text-right">
+          <h3 class="text-right">
             <t t-if="o.state!='done'">COMMERCIAL INVOICE (DRAFT)</t>
             <t t-else="">COMMERCIAL INVOICE</t>
-          </h2>
+          </h3>
           <h3 class="float-right text-muted">
             <span t-field="o.name"/>
           </h3>
