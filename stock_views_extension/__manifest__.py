@@ -10,6 +10,7 @@
         "stock",
         "sale_stock",
         "delivery",
+        "purchase"
     ],
     "data": [
         "views/stock_report_layout.xml",
