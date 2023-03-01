@@ -6,6 +6,6 @@ class PurchaseOrdreLine(models.Model):
     def name_get(self):
       result = []
       for rec in self:
-          result.append((rec.id, rec.product_id))
+          result.append((rec.id, '%s - %s' % (rec.order_id.name,rec.product_id.name)))
 
       return result
