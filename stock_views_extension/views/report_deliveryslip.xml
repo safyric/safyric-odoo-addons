@@ -121,11 +121,7 @@
             <tr>
               <td>
                 <div class="container" name="shipment">
-                  <t t-if="o.note">
-                    <div class="row">
-                      <strong><p t-field="o.note"/></strong>
-                    </div>
-                  </t>
+
                 </div>
               </td>
             </tr>
@@ -230,14 +226,23 @@
       </t>
       <tr>
         <td colspan="999" class="bg-info text-light pt-4 pb-4">
-          <div class="float-left">
-            <div><strong>Packing Summary:</strong></div>
-            <div class="pl-4" t-if="pkg_qty!=0">Total Packages: <span class="font-italic"><span t-esc="pkg_qty"/> Piece(s)</span></div>
-            <div class="pl-4" t-if="pkg_vol!=0">Total Volume: <span class="font-italic"><span t-esc="pkg_vol" t-options='{"widget": "float", "precision": 3}'/> M<sup>3</sup></span></div>
-            <div class="pl-4" t-if="pkg_weight">Total Gross Weight: <span class="font-italic"><span t-esc="pkg_weight" t-options='{"widget": "float", "precision": 1}'/> <span t-field="o.weight_uom_id"/></span></div>
-            <div class="pl-4" t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
+          <div class="container bg-info text-light">
+            <div class="row">
+              <div class="col-8">
+                <div><strong>Packing Summary:</strong></div>
+                <div t-if="pkg_qty!=0">Total Packages: <span class="font-italic"><span t-esc="pkg_qty"/> Piece(s)</span></div>
+                <div t-if="pkg_vol!=0">Total Volume: <span class="font-italic"><span t-esc="pkg_vol" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup></span></div>
+                <div t-if="pkg_weight">Total Gross Weight: <span class="font-italic"><span t-esc="pkg_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/></span></div>
+                <div t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
+              </div>
+              <div class="col-4">
+                <div t-if="o.note"><strong>Shipping Marks:</strong></div>
+                <t t-if="o.note">
+                  <span t-field="o.note"/>
+                </t>
+              </div>
+            </div>
           </div>
-
         </td>
       </tr>
     </xpath>
