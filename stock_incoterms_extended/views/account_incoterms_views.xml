@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="account.view_incoterms_tree"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="Edition"/>
+                    <field name="edition"/>
                 </field>
             </field>
         </record>
