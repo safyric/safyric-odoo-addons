@@ -14,7 +14,7 @@
         'views/sale_order_view.xml',
         'views/stock_delivery_view.xml',
         'views/report_sale_order.xml',
-        'views/account_incoterms_views.xml'，
+        'views/account_incoterms_views.xml'
     ],
     "depends": [
         "stock",
