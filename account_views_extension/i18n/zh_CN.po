@@ -1,0 +1,176 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_views_extension
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-05 13:16+0000\n"
+"PO-Revision-Date: 2023-03-05 13:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
+msgstr ""
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
+msgstr ""
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website\"/>"
+msgstr ""
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
+msgstr ""
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Account Holder: </span>"
+msgstr "<span>帐号持有人: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Account Number: </span>"
+msgstr "<span>帐号: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Bank Name: </span>"
+msgstr "<span>银行名称: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Company: </span>"
+msgstr "<span>公司: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Contact: </span>"
+msgstr "<span>联系人: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Currency: </span>"
+msgstr "<span>币种: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Due Date: </span>"
+msgstr "<span>到期日: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Reference: </span>"
+msgstr "<span>参考: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Sales Rep: </span>"
+msgstr "<span>销售代表: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Source Document: </span>"
+msgstr "<span>源文件: </span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<span>Tax ID</span>"
+msgstr "<span>税号</span>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<strong>Beneficiary Information</strong>"
+msgstr "<strong>受益人信息</strong>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<strong>Information</strong>"
+msgstr "<strong>信息</strong>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<strong>Invoicing Address</strong>"
+msgstr "<strong>开票信息</strong>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<strong>Shipping Address</strong>"
+msgstr "<strong>送货地址</strong>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "<strong>Vendor</strong>"
+msgstr "<strong>供应商</strong>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "Bill Date:"
+msgstr "开票日期:"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "CANCELLED INVOICE<br/>"
+msgstr "取消的发票<br/>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "CREDIT NOTE<br/>"
+msgstr "信用凭证<br/>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "DRAFT INVOICE<br/>"
+msgstr "发票草稿<br/>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "INVOICE<br/>"
+msgstr "发票<br/>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "Invoice Date:"
+msgstr "发票日期:"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "Logo"
+msgstr "徽标"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.report_invoice_document
+msgid "Note Date:"
+msgstr "凭证日期:"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "Page\n"
+"          <span class=\"page\" style=\"font-size: 13px !important;\"/>\n"
+"          of\n"
+"          <span class=\"topage\" style=\"font-size: 13px !important;\"/>"
+msgstr ""
+
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "VENDOR BILL<br/>"
+msgstr "供应商发票<br/>"
+
+#. module: account_views_extension
+#: model_terms:ir.ui.view,arch_db:account_views_extension.external_layout_account
+msgid "VENDOR CREDIT NOTE<br/>"
+msgstr "供应商信用凭证<br/"
+
