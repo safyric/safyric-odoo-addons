@@ -5,7 +5,7 @@
     'license': 'AGPL-3',
     'summary': 'Add country of origin to product.',
     'depends': [
-        'delivery',
+        'delivery_hs_code',
     ],
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
