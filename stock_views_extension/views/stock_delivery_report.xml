@@ -1,6 +1,6 @@
 <odoo>
     <template id="report_delivery_document2" inherit_id="stock_views_extension.report_delivery_document">
-        <xpath expr="//div[@name='shipment']" position="insde">
+        <xpath expr="//div[@name='shipment']" position="inside">
           <div class="row" t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id">
             <span>Carrier: </span><span t-field="o.carrier_id"/>
           </div>
