@@ -3,7 +3,7 @@
 from odoo import api, fields, models
 
 
-class Picking(models.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     signature = fields.Binary(
@@ -14,15 +14,15 @@ class Picking(models.Model):
 
     @api.model
     def create(self, values):
-        picking = super(Picking, self).create(values)
-        if picking.signature:
-            values = {'signature': picking.signature}
-            picking._track_signature(values, 'signature')
-        return picking
+        invoice = super(AccountInvoice, self).create(values)
+        if invoice.signature:
+            values = {'signature': invoice.signature}
+            invoice._track_signature(values, 'signature')
+        return invoice
 
     @api.one
     def write(self, values):
         if self.signature:
             self._track_signature(values, 'signature')
             values['sign_date'] = fields.Datetime.now()
-        return super(Picking, self).write(values)
+        return super(AccountInvoice, self).write(values)
