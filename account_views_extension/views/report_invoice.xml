@@ -26,10 +26,10 @@
             <xpath expr="//p[@t-if='o.reference']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
-            <xpath expr="//div[@t-if='o.user_id.partner_id.mobile']" position="attribute">
+            <xpath expr="//div[@t-if='o.user_id.partner_id.mobile']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
-            <xpath expr="//div[@t-if='o.user_id.partner_id.email']" position="attribute">
+            <xpath expr="//div[@t-if='o.user_id.partner_id.email']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
         </template>
