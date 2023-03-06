@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="external_layout_account" inherit_id="account_views_extension.external_layout_account" primary="True">
+        <template id="external_layout_account_invoice" inherit_id="account_views_extension.external_layout_account" primary="True">
             <xpath expr="//h3/span[3]" position="replace">
                 <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">CANCELLED COMMERCIAL INVOICE<br/></span>
             </xpath>
@@ -14,7 +14,26 @@
         </template>
         
         <template id="report_invoice_document_commercial" inherit_id="account_views_extension.report_invoice_document" primary="True">
-            
+            <xpath expr="//t[@t-call='account_views_extension.external_layout']" position="attributes">
+                <attribute name="t-call">account_views_extension.external_layout_invoice</attribute>
+            </xpath>
+        </template>
+
+        <template id="external_layout_invoice">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="account_views_extension.external_layout_account_invoice"><t t-raw="0"/></t>
         </template>
         
         <template id="report_commercial_invoice">
