@@ -32,6 +32,9 @@
             <xpath expr="//div[@t-if='o.user_id.partner_id.email']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
+            <xpath expr="//div[@name='due_date']" position="attributes">
+                <attribute name="t-att-style">'display: none;'</attribute>
+            </xpath>
         </template>
 
         <template id="external_layout_invoice">
