@@ -15,7 +15,7 @@
     'data': [
         'views/account_report_layout.xml',
         'views/account_invoice_report.xml',
-        'views/invoice_report.xml',
+        'views/report_invoice.xml',
     ],
     'installable': True,
 }
