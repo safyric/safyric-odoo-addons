@@ -5,6 +5,15 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            
+            <xpath expr="//page[@name='other_info']" position="before">
+                <page string="Signature" name="signature">
+                    <group>
+                        <group>
+                            <field name="signature" widget="signature"/>
+                            <field name="sign_date" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
         </field>
 </odoo>
