@@ -23,6 +23,9 @@
             <xpath expr="//span[@t-esc='int(float(line.quantity))']/.." position="before">
                 <td class="text-left"><span t-field="line.product_id.hs_code"/></td>
             </xpath>
+            <xpath expr="//p[@t-if='o.reference']" position="attributes">
+                <attribute name="t-att-style">'display: none;'</attribute>
+            </xpath>
         </template>
 
         <template id="external_layout_invoice">
