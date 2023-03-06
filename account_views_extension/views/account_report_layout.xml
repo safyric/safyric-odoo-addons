@@ -18,7 +18,7 @@
               <span t-if="o.type == 'out_refund'">CREDIT NOTE<br/></span>
               <span t-if="o.type == 'in_refund'">VENDOR CREDIT NOTE<br/></span>
               <span t-if="o.type == 'in_invoice'">VENDOR BILL<br/></span>
-              <span t-field="o.number"/>
+              <span class="text-muted" t-field="o.number"/>
           </h3>
         </div>
         <div class="clearfix"/>
