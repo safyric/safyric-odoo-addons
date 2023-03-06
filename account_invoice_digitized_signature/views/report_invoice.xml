@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_invoice" inherit_id="account.report_delivery_document">
+    </template>
+</odoo>
+  
