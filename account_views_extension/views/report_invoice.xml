@@ -20,7 +20,7 @@
             <xpath expr="//th[@name='th_quantity']" position="before">
                 <th class="text-left"><span>HS Code</span></th>
             </xpath>
-            <xpath expr="//span[@t-field='line.quantity']/.." position="before">
+            <xpath expr="//span[@t-esc='int(float(line.quantity))']/.." position="before">
                 <td class="text-left"><span t-field="line.product_id.hs_code"/></td>
             </xpath>
         </template>
