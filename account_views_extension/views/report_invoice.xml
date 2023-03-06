@@ -17,6 +17,12 @@
             <xpath expr="//t[@t-call='account_views_extension.external_layout']" position="attributes">
                 <attribute name="t-call">account_views_extension.external_layout_invoice</attribute>
             </xpath>
+            <xpath expr="//th[@name='th_quantity']" position="before">
+                <th class="text-left"><span>HS Code</span></th>
+            </xpath>
+            <xpath expr="//td/span[@t-field='line.quantity']/.." position="before">
+                <td class="text-left"><span t-field="line.product_id.hs_code"/></td>
+            </xpath>
         </template>
 
         <template id="external_layout_invoice">
