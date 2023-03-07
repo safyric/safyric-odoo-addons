@@ -137,7 +137,7 @@
         </div>
         <div class="col-6" t-if="o.type == 'out_invoice'">
           <table class="table-sm border-black" width="100%">
-            <tr>
+            <tr t-if="o.partner_bank_id">
               <td class="bg-light"><strong>Beneficiary Information</strong></td>
             </tr>
             <tr>
