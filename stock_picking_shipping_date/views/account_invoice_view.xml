@@ -5,7 +5,7 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet[@string='Invoice']//group/group[2]" position="inside">
+            <xpath expr="//sheet/group/group[2]" position="inside">
                 <field name="picking_id"/>
             </xpath>
         </field>
