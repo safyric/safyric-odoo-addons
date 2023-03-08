@@ -9,6 +9,7 @@
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'depends': [
         'stock',
+        'stock_views_extension',
         'account'
     ],
     'data': [
