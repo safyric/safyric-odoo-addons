@@ -9,6 +9,7 @@
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'depends': [
         'stock',
+        'account'
     ],
     'data': [
         'views/report_deliveryslip.xml',
