@@ -3,7 +3,7 @@ from odoo import api, models, fields, _
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
     
-    picking_id = fields.Many2one('stock.picking', domain="['|', ('partner_id', '=', 'partner_id'), ('partner_id', '=', 'partner_shipping_id')]")
+    picking_id = fields.Many2one('stock.picking', domain="['|', ('partner_id', '=', partner_id), ('partner_id', '=', partner_shipping_id)]")
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
