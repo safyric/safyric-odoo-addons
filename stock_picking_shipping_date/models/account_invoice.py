@@ -8,6 +8,6 @@ class AccountInvoice(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         for rec in self:
-            return {'domain': {'picking_id': [('partner_id', '=', rec.partner_id.id)]}}
+            return {'domain': {'picking_id': ['|', ('partner_id', '=', rec.partner_id.id), ('partner_id', '=', rec.partner_shipping_id.id)]}}
         return super(AccountInvoice, self)._onchange_partner_id()
     
