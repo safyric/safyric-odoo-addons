@@ -21,6 +21,6 @@ class StockPicking(models.Model):
     invoice_count = fields.Integer(compute='compute_count')
     
     def compute_count(self):
-    for record in self:
-        record.invoice_count = self.env['account.invoice'].search_count(
-            [('picking_id', '=', self.id)])
+        for record in self:
+            record.invoice_count = self.env['account.invoice'].search_count(
+                [('picking_id', '=', self.id)])
