@@ -127,7 +127,7 @@
                       <div t-field="doc.partner_shipping_id.parent_id"
                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
-                    <div class="row">
+                    <div class="row" t-if="doc.partner_shipping_id.name">
                       <span>Contact: </span><span t-field="doc.partner_shipping_id.name"/>
                       <t t-if="doc.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_id.mobile" class="m-0"/></t>
                     </div>
