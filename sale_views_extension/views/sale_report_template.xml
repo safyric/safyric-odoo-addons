@@ -169,7 +169,7 @@
                       </span>
                       <p t-field="doc.partner_invoice_id.partner_id.vat"/>
                     </div>
-                    <div class="row">
+                    <div class="row" t-if="doc.partner_invoice_id.name">
                       <span>Contact: </span><span t-field="doc.partner_invoice_id.name"/>
                       <t t-if="doc.partner_invoice_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_invoice_id.mobile" class="m-0"/></t>
                     </div>
