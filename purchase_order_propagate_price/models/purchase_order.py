@@ -9,5 +9,5 @@ class PurchaseOrderLine(models.Model):
     def write(self, values):
         if self.sale_line_id:
             for line in self:
-                line.sale_line_id.price_unit = self.purchase_price
+                line.sale_line_id.purchase_price = self.price_unit
         return super(PurchaseOrderLine, self).write(values)
