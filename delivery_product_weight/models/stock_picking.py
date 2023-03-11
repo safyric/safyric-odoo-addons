@@ -16,3 +16,11 @@ class StockPicking(models.Model):
                 weight += move_line.product_uom_id._compute_quantity(move_line.qty_done, move_line.product_id.uom_id) * move_line.product_id.weight
         self.weight_bulk = weight
         return super(StockPicking, self)._compute_bulk_weight()
+
+    @api.multi
+    def write(self, vals):
+        res = super(Picking, self).write(vals)
+        for move_line in self.move_line_ids:
+            if move_line.product_id and move_line.product_weight > 0:
+                move_line.product_id.weight = move_line.product_weight
+        return res
