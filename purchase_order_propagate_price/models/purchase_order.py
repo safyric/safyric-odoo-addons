@@ -10,4 +10,5 @@ class PurchaseOrderLine(models.Model):
         if self.sale_line_id:
             for line in self:
                 line.sale_line_id.purchase_price = self.price_unit
+                line.product_id.standard_price = self.price_unit
         return super(PurchaseOrderLine, self).write(values)
