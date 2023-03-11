@@ -26,4 +26,5 @@ class StockMoveLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         self.product_weight = lambda self: self.product_id.weight
-    return super(StockMoveLine, self).onchange_product_id()
+        
+        return super(StockMoveLine, self).onchange_product_id()
