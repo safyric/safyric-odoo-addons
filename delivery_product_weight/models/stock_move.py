@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 from odoo.addons import decimal_precision as dp
 
@@ -15,6 +15,7 @@ class StockMove(models.Model):
                 move.weight = (move.product_qty * move.product_weight)
             else:
                 move.weight = (move.product_qty * move.product_id.weight)
+        return super(StockMove, self)._cal_move_weight()
         
 
 class StockMoveLine(models.Model):
