@@ -20,7 +20,7 @@ class StockPicking(models.Model):
     @api.multi
     def write(self, vals):
         res = super(Picking, self).write(vals)
-        for move_line in self.move_line_ids:
-            if move_line.product_id and move_line.product_weight > 0:
-                move_line.product_id.weight = move_line.product_weight
+        for ml in self.move_line_ids:
+            if ml.product_id and ml.product_weight > 0:
+                ml.product_id.weight = ml.product_weight
         return res
