@@ -11,3 +11,4 @@ class SaleOrderLine(models.Model):
             currency_rate = line.order_id.currency_rate
             price = line.purchase_price * currency_rate
             line.margin = currency.round(line.price_subtotal - (price * line.product_uom_qty))
+        return super(SaleOrderLine, self)._product_margin()
