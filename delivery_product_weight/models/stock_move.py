@@ -29,9 +29,3 @@ class StockMoveLine(models.Model):
         
         return super(StockMoveLine, self).onchange_product_id()
 
-    def write(self, vals):
-        res = super(StockMoveLine, self).write(vals)
-        for ml in self:
-            if ml.product_weight > 0:
-                ml.product_id.weight = ml.product_weight
-        return res
