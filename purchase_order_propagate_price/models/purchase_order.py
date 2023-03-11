@@ -9,6 +9,7 @@ class PurchaseOrderLine(models.Model):
     def write(self, values):
         if self.sale_line_id:
             for line in self:
-                line.sale_line_id.purchase_price = self.price_unit
-                line.product_id.standard_price = self.price_unit
+                price_untaxed = self.price_unit - self.price_tax
+                line.sale_line_id.purchase_price = price_untaxed
+                line.product_id.standard_price = price_untaxed
         return super(PurchaseOrderLine, self).write(values)
