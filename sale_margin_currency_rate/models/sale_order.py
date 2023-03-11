@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 
 
-class SaleOrderLine(models.Model):
+class SaleOrderLineCurrency(models.Model):
     _inherit = "sale.order.line"
     
     @api.depends('product_id', 'purchase_price', 'product_uom_qty', 'price_unit', 'price_subtotal')
