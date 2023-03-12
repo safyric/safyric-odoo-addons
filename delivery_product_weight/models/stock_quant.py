@@ -9,6 +9,7 @@ class StockQuantPackage(models.Model):
     @api.one
     @api.depends('quant_ids')
     def _compute_weight(self):
+        res = super(StockQuantPackage, self)._compute_weight()
         weight = 0.0
         if self.env.context.get('picking_id'):
             current_picking_move_line_ids = self.env['stock.move.line'].search([('result_package_id', '=', self.id), ('picking_id', '=', self.env.context['picking_id'])])
@@ -19,4 +20,4 @@ class StockQuantPackage(models.Model):
                     weight += ml.product_uom_id._compute_quantity(ml.qty_done,ml.product_id.uom_id) * ml.product_id.weight
 
         self.weight = weight
-        
+        return res
