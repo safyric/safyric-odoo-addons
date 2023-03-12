@@ -21,6 +21,6 @@ class StockPicking(models.Model):
     def write(self, vals):
         res = super(StockPicking, self).write(vals)
         for ml in self.move_line_ids:
-            if ml.product_id and ml.product_weight > 0:
+            if ml.product_id and ml.product_weight != ml.product_id.weight:
                 ml.product_id.weight = ml.product_weight
         return res
