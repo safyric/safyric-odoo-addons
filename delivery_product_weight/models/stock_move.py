@@ -16,7 +16,13 @@ class StockMove(models.Model):
             else:
                 move.weight = (move.product_qty * move.product_id.weight)
         return super(StockMove, self)._cal_move_weight()
-        
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        res = super(StockMove, self).onchange_product_id()
+        self.product_weight = self.product_id.weight
+        return res
+    
 
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
