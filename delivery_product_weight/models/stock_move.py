@@ -21,7 +21,7 @@ class StockMove(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         res = super(StockMove, self).onchange_product_id()
-        if self.product_weight != self.product_id.weight:
+        if self.product_weight > 0 and self.product_weight != self.product_id.weight:
             self.product_weight = self.product_id.weight
         return res
     
@@ -33,7 +33,7 @@ class StockMoveLine(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
-        if self.product_weight != self.product_id.weight:
+        if self.product_weight > 0 and self.product_weight != self.product_id.weight:
             self.product_weight = lambda self: self.product_id.weight
         
         return super(StockMoveLine, self).onchange_product_id()
