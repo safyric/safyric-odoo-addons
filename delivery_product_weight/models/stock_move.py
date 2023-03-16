@@ -17,6 +17,11 @@ class StockMove(models.Model):
             else:
                 move.weight = (move.product_qty * move.product_id.weight)
         return move_weight
+    
+    def _action_assign(self):
+        record = super(StockMove, self)._action_assign()
+        self.product_weight = self.product_id.weight
+        return record
 
     @api.onchange('product_id')
     def onchange_product_id(self):
