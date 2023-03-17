@@ -13,6 +13,7 @@ class StockQuantPackage(models.Model):
     def _compute_weight(self):
         res = super(StockQuantPackage, self)._compute_weight()
         weight = 0.0
+        package_weight = self.packaging_id.weight
         if self.env.context.get('picking_id'):
             current_picking_move_line_ids = self.env['stock.move.line'].search([('result_package_id', '=', self.id), ('picking_id', '=', self.env.context['picking_id'])])
             for ml in current_picking_move_line_ids:
@@ -22,5 +23,5 @@ class StockQuantPackage(models.Model):
                     weight += ml.product_uom_id._compute_quantity(ml.qty_done,ml.product_id.uom_id) * ml.product_id.weight
         
         self.weight = weight
-        self.shipping_weight = weight + self.packaging_id.weight
+        self.shipping_weight = weight + package_weight
         return res
