@@ -7,7 +7,7 @@ class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
     
     shipping_weight = fields.Float(string='Shipping Weight', compute='_compute_weight', help="Weight used to compute the price of the delivery (if applicable).")
-    package_weight = fields.Float(string='Package Weight', help="Weight of packages used to compute the price of the delivery (if applicable).")
+    package_weight = fields.Float(string='Package Weight', compute='_compute_weight', help="Weight of packages used to compute the price of the delivery (if applicable).")
 
     @api.one
     @api.depends('quant_ids', 'packaging_id')
