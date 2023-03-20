@@ -5,7 +5,7 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <button name="action_unlock" position="after">
+            <button name="button_unlock" position="after">
                 <button name="recalculate_names" class="ml-2 btn btn-default"
                         string="Reset descriptions" Help="Erase custom descriptions of all lines"
                         type="object" attrs="{'invisible':[('state','not in', ['purchase', 'done'])]}"/>
