@@ -17,7 +17,7 @@
     "data": [
         'security/invoice_security.xml',
         'wizards/res_config_view.xml',
-        'views/sale_order_view.xml'
+        'views/account_invoice_view.xml'
     ],
     'installable': True,
 }
