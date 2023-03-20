@@ -8,8 +8,10 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def write(self, values):
         for line in self:
-            price_untaxed = line.price_unit - line.price_tax
-            line.product_id.standard_price = price_untaxed
+            price_untaxed = 0.0
+            if line.product_qty > 0 and line.price_unit > 0:
+                price_untaxed = line.price_subtotal / line.product_qty
+                line.product_id.standard_price = price_untaxed
             if line.sale_line_id:
                 line.sale_line_id.purchase_price = price_untaxed
         return super(PurchaseOrderLine, self).write(values)
