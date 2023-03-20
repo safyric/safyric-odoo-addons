@@ -47,6 +47,7 @@ class PurchaseOrder(models.Model):
             line2 = self.env['purchase.order.line'].new({
                 'product_id': line.product_id,
             })
-            line2.onchange_product_id()
-            line.name = line2.name
+            product_id = line2.with_context(lang=self.partner_id.lang)
+            product_id.onchange_product_id()
+            line.name = product_id.name
         return True
