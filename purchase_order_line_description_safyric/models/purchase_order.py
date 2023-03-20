@@ -36,3 +36,17 @@ class PurchaseOrderLine(models.Model):
             name += attribute_id.name + ': ' + pav.name + "\n"
 
         return name
+    
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
+    
+    @api.multi
+    def recalculate_names(self):
+        for line in self.mapped('order_line').filtered('product_id'):
+            # we make this to isolate changed values:
+            line2 = self.env['purchase.order.line'].new({
+                'product_id': line.product_id,
+            })
+            line2.onchange_product_id()
+            line.name = line2.name
+        return True
