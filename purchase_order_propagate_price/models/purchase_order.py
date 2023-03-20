@@ -7,8 +7,8 @@ class PurchaseOrderLine(models.Model):
 
     @api.multi
     def write(self, values):
-        if self.sale_line_id:
-            for line in self:
+        for line in self:
+            if line.sale_line_id:
                 price_untaxed = self.price_unit - self.price_tax
                 line.sale_line_id.purchase_price = price_untaxed
                 line.product_id.standard_price = price_untaxed
