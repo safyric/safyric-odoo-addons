@@ -48,6 +48,6 @@ class PurchaseOrder(models.Model):
                 'product_id': line.product_id,
             })
             product = line2.with_context(lang=self.partner_id.lang)
-            product.onchange_product_id(self)
+            product.onchange_product_id()
             line.name = product.name
         return True
