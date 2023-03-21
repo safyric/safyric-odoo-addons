@@ -16,9 +16,7 @@ class StockQuantPackage(models.Model):
         weight = 0.0
         package_weight = 0.0
         picking_id = self.env.context.get('picking_id')
-        state = ""
         if picking_id:
-            state = picking_id.state
             current_picking_move_line_ids = self.env['stock.move.line'].search([('result_package_id', '=', self.id), ('picking_id', '=', self.env.context['picking_id'])])
             for ml in current_picking_move_line_ids:
                 if ml.product_weight > 0:
@@ -26,7 +24,7 @@ class StockQuantPackage(models.Model):
                 else:
                     weight += ml.product_uom_id._compute_quantity(ml.qty_done,ml.product_id.uom_id) * ml.product_id.weight
 
-        if self.packaging_id and self.packaging_id.weight > 0 and state != 'done':
+        if self.packaging_id and self.packaging_id.weight > 0:
             package_weight = self.packaging_id.weight
             self.package_weight = package_weight
         
