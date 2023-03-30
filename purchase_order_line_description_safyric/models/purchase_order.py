@@ -34,7 +34,7 @@ class PurchaseOrderLine(models.Model):
         
         if self.sale_line_id:
             product_attribute_with_is_custom += self.sale_line_id.product_custom_attribute_value_ids.mapped('attribute_value_id.attribute_id')
-            product_attribute_custom_ids += self.sale_line_id.product_custom_attribute_value_ids
+            product_attribute_custom_ids += self.sale_line_id.product_custom_attribute_value_ids.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
 
         # attribute_value_with_variants
         for pav in self.product_id.attribute_value_ids.with_context(lang=self.order_id.partner_id.lang or self.env.lang).filtered(
@@ -46,15 +46,13 @@ class PurchaseOrderLine(models.Model):
         # attribute_value is_custom
         if product_attribute_custom_ids:
             for pac in product_attribute_custom_ids:
-                name += pac.attribute_value_id.name + ': ' + pac.custom_value + "\n"
+                name += pac.attribute_value_id.attribute_id.name + ': ' + pac.custom_value
 
         return name
     
     @api.onchange('sale_line_id')
     def onchange_sale_line_id(self):
-        if self.sale_line_id:
-            line = self.new({'product_id': self.product_id})
-            self.onchange_product_id(line)
+        self.onchange_product_id()
     
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
