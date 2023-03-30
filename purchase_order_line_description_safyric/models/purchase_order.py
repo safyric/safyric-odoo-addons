@@ -32,7 +32,7 @@ class PurchaseOrderLine(models.Model):
 
         # attribute_value_with_variants
         for pav in self.product_id.attribute_value_ids.with_context(lang=self.order_id.partner_id.lang or self.env.lang).filtered(
-            lambda pav: pav.attribute_id not in product_attribute_with_is_custom and pav.code and pav.code != "0" and pav.code !="00" and pav.code !="000"
+            lambda pav: pav.code and pav.code != "0" and pav.code !="00" and pav.code !="000"
         ):
             attribute_id = pav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
             name += attribute_id.name + ': ' + pav.name + "\n"
