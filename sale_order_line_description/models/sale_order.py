@@ -51,16 +51,16 @@ class SaleOrderLine(models.Model):
         # no_variant_attribute_value
         for pvav in self.product_no_variant_attribute_value_ids.with_context(lang=self.order_id.partner_id.lang or self.env.lang).filtered(
             lambda pvav: pvav.attribute_id not in product_attribute_with_is_custom):
-            attribute_id = pvav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
+            no_variant_attribute_id = pvav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
             if self.order_id.is_long_description:
-                if pvav.attribute_id.description and pvav.attribute_id.is_reverse_description == False:
-                    name += pvav.name + " " + attribute_id.description + ", "
-                elif pvav.attribute_id.description and pvav.attribute_id.is_reverse_description == True:
-                    name += attribute_id.description + " " + pvav.name + ", "
+                if no_variant_attribute_id.description and no_variant_attribute_id.is_reverse_description == False:
+                    name += pvav.name + " " + no_variant_attribute_id.description + ", "
+                elif no_variant_attribute_id.description and no_variant_attribute_id.is_reverse_description == True:
+                    name += no_variant_attribute_id.description + " " + pvav.name + ", "
                 else:
                     name += pvav.name + ", "
             else:
-                name += attribute_id.name + ': ' + pvav.name + "\n"
+                name += no_variant_attribute_id.name + ': ' + pvav.name + "\n"
 
         # product_custom_attribute_value
         for pacv in self.product_custom_attribute_value_ids:
