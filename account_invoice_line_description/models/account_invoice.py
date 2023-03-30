@@ -10,6 +10,7 @@ class AccountInvoice(models.Model):
             # we make this to isolate changed values:
             line2 = self.env['account.invoice.line'].new({
                 'product_id': line.product_id,
+                'invoice_id': line.invoice_id
             })
             line2._onchange_product_id()
             line.name = line2.name
