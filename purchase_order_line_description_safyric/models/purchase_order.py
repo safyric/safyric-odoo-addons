@@ -43,6 +43,10 @@ class PurchaseOrderLine(models.Model):
 
         return name
     
+    @api.onchange('sale_line_id')
+    def onchange_sale_line_id(self):
+        self.onchange_product_id()
+    
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
     
