@@ -44,7 +44,7 @@ class PurchaseOrderLine(models.Model):
         # attribute_value is_custom
         if product_attribute_custom_ids:
             for pac in product_attribute_custom_ids:
-                name += pac.attribute_value_id.attribute_id.name + ': ' + pac.custom_value
+                name += pac.attribute_value_id.attribute_id.name + ': ' + pac.custom_value + "\n"
 
         return name
     
