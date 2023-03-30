@@ -51,7 +51,7 @@ class SaleOrderLine(models.Model):
         # no_variant_attribute_value
         for pvav in self.product_no_variant_attribute_value_ids.with_context(lang=self.order_id.partner_id.lang or self.env.lang).filtered(
             lambda pvav: pvav.attribute_id not in product_attribute_with_is_custom):
-            attribute_id = pav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
+            attribute_id = pvav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
             if self.order_id.is_long_description:
                 if pvav.attribute_id.description and pvav.attribute_id.is_reverse_description == False:
                     name += pvav.name + " " + attribute_id.description + ", "
