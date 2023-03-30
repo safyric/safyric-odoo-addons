@@ -17,9 +17,7 @@ class PurchaseOrderLine(models.Model):
         return res
 
     def get_purchase_order_line_multiline_description_purchase(self, product):
-        product = self.product_id.with_context(
-            lang=self.order_id.partner_id.lang
-        )
+        product = self.product_id
 
         if product and product.description_purchase:
             return product.display_name + "\n" + self._get_purchase_order_line_multiline_description_variants().strip(', ') + product.description_purchase
