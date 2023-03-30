@@ -61,8 +61,9 @@ class PurchaseOrder(models.Model):
             # we make this to isolate changed values:
             line2 = self.env['purchase.order.line'].new({
                 'product_id': line.product_id,
+                'sale_line_id': line.sale_line_id,
+                'order_id': line.order_id
             })
-            product = line2.with_context(lang=self.partner_id.lang)
-            product.onchange_product_id()
-            line.name = product.name
+            line2.onchange_product_id()
+            line.name = line2.name
         return True
