@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 
 class ProductAttributeValue(models.Model):
-    _name = 'product.attribute.custom.value'
+    _name = 'product.variant.attribute.custom.value'
     
     name = fields.Char(string='Value')
     attribute_id = fields.Many2one('product.attribute', string='Attribute')
