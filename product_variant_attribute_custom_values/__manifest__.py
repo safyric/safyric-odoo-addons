@@ -6,6 +6,7 @@
     'summary': 'Link attribute custom values to product variant level.',
     'depends': [
         'product',
+        'sale'
     ],
     'author': 'Safyric Co., Ltd.',
     'website': 'https://github.com/safyric/safyric-odoo-addons',
