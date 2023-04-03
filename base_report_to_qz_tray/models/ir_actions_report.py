@@ -77,4 +77,4 @@ class IrActionsReport(models.Model):
             data = [result[0].replace(b"\n", b"").decode("unicode_escape")]
         else:
             data = []
-        return 
+        return data
