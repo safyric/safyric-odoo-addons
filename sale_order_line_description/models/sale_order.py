@@ -46,7 +46,7 @@ class SaleOrderLine(models.Model):
                 else:
                     name += pav.name + ", "
             elif pav.description:
-                name += attribute_id.name + ': ' + pav.name + "\n" + pav.description.replace('\n', '\n' + '    ') + "\n"
+                name += attribute_id.name + ': ' + pav.name + "\n" + '    ' + pav.description.replace('\n', '\n' + '    ') + "\n"
             else:
                 name += attribute_id.name + ': ' + pav.name + "\n"
 
