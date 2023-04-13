@@ -39,7 +39,10 @@ class PurchaseOrderLine(models.Model):
             lambda pav: pav.attribute_id not in product_attribute_with_is_custom and pav.code and pav.code != "0" and pav.code !="00" and pav.code !="000"
         ):
             attribute_id = pav.attribute_id.with_context(lang=self.order_id.partner_id.lang or self.env.lang)
-            name += attribute_id.name + ': ' + pav.name + "\n"
+            if pav.description:
+                name += attribute_id.name + ': ' + pav.name + "\n" + '    ' + pav.description.replace('\n', '\n' + '    ') + "\n"
+            else:
+                name += attribute_id.name + ': ' + pav.name + "\n"
             
         # attribute_value is_custom
         if product_attribute_custom_ids:
