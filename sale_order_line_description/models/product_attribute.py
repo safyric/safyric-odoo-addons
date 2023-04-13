@@ -13,6 +13,7 @@ class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
     short_name = fields.Char(string='Short Name', translate=True)
+    description = fields.Text(string='Description', translate=True)
 
     @api.multi
     def _variant_name(self, variable_attributes):
