@@ -11,6 +11,7 @@
     ],
     "data": [
         "views/res_bank_view.xml",
+        "views/report_partner_bank.xml"
     ],
     'installable': True,
 }
