@@ -7,6 +7,7 @@
     "license": "AGPL-3",
     "depends": [
         "base",
+        "partner_bank_view"
     ],
     "data": [
         "views/res_bank_view.xml",
