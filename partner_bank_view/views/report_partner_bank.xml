@@ -75,10 +75,6 @@
                                             <span>IBAN: </span>
                                             <span t-field="doc.bank_id.code" class="m-0 bg-warning"/>
                                         </div>
-                                        <div t-if="doc.bank_id.cnaps_code and doc.currency_id.name=='CNY'" class="row">
-                                            <span>CNAPS: </span>
-                                            <span t-field="doc.bank_id.cnaps_code" class="m-0 bg-warning"/>
-                                        </div>
                                         <div class="row">
                                             <span>Account #: </span>
                                             <span t-field="doc.acc_number" class="m-0 bg-warning"/>
