@@ -27,6 +27,11 @@ msgstr ""
 
 #. module: partner_bank_view
 #: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
+msgid "<span>Bank Details</span>"
+msgstr "<span>银行信息</span>"
+
+#. module: partner_bank_view
+#: model_terms:ir.ui.view,arch_db:partner_bank_view.report_bank_document
 msgid "<span>Bank Account Details</span>"
 msgstr "<span>银行帐号信息</span>"
 
