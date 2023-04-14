@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_bank_document_cnaps" inherit_id="parnter_bank_view.report_bank_document">
+    <template id="report_bank_document_cnaps" inherit_id="partner_bank_view.report_bank_document">
         <xpath expr="//div[@t-if='doc.bank_id.code']" position="after">
             <div t-if="doc.bank_id.cnaps_code and doc.currency_id.name=='CNY'" class="row">
                 <span>CNAPS: </span>
