@@ -232,7 +232,7 @@
                 <div><strong>Packing Summary:</strong></div>
                 <div t-if="pkg_qty!=0">Total Packages: <span class="font-italic"><span t-esc="pkg_qty"/> Piece(s)</span></div>
                 <div t-if="pkg_vol!=0">Total Volume: <span class="font-italic"><span t-esc="pkg_vol" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup></span></div>
-                <div t-if="pkg_weight">Total Gross Weight: <span class="font-italic"><span t-esc="pkg_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/></span></div>
+                <div t-if="pkg_weight">Total Gross Weight: <span class="font-italic"><span t-esc="o.shipping_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/></span></div>
                 <div t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
               </div>
               <div class="col-4">
