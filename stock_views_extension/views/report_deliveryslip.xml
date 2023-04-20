@@ -178,7 +178,7 @@
               <div class="col-4 text-center"><strong t-if="move_dim"><span t-esc="move_dim"/> mm</strong></div>
               <div class="col-2 text-right"><strong t-if="package.packaging_id.volume!=0"><span t-esc="package.packaging_id.volume" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup></strong></div>
               <div class="col-3 text-right">
-                <strong t-if="package.shipping_weight!=0">G.W.: <span t-field="package.shipping_weight"/> <span t-field="o.weight_uom_id"/></strong>
+                <strong t-if="package.shipping_weight!=0">G.W.: <span t-field="package.weight+package.shipping_weight"/> <span t-field="o.weight_uom_id"/></strong>
               </div>
             </div>
           </td>
