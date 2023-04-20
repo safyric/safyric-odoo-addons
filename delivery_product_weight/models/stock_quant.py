@@ -7,7 +7,6 @@ class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
     
     shipping_weight = fields.Float(string='Shipping Weight', compute='_compute_weight', help="Weight used to compute the price of the delivery (if applicable).")
-    package_weight = fields.Float(string='Package Weight', compute='_compute_weight', help="Weight of packages used to compute the price of the delivery (if applicable).")
 
     @api.one
     @api.depends('quant_ids', 'packaging_id')
@@ -30,8 +29,7 @@ class StockQuantPackage(models.Model):
                     
         if self.packaging_id and self.packaging_id.weight > 0 and picking_state != "done":
             package_weight = self.packaging_id.weight
-            self.package_weight = package_weight
         
         self.weight = weight
-        self.shipping_weight = weight + self.package_weight
+        self.shipping_weight = package_weight
         return res
