@@ -19,7 +19,8 @@ class StockMove(models.Model):
     def _action_assign(self):
         record = super(StockMove, self)._action_assign()
         for move in self:
-            move.product_weight = move.product_id.weight
+            if move.product_weight = 0.00 and move.product_id.weight !=0:
+                move.product_weight = move.product_id.weight
         return record
 
     @api.onchange('product_id')
