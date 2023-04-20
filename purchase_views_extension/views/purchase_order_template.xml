@@ -126,7 +126,7 @@
                   <div class="row" t-if="o.company_id.partner_id.vat">
                     <span>
                       <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
-                      <t t-if="not o.company_id.country_id.vat_label">税号</t>:&#160;
+                      <t t-if="not o.company_id.country_id.vat_label">税号: </t>
                     </span>
                     <p t-field="o.company_id.partner_id.vat"/>
                   </div>
