@@ -6,8 +6,6 @@ from odoo.addons import decimal_precision as dp
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
     
-    shipping_weight = fields.Float(string='Shipping Weight', compute='_compute_weight', help="Weight used to compute the price of the delivery (if applicable).")
-
     @api.one
     @api.depends('quant_ids', 'packaging_id')
     def _compute_weight(self):
