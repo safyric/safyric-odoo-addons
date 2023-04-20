@@ -8,10 +8,10 @@ class StockMove(models.Model):
 
     product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'))
 
-    @api.depends('product_id', 'product_uom_qty', 'product_uom')
+    @api.depends('product_id', 'product_uom_qty', 'product_uom', 'product_weight')
     def _cal_move_weight(self):
         move_weight = super(StockMove, self)._cal_move_weight()
-        for move in self:
+        for move in self.filtered(lambda moves: moves.product_id.weight > 0.00 or moves.product_weight > 0.00):
             if move.product_weight > 0:
                 move.weight = (move.product_qty * move.product_weight)
             else:
