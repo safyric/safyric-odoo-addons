@@ -11,11 +11,9 @@ class StockMove(models.Model):
     @api.depends('product_id', 'product_uom_qty', 'product_uom', 'product_weight')
     def _cal_move_weight(self):
         move_weight = super(StockMove, self)._cal_move_weight()
-        for move in self.filtered(lambda moves: moves.product_id.weight > 0.00 or moves.product_weight > 0.00):
+        for move in self:
             if move.product_weight > 0:
                 move.weight = (move.product_qty * move.product_weight)
-            else:
-                move.weight = (move.product_qty * move.product_id.weight)
         return move_weight
     
     def _action_assign(self):
@@ -36,11 +34,4 @@ class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
 
     product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
-
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        if self.product_id.weight > 0:
-            self.product_weight = lambda self: self.product_id.weight
-        
-        return super(StockMoveLine, self).onchange_product_id()
 
