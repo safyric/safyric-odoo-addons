@@ -20,7 +20,7 @@ class StockQuantPackage(models.Model):
                 weight += ml.product_uom_id._compute_quantity(ml.qty_done,ml.product_id.uom_id) * ml.product_weight
         else:
             for quant in self.quant_ids:
-                weight += quant.quantity * quant.product_id.weight
+                weight += quant.quantity * quant.product_weight
                     
         if self.packaging_id and self.packaging_id.weight > 0 and picking_state != "done":
             package_weight = self.packaging_id.weight
