@@ -28,3 +28,8 @@ class StockQuantPackage(models.Model):
         self.weight = weight
         self.shipping_weight = package_weight
         return res
+
+class StockQuantPackage(models.Model):
+    _inherit = "stock.quant"
+    
+    
