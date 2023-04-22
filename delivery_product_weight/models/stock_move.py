@@ -10,10 +10,10 @@ class StockMove(models.Model):
 
     @api.depends('product_id', 'product_uom_qty', 'product_uom', 'product_weight')
     def _cal_move_weight(self):
-        move_weight = super(StockMove, self)._cal_move_weight()
+        res = super(StockMove, self)._cal_move_weight()
         for move in self:
             move.weight = (move.product_qty * move.product_weight)
-        return move_weight
+        return res
     
     def _action_assign(self):
         record = super(StockMove, self)._action_assign()
@@ -24,10 +24,10 @@ class StockMove(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
-        res = super(StockMove, self).onchange_product_id()
+        res1 = super(StockMove, self).onchange_product_id()
         if self.product_id.weight > 0:
             self.product_weight = self.product_id.weight
-        return res
+        return res1
     
 
 class StockMoveLine(models.Model):
