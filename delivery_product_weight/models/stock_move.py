@@ -12,8 +12,7 @@ class StockMove(models.Model):
     def _cal_move_weight(self):
         move_weight = super(StockMove, self)._cal_move_weight()
         for move in self:
-            if move.product_weight > 0:
-                move.weight = (move.product_qty * move.product_weight)
+            move.weight = (move.product_qty * move.product_weight)
         return move_weight
     
     def _action_assign(self):
