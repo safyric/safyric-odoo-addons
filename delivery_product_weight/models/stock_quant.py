@@ -30,6 +30,6 @@ class StockQuantPackage(models.Model):
         return res
 
 class StockQuant(models.Model):
-    _inherit = "stock.quant"
+    _inherit = 'stock.quant'
     
     product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'))
