@@ -36,3 +36,10 @@ class StockMoveLine(models.Model):
 
     product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'), related='move_id.product_weight')
 
+    @api.onchange('product_id', 'product_uom_id')
+    def onchange_product_id(self):
+        res = super(StockMoveLine, self).onchange_product_id()
+        if self.product_id and self.result_package_id:
+            for quant in self.result_package_id.quant_ids:
+                quant.product_weight = self.product_weight
+        return res
