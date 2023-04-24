@@ -33,3 +33,10 @@ class StockQuantPackage(models.Model):
         self.weight = weight
         self.shipping_weight = package_weight
         return res
+    
+    def _update_product_weight(self):
+        self = self.sudo()
+        quants = self._gather(product_id, location_id, lot_id=lot_id, package_id=package_id, owner_id=owner_id, strict=True)
+        for quant in quants:
+            if quant.product_id:
+                quant.product_weight = quant.product_id.weight
