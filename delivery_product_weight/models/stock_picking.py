@@ -25,6 +25,7 @@ class StockPicking(models.Model):
                 if ml.product_id and ml.product_weight != ml.product_id.weight:
                     ml.product_id.weight = ml.product_weight
                 for quant in ml.result_package_id.quant_ids:
-                    quant._update_product_weight()
+                    if self.state != 'done':
+                        quant._update_product_weight()
 
         return res
