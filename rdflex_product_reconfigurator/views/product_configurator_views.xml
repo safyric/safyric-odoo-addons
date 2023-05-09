@@ -9,6 +9,23 @@
             <xpath expr="//tree/field[@name='price_subtotal']" position="after">
                 <button name="open_product_configurator"  icon="fa-gear" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
             </xpath>
+            <xpath expr="//kanban/field[@name='tax_id']" position="after">
+                <button name='open_product_configurator'
+                        type='object'
+                        class="fa-gear oe_edit_only"
+                        />
+            </xpath>
+            <xpath expr="//t[@t-if='!record.display_type.raw_value']/div[last()]/div[1]" position="attributes">
+                <attribute name="class">col-8 text-muted</attribute>               
+            </xpath>
+            <xpath expr="//t[@t-if='!record.display_type.raw_value']/div[last()]" position="inside">
+		<div class="text-right">
+                    <button name='open_product_configurator'
+                           type='object'
+                           class="fa-gear oe_edit_only"
+                           />
+		</div>
+            </xpath>
         </field>
     </record>
 
