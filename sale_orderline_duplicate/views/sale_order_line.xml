@@ -5,14 +5,33 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-        <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
+            <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
                 <button name='dup_line'
                         type='object'
                         class="fa fa-files-o oe_edit_only"
                         attrs="{'invisible': [('state', 'not in', ['draft'])]}"
-                />
-        </xpath>
+                        />
+            </xpath>
+            <xpath expr="//kanban/field[@name='tax_id']" position="after">
+                <button name='dup_line'
+                        type='object'
+                        class="fa fa-files-o oe_edit_only"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"
+                        />
+            </xpath>
+            <xpath expr="//t[@t-if='!record.display_type.raw_value']/div[last()]/div[1]" position="attributes">
+                <attribute name="class">col-8 text-muted</attribute>               
+            </xpath>
+            <xpath expr="//t[@t-if='!record.display_type.raw_value']/div[last()]" position="inside">
+                <div class="col-4 text-muted">
+                    <button name='dup_line'
+                            type='object'
+                            class="fa fa-files-o oe_edit_only"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"
+                            />
+                </div>
+            </xpath>
         </field>
     </record>
-
+    
 </odoo>
