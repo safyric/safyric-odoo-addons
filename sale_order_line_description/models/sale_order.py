@@ -17,7 +17,7 @@ class SaleOrderLine(models.Model):
     def get_sale_order_line_multiline_description_sale(self, product):
         res = super(SaleOrderLine,self).get_sale_order_line_multiline_description_sale(product)
         barcode = ""
-        if product.barcode:
+        if product.barcode and product.type != "service":
             barcode = "\nStock Code: " + product.barcode
 
         if product.description_sale:
