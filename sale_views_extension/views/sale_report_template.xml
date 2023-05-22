@@ -6,7 +6,59 @@
     </xpath>
     <xpath expr="//t[@t-set='doc']" position="after">
       <div class="row">
-        <div class="col-6">
+        <div class="col-6" t-if="env.context.get('proforma', False) or is_pro_forma">
+          <table class="table-sm border-black pull-right" width="100%" id="invoicing">
+            <tr>
+              <td class="bg-light"><strong>Invoicing Address</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container">
+                  <t t-if="doc.partner_invoice_id.parent_id">
+                    <div class="row">
+                      <div t-field="doc.partner_invoice_id.parent_id"/>
+                    </div>
+                    <div class="row">
+                      <div t-field="doc.partner_invoice_id"
+                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                    </div>
+                    <div class="row" t-if="doc.partner_invoice_id.vat">
+                      <span>
+                        <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
+                        <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
+                      </span>
+                      <p t-field="doc.partner_invoice_id.partner_id.vat"/>
+                    </div>
+                    <div class="row" t-if="doc.partner_invoice_id.name">
+                      <span>Contact: </span><span t-field="doc.partner_invoice_id.name"/>
+                      <t t-if="doc.partner_invoice_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_invoice_id.mobile" class="m-0"/></t>
+                    </div>
+                    <div class="row" t-if="doc.partner_invoice_id.email">
+                      <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_invoice_id.email"/>
+                    </div>
+                  </t>
+                  <t t-else="">
+                    <div class="row">
+                      <div t-field="doc.partner_invoice_id"/>
+                    </div>
+                    <div class="row">
+                      <span t-field="doc.partner_invoice_id"
+                            t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true, "phone_icons": True}'/>
+                    </div>
+                    <div class="row" t-if="doc.partner_invoice_id.vat">
+                      <span>
+                        <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
+                        <t t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID</t>:&#160;
+                      </span>
+                      <p t-field="doc.partner_invoice_id.partner_id.vat"/>
+                    </div>
+                  </t>
+                </div>
+              </td>
+            </tr>
+          </table>     
+        </div>
+        <div class="col-6" t-else="">
           <table class="table-sm border-black" width="90%">
             <tr>
               <td class="bg-light"><strong>Customer</strong></td>
@@ -70,7 +122,7 @@
                       <span>Order Date: </span>
                       <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
-                    <div t-if="doc.validity_date" class="row" >
+                    <div t-if="doc.validity_date" class="row" t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                       <span>Validity: </span>
                       <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
@@ -80,7 +132,7 @@
                       <span t-esc="doc.client_order_ref" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Company: </span>
+                      <span>Seller: </span>
                       <span t-field="doc.company_id" class="m-0"/>
                     </div>
                     <div class="row">
@@ -146,7 +198,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-6">
+        <div class="col-6" t-if="not (env.context.get('proforma', False) or is_pro_forma)">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
               <td class="bg-light"><strong>Invoicing Address</strong></td>
@@ -197,6 +249,16 @@
               </td>
             </tr>
           </table>          
+        </div>
+        <div class="col-6" t-if="env.context.get('proforma', False) or is_pro_forma">
+          <table class="table-sm border-black pull-right" width="100%">
+            <tr>
+              <td class="bg-light"><strong>Beneficiary's Bank Details</strong></td>
+            </tr>
+            <tr>
+              
+            </tr>
+          </table>
         </div>
       </div>
       <div class="clearfix"/>
