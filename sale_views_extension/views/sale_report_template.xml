@@ -122,8 +122,8 @@
                       <span>Order Date: </span>
                       <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
-                    <div t-if="doc.validity_date" class="row" t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                      <span>Validity: </span>
+                    <div t-if="doc.validity_date and not (env.context.get('proforma', False) or is_pro_forma)" class="row">
+                      <span>Expiration Date: </span>
                       <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
