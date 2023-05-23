@@ -257,7 +257,78 @@
               <td class="bg-light"><strong>Beneficiary's Bank Details</strong></td>
             </tr>
             <tr>
-              
+              <td>
+		<div class="container">
+		  <t t-if="doc.payment_mode_id">
+		    <t t-foreach="doc.payment_mode_id" t-as="mode">
+		      <div class="row">
+			<span>Beneficiary: </span>
+			<span t-field="mode.company_id"/>
+		      </div>
+                      <t t-if="mode.fixed_journal_id" t-foreach="mode.fixed_journal_id" t-as="bank">
+		        <div class="row">
+			  <span>Bank Name: </span>
+			  <span t-field="bank.bank_id.name"/>
+		        </div>
+			<div class="row">
+			  <span>Account#: </span>
+			  <span t-field="bank.bank_account_id"/>
+                        </div>
+			<div class="row">
+			  <span>Swift#: </span>
+			  <span t-field="bank.bank_id.bic"/>
+			</div>
+                        <!--<t t-if="bank.bank_id.intermediary_bank_id">
+                          <div class="row">
+                            <span>Intermediary Bank: </span>
+                            <span t-field="bank.bank_id.intermediary_bank_id"/>
+                          </div>
+                          <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
+                            <span>Intermediary Bank Swift: </span>
+                            <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
+                          </div>
+                        </t>-->
+                        <div class="row">
+                          <span>Currency: </span>
+                          <span t-field="bank.currency_id"/>
+                        </div>
+                      </t>
+		      <t t-else="mode.variable_journal_ids" t-foreach="mode.variable_journal_ids" t-as="bank">
+			<div class="row">
+			  <span>Beneficiary: </span>
+			  <span t-field="bank.company_id"/>
+			</div>
+                        <div class="row">
+                          <span>Bank Name: </span>
+                          <span t-field="bank.bank_id.name"/>
+                        </div>
+                        <div class="row">
+                          <span>Account#: </span>
+                          <span t-field="bank.bank_account_id"/>
+                        </div>
+                        <div class="row">
+                          <span>Swift#: </span>
+                          <span t-field="bank.bank_id.bic"/>
+                        </div>
+                        <!--<t t-if="bank.bank_id.intermediary_bank_id">
+                          <div class="row">
+                            <span>Intermediary Bank: </span>
+                            <span t-field="bank.bank_id.intermediary_bank_id"/>
+                          </div>
+                          <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
+                            <span>Intermediary Bank Swift: </span>
+                            <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
+                          </div>
+                        </t>-->
+			<div class="row">
+			  <span>Currency: </span>
+			  <span t-field="bank.currency_id"/>
+			</div>
+                      </t>
+	            </t>
+		  </t>
+		</div>
+	      </td>
             </tr>
           </table>
         </div>
