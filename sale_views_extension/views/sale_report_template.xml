@@ -20,7 +20,7 @@
                     </div>
                     <div class="row">
                       <div t-field="doc.partner_invoice_id"
-                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true, "phone_icons": True}'/>
                     </div>
                     <div class="row" t-if="doc.partner_invoice_id.vat">
                       <span>
@@ -110,21 +110,21 @@
                   <div class="pull-right">
                     <div t-if="doc.date_order and doc.state in ['draft','sent']" class="row" >
                       <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                        <span>Invoice Date: </span>
-                        <span t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}" class="m-0"/>                        
+                        <span>Invoice Date (m/d/Y): </span>
+                        <span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/>                        
                       </t>
                       <t t-else="">
-                        <span>Quotation Date: </span>
-                        <span t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}" class="m-0"/>                        
+                        <span>Quotation Date (m/d/Y): </span>
+                        <span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/>                        
                       </t>
                     </div>
                     <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="row" >
-                      <span>Order Date: </span>
-                      <span t-field="doc.confirmation_date" t-options='{"widget": "date"}' class="m-0"/>
+                      <span>Order Date (m/d/Y): </span>
+                      <span t-esc="doc.confirmation_date.strftime('%m/%d/%Y')" class="m-0"/>
                     </div>
                     <div t-if="doc.validity_date and not (env.context.get('proforma', False) or is_pro_forma)" class="row">
-                      <span>Expiration Date: </span>
-                      <span t-field="doc.validity_date" t-options='{"widget": "date"}' class="m-0"/>
+                      <span>Expiration Date (m/d/Y): </span>
+                      <span t-field="doc.validity_date" widget="date" t-field-options='{"format": "mm/dd/yyyy"}' class="m-0"/>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
                       <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Reference: </span>
@@ -139,7 +139,7 @@
                       <span>Contact: </span>
                       <span t-field="doc.user_id.partner_id.name" class="m-0"/>
                     </div>
-                    <div t-if="doc.user_id.partner_id.mobile">
+                    <div t-if="doc.user_id.partner_id.mobile" class="row">
                         <i class="fa fa-mobile"/>
 			<span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
                     </div>
@@ -213,7 +213,7 @@
                     </div>
                     <div class="row">
                       <div t-field="doc.partner_invoice_id"
-                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true, "phone_icons": True}'/>
                     </div>
                     <div class="row" t-if="doc.partner_invoice_id.vat">
                       <span>
