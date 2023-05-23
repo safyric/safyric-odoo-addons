@@ -136,18 +136,19 @@
                       <span t-field="doc.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Sales Representative: </span>
+                      <span>Contact: </span>
                       <span t-field="doc.user_id.partner_id.name" class="m-0"/>
-                      <t t-if="doc.user_id.partner_id.mobile">
-                        <i class="fa fa-mobile"/><span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
-                      </t>
+                    </div>
+                    <div t-if="doc.user_id.partner_id.mobile">
+                        <i class="fa fa-mobile"/>
+			<span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
                     </div>
                     <div t-if="doc.user_id.partner_id.email" class="row">
                       <i class="fa fa-envelope-o fa-fw"/>
                       <span t-field="doc.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <div t-if="doc.incoterm" class="row">
-                      <span>Incoterms: </span>
+                      <span>Shipping Terms: </span>
                       <span t-field="doc.incoterm.code" class="m-0"/>
                     </div>
                     <div t-if="doc.carrier_id" class="row">
@@ -155,7 +156,7 @@
                       <span t-field="doc.carrier_id" class="m-0"/>
                     </div>                    
                     <div t-if="doc.payment_term_id" class="row">
-                      <span>Payment Term: </span>
+                      <span>Payment Terms: </span>
                       <span t-field="doc.payment_term_id" class="m-0"/>
                     </div>
                   </div>
