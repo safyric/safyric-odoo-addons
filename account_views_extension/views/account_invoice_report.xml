@@ -143,20 +143,72 @@
             <tr>
               <td>
                 <div class="container" name="beneficiary">
-                    <t t-if="o.partner_bank_id">
+                  <t t-if="o.payment_mode_id" t-foreach="o.payment_mode_id" t-as="mode">
+                    <div class="row">
+                      <span>Beneficiary: </span>
+                      <span t-field="mode.company_id"/>
+                    </div>
+                    <t t-if="mode.fixed_journal_id" t-foreach="mode.fixed_journal_id" t-as="bank">
                       <div class="row">
-                        <span>Bank Name: </span><span t-field="o.partner_bank_id.bank_id"/>                       
+                        <span>Bank Name: </span>
+                        <span t-field="bank.bank_id.name"/>
                       </div>
                       <div class="row">
-                        <span>Account Number: </span><span t-field="o.partner_bank_id.acc_number"/>
+                        <span>Account#: </span>
+                        <span t-field="bank.bank_account_id"/>
                       </div>
-                      <div class="row" t-if="o.partner_bank_id.acc_holder_name">
-                        <span>Account Holder: </span><span t-field="o.partner_bank_id.acc_holder_name"/>
+                      <div class="row">
+                        <span>Swift#: </span>
+                        <span t-field="bank.bank_id.bic"/>
                       </div>
-                      <div class="row" t-if="o.partner_bank_id.currency_id">
-                        <span>Currency: </span><span t-field="o.partner_bank_id.currency_id"/>
-                      </div>                     
+                      <!--<t t-if="bank.bank_id.intermediary_bank_id">
+                        <div class="row">
+                          <span>Intermediary Bank: </span>
+                          <span t-field="bank.bank_id.intermediary_bank_id"/>
+                        </div>
+                        <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
+                          <span>Intermediary Bank Swift: </span>
+                          <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
+                        </div>
+                      </t>-->
+                      <div class="row">
+                        <span>Currency: </span>
+                        <span t-field="bank.currency_id"/>
+                      </div>
                     </t>
+                    <t t-if="mode.variable_journal_ids" t-foreach="mode.variable_journal_ids" t-as="bank">
+                      <div class="row">
+                        <span>Beneficiary: </span>
+                        <span t-field="bank.company_id"/>
+                      </div>
+                      <div class="row">
+                        <span>Bank Name: </span>
+                        <span t-field="bank.bank_id.name"/>
+                      </div>
+                      <div class="row">
+                        <span>Account#: </span>
+                        <span t-field="bank.bank_account_id"/>
+                      </div>
+                      <div class="row">
+                        <span>Swift#: </span>
+                        <span t-field="bank.bank_id.bic"/>
+                      </div>
+                      <!--<t t-if="bank.bank_id.intermediary_bank_id">
+                        <div class="row">
+                          <span>Intermediary Bank: </span>
+                          <span t-field="bank.bank_id.intermediary_bank_id"/>
+                        </div>
+                        <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
+                          <span>Intermediary Bank Swift: </span>
+                          <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
+                        </div>
+                      </t>-->
+                      <div class="row">
+                        <span>Currency: </span>
+                        <span t-field="bank.currency_id"/>
+                      </div>
+                    </t>
+		  </t>
                 </div>
               </td>
             </tr>
