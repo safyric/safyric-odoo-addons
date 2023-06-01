@@ -5,9 +5,9 @@
             <xpath expr="//h3/span[3]" position="replace">
                 <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">CANCELLED COMMERCIAL INVOICE<br/></span>
             </xpath>
-            <xpath expr="//h3/span[2]" position="replace"/>
-            <!--    <span t-if="o.type == 'out_invoice' and o.state == 'draft'">DRAFT COMMERCIAL INVOICE<br/></span>
-            </xpath>-->
+            <xpath expr="//h3/span[2]" position="replace">
+                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">COMMERCIAL INVOICE<br/></span>
+            </xpath>
             <xpath expr="//h3/span[1]" position="replace">
                 <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">COMMERCIAL INVOICE<br/></span>
             </xpath>
