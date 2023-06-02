@@ -151,9 +151,9 @@
     <xpath expr="//div[hasclass('justify-content-end')]" position="attributes">
       <attribute name="style">display:none</attribute>
     </xpath>
-    <xpath expr="//th[@name='lot_serial']" position="before">
+    <!--<xpath expr="//th[@name='lot_serial']" position="before">
       <th name="hscode">HS Code</th>
-    </xpath>
+    </xpath>-->
     <xpath expr="//table[@class='table table-sm mt48'][2]/tbody" position="inside">
       <t t-set="move_package" t-value="[]"/>
       <t t-set="shipped_qty" t-value="0"/>
@@ -203,6 +203,8 @@
             </td>
             <td>
               <span t-field="move_line.product_id"/>
+	      <span t-if="move_line.product_id.country_of_origin_id"><br/>Country of Origin: <span t-field="move_line.product_id.country_of_origin_id"/></span>
+	      <span t-if="move_line.product_id.hs_code"><br/>H.S. Code: <span t-field="move_line.product_id.hs_code"/></span>
               <p t-if="o.picking_type_code == 'outgoing'">
                 <span t-field="move_line.product_id.sudo().description_pickingout"/>
               </p>
@@ -210,7 +212,7 @@
                 <span t-field="move_line.product_id.sudo().description_pickingin"/>
               </p>
             </td>
-            <td><span t-field="move_line.product_id.hs_code"/></td>
+            <!--<td><span t-field="move_line.product_id.hs_code"/></td>-->
             <td width="20%" t-if="has_serial_number and o.show_serial" groups="stock.group_lot_on_delivery_slip">
               <t t-foreach="sorted(set(move_lot), key=lambda k: k.name)" t-as="lot">
                 <span t-esc="lot.name"/>

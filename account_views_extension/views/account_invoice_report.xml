@@ -13,7 +13,7 @@
           <table class="table-sm border-black" width="90%">
             <tr>
               <td class="bg-light">
-                <t t-if="o.type == 'out_invoice' or o.type == 'in_invoice'"><strong>Invoicing Address</strong></t>
+                <t t-if="o.type == 'out_invoice'"><strong>Invoicing Address</strong></t>
                 <t t-else=""><strong>Vendor</strong></t>
               </td>
             </tr>
@@ -72,12 +72,12 @@
                       <span t-field="o.date_due" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Company: </span>
+                      <span name="company">Company: </span>
                       <span t-field="o.company_id" class="m-0"/>
                     </div>
                     <div class="row">
-                      <span>Sales Rep: </span>
-                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
+                      <span>Contact: </span>
+                      <span t-field="o.user_id.partner_id.name" class="m-0"/><i class="fa fa-envelope-o fa-fw"/><span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <!--<div class="row" t-if="o.user_id.partner_id.mobile">
                       <i class="fa fa-mobile"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
@@ -87,13 +87,19 @@
                       <span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>-->
                     <div t-if="o.name" class="row" name="description">
-                      <span>Reference: </span>
+                      <span t-if="o.type == 'out_invoice'">Purchase Order: </span>
+		      <span t-else="">Vendor Reference: </span>
                       <span t-field="o.name" class="m-0"/>
                     </div>
-                    <div t-if="o.origin" class="row" name="origin">
-                      <span>Source Document: </span>
+                    <div t-if=" o.origin" class="row" name="origin">
+                      <span t-if="o.type == 'out_invoice'">Sales Order: </span>
+		      <span t-else="">Internal Reference: </span>
                       <span t-field="o.origin" class="m-0"/>
                     </div>
+		    <div t-if="o.incoterm_id" class="row" name="incoterm">
+		      <span>Shipping Terms: </span>
+		      <span t-field="o.incoterm_id" class="m-0"/>
+		    </div>
                   </div>
                 </div>
               </td>
@@ -105,7 +111,7 @@
         <div class="col-6" t-if="o.type == 'out_invoice'">
           <table class="table-sm border-black" width="90%">
             <tr>
-              <td class="bg-light"><strong>Shipping Address</strong></td>
+              <td class="bg-light"><strong>Consignee</strong></td>
             </tr>
             <tr>
               <td>
@@ -134,14 +140,14 @@
           </table>
         </div>
         <div class="col-6" t-if="o.type == 'out_invoice'">
-          <table class="table-sm border-black" width="100%">
+          <table t-if="o.payment_mode_id" class="table-sm border-black" width="100%" name="beneficiary">
             <tr>
               <td class="bg-light"><strong>Beneficiary Information</strong></td>
             </tr>
             <tr>
               <td>
                 <div class="container" name="beneficiary">
-                  <t t-if="o.payment_mode_id" t-foreach="o.payment_mode_id" t-as="mode">
+                  <t t-foreach="o.payment_mode_id" t-as="mode">
                     <div class="row">
                       <span>Beneficiary: </span>
                       <span t-field="mode.company_id"/>

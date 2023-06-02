@@ -17,12 +17,16 @@
             <xpath expr="//t[@t-call='account_views_extension.external_layout']" position="attributes">
                 <attribute name="t-call">account_views_extension.external_layout_invoice</attribute>
             </xpath>
-            <xpath expr="//th[@name='th_quantity']" position="before">
+            <!--<xpath expr="//th[@name='th_quantity']" position="before">
                 <th class="text-left"><span>HS Code</span></th>
             </xpath>
             <xpath expr="//span[@t-esc='int(float(line.quantity))']/.." position="before">
                 <td class="text-left"><span t-field="line.product_id.hs_code"/></td>
-            </xpath>
+            </xpath>-->
+	    <xpath expr="//span[@t-field='line.name']" position="after">
+		<span t-if="line.product_id.country_of_origin_id"><br/>Country of Origin: <span t-field="line.product_id.country_of_origin_id"/></span>
+		<span t-if="line.product_id.hs_code"><br/>H.S. Code: <span t-field="line.product_id.hs_code"/></span>
+	    </xpath>
             <xpath expr="//p[@t-if='o.reference']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
@@ -35,6 +39,23 @@
             <xpath expr="//div[@name='due_date']" position="attributes">
                 <attribute name="t-att-style">'display: none;'</attribute>
             </xpath>
+	    <xpath expr="//span[@name='company']" position="replace">
+		<span name="company">Exporter: </span>
+	    </xpath>
+	    <xpath expr="//table[@name='beneficiary']" position="after">
+		<table t-if="o.picking_id" class="table-sm border-black" width="100%" name="shipment">
+		    <tr>
+			<td class="bg-light"><strong>Shipment Information</strong></td>
+		    </tr>
+		    <tr>
+			<td>
+			</td>
+		    </tr>
+		</table>
+	    </xpath>
+	    <xpath expr="//table[@name='beneficiary']" position="attributes">
+		<attribute name="t-att-style">'display: none;'</attribute>
+	    </xpath>
         </template>
 
         <template id="external_layout_invoice">
