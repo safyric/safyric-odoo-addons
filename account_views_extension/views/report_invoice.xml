@@ -49,6 +49,20 @@
 		    </tr>
 		    <tr>
 			<td>
+			    <div class="container" name="shipment">
+				<div t-if="o.picking_id.shipping_date" class="row">
+				    <span>Shipping Date: </span>
+				    <span t-field="o.picking_id.shipping_date"/>
+				</div>
+				<div t-if="o.picking_id.carrier_id" class="row">
+				    <span>Carrier: </span>
+				    <span t-field="o.picking_id.carrier_id"/>
+				</div>
+                                <div t-if="o.picking_id.carrier_tracking_ref" class="row">
+                                    <span>Tracking or B/L #: </span>
+                                    <span t-field="o.picking_id.carrier_tracking_ref"/>
+                                </div>
+			    </div>
 			</td>
 		    </tr>
 		</table>
