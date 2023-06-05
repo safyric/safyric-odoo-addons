@@ -62,13 +62,13 @@
                 <div class="container">
                   <div class="pull-right">
                     <div t-if="o.date_invoice" class="row" name="invoice_date">
-                      <span t-if="o.type == 'out_invoice'">Invoice Date: </span>
-                      <span t-if="o.type == 'out_refund' or o.type == 'in_refund'">Note Date: </span>
-                      <span t-if="o.type == 'in_invoice'">Bill Date: </span>
+                      <span t-if="o.type == 'out_invoice'">Invoice Date (m/d/Y): </span>
+                      <span t-if="o.type == 'out_refund' or o.type == 'in_refund'">Note Date (m/d/Y): </span>
+                      <span t-if="o.type == 'in_invoice'">Bill Date (m/d/Y): </span>
                       <span t-field="o.date_invoice" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div t-if="o.date_due and o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')" class="row" name="due_date">
-                      <span>Due Date: </span>
+                      <span>Due Date (m/d/Y): </span>
                       <span t-field="o.date_due" t-options='{"widget": "date"}' class="m-0"/>
                     </div>
                     <div class="row">
@@ -77,7 +77,7 @@
                     </div>
                     <div class="row">
                       <span>Contact: </span>
-                      <span t-field="o.user_id.partner_id.name" class="m-0"/><i class="fa fa-envelope-o fa-fw"/><span t-field="o.user_id.partner_id.email" class="m-0"/>
+                      <span t-field="o.user_id.partner_id.name"/ class="m-0"><span> </span><i class="fa fa-envelope-o fa-fw"/><span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>
                     <!--<div class="row" t-if="o.user_id.partner_id.mobile">
                       <i class="fa fa-mobile"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
@@ -87,12 +87,12 @@
                       <span t-field="o.user_id.partner_id.email" class="m-0"/>
                     </div>-->
                     <div t-if="o.name" class="row" name="description">
-                      <span t-if="o.type == 'out_invoice'">Purchase Order: </span>
+                      <span t-if="o.type == 'out_invoice'">Purchase Order(s): </span>
 		      <span t-else="">Vendor Reference: </span>
                       <span t-field="o.name" class="m-0"/>
                     </div>
                     <div t-if=" o.origin" class="row" name="origin">
-                      <span t-if="o.type == 'out_invoice'">Sales Order: </span>
+                      <span t-if="o.type == 'out_invoice'">Sales Order(s): </span>
 		      <span t-else="">Internal Reference: </span>
                       <span t-field="o.origin" class="m-0"/>
                     </div>
