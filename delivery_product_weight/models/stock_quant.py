@@ -36,6 +36,6 @@ class StockQuantPackage(models.Model):
             package_weight = self.packaging_id.weight
         
         self.weight = weight
-        self.shipping_weight = package_weight
+        self.shipping_weight = weight + package_weight
         return res
     
