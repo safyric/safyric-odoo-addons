@@ -15,7 +15,7 @@ class StockQuant(models.Model):
 
 class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
-    
+
     @api.one
     @api.depends('quant_ids', 'packaging_id')
     def _compute_weight(self):
@@ -31,11 +31,10 @@ class StockQuantPackage(models.Model):
         else:
             for quant in self.quant_ids:
                 weight += quant.quantity * quant.product_weight
-                    
+
         if self.packaging_id and self.packaging_id.weight > 0 and picking_state != "done":
             package_weight = self.packaging_id.weight
-        
+
         self.weight = weight
-        self.shipping_weight = weight + package_weight
+        self.shipping_weight = package_weight
         return res
-    

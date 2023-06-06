@@ -14,12 +14,16 @@ class StockMove(models.Model):
         for move in self:
             move.weight = (move.product_qty * move.product_weight)
         return res
-    
+
     def _action_assign(self):
         record = super(StockMove, self)._action_assign()
         for move in self:
             if move.product_weight <= 0.00 and move.product_id.weight !=0:
                 move.product_weight = move.product_id.weight
+            for line in self.move_line_ids:
+                for quant in line.package_id.quant_ids:
+                    quant.product_weight = move.product_weight
+
         return record
 
     @api.onchange('product_id')
@@ -28,7 +32,7 @@ class StockMove(models.Model):
         if self.product_id.weight > 0:
             self.product_weight = self.product_id.weight
         return res1
-    
+
 
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
