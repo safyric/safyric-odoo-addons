@@ -20,7 +20,7 @@ class StockMove(models.Model):
         for move in self:
             if move.product_weight <= 0.00 and move.product_id.weight !=0:
                 move.product_weight = move.product_id.weight
-            for line in self.move_line_ids:
+            for line in move.move_line_ids:
                 for quant in line.package_id.quant_ids:
                     quant.product_weight = move.product_weight
 

@@ -4,11 +4,11 @@ from odoo.addons import decimal_precision as dp
 
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
-    
+
     product_weight = fields.Float('Product Weight', digits=dp.get_precision('Stock Weight'))
 
     def _update_product_weight(self):
-        self = self.sudo()        
+        self = self.sudo()
         for quant in self:
             if quant.product_id:
                 quant.product_weight = quant.product_id.weight
