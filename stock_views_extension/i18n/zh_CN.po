@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_views_extension
+#	* stock_views_extension
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 04:59+0000\n"
-"PO-Revision-Date: 2023-03-03 04:59+0000\n"
+"POT-Creation-Date: 2023-06-23 12:18+0000\n"
+"PO-Revision-Date: 2023-06-23 12:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,141 +15,182 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
-msgstr ""
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<br/>Country of Origin:"
+msgstr "<br/>原产地:"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
-msgstr ""
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<br/>H.S. Code:"
+msgstr "<br/>H.S.编码:"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_picking
 msgid "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website\"/>"
 msgstr ""
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_picking
 msgid "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
 msgstr ""
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "<span class=\"text-right\">PRO-FORMA INVOICE<br/></span>"
-msgstr "<span class=\"text-right\">形式发票<br/></span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document2
+msgid "<span>Carrier: </span>"
+msgstr "<span>承运商: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Company: </span>"
-msgstr "<span>公司: </span>"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
 msgid "<span>Contact: </span>"
 msgstr "<span>联系人: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Customer Reference: </span>"
+msgstr "<span>客户参考: </span>"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Date: </span>"
+msgstr "<span>日期: </span>"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
 msgid "<span>Incoterms: </span>"
 msgstr ""
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Invoice Date: </span>"
-msgstr "<span>发票日期: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Sales Order: </span>"
+msgstr "<span>销售订单: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Order Date: </span>"
-msgstr "<span>订单日期: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Shipper Contact: </span>"
+msgstr "<span>发货人联系人: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Payment Term: </span>"
-msgstr "<span>付款条件: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Shipper: </span>"
+msgstr "<span>发货人: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Quotation Date: </span>"
-msgstr "<span>报价日期: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<span>Source Document: </span>"
+msgstr "<span>源文件: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Sales Representative: </span>"
-msgstr "<span>销售代表: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document2
+msgid "<span>Tracking Number: </span>"
+msgstr "<span>跟踪号: </span>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Shipping Method: </span>"
-msgstr "<span>运输方式: </span>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<strong>Consignee</strong>"
+msgstr "<strong>收货人</strong>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<span>Validity: </span>"
-msgstr "<span>有效期: </span>"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<strong>Currency</strong>"
-msgstr "<strong>货币</strong>"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
 msgid "<strong>Customer</strong>"
 msgstr "<strong>客户</strong>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
 msgid "<strong>Information</strong>"
 msgstr "<strong>信息</strong>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<strong>Invoicing Address</strong>"
-msgstr "<strong>开票信息</strong>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<strong>Packing Summary:</strong>"
+msgstr "<strong>装箱汇总:</strong>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "<strong>Shipping Address</strong>"
-msgstr "<strong>送货地址</strong>"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<strong>Shipment Information</strong>"
+msgstr "<strong>运输信息</strong>"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "<strong>Shipping Marks:</strong>"
+msgstr "<strong>装运唛头:</strong>"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "G.W.:"
+msgstr "毛重:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_picking
 msgid "Logo"
 msgstr "徽标"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "PO Number:"
-msgstr "订单号:"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+msgid "PACKING LIST"
+msgstr "装箱单"
 
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "Page\n"
-"          <span class=\"page\" style=\"font-size: 13px !important;\"/>\n"
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+msgid "PACKING LIST (DRAFT)"
+msgstr "装箱单 (草稿)"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_picking
+msgid "PICKING OPERATION"
+msgstr "分拣单"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_delivery
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.external_layout_picking
+msgid "Page:\n"
+"          <span class=\"page\"/>\n"
 "          of\n"
-"          <span class=\"topage\" style=\"font-size: 13px !important;\"/>"
+"          <span class=\"topage\"/>"
+msgstr "第 <span class=\"page\"/> 页\n"
+"          共\n"
+"          <span class=\"topage\"/> 页"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Piece(s)"
+msgstr "件"
+
+#. module: stock_views_extension
+#: model:ir.model,name:stock_views_extension.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "采购订单行"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Total Gross Weight:"
+msgstr "总毛重:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Total Packages:"
+msgstr "总件数:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Total Shipped Quantity:"
+msgstr "总发货数量:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Total Volume:"
+msgstr "总体积:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "Vol.:"
+msgstr "体积:"
+
+#. module: stock_views_extension
+#: model_terms:ir.ui.view,arch_db:stock_views_extension.report_delivery_document
+msgid "mm"
 msgstr ""
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "QUOTATION<br/>"
-msgstr "报价单<br/>"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.external_layout_sale
-msgid "SALES ORDER<br/>"
-msgstr "销售订单<br/>"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "Tax ID"
-msgstr "税号"
-
-#. module: sale_views_extension
-#: model_terms:ir.ui.view,arch_db:sale_views_extension.report_saleorder_document
-msgid "Your Reference:"
-msgstr "你的参考:"
 
