@@ -15,14 +15,18 @@ class StockMove(models.Model):
             move.weight = (move.product_qty * move.product_weight)
         return res
 
+    def _update_shipping_weight(self):
+        for move in self:
+            for line in move.move_line_ids:
+                for quant in line.package_id.quant_ids:
+                    quant.product_weight = move.product_weight
+
     def _action_assign(self):
         record = super(StockMove, self)._action_assign()
         for move in self:
             if move.product_weight <= 0.00 and move.product_id.weight !=0:
                 move.product_weight = move.product_id.weight
-            for line in move.move_line_ids:
-                for quant in line.package_id.quant_ids:
-                    quant.product_weight = move.product_weight
+                move._update_shipping_weight()
 
         return record
 
