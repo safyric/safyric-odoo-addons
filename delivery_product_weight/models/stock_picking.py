@@ -27,5 +27,12 @@ class StockPicking(models.Model):
                 for quant in ml.result_package_id.quant_ids:
                     if self.state != 'done':
                         quant._update_product_weight()
+        return res
 
+    @api.multi
+    def button_validate(self):
+        res = super(StockPicking, self).button_validate()
+        for picking in self:
+            for move in picking.move_lines:
+                move._update_shipping_weight()
         return res
