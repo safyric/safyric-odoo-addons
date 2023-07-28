@@ -52,10 +52,10 @@
                       <span>Your Ref: </span>
                       <span t-esc="o.partner_ref" class="m-0"/>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                       <span>Company: </span>
                       <span t-field="o.company_id" class="m-0"/>
-                    </div>
+                    </div>-->
                     <div class="row">
                       <span>Buyer: </span>
                       <span t-field="o.user_id.partner_id.name" class="m-0"/>
@@ -111,7 +111,7 @@
         <div class="col-6">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
-              <td class="bg-light"><strong>Invoicing Address</strong></td>
+              <td class="bg-light"><strong>Purchaser/Invoicing Address</strong></td>
             </tr>
             <tr>
               <td>
