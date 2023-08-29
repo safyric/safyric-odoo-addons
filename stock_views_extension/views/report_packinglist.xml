@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_packinglist">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="stock_views_extension.report_delivery_packing" t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+  <template id="report_delivery_packing" inherit_id="stock_views_extension.report_delivery_document" primary="True">
+    <xpath expr="//t[@t-call='stock_views_extension.external_layout_deliveryslip']" position="attributes">
+      <attribute name="t-call">stock_views_extension.external_layout_packinglist</attribute>
+    </xpath>
+    <xpath expr="//div[@id='shipment']" position="replace">
+        <div class="col-6">
+          <table class="table-sm border-black pull-right" width="100%">
+            <tr>
+              <td class="bg-light"><strong>Shipment Information</strong></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="container" name="shipment">
+
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+    </xpath>
+  </template>
+</odoo>

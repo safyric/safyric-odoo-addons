@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="qc_noi_tree" model="ir.ui.view">
+        <field name="name">qc.noi.tree</field>
+        <field name="model">qc.noi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+		<field name="inspection_date"/>
+		<field name="partner_id"/>
+		<field name="sale_order_ids" widget="many2many_tags"/>
+		<field name="purchase_order_ids" widget="many2many_tags"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="qc_noi_form" model="ir.ui.view">
+        <field name="name">qc.noi.form</field>
+        <field name="model">qc.noi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+			<h1>
+                            <label string="Notification " for="name"/>
+                            <field name="name" class="oe_inline"/>
+			</h1>
+                    </div>
+                    <group>
+			<group>
+			    <field name="partner_id"/>
+			    <field name="sale_order_ids" widget="many2many_tags" domain="[('state', 'in', ('sale', 'done')), '|', ('partner_id.id', '=', partner_id), ('partner_id.parent_id', '=', partner_id)]"/>
+			    <field name="purchase_order_ids" widget="many2many_tags" domain="[('state', 'in', ('purchase', 'done'))]"/>
+			    <label for="description"/>
+			    <div>
+				<field name="description" class="oe_inline" placeholder="Description ..."/>
+			    </div>
+			</group>
+                        <group>
+			    <field name="date"/>
+			    <field name="responsible_id"/>
+			    <field name="inspection_date"/>
+			    <field name="inspection_duration"/>
+			    <field name="inspection_partner_id"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+		    <notebook>
+			<page string="Order Lines">
+			    <field name="sale_line_ids" nolable="1" widget="many2many" options="{'reload_on_button': True}" context="{'form_view_ref': 'sale.sale_order_line_view_form_readyonly_noi', 
+				'tree_view_ref': 'sale.view_order_line_tree_noi'}" domain="[('order_id', 'in', sale_order_ids)]">
+				<tree>
+				    <field name="sequence"/>
+				    <field name="product_id"/>
+				    <field name="product_uom_qty"/>
+				    <field name="order_partner_id" invisible="1"/>
+				    <field name="order_id" invisible="1"/>
+				</tree>
+			    </field>
+			</page>
+			<page string="Inspector Info">
+			    <group>
+				<group>
+				    <field name="inspector_name"/>
+				    <field name="inspector_phone"/>
+				    <field name="inspector_email"/>
+				    <field name="inspector_company"/>
+				</group>
+				<group>
+				</group>
+			    </group>
+			</page>
+		    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="qc_noi_kanban_view" model="ir.ui.view">
+        <field name="name">qc.noi.kanban</field>
+        <field name="model">qc.noi</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" quick_create="false" create="true">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title"><field name="name"/></strong><br/>
+
+                                    </div>
+                                    <div class="o_dropdown_kanban dropdown" groups="">
+                                        <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown"
+                                           href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                            <span class="fa fa-ellipsis-v"/>
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <a t-if="widget.editable" role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                                            <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                            <div role="separator" class="dropdown-divider"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <div>
+                                    </div>
+                                    <div class="text-muted o_kanban_record_subtitle">
+                                    </div>
+
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <!--To be inhereted.-->
+                                </div>
+                            </div>
+                            <div class="oe_clear"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="qc_oi_search">
+        <field name="name">qc.noi.search</field>
+        <field name="model">qc.noi</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="responsible_id"/>
+                <filter string="Late Activities" name="activities_overdue"
+                    domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                    help="Show all records which has next action date is before today"/>
+                <filter string="Today Activities" name="activities_today"
+                    domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Future Activities" name="activities_upcoming_all"
+                    domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                    ]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="groupby_company"
+                            string="Company" context="{'group_by':'company_id'}"
+                            groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="qc_noi_action" model="ir.actions.act_window">
+        <field name="name">Notification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">qc.noi</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem name="Notification"
+              parent="quality_control.qc_inspection_menu_parent"
+              id="qc_inspection_noi_menu"
+              action="qc_noi_action" 
+	      sequence="5"/>
+</odoo>
