@@ -79,7 +79,7 @@ class QcItpLine(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
-            'res_model': 'qc.itp.line',
+            'res_model': 'qc.itp',
             'target': 'current',
             'res_id': self.plan_id.id
         }
@@ -124,12 +124,11 @@ class QcItp(models.Model):
 
     @api.model
     def create(self, vals):
-        line = super(QcItpLine, self.with_context(mail_create_nosubscribe=True)).create(vals)
-        line.activity_update()
+        line = super(QcItp, self.with_context(mail_create_nosubscribe=True)).create(vals)
         return line
 
     @api.multi
     def _compute_attachment_number(self):
-        for sheet in self:
-            sheet.attachment_number = sum(sheet.plan_line_ids.mapped('attachment_number'))
+        for plan in self:
+            plan.attachment_number = sum(plan.plan_line_ids.mapped('attachment_number'))
 
