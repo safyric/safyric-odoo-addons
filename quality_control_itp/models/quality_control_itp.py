@@ -10,6 +10,7 @@ from odoo.tools import email_split, float_is_zero
 from odoo.addons import decimal_precision as dp
 
 
+
 class QcItpLine(models.Model):
 
     _name = "qc.itp.line"
@@ -21,16 +22,18 @@ class QcItpLine(models.Model):
     def _default_employee_id(self):
         return self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
 
-    name = fields.Char('Description', readonly=True, required=True, states={'draft': [('readonly', False)], 'submitted': [('readonly', False)]})
+    sequence = fields.Integer('Sequence', help="Determine the display order", index=True)
+    name = fields.Char('Description', readonly=True, required=True, states={'draft': [('readonly', False)]})
     date = fields.Date(readonly=True, states={'draft': [('readonly', False)], 'reported': [('readonly', False)]}, default=fields.Date.context_today, string="Date")
-    employee_id = fields.Many2one('hr.employee', string="Employee", required=True, readonly=True, states={'draft': [('readonly', False)], 'submitted': [('readonly', False)]}, default=_default_employee_id)
+    employee_id = fields.Many2one('hr.employee', string="Employee", required=True, readonly=True, states={'draft': [('readonly', False)]}, default=_default_employee_id)
     company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
-    description = fields.Text('Notes...', readonly=True, states={'draft': [('readonly', False)], 'submitted': [('readonly', False)]})
+    description = fields.Text('Description...', readonly=True, states={'draft': [('readonly', False)]})
     attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
     state = fields.Selection([
         ('draft', 'To Submit'),
-        ('submitted', 'Submitted'),
-        ('approved', 'Approved')
+        ('cancel', 'Refused'),
+        ('approved', 'Approved'),
+        ('done', 'Done')
     ], compute='_compute_state', string='Status', copy=False, index=True, readonly=True, store=True, help="Status of the plan")
     plan_id = fields.Many2one('qc.itp', string="ITP", readonly=True, copy=False)
     reference = fields.Char("Document Reference")
@@ -41,8 +44,8 @@ class QcItpLine(models.Model):
             if not line.plan_id or line.plan_id.state == 'draft':
                 line.state = "draft"
             elif line.plan_id.state == "cancel":
-                line.state = "refused"
-            elif line.plan_id.state == "approve" or line.plan_id.state == "post":
+                line.state = "cancel"
+            elif line.plan_id.state == "approve":
                 line.state = "approved"
             else:
                 line.state = "done"
@@ -110,6 +113,7 @@ class QcItp(models.Model):
     user_id = fields.Many2one('res.users', 'Manager', readonly=True, copy=False, states={'draft': [('readonly', False)]}, track_visibility='onchange', oldname='responsible_id')
     company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
     date = fields.Date("Date")
+    attachment_number = fields.Integer(compute='_compute_attachment_number', string='Number of Attachments')
 
     @api.constrains('plan_line_ids', 'employee_id')
     def _check_employee(self):
@@ -123,3 +127,9 @@ class QcItp(models.Model):
         line = super(QcItpLine, self.with_context(mail_create_nosubscribe=True)).create(vals)
         line.activity_update()
         return line
+
+    @api.multi
+    def _compute_attachment_number(self):
+        for sheet in self:
+            sheet.attachment_number = sum(sheet.plan_line_ids.mapped('attachment_number'))
+
