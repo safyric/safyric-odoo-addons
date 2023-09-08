@@ -77,7 +77,7 @@
                     </div>
                     <div class="row">
                       <span>Contact: </span>
-                      <span t-field="o.user_id.partner_id.name"/ class="m-0"><span> </span><i class="fa fa-envelope-o fa-fw"/><span t-field="o.user_id.partner_id.email" class="m-0"/>
+                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
                     </div>
                     <!--<div class="row" t-if="o.user_id.partner_id.mobile">
                       <i class="fa fa-mobile"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
