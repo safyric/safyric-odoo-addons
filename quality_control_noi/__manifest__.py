@@ -18,7 +18,6 @@
         "security/ir.model.access.csv",
         "security/quality_control_noi_security.xml",
         "data/qc_noi_sequence.xml",
-	"views/sale_order.xml",
         "views/qc_noi_view.xml",
 	"views/qc_noi_report.xml",
     ],

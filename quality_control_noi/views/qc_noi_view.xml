@@ -4,6 +4,42 @@
 
 <odoo>
 
+    <record id="sale_order_line_view_form_readonly_noi" model="ir.ui.view">
+        <field name="name">sale.order.line.form.readonly</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.sale_order_line_view_form_readonly"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group[last()]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_line_tree_noi" model="ir.ui.view">
+        <field name="name">sale.order.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='salesman_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='price_subtotal']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="product_id"/>
+            </xpath>
+        </field>
+
+    </record>
+
+
+
     <record id="qc_noi_tree" model="ir.ui.view">
         <field name="name">qc.noi.tree</field>
         <field name="model">qc.noi</field>
@@ -53,8 +89,9 @@
                     </group>
 		    <notebook>
 			<page string="Order Lines">
-			    <field name="sale_line_ids" nolable="1" widget="many2many" options="{'reload_on_button': True}" context="{'form_view_ref': 'sale.sale_order_line_view_form_readyonly_noi', 
-				'tree_view_ref': 'sale.view_order_line_tree_noi'}" domain="[('order_id', 'in', sale_order_ids)]">
+			    <field name="sale_line_ids" nolable="1" widget="many2many" options="{'reload_on_button': True}" 
+				context="{'form_view_ref': 'sale.sale_order_line_view_form_readyonly_noi', 'tree_view_ref': 'sale.view_order_line_tree_noi'}" 
+				domain="[('order_id', 'in', sale_order_ids)]">
 				<tree>
 				    <field name="sequence"/>
 				    <field name="product_id"/>
