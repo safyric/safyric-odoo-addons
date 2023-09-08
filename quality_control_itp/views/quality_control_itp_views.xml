@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_qc_itp_line_tree" model="ir.ui.view">
+            <field name="name">qc.itp.line.tree</field>
+            <field name="model">qc.itp.line</field>
+            <field name="arch" type="xml">
+                <tree string="Plan Lines" decoration-bf="message_unread == True">
+                    <field name="attachment_number" invisible="True"/>
+                    <field name="date"/>
+                    <field name="plan_id"/>
+                    <field name="name"/>
+		    <field name="process_id"/>
+		    <field name="reference_ids" widget="many2many_tags"/>
+		    <field name="acc_criteria_ids" widget="many2many_tags"/>
+		    <field name="verify_doc_ids" widget="many2many_tags"/>
+		    <field name="insp_level1_id"/>
+		    <field name="insp_level2_id"/>
+		    <field name="insp_level3_id"/>
+                    <field name="insp_level4_id"/>
+		    <field name="insp_level5_id"/>
+		    <field name="insp_level6_id"/>
+                    <field name="employee_id"/>
+                    <button name="action_get_attachment_view" string="View Attached Documents" type="object" icon="fa-paperclip" attrs="{'invisible': [('attachment_number', '=', 0)]}"/>
+                    <field name="message_unread" invisible="1"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_itp_line_tree_for_plan" model="ir.ui.view">
+            <field name="name">qc.itp.line.tree</field>
+            <field name="model">qc.itp.line</field>
+	    <field name="inherit_id" ref="quality_control_itp.view_qc_itp_line_tree"/>
+	    <field name="mode">primary</field>
+            <field name="arch" type="xml">
+		<xpath expr="//field[@name='plan_id']" position="attributes">
+		    <attribute name="invisible">1</attribute>
+		</xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="qc_itp_line_view_form" model="ir.ui.view">
+            <field name="name">qc.itp.line.view.form</field>
+            <field name="model">qc.itp.line</field>
+            <field name="arch" type="xml">
+                <form string="Plan Lines">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            attrs="{'invisible': [('attachment_number', '=', 0)]}">
+                            <field name="attachment_number" widget="statinfo" string="Documents" options="{'reload_on_button': true}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Pressure Test"/>
+                        </h1>
+                        <label for="description"/>
+                        <h2>
+                            <field name="description"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+			    <field name="process_id"/>
+			    <field name="reference_ids" widget="many2many_tags"/>
+			    <field name="acc_criteria_ids" widget="many2many_tags"/>
+			    <field name="verify_doc_ids" widget="many2many_tags"/>
+			    <field name="records_ids" widget="many2many_tags"/>
+			    <field name="insp_level1_id" widget="selection"/>
+			    <field name="insp_level2_id" widget="selection"/>
+			    <field name="insp_level3_id" widget="selection"/>
+			    <field name="insp_level4_id" widget="selection"/>
+			    <field name="insp_level5_id" widget="selection"/>
+                        </group>
+			<group>
+			    <field name="state" invisible="1"/>
+                            <field name="date"/>
+                            <field name="employee_id"/>
+                            <field name="plan_id" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+			<group>
+                        </group>
+
+                    </group>
+                    <div>
+                        <field name="description" class="oe_inline" placeholder="Notes..."/>
+                    </div>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="qc_itp_line_view_form_without_header" model="ir.ui.view">
+            <field name="name">qc.itp.line.view.form</field>
+            <field name="model">qc.itp.line</field>
+            <field name="inherit_id" ref="quality_control_itp.qc_itp_line_view_form"/>
+            <field eval="35" name="priority"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="/form/sheet/div[hasclass('oe_button_box')]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='plan_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="qc_itp_line_kanban_view" model="ir.ui.view">
+            <field name="name">qc.itp.line.kanban</field>
+            <field name="model">qc.itp.line</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-6 text-muted">
+                                        <span><t t-esc="record.employee_id.value"/> <t t-esc="record.date.value"/></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right text-right">
+                                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'submit': 'primary', 'approve': 'success'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_qc_itp_line_filter" model="ir.ui.view">
+            <field name="name">qc.itp.line.filter</field>
+            <field name="model">qc.itp.line</field>
+            <field name="arch" type="xml">
+                <search string="Plan Lines">
+                    <field name="name" string="Plan Lines" filter_domain="['|',('employee_id','ilike',self),('name','ilike',self)]"/>
+                    <field name="date"/>
+                    <field name="employee_id"/>
+                    <separator />
+                    <filter domain="[('plan_id', '=', False)]" string="To report" name="no_report"/>
+                    <filter domain="[('plan_id', '!=', False)]" string="Submitted" name="submit" help="Submitted Plans"/>
+                    <filter domain="[('state', '=', 'approve')]" string="Approved" name="approve" help="Actual plan, not the refused ones"/>
+                    <separator />
+                    <filter domain="[('employee_id.active', '=', False)]" string="Former Employees" name="inactive"/>
+                    <separator/>
+                    <filter string="Late Activities" name="activities_overdue"
+                        domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                        help="Show all records which has next action date is before today"/>
+                    <filter string="Today Activities" name="activities_today"
+                        domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Future Activities" name="activities_upcoming_all"
+                            domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                            ]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Plan" name="report" domain="[]" context="{'group_by': 'plan_id'}"/>
+                        <filter string="Employee" name="employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="Date" name="expensesmonth" domain="[]" context="{'group_by': 'date'}" help="Date"/>
+                        <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="qc_itp_line_actions_all" model="ir.actions.act_window">
+            <field name="name">All Lines</field>
+            <field name="res_model">qc.itp.line</field>
+            <field name="view_mode">tree,kanban,form,activity</field>
+            <field name="search_view_id" ref="view_qc_itp_line_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new expense
+              </p>
+            </field>
+        </record>
+
+
+
+        <record id="action_approved_plan_line" model="ir.actions.act_window">
+            <field name="name">Plan Lines</field>
+            <field name="res_model">qc.itp.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="view_qc_itp_line_tree"/>
+            <field name="domain">[]</field>
+            <field name="context">{"search_default_approved": 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_empty_folder">
+                No approved plan lines
+              </p>
+            </field>
+        </record>
+
+        <record id="view_qc_itp_tree" model="ir.ui.view">
+            <field name="name">qc.itp.tree</field>
+            <field name="model">qc.itp</field>
+            <field name="arch" type="xml">
+                <tree string="Plan" decoration-warning="state=='draft'" decoration-bf="message_unread == True">
+                    <field name="name" string="Plan"/>
+		    <field name="partner_id"/>
+		    <field name="sale_order_ids" widget="many2many_tags"/>
+		    <field name="purchase_order_ids" widget="many2many_tags"/>
+                    <field name="employee_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="message_unread" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_itp_form" model="ir.ui.view">
+            <field name="name">qc.itp.form</field>
+            <field name="model">qc.itp</field>
+            <field eval="25" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Plan">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            attrs="{'invisible': [('attachment_number', '=', 0)]}">
+                            <field name="attachment_number" widget="statinfo" string="Documents"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="ITP #"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <label for="project_name"/>
+                        <h2>
+                            <field name="project_name"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+			    <field name="partner_id"/>
+			    <field name="sale_order_ids" widget="many2many_tags" domain="[('state', 'in', ('sale', 'done')), '|', ('partner_id', '=', partner_id), ('partner_id.parent_id', '=', partner_id)]"/>
+			    <field name="purchase_order_ids" widget="many2many_tags" domain="[('state', 'in', ('done', 'purchase'))]"/>
+			    <field name="contractor_id"/>
+			    <field name="enduser_id"/>
+			    <field name="state" invisible="1"/>
+			</group>
+			<group>
+			    <field name="date"/> 
+                            <field name="employee_id"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                     <notebook>
+                        <page string="Plan Lines">
+                        <field name="plan_line_ids" nolabel="1" widget="many2many" options="{'reload_on_button': True}" 
+				context="{'form_view_ref' : 'quality_control_itp.qc_itp_line_view_form_without_header', 'tree_view_ref': 'quality_control_itp.view_qc_itp_line_tree_for_plan'}"
+				domain="[('plan_id', '=', False)]">
+                            <tree>
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+				<field name="process_id"/>
+				<field name="reference_ids" widget="many2many_tags"/>
+                                <field name="acc_criteria_ids" widget="many2many_tags"/>
+				<field name="verify_doc_ids" widget="many2many_tags"/>
+				<field name="insp_level1_id"/>
+				<field name="insp_level2_id"/>
+				<field name="insp_level3_id"/>
+				<field name="insp_level4_id"/>
+				<field name="insp_level5_id"/>
+                                <field name="state" invisible="1"/>
+                                <field name="message_unread" invisible="1"/>
+                                <field name="attachment_number" string=" "/>
+                                <button name="action_get_attachment_view" string="View Attachments" type="object" icon="fa-paperclip"/>
+                           </tree>
+                        </field>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <group>
+                                </group>
+                                <group>
+                                </group>
+                        </group>
+                        </page>
+                     </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qc_itp_kanban" model="ir.ui.view">
+            <field name="name">qc.itp.kanban</field>
+            <field name="model">qc.itp</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-6 text-muted">
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right text-right">
+                                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'submit': 'default', 'cancel': 'danger', 'done': 'success'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_qc_itp_filter" model="ir.ui.view">
+            <field name="name">qc.itp.filter</field>
+            <field name="model">qc.itp</field>
+            <field name="arch" type="xml">
+                <search string="Plan">
+                    <field name="name" string="Plan"/>
+                    <field name="state"/>
+                    <separator />
+                    <field name="employee_id"/>
+                    <separator />
+                    <filter domain="[('state', '=', 'draft')]" string="Draft" name="draft" help="Draft Plans"/>
+                    <filter domain="[('state', '=', 'submit')]" string="To Approve" name="submit" help="Submitted Plans"/>
+                    <separator/>
+                    <filter domain="[('employee_id.active', '=', False)]" string="Former Employees" name="inactive" />
+                    <separator/>
+                    <filter string="Late Activities" name="activities_overdue"
+                        domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                        help="Show all records which has next action date is before today"/>
+                    <filter string="Today Activities" name="activities_today"
+                        domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Future Activities" name="activities_upcoming_all"
+                            domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                            ]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Employee" name="employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="State" domain="[]" context="{'group_by': 'state'}" name="state"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_qc_itp_my_all" model="ir.actions.act_window">
+            <field name="name">My Plans</field>
+            <field name="res_model">qc.itp</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_qc_itp_filter"/>
+            <field name="domain">[('employee_id.user_id', '=', uid)]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new expense report
+              </p>
+            </field>
+        </record>
+
+        <record id="action_qc_itp_all_to_approve" model="ir.actions.act_window">
+            <field name="name">Plans to Approve</field>
+            <field name="res_model">qc.itp</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_qc_itp_filter"/>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_submitted': 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_empty_folder">
+                No plans to approve
+              </p>
+            </field>
+        </record>
+
+
+        <record id="action_qc_itp_all_all" model="ir.actions.act_window">
+            <field name="name">All Plans</field>
+            <field name="res_model">qc.itp</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_qc_itp_filter"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new plan
+              </p>
+            </field>
+        </record>
+
+
+        <record id="view_qc_itp_ref_doc_tree" model="ir.ui.view">
+            <field name="name">qc.itp.ref.tree</field>
+            <field name="model">qc.itp.ref</field>
+            <field name="arch" type="xml">
+		<tree string="Reference Documents">
+		    <field name="sequence" widget="handle"/>
+		    <field name="name"/>
+		</tree>
+	    </field>
+	</record>
+
+        <record id="action_qc_itp_ref_doc" model="ir.actions.act_window">
+            <field name="name">Reference Documents</field>
+            <field name="res_model">qc.itp.ref</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_qc_itp_verify_doc_tree" model="ir.ui.view">
+            <field name="name">qc.itp.verify.doc.tree</field>
+            <field name="model">qc.itp.verify.doc</field>
+            <field name="arch" type="xml">
+		<tree string="Verifying Documents">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+		</tree>
+            </field>
+        </record>
+
+
+        <record id="action_qc_itp_verify_doc" model="ir.actions.act_window">
+            <field name="name">Veifying Documents</field>
+            <field name="res_model">qc.itp.verify.doc</field>
+	    <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_qc_itp_records_tree" model="ir.ui.view">
+            <field name="name">qc.itp.records.tree</field>
+            <field name="model">qc.itp.records</field>
+            <field name="arch" type="xml">
+		<tree string="Records">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+		</tree>
+            </field>
+        </record>
+
+        <record id="action_qc_itp_records" model="ir.actions.act_window">
+            <field name="name">Records</field>
+            <field name="res_model">qc.itp.records</field>
+	    <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_qc_itp_insp_level_tree" model="ir.ui.view">
+            <field name="name">qc.itp.insp.level.tree</field>
+            <field name="model">qc.itp.insp.level</field>
+            <field name="arch" type="xml">
+		<tree string="Inspection Level">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+		    <field name="frequency"/>
+		</tree>
+            </field>
+        </record>
+
+
+        <record id="action_qc_itp_insp_level" model="ir.actions.act_window">
+            <field name="name">Inspection Level</field>
+            <field name="res_model">qc.itp.insp.level</field>
+	    <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_qc_itp_proc_tree" model="ir.ui.view">
+            <field name="name">qc.itp.proc.tree</field>
+            <field name="model">qc.itp.proc</field>
+            <field name="arch" type="xml">
+                <tree string="Process Category">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_qc_itp_proc" model="ir.actions.act_window">
+            <field name="name">Process Category</field>
+            <field name="res_model">qc.itp.proc</field>
+	    <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+	<menuitem id="menu_qc_itp"
+	    parent="quality_control.qc_menu"
+	    sequence="5" name="ITP"/>
+
+	<menuitem id="menu_qc_itp_child"
+	    parent="quality_control_itp.menu_qc_itp"
+	    action="action_qc_itp_my_all"
+	    sequence="10" name="Plan"/>
+
+	<menuitem id="menu_qc_itp_line"
+	    parent="quality_control_itp.menu_qc_itp"
+	    action="qc_itp_line_actions_all"
+	    sequence="20" name="Plan Lines"/>
+
+        <menuitem id="menu_qc_itp_insp_level"
+            parent="quality_control_itp.menu_qc_itp"
+            action="action_qc_itp_insp_level"
+            sequence="30" name="Inspection Level"/>
+
+
+	<menuitem id="menu_qc_itp_ref_doc"
+	    parent="quality_control.menu_qc_config"
+	    action="action_qc_itp_ref_doc"
+	    sequence="90" name="Reference Documents"/>
+
+        <menuitem id="menu_qc_itp_verify_doc"
+            parent="quality_control.menu_qc_config"
+            action="action_qc_itp_verify_doc"
+            sequence="92" name="Verifying Documents"/>
+
+
+        <menuitem id="menu_qc_itp_proc"
+            parent="quality_control.menu_qc_config"
+            action="action_qc_itp_proc"
+            sequence="95" name="Process Category"/>
+
+</odoo>
+
