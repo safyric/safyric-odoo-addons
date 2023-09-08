@@ -1,3 +1,16 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_user_qc_itp,qc.itp.user,quality_control_itp.model_qc_itp,quality_control.group_quality_control_user,1,1,1,0
 access_manager_qc_itp,qc.noi.manager,quality_control_itp.model_qc_itp,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_line,qc.itp.user,quality_control_itp.model_qc_itp_line,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_line,qc.noi.manager,quality_control_itp.model_qc_itp_line,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_ref,qc.itp.user,quality_control_itp.model_qc_itp_ref,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_ref,qc.noi.manager,quality_control_itp.model_qc_itp_ref,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_acc_criteria,qc.itp.user,quality_control_itp.model_qc_itp_acc_criteria,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_acc_criteria,qc.noi.manager,quality_control_itp.model_qc_itp_acc_criteria,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_verify_doc,qc.itp.user,quality_control_itp.model_qc_itp_verify_doc,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_verify_doc,qc.noi.manager,quality_control_itp.model_qc_itp_verify_doc,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_records,qc.itp.user,quality_control_itp.model_qc_itp_records,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_records,qc.noi.manager,quality_control_itp.model_qc_itp_records,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_itp_insp_level,qc.itp.user,quality_control_itp.model_qc_itp_insp_level,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_itp_insp_level,qc.noi.manager,quality_control_itp.model_qc_itp_insp_level,quality_control.group_quality_control_manager,1,1,1,1
+

@@ -22,12 +22,24 @@ class QcItpLine(models.Model):
     def _default_employee_id(self):
         return self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
 
-    sequence = fields.Integer('Sequence', help="Determine the display order", index=True)
-    name = fields.Char('Description', readonly=True, required=True, states={'draft': [('readonly', False)]})
+    sequence = fields.Integer('Sequence', help="Determine the display order", default=1, index=True)
+    name = fields.Char('Activity', readonly=True, required=True, translate=True, copy=False, states={'draft': [('readonly', False)]})
     date = fields.Date(readonly=True, states={'draft': [('readonly', False)], 'reported': [('readonly', False)]}, default=fields.Date.context_today, string="Date")
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True, readonly=True, states={'draft': [('readonly', False)]}, default=_default_employee_id)
     company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
-    description = fields.Text('Description...', readonly=True, states={'draft': [('readonly', False)]})
+    description = fields.Text('Description', readonly=True, translate=True, states={'draft': [('readonly', False)]})
+    reference_ids = fields.Many2many('qc.itp.ref', 'itp_ref_rel', string='Reference Documents')
+    acc_criteria_ids = fields.Many2many('qc.itp.ref', 'itp_acc_rel', string='Acceptance Criteria')
+    verify_doc_ids = fields.Many2many('qc.itp.verify.doc', string='Verifying Documents')
+    records_ids = fields.Many2many('qc.itp.records', string='Records')
+    process_id = fields.Many2one('qc.itp.proc', string='Process')
+    insp_level1_id = fields.Many2one('qc.itp.insp.level', string='L1')
+    insp_level2_id = fields.Many2one('qc.itp.insp.level', string='L2')
+    insp_level3_id = fields.Many2one('qc.itp.insp.level', string='L3')
+    insp_level4_id = fields.Many2one('qc.itp.insp.level', string='L4')
+    insp_level5_id = fields.Many2one('qc.itp.insp.level', string='L5')
+    insp_level6_id = fields.Many2one('qc.itp.insp.level', string='L6')
+    notes = fields.Text('Notes', translate=True)
     attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
     state = fields.Selection([
         ('draft', 'To Submit'),
@@ -36,7 +48,6 @@ class QcItpLine(models.Model):
         ('done', 'Done')
     ], compute='_compute_state', string='Status', copy=False, index=True, readonly=True, store=True, help="Status of the plan")
     plan_id = fields.Many2one('qc.itp', string="ITP", readonly=True, copy=False)
-    reference = fields.Char("Document Reference")
 
     @api.depends('plan_id', 'plan_id.state')
     def _compute_state(self):
@@ -101,7 +112,15 @@ class QcItp(models.Model):
     _description = "Inspection and Test Plan"
     _order = "date desc, id desc"
 
-    name = fields.Char('Inspection and Test Plan', required=True)
+
+    name = fields.Char(readonly=True)
+    date = fields.Date(default=fields.Date.context_today, string="Date")
+    partner_id = fields.Many2one('res.partner', string='Customer', required=True)
+    sale_order_ids = fields.Many2many('sale.order', string='Sales Order')
+    purchase_order_ids = fields.Many2many('purchase.order','qc_itp_purchase_rel', string='Purchase Order')
+    project_name = fields.Char('Project Name', translate=True)
+    contractor_id = fields.Many2one('res.partner', string='Contractor')
+    enduser_id = fields.Many2one('res.partner', string='End-user')
     plan_line_ids = fields.One2many('qc.itp.line', 'plan_id', string='Plan Lines', states={'approve': [('readonly', True)]}, copy=False)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -112,7 +131,6 @@ class QcItp(models.Model):
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True, readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1))
     user_id = fields.Many2one('res.users', 'Manager', readonly=True, copy=False, states={'draft': [('readonly', False)]}, track_visibility='onchange', oldname='responsible_id')
     company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
-    date = fields.Date("Date")
     attachment_number = fields.Integer(compute='_compute_attachment_number', string='Number of Attachments')
 
     @api.constrains('plan_line_ids', 'employee_id')
@@ -122,10 +140,13 @@ class QcItp(models.Model):
             if len(employee_ids) > 1 or (len(employee_ids) == 1 and employee_ids != plan.employee_id):
                 raise ValidationError(_('You cannot add plan of another employee.'))
 
+
     @api.model
     def create(self, vals):
-        line = super(QcItp, self.with_context(mail_create_nosubscribe=True)).create(vals)
-        return line
+        self.with_context(mail_create_nosubscribe=True)
+        vals['name'] = self.env['ir.sequence'].next_by_code(
+            'qc.itp') or ''
+        return super(QcItp, self).create(vals)
 
     @api.multi
     def _compute_attachment_number(self):

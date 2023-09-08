@@ -4,7 +4,11 @@
     'category': 'Quality control',
     'summary': 'Inspection and Test Plan for Quality Control',
     'website': 'https://www.github.com/safyric/safyric-odoo-addons',
-    'depends': ['quality_control'],
+    'depends': [
+	'quality_control',
+	'sale',
+	'purchase'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/quality_control_itp_views.xml',
