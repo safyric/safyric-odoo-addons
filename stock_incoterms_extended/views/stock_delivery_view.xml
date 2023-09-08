@@ -10,7 +10,9 @@
                     <field name="active" invisible="1"/>
                     <field name="sequence" widget="handle" />
                     <field name="code"/>
-                    <field colspan="4" name="name"/>
+                    <field name="name"/>
+		    <field name="country_id"/>
+		    <field name="port_type"/>
                 </tree>
             </field>
         </record>
@@ -28,7 +30,9 @@
                         </div>
                         <group>
                             <field name="name"/>
+			    <field name="port_type"/>
                             <field name="code"/>
+			    <field name="country_id"/>
                         </group>
                 </sheet>
             </form>

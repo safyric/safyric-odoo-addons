@@ -16,4 +16,11 @@ class DeliveryPlace(models.Model):
     active = fields.Boolean(
         'Active', default=True,
         help="By unchecking the active field, you may hide a delivery point you will not use.")
+    country_id = fields.Many2one('res.country', string='Country')
+    port_type = fields.Selection([
+        ('main', 'Main Port'),
+        ('feeder', 'Feeder Port'),
+        ('dry', 'Dry Port'),
+        ('others', 'Others')
+    ], string='Port Type', default='main')
     sequence = fields.Integer(help="Determine the display order", default=10)
