@@ -1,19 +1,15 @@
 qz.security.setCertificatePromise(function (resolve, reject) {
-    fetch("/qz-certificate", {
+    return fetch("/qz-certificate", {
         cache: "no-store",
         headers: {"Content-Type": "text/plain"},
-    }).then(function (data) {
-        data.ok ? resolve(data.text()) : reject(data.text());
     });
 });
 qz.security.setSignatureAlgorithm("SHA512");
 qz.security.setSignaturePromise(function (toSign) {
     return function (resolve, reject) {
-        fetch("/qz-sign-message?request=" + toSign, {
+        return fetch("/qz-sign-message?request=" + toSign, {
             cache: "no-store",
             headers: {"Content-Type": "text/plain"},
-        }).then(function (data) {
-            data.ok ? resolve(data.text()) : reject(data.text());
         });
     };
 });
@@ -53,15 +49,6 @@ odoo.define("base_report_to_qz_tray.print", function (require) {
                                     return qz.print(config, data);
                                 })
                                 .then(qz.websocket.disconnect)
-                                .then(function () {
-                                    self.do_notify(
-                                        _t("Report"),
-                                        _.str.sprintf(
-                                            _t("Document sent to the printer %s"),
-                                            print_action.printer_name
-                                        )
-                                    );
-                                })
                                 .catch(function (err) {
                                     console.log(err);
                                     return _super.apply(self, [action, options, type]);

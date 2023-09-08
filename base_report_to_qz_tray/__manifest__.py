@@ -8,7 +8,7 @@
     "author": "PESOL, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/report-print-send",
     "license": "AGPL-3",
-    "depends": ["web", "mail"],
+    "depends": ["base", "web", "mail"],
     "data": [
         "security/security.xml",
         "views/assets.xml",
@@ -17,5 +17,4 @@
     ],
     "installable": True,
     "application": False,
-    "external_dependencies": {"python": ["pyOpenSSL"]},
 }

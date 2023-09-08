@@ -63,7 +63,7 @@ class IrActionsReport(models.Model):
 
     def get_qz_tray_data(self, res_ids=None, type="pdf", data=None):
         if type == "pdf":
-            result = super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+            result = super(IrActionsReport, self).render_qweb_pdf(res_ids, data)
             data = [
                 {
                     "type": "pixel",
@@ -73,7 +73,7 @@ class IrActionsReport(models.Model):
                 }
             ]
         elif type == "text":
-            result = super(IrActionsReport, self)._render_qweb_text(res_ids, data)
+            result = super(IrActionsReport, self).render_qweb_text(res_ids, data)
             data = [result[0].replace(b"\n", b"").decode("unicode_escape")]
         else:
             data = []
