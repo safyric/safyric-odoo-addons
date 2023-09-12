@@ -21,6 +21,13 @@ class ProductBrand(models.Model):
         help='Select a partner for this brand if any.',
         ondelete='restrict'
     )
+    product_ids = fields.Many2many(
+        'product.template',
+        'product_brand_rel',
+        'brand_id',
+        'product_id',
+        string='Product'
+    )
     logo = fields.Binary('Logo File', attachment=True)
     color = fields.Integer()
 
@@ -31,6 +38,8 @@ class ProductTemplate(models.Model):
     product_brand_ids = fields.Many2many(
         'product.brand', 
         'product_brand_rel',
+        'product_id',
+        'brand_id',
         string='Brands',
         index=True,
         help='Select brands for this product'

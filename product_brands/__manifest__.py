@@ -20,10 +20,12 @@
     'license': 'AGPL-3',
     'depends': [
         'sale',
+        'purchase',
         ],
     'data': [
         'security/ir.model.access.csv',
         'views/product_brand_view.xml',
+        'views/sale_order.xml',
     ],
     'installable': True,
     'auto_install': False
