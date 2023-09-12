@@ -9,11 +9,11 @@
                 <page string="Signatures" name="signatures">
                     <group>
                         <group>
-                            <field name="seller_signature" widget="image"/>
+                            <field name="seller_signature" widget="image" class="oe_left oe_avatar"/>
                             <field name="seller_sign_date"/>
                         </group>
                         <group>
-                            <field name="buyer_signature" widget="image"/>
+                            <field name="buyer_signature" widget="image" class="oe_left oe_avatar"/>
                             <field name="buyer_sign_date"/>
                         </group>
                     </group>
