@@ -6,12 +6,12 @@ class SaleOrder(models.Model):
     brand_id = fields.Many2one('product.brand', 
         string='Brand')
 
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        if self.product_id:
-            self.brand_id = False
-            brands = self.product_id.product_brand_ids.ids
-            if brands:
-                domain = [('id', 'in', brands)]
-                return {'domain': {'brand_id': domain}}
-        return {'domain': {'brand_id': [('id', 'in', [])]}}
+    brand_ids = fields.Many2many('product.brand', 'sale_brand_rel', compute='compute_brand_ids')
+
+    @api.depends('product_id')
+    def compute_brand_ids(self):
+        for rec in self:
+            rec.brand_ids = False
+            if rec.product_id:
+                if rec.product_id.product_brand_ids:
+                    rec.brand_ids = rec.product_id.product_brand_ids.ids

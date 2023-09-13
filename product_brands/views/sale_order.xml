@@ -11,7 +11,8 @@
                     <field name="brand_id"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="after">
-                    <field name="brand_id"/>
+		    <field name="brand_ids" invisible="1"/>
+                    <field name="brand_id" domain="[('id', 'in', brand_ids)]"/>
                 </xpath>
             </field>
         </record>
