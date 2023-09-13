@@ -7,7 +7,7 @@
     "category": "Purchase Management",
     "website": "https://github.com/safyric/safyric-odoo-addons",
     "depends": [
-        "purchase",
+        "sale_purchase",
     ],
     "data": [
         "views/purchase_order.xml",
