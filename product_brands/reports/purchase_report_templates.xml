@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_purchaseorder_document_brand" inherit_id="purchase.report_purchaseorder_document">
+    <xpath expr="//span[@t-field='line.name']" position="after">
+        <span t-if="line.brand_id">
+            Brand: <span t-field="line.brand_id"/>
+        </span>
+    </xpath>
+
+</template>
+
+</odoo>
+
