@@ -26,6 +26,9 @@
         'security/ir.model.access.csv',
         'views/product_brand_view.xml',
         'views/sale_order.xml',
+	'views/purchase_order.xml',
+	'reports/sale_report_templates.xml',
+	'reports/purchase_report_templates.xml',
     ],
     'installable': True,
     'auto_install': False
