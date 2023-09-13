@@ -4,9 +4,7 @@
     <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
       <attribute name="t-call">stock_views_extension.external_layout_deliveryslip</attribute>
     </xpath>
-    <xpath expr="//t[@name='partner_header']" position="attributes">
-      <attribute name="t-att-style">display: none;</attribute>
-    </xpath>
+    <xpath expr="//t[@name='partner_header']" position="replace"/>
     <xpath expr="//t[@t-set='partner']" position="after">
       <div class="row">
         <div class="col-6">

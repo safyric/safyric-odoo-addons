@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="report_packinglist">
-    <t t-call="web.html_container">
-      <t t-foreach="docs" t-as="o">
-        <t t-call="stock_views_extension.report_delivery_packing" t-lang="o.partner_id.lang"/>
-      </t>
-    </t>
-  </template>
-  <template id="report_delivery_packing" inherit_id="stock_views_extension.report_delivery_document" primary="True">
-    <xpath expr="//t[@t-call='stock_views_extension.external_layout_deliveryslip']" position="attributes">
-      <attribute name="t-call">stock_views_extension.external_layout_packinglist</attribute>
-    </xpath>
-    <xpath expr="//div[@id='shipment']" position="replace">
-        <div class="col-6">
-          <table class="table-sm border-black pull-right" width="100%">
-            <tr>
-              <td class="bg-light"><strong>Shipment Information</strong></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="container" name="shipment">
+    <data>
+	<template id="report_packinglist">
+	    <t t-foreach="docs" t-as="o">
+		<t t-call="stock_views_extension.report_packinglist_document" t-lang="o.partner_id.lang"/>
+	   </t>
+	</template>
 
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-    </xpath>
-  </template>
+	<template id="report_packinglist_document" inherit_id="stock_views_extension.report_delivery_document" primary="True">
+	    <xpath expr="//t[@t-call='stock_views_extension.external_layout_deliveryslip']" position="attributes">
+		<attribute name="t-call">stock_views_extension.external_layout_packinglist</attribute>
+	    </xpath>
+
+	</template>
+
+	<report 
+            string="Packing List"
+            id="action_report_packing"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock_views_extension.report_packinglist"
+            file="stock_views_extension.report_packinglist"
+            print_report_name="'Packing List - %s - %s' % (object.partner_id.parent_id.name or '', object.name)"
+	/>
+    </data>
 </odoo>
