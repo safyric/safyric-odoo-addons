@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_document" inherit_id="sale_views_extension.report_saleorder_document">
-        <xpath expr="//div[@t-if='doc.incoterm']" position="inside">
-            <span> </span><span class="m-0" t-field="doc.delivery_place"/>
-            <span> </span><span class="m-0" t-field="doc.incoterm.edition"/>
+        <xpath expr="//span[@t-field='doc.incoterm.code']" position="after">
+            <span> <span class="m-0" t-field="doc.delivery_place"/> <span class="m-0" t-field="doc.incoterm.edition"/></span>
         </xpath>
     </template>
 </odoo>
