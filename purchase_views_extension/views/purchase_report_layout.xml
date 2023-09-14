@@ -1,87 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="layout_purchasequotation">
-    <div class="header">
-      <div class="o_background_header">
-        <div class="float-right">
-          <h3 class="mt0 text-right" t-field="company.report_header"/>
-        </div>
-        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo" height="50px;"/>
-        <div class="float-left" t-if="company.report_header_name">
-          <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
-        </div>
-        <div class="float-right" style="font-size: 14px !important;">
-          <h3 class="text-right" t-if="o.state in ['draft', 'sent', 'to approve']">RFQ</h3>
-          <h3 class="text-right" t-if="o.state in ['purchase', 'done']">RFQ (DONE)</h3>
-          <h3 class="text-right" t-if="o.state == 'cancel'"> RFQ (CANCELLED)</h3>
-          <h3 class="text-right text-muted"><span t-field="o.name"/></h3>
-        </div>
-        <div class="clearfix"/>
+  <template id="layout_purchasequotation" inherit_id="web.external_layout_background" primary="True">
+    <xpath expr="//img" position="after">
+      <div class="float-right">
+        <h3 class="text-right" t-if="o.state in ['draft', 'sent', 'to approve']">RFQ</h3>
+        <h3 class="text-right" t-if="o.state in ['purchase', 'done']">RFQ (DONE)</h3>
+        <h3 class="text-right" t-if="o.state == 'cancel'"> RFQ (CANCELLED)</h3>
+        <h3 class="text-right text-muted"><span t-field="o.name"/></h3>
       </div>
-    </div>
-
-    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
-         t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
-      <t t-raw="0"/>
-    </div>
-
-    <div class="footer o_background_footer" style="font-size: 14px !important;">
-      <div class="text-center">
-        <ul class="list-inline">
-          <li t-if="company.partner_id"><span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_tag_br": true}'/></li>
-          <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>
-          <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
-        </ul>
-        <div t-if="report_type == 'pdf'" class="text-muted">
-          Page:
-          <span class="page"/>
-          of
-          <span class="topage"/>
-        </div>
-      </div>
-    </div>
+    </xpath>
   </template>
 
-  <template id="layout_purchaseorder">
-    <div class="header">
-      <div class="o_background_header">
+  <template id="layout_purchaseorder" inherit_id="web.external_layout_background" primary="True">
+    <xpath expr="//img" position="after">
+      <div class="float-right">
         <div class="float-right">
-          <h3 class="mt0 text-right" t-field="company.report_header"/>
-        </div>
-        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo" height="50px;"/>
-        <div class="float-left" t-if="company.report_header_name">
-          <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
-        </div>
-        <div class="float-right" style="font-size: 14px !important;">
-          <h2 class="text-right" t-if="o.state in ['draft', 'sent', 'to approve']">PURCHASE ORDER (DRAFT)</h2>
-          <h2 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER</h2>
-          <h2 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED)</h2>
+          <h3 class="text-right" t-if="o.state in ['draft', 'sent', 'to approve']">PURCHASE ORDER (DRAFT)</h3>
+          <h3 class="text-right" t-if="o.state in ['purchase', 'done']">PURCHASE ORDER</h3>
+          <h3 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED)</h3>
           <h3 class="text-right text-muted"><span t-field="o.name"/></h3>
         </div>
-        <div class="clearfix"/>
       </div>
-    </div>
-
-    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
-         t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
-      <t t-raw="0"/>
-    </div>
-
-    <div class="footer o_background_footer" style="font-size: 14px !important;">
-      <div class="text-center">
-        <!--<ul class="list-inline">
-          <li t-if="company.partner_id"><span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_tag_br": true}'/></li>
-          <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>
-          <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
-        </ul>-->
-        <div t-if="report_type == 'pdf'" class="text-muted">
-          Page:
-          <span class="page"/>
-          of
-          <span class="topage"/>
-        </div>
-      </div>
-    </div>
+    </xpath>
   </template>
 
   <template id="external_layout_purchasequotation">
