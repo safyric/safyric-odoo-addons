@@ -12,18 +12,15 @@
                 <div class="col-6">
                     <table class="table-sm border-black" width="90%">
                         <tr>
-                            <td class="bg-light"><strong>Customer</strong></td>
+                            <td class="bg-light"><strong>Shipper</strong></td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="container">
                                     <div id="seller">
                                         <div class="row">
-                                            <span t-field="o.sale_id.partner_id"
+                                            <span t-field="o.company_id.partner_id"
                                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                                        </div>
-                                        <div class="row" t-if="o.sale_id.partner_id.email">
-                                            <i class="fa fa-envelope-o fa-fw"/><span t-field="o.sale_id.partner_id.email"/>
                                         </div>
                                     </div>
                                 </div>
@@ -41,38 +38,39 @@
                                 <div class="container">
                                     <div class="pull-right">
                                         <div class="row">
-                                            <span>Date: </span>
-                                            <t t-if="o.state == 'done'">
-                                                <span t-field="o.date_done" class="m-0" t-options='{"widget": "date"}'/>
-                                            </t>
-                                            <t t-if="o.state != 'done'">
-                                                <span t-field="o.scheduled_date" class="m-0" t-options='{"widget": "date"}'/>
-                                            </t>
-                                        </div>
-                                        <div class="row">
-                                            <span>Shipper: </span>
-                                            <span t-field="o.company_id" class="m-0"/>
-                                        </div>
-                                        <div class="row">
-                                            <span>Shipper Contact: </span>
-                                            <span t-field="o.sale_id.user_id.partner_id.name" class="m-0"/>
+                                            <div class="col-5 p-0">Date (m/d/Y): </div>
+                                            <div>
+						<t t-if="o.state == 'done'">
+						    <span t-field="o.date_done" class="m-0" t-options='{"widget": "date"}'/>
+                                                </t>
+                                                <t t-if="o.state != 'done'">
+                                                    <span t-field="o.scheduled_date" class="m-0" t-options='{"widget": "date"}'/>
+                                                </t>
+					    </div>
                                         </div>
                                         <div t-if="o.origin" class="row">
-                                            <span>Source Document: </span>
-                                            <span t-field="o.origin"/>
+                                            <div class="col-5 p-0">Source Document: </div>
+                                            <div><span t-field="o.origin"/></div>
                                         </div>
                                         <div t-else="" class="row">
-                                            <span>Sales Order: </span>
-                                            <span t-field="o.sale_id.name"/>
+                                            <div class="col-5 p-0">Sales Order: </div>
+                                            <div><span t-field="o.sale_id.name"/></div>
                                         </div>
                                         <div t-if="o.client_order_ref" class="row">
-                                            <span>Customer Reference: </span>
-                                            <span t-field="o.client_order_ref"/>
+                                            <div class="col-5 p-0">Customer Reference: </div>
+                                            <div><span t-field="o.client_order_ref"/></div>
                                         </div>
                                         <div t-if="o.sale_id.incoterm" class="row">
-                                            <span>Incoterms: </span>
-                                            <span t-field="o.sale_id.incoterm"/>
+                                            <div class="col-5 p-0">Incoterms: </div>
+                                            <div><span t-field="o.sale_id.incoterm"/></div>
                                         </div>
+					<div class="row" t-if="o.sale_id">
+					    <div class="col-5 p-0">Shipper Contact: </div>
+					    <div>
+						<span t-field="o.sale_id.user_id"/>
+						<t t-if="o.sale_id.user_id.mobile"><br/><i class="fa fa-mobile"/><span t-field="o.sale_id.user_id.mobile" class="m-0"/></t>
+					    </div>
+					</div>
                                     </div>
                                 </div>
                             </td>
