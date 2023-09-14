@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	<template id="report_pickingoperation_document" inherit_id="stock.report_picking" primary="True">
+	    <xpath expr="//h1[@t-field='o.name']" position="attributes">
+		<attribute name="style">display:none</attribute>
+	    </xpath>
+	    <xpath expr="//t[@t-call='web.html_container']" position="inside">
+		<xpath expr="//t[@t-call='web.external_layout']" position="move"/>
+	    </xpath>
+	    <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+		<attribute name="t-call">stock_views_extension.external_layout_pickingoperation</attribute>
+	    </xpath>
+	    <xpath expr="//t[@t-foreach='docs']" position="attributes">
+		<attribute name="style">display:none</attribute>
+	    </xpath>
+	</template>
+
+	<template id="report_pickingopeartion">
+	    <t t-foreach="docs" t-as="o">
+		<t t-call="stock_views_extension.report_pickingoperation_document" t-lang="o.partner_id.lang"/>
+	    </t>
+	</template>
+
+	<report 
+	    string="Picking Operations"
+	    id="action_report_picking"
+	    model="stock.picking"
+	    report_type="qweb-pdf"
+	    name="stock_views_extension.report_pickingopeartion"
+	    file="stock_views_extension.report_pickingoperation"
+	    print_report_name="'Picking Operations - %s - %s' % (object.partner_id.parent_id.name or '', object.name)"
+	/>
+    </data>
+</odoo>
