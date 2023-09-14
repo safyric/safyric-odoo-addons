@@ -1,98 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_delivery" inherit_id="web.external_layout_background" primary="True">
-    <xpath expr="//img" position="after">
-      <div class="float-right">
-	<h3 class="text-right">
-	  <t t-if="o.state!='done'">DELIVERY SLIP</t>
-	  <t t-else="">DELIVERY SLIP (DONE)</t>
-	</h3>
-	<h3 class="float-right text-muted">
-	  <span t-field="o.name"/>
-	</h3>
-      </div>
-    </xpath>
-  </template>
-
-  <template id="external_layout_picking" inherit_id="web.external_layout_background" primary="True">
-    <xpath expr="//img" position="after">
-      <div class="float-right">
-        <h3 class="text-right">
-          <t t-if="o.state!='done'">PICKING OPEARTIONS</t>
-          <t t-else="">PICKING OPERATIONS (DONE)</t>
-        </h3>
-        <h3 class="float-right text-muted">
-          <span t-field="o.name"/>
-        </h3>
-      </div>
-    </xpath>
-  </template>
-
-  <template id="external_layout_packing" inherit_id="web.external_layout_background" primary="True">
-    <xpath expr="//img" position="after">
-      <div class="float-right">
-        <h3 class="text-right">
-          <t t-if="o.state!='done'">PACKING LIST (DRAFT)</t>
-          <t t-else="">PACKING LIST</t>
-        </h3>
-        <h3 class="float-right text-muted">
-          <span t-field="o.name"/>
-        </h3>
-      </div>
-    </xpath>
-  </template>
-
-
-  <template id="external_layout_deliveryslip">
-    <t t-if="not o" t-set="o" t-value="doc"/>
-    <t t-if="not company">
-      <!-- Multicompany -->
-      <t t-if="company_id">
-        <t t-set="company" t-value="company_id"/>
-      </t>
-      <t t-elif="o and 'company_id' in o">
-        <t t-set="company" t-value="o.company_id.sudo()"/>
-      </t>
-      <t t-else="else">
-        <t t-set="company" t-value="res_company"/>
-      </t>
-    </t>
-    <t t-call="stock_views_extension.external_layout_delivery"><t t-raw="0"/></t>
-  </template>
-
-  <template id="external_layout_pickingoperation">
-    <t t-if="not o" t-set="o" t-value="doc"/>
-    <t t-if="not company">
-      <!-- Multicompany -->
-      <t t-if="company_id">
-        <t t-set="company" t-value="company_id"/>
-      </t>
-      <t t-elif="o and 'company_id' in o">
-        <t t-set="company" t-value="o.company_id.sudo()"/>
-      </t>
-      <t t-else="else">
-        <t t-set="company" t-value="res_company"/>
-      </t>
-    </t>
-    <t t-call="stock_views_extension.external_layout_picking"><t t-raw="0"/></t>
-  </template>
-
-  <template id="external_layout_packinglist">
-    <t t-if="not o" t-set="o" t-value="doc"/>
-    <t t-if="not company">
-      <!-- Multicompany -->
-      <t t-if="company_id">
-        <t t-set="company" t-value="company_id"/>
-      </t>
-      <t t-elif="o and 'company_id' in o">
-        <t t-set="company" t-value="o.company_id.sudo()"/>
-      </t>
-      <t t-else="else">
-        <t t-set="company" t-value="res_company"/>
-      </t>
-    </t>
-    <t t-call="stock_views_extension.external_layout_packing"><t t-raw="0"/></t>
-  </template>
-
-
+    <template id="external_layout_delivery" inherit_id="web.external_layout_background" primary="True">
+        <xpath expr="//img" position="after">
+            <div class="float-right">
+                <h3 class="text-right">
+                    <t t-if="o.state!='done'">DELIVERY SLIP</t>
+                    <t t-else="">DELIVERY SLIP (DONE)</t>
+                </h3>
+                <h3 class="float-right text-muted">
+                    <span t-field="o.name"/>
+                </h3>
+            </div>
+        </xpath>
+    </template>
+    
+    <template id="external_layout_picking" inherit_id="web.external_layout_background" primary="True">
+        <xpath expr="//img" position="after">
+            <div class="float-right">
+                <h3 class="text-right">
+                    <t t-if="o.state!='done'">PICKING OPEARTIONS</t>
+                    <t t-else="">PICKING OPERATIONS (DONE)</t>
+                </h3>
+                <h3 class="float-right text-muted">
+                    <span t-field="o.name"/>
+                </h3>
+            </div>
+        </xpath>
+    </template>
+    
+    <template id="external_layout_packing" inherit_id="web.external_layout_background" primary="True">
+        <xpath expr="//img" position="after">
+            <div class="float-right">
+                <h3 class="text-right">
+                    <t t-if="o.state!='done'">PACKING LIST (DRAFT)</t>
+                    <t t-else="">PACKING LIST</t>
+                </h3>
+                <h3 class="float-right text-muted">
+                    <span t-field="o.name"/>
+                </h3>
+            </div>
+        </xpath>
+    </template>
+    
+    <template id="external_layout_deliveryslip">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="stock_views_extension.external_layout_delivery"><t t-raw="0"/></t>
+    </template>
+    
+    <template id="external_layout_pickingoperation">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="stock_views_extension.external_layout_picking"><t t-raw="0"/></t>
+    </template>
+    
+    <template id="external_layout_packinglist">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="stock_views_extension.external_layout_packing"><t t-raw="0"/></t>
+    </template>
 </odoo>
