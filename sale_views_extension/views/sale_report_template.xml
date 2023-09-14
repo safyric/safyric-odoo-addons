@@ -4,6 +4,15 @@
     <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
       <attribute name="t-call">sale_views_extension.external_layout</attribute>
     </xpath>
+
+    <xpath expr="//t[@t-set='address']" position="replace"/>
+
+    <xpath expr="//t[@t-set='information_block']" position="replace"/>
+
+    <xpath expr="//div[hasclass('page')]//h2" position="replace"/>
+
+    <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="replace"/>
+
     <xpath expr="//t[@t-set='doc']" position="after">
       <div class="row">
         <div class="col-6" t-if="env.context.get('proforma', False) or is_pro_forma">
@@ -86,13 +95,6 @@
                     <div class="row" t-if="doc.partner_id.email">
                       <i class="fa fa-envelope-o fa-fw"/><span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/>
                     </div>
-                    <!--<div class="row" t-if="doc.partner_id.vat">
-                      <span>
-                        <t if="doc.company_id.country_id.vat_label" t-esc="doc.company_id.country_id.vat_label"/>
-                        <t if="not doc.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
-                      </span>
-                      <p t-field="doc.partner_id.vat"/>
-                    </div>-->
                   </div>
                 </div>
               </td>
@@ -110,54 +112,38 @@
                   <div class="pull-right">
                     <div t-if="doc.date_order and doc.state in ['draft','sent']" class="row" >
                       <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                        <span>Invoice Date (m/d/Y): </span>
-                        <span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/>                        
+                        <div class="col-5 p-0">Invoice Date (m/d/Y): </div>
+                        <div><span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/></div>                        
                       </t>
                       <t t-else="">
-                        <span>Quotation Date (m/d/Y): </span>
-                        <span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/>                        
+                        <div class="col-5 p-0">Quotation Date (m/d/Y): </div>
+                        <div><span t-esc="doc.date_order.strftime('%m/%d/%Y')" class="m-0"/></div>                        
                       </t>
                     </div>
                     <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="row" >
-                      <span>Order Date (m/d/Y): </span>
-                      <span t-esc="doc.confirmation_date.strftime('%m/%d/%Y')" class="m-0"/>
+                      <div class="col-5 p-0">Order Date (m/d/Y): </div>
+                      <div><span t-esc="doc.confirmation_date.strftime('%m/%d/%Y')" class="m-0"/></div>
                     </div>
                     <div t-if="doc.validity_date and not (env.context.get('proforma', False) or is_pro_forma)" class="row">
-                      <span>Expiration Date (m/d/Y): </span>
-                      <span t-field="doc.validity_date" widget="date" t-field-options='{"format": "mm/dd/yyyy"}' class="m-0"/>
+                      <div class="col-5 p-0">Expiration Date (m/d/Y): </div>
+                      <div><span t-field="doc.validity_date" widget="date" t-field-options='{"format": "mm/dd/yyyy"}' class="m-0"/></div>
                     </div>
                     <div class="row" t-if="doc.client_order_ref">
-                      <span t-if="doc.date_order and doc.state in ['draft','sent']">Your Reference: </span>
-                      <span t-if="doc.confirmation_date and doc.state not in ['draft','sent']">PO Number: </span>
-                      <span t-esc="doc.client_order_ref" class="m-0"/>
+                      <div class="col-5 p-0" t-if="doc.date_order and doc.state in ['draft','sent']">Your Reference: </div>
+                      <div class="col-5 p-0" t-if="doc.confirmation_date and doc.state not in ['draft','sent']">PO Number: </div>
+                      <div><span t-esc="doc.client_order_ref" class="m-0"/></div>
                     </div>
-                    <div class="row">
-                      <span>Seller: </span>
-                      <span t-field="doc.company_id" class="m-0"/>
-                    </div>
-                    <div class="row">
-                      <span>Contact: </span>
-                      <span t-field="doc.user_id.partner_id.name" class="m-0"/>
-                    </div>
-                    <!--<div t-if="doc.user_id.partner_id.mobile" class="row">
-                        <i class="fa fa-mobile"/>
-			<span t-field="doc.user_id.partner_id.mobile" class="m-0"/>
-                    </div>
-                    <div t-if="doc.user_id.partner_id.email" class="row">
-                      <i class="fa fa-envelope-o fa-fw"/>
-                      <span t-field="doc.user_id.partner_id.email" class="m-0"/>
-                    </div>-->
                     <div t-if="doc.incoterm" class="row">
-                      <span>Shipping Terms: </span>
-                      <span t-field="doc.incoterm.code" class="m-0"/>
+                      <div class="col-5 p-0">Shipping Terms: </div>
+                      <div><span t-field="doc.incoterm.code" class="m-0"/></div>
                     </div>
                     <div t-if="doc.carrier_id" class="row">
-                      <span>Shipping Method: </span>
-                      <span t-field="doc.carrier_id" class="m-0"/>
+                      <div class="col-5 p-0">Shipping Method: </div>
+                      <div><span t-field="doc.carrier_id" class="m-0"/></div>
                     </div>                    
                     <div t-if="doc.payment_term_id" class="row">
-                      <span>Payment Terms: </span>
-                      <span t-field="doc.payment_term_id" class="m-0"/>
+                      <div class="col-5 p-0">Payment Terms: </div>
+                      <div><span t-field="doc.payment_term_id" class="m-0"/></div>
                     </div>
                   </div>
                 </div>
@@ -199,51 +185,21 @@
             </tr>
           </table>
         </div>
-        <div class="col-6" t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+        <div class="col-6">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
-              <td class="bg-light"><strong>Invoicing Address</strong></td>
+              <td class="bg-light"><strong>Company</strong></td>
             </tr>
             <tr>
               <td>
                 <div class="container">
-                  <t t-if="doc.partner_invoice_id.parent_id">
+                  <t>
                     <div class="row">
-                      <div t-field="doc.partner_invoice_id.parent_id"/>
-                    </div>
-                    <div class="row">
-                      <span t-field="doc.partner_invoice_id"
-                           t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'/>
-                    </div>
-                    <div class="row" t-if="doc.partner_invoice_id.vat">
-                      <span>
-                        <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
-                        <span t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID: </span>
-                      </span>
-                      <p t-field="doc.partner_invoice_id.partner_id.vat"/>
-                    </div>
-                    <div class="row" t-if="doc.partner_invoice_id.name">
-                      <span>Contact: </span><span t-field="doc.partner_invoice_id.name"/>
-                      <t t-if="doc.partner_invoice_id.mobile"><i class="fa fa-mobile"/><span t-field="doc.partner_invoice_id.mobile" class="m-0"/></t>
-                    </div>
-                    <div class="row" t-if="doc.partner_invoice_id.email">
-                      <i class="fa fa-envelope-o fa-fw"/><span t-field="doc.partner_invoice_id.email"/>
-                    </div>
-                  </t>
-                  <t t-else="">
-                    <div class="row">
-                      <div t-field="doc.partner_invoice_id"/>
+                      <span t-field="doc.company_id.partner_id"
+                           t-options='{"widget": "contact", "fields": ["name", "address", "phone"], "no_marker": True, "phone_icons": True}'/>
                     </div>
                     <div class="row">
-                      <span t-field="doc.partner_invoice_id"
-                            t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'/>
-                    </div>
-                    <div class="row" t-if="doc.partner_invoice_id.vat">
-                      <span>
-                        <t t-if="doc.country_id.vat_label" t-esc="doc.partner_invoice_id.country_id.vat_label"/>
-                        <span t-if="not doc.partner_invoice_id.country_id.vat_label">Tax ID: </span>
-                      </span>
-                      <p t-field="doc.partner_invoice_id.partner_id.vat"/>
+                      <span>Contact: </span><span t-field="doc.user_id.partner_id.name"/>
                     </div>
                   </t>
                 </div>
@@ -251,102 +207,10 @@
             </tr>
           </table>          
         </div>
-        <div class="col-6" t-if="env.context.get('proforma', False) or is_pro_forma">
-          <table class="table-sm border-black pull-right" width="100%">
-            <tr>
-              <td class="bg-light"><strong>Beneficiary's Bank Details</strong></td>
-            </tr>
-            <tr>
-              <td>
-		<div class="container">
-		  <t t-if="doc.payment_mode_id">
-		    <t t-foreach="doc.payment_mode_id" t-as="mode">
-		      <div class="row">
-			<span>Beneficiary: </span>
-			<span t-field="mode.company_id"/>
-		      </div>
-                      <t t-if="mode.fixed_journal_id" t-foreach="mode.fixed_journal_id" t-as="bank">
-		        <div class="row">
-			  <span>Bank Name: </span>
-			  <span t-field="bank.bank_id.name"/>
-		        </div>
-			<div class="row">
-			  <span>Account#: </span>
-			  <span t-field="bank.bank_account_id"/>
-                        </div>
-			<div class="row">
-			  <span>Swift#: </span>
-			  <span t-field="bank.bank_id.bic"/>
-			</div>
-                        <!--<t t-if="bank.bank_id.intermediary_bank_id">
-                          <div class="row">
-                            <span>Intermediary Bank: </span>
-                            <span t-field="bank.bank_id.intermediary_bank_id"/>
-                          </div>
-                          <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
-                            <span>Intermediary Bank Swift: </span>
-                            <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
-                          </div>
-                        </t>-->
-                        <div class="row">
-                          <span>Currency: </span>
-                          <span t-field="bank.currency_id"/>
-                        </div>
-                      </t>
-		      <t t-else="mode.variable_journal_ids" t-foreach="mode.variable_journal_ids" t-as="bank">
-			<div class="row">
-			  <span>Beneficiary: </span>
-			  <span t-field="bank.company_id"/>
-			</div>
-                        <div class="row">
-                          <span>Bank Name: </span>
-                          <span t-field="bank.bank_id.name"/>
-                        </div>
-                        <div class="row">
-                          <span>Account#: </span>
-                          <span t-field="bank.bank_account_id"/>
-                        </div>
-                        <div class="row">
-                          <span>Swift#: </span>
-                          <span t-field="bank.bank_id.bic"/>
-                        </div>
-                        <!--<t t-if="bank.bank_id.intermediary_bank_id">
-                          <div class="row">
-                            <span>Intermediary Bank: </span>
-                            <span t-field="bank.bank_id.intermediary_bank_id"/>
-                          </div>
-                          <div class="row" t-if="bank.bank_id.intermediary_bank_id.bic">
-                            <span>Intermediary Bank Swift: </span>
-                            <span t-field="bank.bank_id.intermediary_bank_id.bic"/>
-                          </div>
-                        </t>-->
-			<div class="row">
-			  <span>Currency: </span>
-			  <span t-field="bank.currency_id"/>
-			</div>
-                      </t>
-	            </t>
-		  </t>
-		</div>
-	      </td>
-            </tr>
-          </table>
-        </div>
       </div>
       <div class="clearfix"/>
     </xpath>
-    <xpath expr="//t[@t-set='address']" position="attributes">
-      <attribute name="t-att-style">'display: none;'</attribute>
-    </xpath>
-    <xpath expr="//t[@t-set='information_block']" position="attributes">
-      <attribute name="t-att-style">'display: none;'</attribute>
-    </xpath>
-    <xpath expr="//div[hasclass('page')]//h2" position="attributes">
-      <attribute name="t-att-style">'display: none;'</attribute>
-    </xpath>
-    <xpath expr="//div[hasclass('page')]//div[@id='informations']" position="attributes">
-      <attribute name="t-att-style">'display: none;'</attribute>
-    </xpath>
+
     <xpath expr="//thead/tr" position="attributes">
       <attribute name="class" add="align-top text-nowrap" separator=" "/>
     </xpath>

@@ -1,54 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="external_layout_sale">
-    <div class="header">
-      <div class="o_background_header">
-        <div class="float-right">
-          <h3 class="mt0 text-right" t-field="company.report_header"/>
-        </div>
-        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo" height="50px;"/>
-        <div class="float-left" t-if="company.report_header_name">
-          <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
-        </div>
-        <div class="float-right" style="font-size: 14px !important;">
-          <h3 class="text-right text-nowrap">
-            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-              <span t-if="doc.state not in ['draft','sent']">SALES ORDER<br/></span>
-              <span t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
-            </t>
-            <t t-if="env.context.get('proforma', False) or is_pro_forma">
-              <span class="text-right">PRO-FORMA INVOICE<br/></span>
-            </t>
-            <h3 class="float-right text-muted"><span t-field="doc.name"/></h3>
-          </h3>
-        </div>
-        <div class="clearfix"/>
+  <template id="external_layout_sale" inherit_id="web.external_layout_background" primary="True">
+    <xpath expr="//img" position="after">
+      <div class="float-right">
+        <h3 class="text-right text-nowrap">
+          <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+            <span t-if="doc.state not in ['draft','sent']">SALES ORDER<br/></span>
+            <span t-if="doc.state in ['draft','sent']">QUOTATION<br/></span>
+          </t>
+          <t t-if="env.context.get('proforma', False) or is_pro_forma">
+            <span class="text-right">PRO-FORMA INVOICE<br/></span>
+          </t>
+        </h3>
+        <h3>
+          <span class="float-right text-muted" t-field="doc.name"/>
+        </h3>
       </div>
-    </div>
-
-    <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" 
-         t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size: 12px !important;">
-      <t t-raw="0"/>
-    </div>
-
-    <div class="footer o_background_footer" style="font-size: 13px !important;">
-      <div class="text-center">
-        <ul class="list-inline">
-          <li t-if="company.partner_id"><span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_tag_br": true}'/></li>
-          <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>
-          <t t-if="doc.state not in ['draft','sent']"><li t-if="company.email_sale" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="company.email_sale"/></li></t>
-          <t t-if="doc.state in ['draft','sent']"><li t-if="company.email" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li></t>
-          <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
-          <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building-o" role="img" aria-label="Fiscal number"/><t t-esc="(company.country_id.vat_label or 'Tax ID').replace(' ','\N{NO-BREAK SPACE}')"/>: <span t-esc="company.vat.replace(' ','\N{NO-BREAK SPACE}')"/></li>
-        </ul>
-        <div t-if="report_type == 'pdf'" class="text-muted">
-          Page
-          <span class="page" style="font-size: 13px !important;"/>
-          of
-          <span class="topage" style="font-size: 13px !important;"/>
-        </div>
-      </div>
-    </div>
+    </xpath>
   </template>
   <template id="external_layout">
     <t t-if="not o" t-set="o" t-value="doc"/>
