@@ -13,13 +13,12 @@
         "purchase"
     ],
     "data": [
-        "views/stock_report_layout.xml",
-        "views/report_deliveryslip.xml",
-        "views/report_picking.xml",
-	"views/report_packinglist.xml",
+        "reports/stock_report_layout.xml",
+        "reports/report_deliveryslip.xml",
+        "reports/report_picking.xml",
+	"reports/report_packinglist.xml",
         "views/stock_move_view.xml",
         "views/stock_picking_view.xml",
-        "views/stock_delivery_report.xml",
     ],
     "license": "AGPL-3",
     "installable": True,
