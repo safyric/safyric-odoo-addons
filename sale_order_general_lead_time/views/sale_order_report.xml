@@ -3,15 +3,15 @@
   <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
     <xpath expr="//div[@t-if='doc.payment_term_id']" position="after">
       <div t-if="doc.general_lead_time" class="row">
-        <span>Lead Time: </span>
-        <t t-if="doc.weeks_in_reports">
+        <div class="col-5 p-0">Lead Time: </div>
+        <div t-if="doc.weeks_in_reports">
           <span t-esc="int(float(round(doc.general_lead_time/7+1,0)))" class="m-0"/>
           <span> Weeks</span>
-        </t>
-        <t t-else="">
+        </div>
+        <div t-else="">
           <span t-field="doc.general_lead_time" class="m-0"/>
           <span> days</span>
-        </t>
+        </div>
       </div>
     </xpath>
     <xpath expr="//th[@name='th_quantity']" position="after">
