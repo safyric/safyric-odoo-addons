@@ -66,19 +66,19 @@
                     </div>
                     <div class="row" t-if="o.partner_ref">
                       <div class="col-4 p-0">Your Ref: </div>
-                      <div><span t-esc="o.partner_ref" class="m-0"/></div>
+                      <div class="col-8 p-0"><span t-esc="o.partner_ref" class="m-0"/></div>
                     </div>
                     <div class="row" t-if="o.origin">
                       <div class="col-4 p-0">Source Documents: </div>
-                      <div><span t-esc="o.origin" class="m-0"/></div>
+                      <div class="col-8 p-0"><span t-esc="o.origin" class="m-0"/></div>
                     </div>
                     <div t-if="o.incoterm_id" class="row">
                       <div class="col-4 p-0">Incoterms: </div>
-                      <div><span t-field="o.incoterm_id" class="m-0"/></div>
+                      <div class="col-8 p-0"><span t-field="o.incoterm_id" class="m-0"/></div>
                     </div>
                     <div t-if="o.payment_term_id" class="row">
                       <div class="col-4 p-0">Payment Term: </div>
-                      <div><span t-field="o.payment_term_id" class="m-0"/></div>
+                      <div class="col-8 p-0"><span t-field="o.payment_term_id" class="m-0"/></div>
                     </div>
                   </div>
                 </div>
