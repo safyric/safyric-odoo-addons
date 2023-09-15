@@ -131,19 +131,19 @@
                     <div class="row" t-if="doc.client_order_ref">
                       <div class="col-5 p-0" t-if="doc.date_order and doc.state in ['draft','sent']">Your Reference: </div>
                       <div class="col-5 p-0" t-if="doc.confirmation_date and doc.state not in ['draft','sent']">PO Number: </div>
-                      <div><span t-esc="doc.client_order_ref" class="m-0"/></div>
+                      <div class="col-7 p-0"><span t-esc="doc.client_order_ref" class="m-0"/></div>
                     </div>
                     <div t-if="doc.incoterm" class="row">
                       <div class="col-5 p-0">Shipping Terms: </div>
-                      <div><span t-field="doc.incoterm.code" class="m-0"/></div>
+                      <div class="col-7 p-0"><span t-field="doc.incoterm.code" class="m-0"/></div>
                     </div>
                     <div t-if="doc.carrier_id" class="row">
                       <div class="col-5 p-0">Shipping Method: </div>
-                      <div><span t-field="doc.carrier_id" class="m-0"/></div>
+                      <div class="col-7 p-0"><span t-field="doc.carrier_id" class="m-0"/></div>
                     </div>                    
                     <div t-if="doc.payment_term_id" class="row">
                       <div class="col-5 p-0">Payment Terms: </div>
-                      <div><span t-field="doc.payment_term_id" class="m-0"/></div>
+                      <div class="col-7 p-0"><span t-field="doc.payment_term_id" class="m-0"/></div>
                     </div>
                   </div>
                 </div>
@@ -188,7 +188,10 @@
         <div class="col-6">
           <table class="table-sm border-black pull-right" width="100%">
             <tr>
-              <td class="bg-light"><strong>Company</strong></td>
+              <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                <td class="bg-light"><strong>Shipper</strong></td>
+              </t>
+              <t t-else=""><td class="bg-light"><strong>Company</strong></td></t>
             </tr>
             <tr>
               <td>
