@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_purchasequotation_document_comments"
+      inherit_id="purchase.report_purchasequotation_document">
+      <xpath expr="//table[hasclass('table-sm')]" position="before">
+        <p t-if="o.note1">
+          <span t-field="o.note1"/>
+        </p>
+      </xpath>
+      <xpath expr="//tbody" position="inside">
+        <t t-foreach="o.order_line" t-as="order_line">
+        </t>
+      </xpath>
+      <xpath expr="//t[@t-as='order_line']" position="inside">
+        <xpath expr="//tr[@t-as='order_line']" position="move"/>
+      </xpath>
+      <xpath expr="//tr[@t-as='order_line']" position="after">
+            <t t-if="order_line.formatted_note and order_line.formatted_note != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'">
+                <tr>
+                    <td colspan="1000">
+                       <span t-field="order_line.formatted_note"/>
+                    </td>
+                </tr>
+            </t>
+      </xpath>
+      <xpath expr="//tr[@t-as='order_line']" position="attributes">
+        <attribute name="t-as"/>
+        <attribute name="t-foreach"/>
+      </xpath>
+      <xpath expr="//p[@t-field='o.notes']" position="after">
+        <p t-if="o.note2">
+          <span t-field="o.note2"/>
+        </p>
+      </xpath>
+    </template>
+
+</odoo>
