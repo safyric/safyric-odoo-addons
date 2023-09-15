@@ -17,6 +17,13 @@
         </h3>
       </div>
     </xpath>
+    <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
+      <div class="float-left text-muted" style="font-size: 8px;">
+        <t t-if="doc.state in ['draft','sent']"><small>REPORT-S1 (v.230915)</small></t>
+        <t t-if="doc.state not in ['draft','sent']"><small>REPORT-S2 (v.230915)</small></t>
+        <t t-if="env.context.get('proforma', False) or is_pro_forma"><small>REPORT-S3 (v.230915)</small></t>
+      </div>
+    </xpath>
   </template>
   <template id="external_layout">
     <t t-if="not o" t-set="o" t-value="doc"/>

@@ -25,7 +25,7 @@
                     <div class="row" t-if="o.partner_id.vat">
                       <span>
                         <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/>
-                        <t t-if="not o.company_id.country_id.vat_label"><span>Tax ID</span></t><span>: </span>
+                        <t t-if="not o.company_id.country_id.vat_label"><span>Tax ID: </span></t>
                       </span>
                       <p t-field="o.partner_id.vat" class="m-0"/>
                     </div>
@@ -45,27 +45,16 @@
                 <div class="container">
                   <div class="pull-right">
                     <div class="row">
-                      <span>Date: </span>
-                      <span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                      <div class="col-4 p-0">Date: </div>
+                      <div><span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/></div>
                     </div>
                     <div class="row">
-                      <span>Company: </span>
-                      <span t-field="o.company_id" class="m-0"/>
+                      <div class="col-4 p-0">Company: </div>
+                      <div><span t-field="o.company_id" class="m-0"/></div>
                     </div>
                     <div class="row">
-                      <span>Buyer: </span>
-                      <span t-field="o.user_id.partner_id.name" class="m-0"/>
-                      <t t-if="o.user_id.partner_id.mobile">
-                        <i class="fa fa-mobile"/><span t-field="o.user_id.partner_id.mobile" class="m-0"/>
-                      </t>
-                    </div>
-                    <div t-if="o.user_id.phone" class="row">
-                      <i class="fa fa-phone"/>
-                      <span t-field="o.user_id.phone" class="m-0"/>
-                    </div>
-                    <div t-if="o.user_id.email" class="row">
-                      <i class="fa fa-envelope-o fa-fw"/>
-                      <span t-field="o.user_id.email" class="m-0"/>
+                      <div class="col-4 p-0">Buyer: </div>
+                      <div><span t-field="o.user_id.partner_id.name" class="m-0"/></div>
                     </div>
                   </div>
                 </div>
@@ -90,7 +79,8 @@
                       <t t-else="">
                         <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
                           <span t-field="o.picking_type_id.warehouse_id.name"/>
-                          <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                          <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                              t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                         </div>
                       </t>
                     </div>

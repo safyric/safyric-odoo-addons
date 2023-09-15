@@ -9,6 +9,11 @@
         <h3 class="text-right text-muted"><span t-field="o.name"/></h3>
       </div>
     </xpath>
+    <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
+      <div class="float-left text-muted" style="font-size: 8px;">
+        <small>REPORT-P1 (v.230915)</small>
+      </div>
+    </xpath>
   </template>
 
   <template id="layout_purchaseorder" inherit_id="web.external_layout_background" primary="True">
@@ -20,6 +25,12 @@
           <h3 class="text-right" t-if="o.state == 'cancel'"> PURCHASE ORDER (CANCELLED)</h3>
           <h3 class="text-right text-muted"><span t-field="o.name"/></h3>
         </div>
+      </div>
+    </xpath>
+
+    <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
+      <div class="float-left text-muted" style="font-size: 8px;">
+        <small>REPORT-P2 (v.230915)</small>
       </div>
     </xpath>
   </template>
