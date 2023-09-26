@@ -3,7 +3,7 @@
 <template id="report_saleorder_document_brand" inherit_id="sale.report_saleorder_document">
     <xpath expr="//span[@t-field='line.name']" position="after">
 	<span t-if="line.brand_id">
-	    Brand: <span t-field="line.brand_id"/>
+	    <span><br/>Brand: <span t-field="line.brand_id"/></span>
 	</span>
     </xpath>
 
