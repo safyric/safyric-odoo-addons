@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="extract_signature_wizard" model="ir.ui.view">
+	<field name="name">extract.signature.wizard.form</field>
+	<field name="model">extract.signature.wizard</field>
+	<field name="arch" type="xml">
+	    <form string="Extract Signature Wizard">
+		<group class="oe_title">
+		    <field name="image" widget="image"/>
+		</group>
+		<footer>
+		    <button name="extract_signature" string="Extract Signature" type="object" class="btn-primary"/>
+		    <button string="Cancel" class="btn-secondary" special="cancel"/>
+		</footer>
+	    </form>
+	</field>
+    </record>
+
+    <record id="extract_signature_action" model="ir.actions.act_window">
+	<field name="name">Extract Signature</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">extract.signature.wizard</field>
+	<field name="view_mode">form</field>
+        <field name="view_type">form</field>
+	<field name="view_id" ref="extract_signature_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

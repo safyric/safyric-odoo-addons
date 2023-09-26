@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="view_users_signatures_tree" model="ir.ui.view">
+        <field name="name">res.users.signatures.tree</field>
+        <field name="model">res.users.signatures</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Signatures">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+   <record id="view_users_signatures_form" model="ir.ui.view">
+        <field name="name">res.users.signatures.form</field>
+        <field name="model">res.users.signatures</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Signatures">
+		<header>
+		    <button name="%(extract_signature_action)d"
+			string="Extract Signature"
+			type="action" class="oe_highlight"/>
+		</header>
+		<sheet>
+		    <group>
+		        <group>
+			    <field name="name"/>
+			    <field name="digital_signature" widget="image"/>
+		        </group>
+		        <group>
+                	    <field name="user_id" options="{'no_create': True}"/>
+                	    <field name="company_id" options="{'no_create': True}"/>
+		        </group>
+		    </group>
+		</sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_users_signatures_action" model="ir.actions.act_window">
+        <field name="name">Users Signatures</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.users.signatures</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Signatures"
+              parent="base.menu_users"
+              id="res_users_signatures_menu"
+              action="res_users_signatures_action"
+              sequence="5"/>
+
+
+    <record id="view_users_form_simple_modif_signatures" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.signatures</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signature']/.." position="after">
+                <group>
+		    <field name="signature_ids" mode="kanban">
+			<kanban>
+			    <field name="id"/>
+			    <field name="name"/>
+                            <field name="digital_signature"/>
+			    <templates>
+				<t t-name="kanban-box">
+				    <div>
+					<div class="o_kanban_image">
+					    <img alt="" t-if="record.digital_signature.raw_value" t-att-src="kanban_image('res.users.signatures', 'digital_signature', record.id.raw_value)"/>
+					</div>
+                                        <div class="oe_kanban_details">
+                                            <field name="name"/>
+                                            <div><field name="create_date"/></div>
+                                        </div>
+				    </div>
+				</t>
+			    </templates>
+			</kanban>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="inherited_res_users_form" model="ir.ui.view">
+	<field name="name">inherited.res.users.form</field>
+	<field name="model">res.users</field>
+	<field name="inherit_id" ref="web_widget_digitized_signature.inherited_res_users_form"/>
+	<field name="arch" type="xml">
+	   <xpath expr="//label[@for='digital_signature']" position="replace"/>
+	   <xpath expr="//h2/field[@name='digital_signature']/.." position="replace"/>
+	</field>
+
+    </record>
+
+
+    <record id="inherited_res_users_preferences_form" model="ir.ui.view">
+        <field name="name">inherited.res.users.preferences.form</field>
+	<field name="model">res.users</field>
+        <field name="inherit_id" ref="web_widget_digitized_signature.inherited_res_users_preferences_form"/>
+	<field name="arch" type="xml">
+           <xpath expr="//label[@for='digital_signature']" position="replace"/>
+           <xpath expr="//h2/field[@name='digital_signature']/.." position="replace"/>
+	</field>
+    </record>
+</odoo>
