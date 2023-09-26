@@ -9,11 +9,11 @@ class SaleOrder(models.Model):
     general_lead_time = fields.Integer(
         string='Lead Time'
     )
-    
+
     weeks_in_reports = fields.Boolean('Display weeks in reports')
-    
+
     def action_update_lead_time(self):
-        self.mapped('order_line').update({
+        self.mapped('order_line').filtered(lambda r: r.product_id.type =='product').update({
             'customer_lead': self.general_lead_time,
         })
 
@@ -27,6 +27,6 @@ class SaleOrderLine(models.Model):
         """
         if 'customer_lead' not in vals and 'order_id' in vals:
             sale_order = self.env['sale.order'].browse(vals['order_id'])
-            if sale_order.general_lead_time:
+            if sale_order.general_lead_time and self.product_id.type == 'product':
                 vals['customer_lead'] = sale_order.general_lead_time
         return super().create(vals)
