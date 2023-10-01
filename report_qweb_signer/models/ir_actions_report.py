@@ -143,7 +143,7 @@ class IrActionsReport(models.Model):
                 on_page = -1
                 rect = search_rects[0]
                 if rect:
-                    x1,y1 = rect.x0, page.rect.y1 - rect.y1 - certificate.signature_height * 1.2
+                    x1,y1 = rect.x0, page.rect.y1 - rect.y1 - certificate.signature_height * 1.02
             if certificate.signature_width > 1:
                 x2 = x1 + certificate.signature_width
             if certificate.signature_height > 1:
@@ -154,8 +154,8 @@ class IrActionsReport(models.Model):
 
         if certificate.stamp:
             image = base64.b64decode(certificate.stamp)
-            img, background = tempfile.mkstemp()
-            with closing(os.fdopen(img, 'wb')) as f:
+            fd, background = tempfile.mkstemp()
+            with closing(os.fdopen(fd, 'wb')) as f:
                 f.write(image)
 
         # Start signing
