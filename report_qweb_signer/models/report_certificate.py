@@ -48,6 +48,9 @@ class ReportCertificate(models.Model):
         string='Signature Height',
         default=110,
         help="Signature Width")
+    stamp = fields.Binary(
+        attachment=False, 
+        string='Stamp')
     company_id = fields.Many2one(
         string='Company', comodel_name='res.company',
         required=True, default=_default_company)

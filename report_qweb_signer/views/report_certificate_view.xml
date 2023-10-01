@@ -24,6 +24,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="keyword"/>
                         <field name="signature_width"/>
                         <field name="signature_height"/>
+                        <field name="stamp" widget="image"/>
                     </group>
                     <group>
                         <field name="domain"/>

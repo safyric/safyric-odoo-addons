@@ -14,7 +14,7 @@ from odoo.exceptions import UserError, AccessError
 from odoo.tools.safe_eval import safe_eval
 
 from pyhanko import stamp
-from pyhanko.pdf_utils import text, images
+from pyhanko.pdf_utils import text, images, layout
 from pyhanko.sign import fields, signers
 from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
 import fitz
@@ -135,33 +135,62 @@ class IrActionsReport(models.Model):
         x1,y1,x2,y2 = 350,20,550,80
         for page in doc:
             search_rects = []
+            on_page = 0
             if certificate.keyword:
                 search_rects = page.search_for(certificate.keyword)
 
             if len(search_rects) > 0:
+                on_page = -1
                 rect = search_rects[0]
                 if rect:
                     x1,y1 = rect.x0, page.rect.y1 - rect.y1 - certificate.signature_height * 1.2
+            if certificate.signature_width > 1:
+                x2 = x1 + certificate.signature_width
+            if certificate.signature_height > 1:
+                y2 = y1 + certificate.signature_height
 
-            x2,y2 = x1 + certificate.signature_width, y1 + certificate.signature_height
+        me = os.path.dirname(__file__)
+        background = '{}/../static/src/image/stamp.png'.format(me)
+
+        if certificate.stamp:
+            image = base64.b64decode(certificate.stamp)
+            img, background = tempfile.mkstemp()
+            with closing(os.fdopen(img, 'wb')) as f:
+                f.write(image)
 
         # Start signing
         signer = signers.SimpleSigner.load_pkcs12(pfx_file=p12, passphrase=passphrase)
         with open(pdf, 'rb') as inf:
             w = IncrementalPdfFileWriter(inf)
             fields.append_signature_field(
-                w, sig_field_spec = fields.SigFieldSpec('Signature', on_page = -1, box=(x1,y1,x2,y2))
+                w, sig_field_spec = fields.SigFieldSpec('Signature', on_page = on_page, box=(x1,y1,x2,y2))
             )
             meta = signers.PdfSignatureMetadata(field_name='Signature')
             pdf_signer = signers.PdfSigner(
                 meta, signer=signer, stamp_style = stamp.TextStampStyle(
                     stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s',
+                    background = images.PdfImage(background),
+                    background_layout = layout.SimpleBoxLayoutRule(
+                        x_align=layout.AxisAlignment(2),
+                        y_align=layout.AxisAlignment(2),
+                        margins=layout.Margins(left=5, right=5, top=5, bottom=15),
+                    ),
+                    inner_content_layout = layout.SimpleBoxLayoutRule(
+                        x_align=layout.AxisAlignment(1),
+                        y_align=layout.AxisAlignment(1),
+                    ),
                     border_width = 0,
                     background_opacity = 1
                 )
             )
             with open(pdfsigned, 'wb') as outf:
                 pdf_signer.sign_pdf(w, output=outf)
+
+        if certificate.stamp:
+            try:
+                os.unlink(background)
+            except (OSError, IOError):
+                _logger.error('Error when trying to remove file %s', fname)
         #signer_opts = '"%s" "%s" "%s" "%s"' % (p12, pdf, pdfsigned, passwd)
         #signer = self._signer_bin(signer_opts)
         #process = subprocess.Popen(
