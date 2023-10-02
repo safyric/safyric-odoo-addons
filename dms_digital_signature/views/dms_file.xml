@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_dms_file_form_digital_signature">
+        <field name="name">dms.file.form.digital.signature</field>
+	<field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(digital_signature_action)d" string="Sign" type="action" class="oe_highlight oe_read_only"/>
+            </xpath>
+            <xpath expr="//field[@name='content']" position="after">
+                <field name="signed_doc" filename="signed_doc_name" widget="preview_binary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
