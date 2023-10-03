@@ -163,7 +163,9 @@ class DmsDigitalSignature(models.TransientModel):
                     assert len(current) == 1, "Only 1 ID expected"
                     rec = self.env['dms.file'].browse(current)
                     rec.signed_doc = signed_doc
-                    rec.signed_doc_name = rec.name
+                    name, extension = os.path.splitext(rec.name)
+                    name = name + '-signed' + extension
+                    rec.signed_doc_name = name
                     return act_close
 
 
