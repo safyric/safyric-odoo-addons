@@ -85,7 +85,7 @@ class DmsDigitalSignature(models.TransientModel):
             x1,y1,x2,y2 = 350,20,550,80
 
             if self.signature_keyword:
-                keyword = self.keyword
+                keyword = self.signature_keyword
             else:
                 keyword = certificate.keyword
 
@@ -97,17 +97,17 @@ class DmsDigitalSignature(models.TransientModel):
                 search_rects = []
                 on_page = 0
                 if keyword:
-                    search_rects = page.search_for(certificate.keyword)
+                    search_rects = page.search_for(keyword)
 
                 if len(search_rects) > 0:
                     on_page = -1
                     rect = search_rects[0]
                     if rect:
                         x1,y1 = rect.x0, page.rect.y1 - rect.y1 - height * 1.02
-                if certificate.signature_width > 1:
+                if width > 1:
                     x2 = x1 + width
 
-                if certificate.signature_height > 1:
+                if height > 1:
                     y2 = y1 + height
 
             me = os.path.dirname(__file__)
