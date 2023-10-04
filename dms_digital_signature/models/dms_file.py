@@ -17,8 +17,8 @@ class DmsFile(models.Model):
     @api.onchange("content", "signed_doc")
     def onchange_binaryfields(self):
         if self.name:
-            content_name = re.sub(' +', ' ', str(self.name).replace(' - ', '')).replace(' ', '_')
+            content_name = re.sub(' +', ' ', str(self.name).replace(' - ', ' ')).replace(' ', '_')
             self.name = content_name
         if self.signed_doc_name:
-            signed_doc_name = re.sub(' +', ' ', str(self.signed_doc_name).replace(' - ', '')).replace(' ', '_')
+            signed_doc_name = re.sub(' +', ' ', str(self.signed_doc_name).replace(' - ', ' ')).replace(' ', '_')
             self.signed_doc_name = signed_doc_name
