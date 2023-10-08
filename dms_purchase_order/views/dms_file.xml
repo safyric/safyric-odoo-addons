@@ -28,4 +28,23 @@
 	</field>
     </record>
 
+    <record id="view_dms_file_form_for_purchase" model="ir.ui.view">
+        <field name="name">dms_file.tree.purchase</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="thumbnail" position="replace"/>
+            <field name="custom_thumbnail" position="replace"/>
+            <field name="path_json" position="replace"/>
+            <field name="content" position="before">
+		<field name="to_print"/>
+	    </field>
+	    <page name="page_access" position="attributes">
+		<attribute name="invisible">1</attribute>
+	    </page>
+        </field>
+    </record>
+
+
 </odoo>

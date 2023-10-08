@@ -11,3 +11,4 @@ class DmsFile(models.Model):
 
 
     purchase_id = fields.Many2one('purchase.order', string='Purchase Order')
+    to_print = fields.Boolean('To Print', default=False)

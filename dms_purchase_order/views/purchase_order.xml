@@ -11,8 +11,13 @@
 
 	    <xpath expr="//notebook" position="inside">
                 <page string="DMS Attachments" name="dms">
-		    <field name="dms_ids" widget="many2many" context="{'default_purchase_id': active_id, 'tree_view_ref': 'dms_purchase_order.view_dms_file_tree_for_purchase'}">
+		    <field name="dms_ids" widget="one2many" context="{
+			    'default_purchase_id': active_id, 
+			    'tree_view_ref': 'dms_purchase_order.view_dms_file_tree_for_purchase', 
+			    'form_view_ref': 'dms_purchase_order.view_dms_file_form_for_purchase'
+			}">
 			<tree>
+			    <field name="to_print"/>
 			    <field name="name"/>
 			    <field name="category_id"/>
 			    <field name="create_date"/>
