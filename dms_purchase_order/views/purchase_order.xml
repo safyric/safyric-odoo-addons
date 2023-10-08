@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_dms" model="ir.ui.view">
+	<field name="name">purchase.order.form.dms</field>
+	<field name="model">purchase.order</field>
+	<field name="inherit_id" ref="purchase.purchase_order_form"/>
+	<field name="arch" type="xml">
+	    <xpath expr="//header" position="inside">
+		<button name="%(dms.action_dms_file_new)d" string="Attach Files" type="action" context="{'default_purchase_id': active_id}"/>
+	    </xpath>
+
+	    <xpath expr="//notebook" position="inside">
+                <page string="DMS Attachments" name="dms">
+		    <field name="dms_ids" widget="many2many" context="{'default_purchase_id': active_id, 'tree_view_ref': 'dms_purchase_order.view_dms_file_tree_for_purchase'}">
+			<tree>
+			    <field name="name"/>
+			    <field name="category_id"/>
+			    <field name="create_date"/>
+			    <field name="content" filename="name" widget="binary"/>
+			    <field name="signed_doc" filename="signed_doc_name" widget="binary"/>
+			    <button name="%(dms_digital_signature.digital_signature_action)d" string="Sign" type="action" class="oe_highlight" attrs="{'invisible': [('signed_doc', '=', True)]}"/>
+			</tree>
+		    </field>
+		</page>
+	    </xpath>
+	</field>
+    </record>
+
+</odoo>

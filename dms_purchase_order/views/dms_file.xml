@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_dms_file_form_digital_signature">
+        <field name="name">dms.file.form.digital.signature</field>
+	<field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="arch" type="xml">
+	    <field name="storage_id" position="after">
+		<field name="purchase_id" domain="[('user_id', '=', create_uid)]" invisible="1"/>
+	    </field>
+        </field>
+    </record>
+
+    <record id="view_dms_file_tree_for_purchase" model="ir.ui.view">
+        <field name="name">dms_file.tree.purchase</field>
+        <field name="model">dms.file</field>
+	<field name="inherit_id" ref="dms.view_dms_file_tree"/>
+	<field name="mode">primary</field>
+        <field name="arch" type="xml">
+	    <field name="write_date" position="replace">
+		<field name="create_date"/>
+	    </field>
+	    <field name="path_names" position="replace">
+	        <field name="category_id"/>
+	    </field>
+	</field>
+    </record>
+
+</odoo>
