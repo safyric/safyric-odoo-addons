@@ -8,7 +8,8 @@
         <field name="arch" type="xml">
             <form string="Digital Signature Wizard">
                 <group class="oe_title">
-                    <field name="signature" widget="image"/>
+		    <field name="signature_id" domain="['|', ('user_id', '=', uid), ('user_id', '=', False)]"/>
+                    <label for="signature" string="Preview"/><field name="signature" widget="image" nolabel="1"/>
                     <field name="signature_keyword"/>
                     <field name="signature_width"/>
                     <field name="signature_height"/>

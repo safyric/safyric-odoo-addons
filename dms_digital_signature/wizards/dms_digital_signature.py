@@ -34,11 +34,17 @@ class DmsDigitalSignature(models.TransientModel):
     _name = "dms.digital.signature"
     _description = "DMS Digital Signature"
 
+    signature_id = fields.Many2one('res.users.signatures', string='Signature')
     signature = fields.Binary(string='Signature', attachment=False)
     signature_keyword = fields.Char('Signature Area', help="Keyword to identify the signature area to attach digital signature")
     signature_width = fields.Integer('Signature Width', help="Width of the signature area")
     signature_height = fields.Integer('Signature Height', help="Height of the signature area")
 
+
+    @api.onchange('signature_id')
+    def _onchange_signature_id(self):
+        if self.signature_id:
+            self.signature = self.signature_id.digital_signature
 
     @api.multi
     def dms_digital_signature(self):
