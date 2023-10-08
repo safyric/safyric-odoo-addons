@@ -45,6 +45,8 @@ class DmsDigitalSignature(models.TransientModel):
     def _onchange_signature_id(self):
         if self.signature_id:
             self.signature = self.signature_id.digital_signature
+        else:
+            self.signature = False
 
     @api.multi
     def dms_digital_signature(self):
