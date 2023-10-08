@@ -16,8 +16,8 @@
 			    <field name="name"/>
 			    <field name="category_id"/>
 			    <field name="create_date"/>
-			    <field name="content" widget="binary"/>
-			    <field name="signed_doc" widget="binary"/>
+			    <field name="content" filename="name" widget="binary"/>
+			    <field name="signed_doc" filename="signed_doc_name" widget="binary"/>
 			    <button name="%(dms_digital_signature.digital_signature_action)d" string="Sign" type="action" class="oe_highlight" attrs="{'invisible': [('signed_doc', '=', True)]}"/>
 			</tree>
 		    </field>
