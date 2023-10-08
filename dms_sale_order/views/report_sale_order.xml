@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_dms" inherit_id="sale.report_saleorder_document">
+	<xpath expr="//div[@class='page']" position="inside">
+	    <t t-if="len(doc.dms_ids.filtered(lambda x: x.to_print)) > 0">
+		<table class="table-sm" width="100%">
+		    <tr><td colspan="999"><strong>Attachments:</strong></td></tr>
+		    <t t-foreach="doc.dms_ids.filtered(lambda x: x.to_print)" t-as="dms">
+		        <tr>
+			    <td><span t-field="dms.name"/></td>
+			</tr>
+		    </t>
+	    	</table>
+	    </t>
+	</xpath>
+    </template>
+</odoo>
