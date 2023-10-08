@@ -15,6 +15,7 @@
     ],
     "data": [
         "views/dms_file.xml",
-	"views/sale_order.xml"
+	"views/sale_order.xml",
+	"views/report_sale_order.xml"
     ],
 }
