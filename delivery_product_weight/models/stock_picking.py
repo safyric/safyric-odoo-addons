@@ -36,3 +36,9 @@ class StockPicking(models.Model):
             for move in picking.move_lines:
                 move._update_shipping_weight()
         return res
+
+    @api.multi
+    def button_update_weight(self):
+        for picking in self:
+            for move in picking.move_lines:
+                move._update_shipping_weight()
