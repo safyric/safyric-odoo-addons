@@ -68,7 +68,6 @@
 					    <div class="col-5 p-0">Shipper Contact: </div>
 					    <div>
 						<span t-field="o.sale_id.user_id"/>
-						<t t-if="o.sale_id.user_id.mobile"><br/><i class="fa fa-mobile"/><span t-field="o.sale_id.user_id.mobile" class="m-0"/></t>
 					    </div>
 					</div>
                                     </div>
@@ -92,7 +91,7 @@
                                             <div t-field="o.partner_id.parent_id"
                                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" t-if="o.partner_id.name">
                                                 <span>Contact: </span><span t-field="o.partner_id.name"/>
                                                 <t t-if="o.partner_id.mobile"><i class="fa fa-mobile"/><span t-field="o.partner_id.mobile" class="m-0"/></t>
                                             </div>
@@ -198,7 +197,8 @@
                     <t t-set="move_qty" t-value="0"/>
                     <t t-set="move_lot" t-value="[]"/>
                     <t t-foreach="o.move_line_ids.filtered(lambda x: x.move_id.id==move_line.id and x.result_package_id.id==package.id)" t-as="product">
-                        <t t-set="move_qty" t-value="move_qty+product.qty_done"/>
+                        <t t-set="move_qty" t-if="o.state=='done'" t-value="move_qty+product.qty_done"/>
+			<t t-set="move_qty" t-else="" t-value="move_qty+product.product_uom_qty"/>
                         <t t-set="move_lot" t-value="move_lot+[product.lot_id]"/>
                     </t>
                     <tr>
@@ -226,16 +226,15 @@
                             </t>
                         </td>
                         <td class="text-right text-nowrap">
-                            <span t-if="o.state=='done'" t-esc="move_qty"/>
-                            <span t-else="" t-esc="move_line.product_uom_qty"/>
+                            <span t-esc="move_qty"/>
                             <span t-field="move_line.product_uom"/>
                         </td>
                     </tr>
                 </t>
             </t>
             <tr>
-                <td colspan="999" class="bg-info text-light pt-4 pb-4">
-                    <div class="container bg-info text-light">
+                <td colspan="999" class="table-bordered pt-4 pb-4">
+                    <div class="container">
                         <div class="row">
                             <div class="col-8">
                                 <div><strong>Packing Summary:</strong></div>
@@ -246,7 +245,7 @@
                                 </div>
                                 <div t-if="pkg_weight">Total Gross Weight: 
                                     <span class="font-italic">
-                                        <span t-esc="o.shipping_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/>
+                                        <span t-esc="o.weight+o.shipping_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/>
                                     </span>
                                 </div>
                                 <div t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
