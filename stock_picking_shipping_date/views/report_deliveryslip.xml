@@ -3,7 +3,7 @@
     <template id="report_delivery_document" inherit_id="stock_views_extension.report_delivery_document">
         <xpath expr="//div[@t-if='o.origin']/.." position="before">
             <div class="row" t-if="o.shipping_date">
-                <div class="col-5 p-0">Shipping Date: </div>
+                <div class="col-5 p-0">Shipping Date (m/d/Y): </div>
                 <div><span t-field="o.shipping_date" class="m-0"/></div>
             </div>
         </xpath>
