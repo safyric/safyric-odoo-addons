@@ -10,8 +10,14 @@
     <xpath expr="//div[hasclass('company_address')]" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
     </xpath>
+    <xpath expr="//div[hasclass('o_background_header')]" position="attributes">
+      <attribute name="style">font-size: 12px !important;</attribute>
+    </xpath>
     <xpath expr="//div[hasclass('footer')]//ul" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
+    </xpath>
+    <xpath expr="//div[hasclass('footer')]" position="attributes">
+      <attribute name="style">font-size: 12px !important;</attribute>
     </xpath>
     <xpath expr="//div[@t-field='company.report_footer']" position="attributes">
       <attribute name="t-att-style">'display: none;'</attribute>
