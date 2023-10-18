@@ -14,6 +14,7 @@ class ProductBrand(models.Model):
     _order = 'name'
 
     name = fields.Char('Brand Name', required=True)
+    is_default = fields.Boolean('Default', default=False)
     description = fields.Text(translate=True)
     partner_id = fields.Many2one(
         'res.partner',
