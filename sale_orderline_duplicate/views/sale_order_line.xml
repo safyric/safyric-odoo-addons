@@ -8,7 +8,7 @@
             <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
                 <button name='dup_line'
                         type='object'
-			ico="fa-clone"
+			icon="fa-clone"
                         class="oe_edit_only"
                         attrs="{'invisible': [('state', 'not in', ['draft'])]}"
                         />
