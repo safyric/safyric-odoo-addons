@@ -8,14 +8,16 @@
             <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
                 <button name='dup_line'
                         type='object'
-                        class="fa fa-files-o oe_edit_only"
+			ico="fa-clone"
+                        class="oe_edit_only"
                         attrs="{'invisible': [('state', 'not in', ['draft'])]}"
                         />
             </xpath>
             <xpath expr="//kanban/field[@name='tax_id']" position="after">
                 <button name='dup_line'
                         type='object'
-                        class="fa fa-files-o oe_edit_only"
+			icon="fa-clone"
+                        class="oe_edit_only"
                         />
             </xpath>
             <xpath expr="//t[@t-if='!record.display_type.raw_value']/div[last()]/div[1]" position="attributes">
@@ -25,7 +27,8 @@
                 <div class="pull-right">
                     <button name='dup_line'
                             type='object'
-                            class="fa fa-files-o oe_edit_only"
+			    icon="fa-clone"
+                            class="oe_edit_only"
                             />
                 </div>
             </xpath>
