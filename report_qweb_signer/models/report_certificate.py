@@ -51,6 +51,7 @@ class ReportCertificate(models.Model):
     stamp = fields.Binary(
         attachment=False, 
         string='Stamp')
+    show_signer = fields.Boolean('Show Signer Info', default=True)
     company_id = fields.Many2one(
         string='Company', comodel_name='res.company',
         required=True, default=_default_company)

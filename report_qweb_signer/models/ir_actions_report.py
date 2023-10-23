@@ -166,9 +166,13 @@ class IrActionsReport(models.Model):
                 w, sig_field_spec = fields.SigFieldSpec('Signature', on_page = on_page, box=(x1,y1,x2,y2))
             )
             meta = signers.PdfSignatureMetadata(field_name='Signature')
+            if certificate.show_signer:
+                stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s'
+            else:
+                stamp_text = ''
             pdf_signer = signers.PdfSigner(
                 meta, signer=signer, stamp_style = stamp.TextStampStyle(
-                    stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s',
+                    stamp_text = stamp_text,
                     background = images.PdfImage(background),
                     background_layout = layout.SimpleBoxLayoutRule(
                         x_align=layout.AxisAlignment(2),
