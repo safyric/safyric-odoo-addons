@@ -174,15 +174,15 @@
                 <tr t-if="package">
                     <td colspan="999" class="bg-dark">
                         <div class="row">
-                            <div class="col-3"><strong><span t-esc="package_index+1"/># <span t-field="package.name"/></strong></div>
-                            <div class="col-4 text-center"><strong t-if="move_dim"><span t-esc="move_dim"/> mm</strong></div>
-                            <div class="col-2 text-right">
-                                <strong t-if="package.packaging_id.volume!=0">Vol.: 
-                                    <span t-esc="package.packaging_id.volume" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup>
+                            <div class="col-2"><strong><span t-esc="package_index+1"/># <span t-field="package.name"/></strong></div>
+                            <div class="col-4 text-center"><strong t-if="move_dim"><span t-esc="move_dim"/> mm (<span t-esc="package.packaging_id.volume" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup>)</strong></div>
+                            <div class="col-3 text-right">
+                                <strong t-if="package.shipping_weight">N.W.: 
+                                    <span t-esc="package.weight" t-options='{"widget": "float", "precision": 2}'/> <span t-field="o.weight_uom_id"/>
                                 </strong>
                             </div>
                             <div class="col-3 text-right">
-                                <strong t-if="package.shipping_weight!=0">G.W.: 
+                                <strong t-if="package.shipping_weight">G.W.: 
                                     <span t-esc="package.weight+package.shipping_weight" t-options='{"widget": "float", "precision": 2}'/> <span t-field="o.weight_uom_id"/>
                                 </strong>
                             </div>
@@ -243,9 +243,14 @@
                                 <div t-if="pkg_vol!=0">
                                     Total Volume: <span class="font-italic"><span t-esc="pkg_vol" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 3}"/> M<sup>3</sup></span>
                                 </div>
+                                <div>Total Net Weight: 
+                                    <span class="font-italic">
+                                        <span t-esc="o.weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/>
+                                    </span>
+                                </div>
                                 <div t-if="pkg_weight">Total Gross Weight: 
                                     <span class="font-italic">
-                                        <span t-esc="o.weight+o.shipping_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/>
+                                        <span t-esc="o.shipping_weight" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 1}"/> <span t-field="o.weight_uom_id"/>
                                     </span>
                                 </div>
                                 <div t-if="shipped_qty">Total Shipped Quantity: <span class="font-italic"><span t-esc="shipped_qty"/> <span t-esc="product_uom"/></span></div>
