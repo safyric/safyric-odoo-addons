@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_move_operations_fill_done_qty" model="ir.ui.view">
+        <field name="name">stock.move.operations.form.fill.done.qty</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations"/>
+        <field name="arch" type="xml">
+	    <xpath expr="//div[@class='o_row'][last()]" position="inside">
+		<span><button name="fill_done_qty" class="oe_highlight oe_edit_only" string="Fill Done Qty" type="object" attrs="{'invisible': [('state', 'in', ['cancel', 'done'])]}"/></span>
+		<span><button name="unfill_done_qty" class="oe_highlight oe_edit_only" string="Unfill Done Qty" type="object" attrs="{'invisible': [('state', 'in', ['cancel', 'done'])]}"/></span>
+	    </xpath>
+        </field>
+    </record>
+</odoo>
