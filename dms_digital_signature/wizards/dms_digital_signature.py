@@ -69,7 +69,7 @@ class DmsDigitalSignature(models.TransientModel):
                 docs = self.env[certificate.model_id.model].search(domain)
                 if not docs:
                     _logger.exception(
-                        "Certificate '%s' domain not satisfied", cert.name)
+                        "Certificate '%s' domain not satisfied", certificate.name)
                     continue
 
         if certificate:
