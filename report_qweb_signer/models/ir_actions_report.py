@@ -167,7 +167,7 @@ class IrActionsReport(models.Model):
             fields.append_signature_field(
                 w, sig_field_spec = fields.SigFieldSpec(sig_name, on_page = on_page, box=(x1,y1,x2,y2))
             )
-            meta = signers.PdfSignatureMetadata(field_name='Signature')
+            meta = signers.PdfSignatureMetadata(field_name=sig_name)
             if certificate.show_signer:
                 stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s'
             else:
