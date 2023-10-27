@@ -18,6 +18,7 @@ from pyhanko.pdf_utils import text, images, layout
 from pyhanko.sign import fields, signers
 from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
 import fitz
+import uuid
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -160,10 +161,11 @@ class IrActionsReport(models.Model):
 
         # Start signing
         signer = signers.SimpleSigner.load_pkcs12(pfx_file=p12, passphrase=passphrase)
+        sig_name = str(uuid.uuid1())
         with open(pdf, 'rb') as inf:
             w = IncrementalPdfFileWriter(inf, strict=False)
             fields.append_signature_field(
-                w, sig_field_spec = fields.SigFieldSpec('Signature', on_page = on_page, box=(x1,y1,x2,y2))
+                w, sig_field_spec = fields.SigFieldSpec(sig_name, on_page = on_page, box=(x1,y1,x2,y2))
             )
             meta = signers.PdfSignatureMetadata(field_name='Signature')
             if certificate.show_signer:
