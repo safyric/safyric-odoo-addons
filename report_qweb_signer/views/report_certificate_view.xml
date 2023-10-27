@@ -31,6 +31,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="allow_only_one"/>
                         <field name="attachment"/>
                         <field name="show_signer"/>
+			<field name="counter_sign"/>
                         <field name="company_id" widget="selection"
                                groups="base.group_multi_company"/>
                     </group>

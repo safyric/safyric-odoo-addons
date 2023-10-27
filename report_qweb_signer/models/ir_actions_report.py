@@ -136,7 +136,9 @@ class IrActionsReport(models.Model):
         x1,y1,x2,y2 = 350,20,550,80
         for page in doc:
             search_rects = []
+            search_countersign = []
             on_page = 0
+            countersign_on_page = 0
             if certificate.keyword:
                 search_rects = page.search_for(certificate.keyword)
 
@@ -145,10 +147,21 @@ class IrActionsReport(models.Model):
                 rect = search_rects[0]
                 if rect:
                     x1,y1 = rect.x0, page.rect.y1 - rect.y1 - certificate.signature_height - rect.height
+
             if certificate.signature_width > 1:
                 x2 = x1 + certificate.signature_width
+
             if certificate.signature_height > 1:
                 y2 = y1 + certificate.signature_height
+
+            if certificate.counter_sign:
+                search_countersign = page.search_for(certificate.counter_sign)
+
+            if len(search_countersign) > 0:
+                countersign_on_page = -1
+                rect1 = search_countersign[0]
+                if rect1:
+                    xx,yy = rect1.x0, page.rect.y1 - rect1.y1 - 100 - rect1.height
 
         me = os.path.dirname(__file__)
         background = '{}/../static/src/image/stamp.png'.format(me)
@@ -167,6 +180,12 @@ class IrActionsReport(models.Model):
             fields.append_signature_field(
                 w, sig_field_spec = fields.SigFieldSpec(sig_name, on_page = on_page, box=(x1,y1,x2,y2))
             )
+
+            if certificate.counter_sign:
+                fields.append_signature_field(
+                    w, sig_field_spec = fields.SigFieldSpec('Signature', on_page = countersign_on_page, box=(xx,yy,xx+160, yy+100))
+                )
+
             meta = signers.PdfSignatureMetadata(field_name=sig_name)
             if certificate.show_signer:
                 stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s'
