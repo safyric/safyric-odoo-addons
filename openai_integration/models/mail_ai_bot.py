@@ -15,7 +15,7 @@ class MailBot(models.AbstractModel):
         if len(record) != 1 or values.get("author_id") == ai_bot_id:
             return
 
-        if self._is_bot_in_private_channel(record):
+        if self._is_bot_pinged(values) or self._is_bot_in_private_channel(record):
             body = values.get("body", "")
             try:
                 answer = self._get_answer(record, body, values)
@@ -42,6 +42,10 @@ class MailBot(models.AbstractModel):
         res = response['choices'][0]['message']['content']
         if res:
             return res
+
+    def _is_bot_pinged(self, values):
+        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id("openai_integration.partner_ai")
+        return (4, ai_bot_id) in values.get('partner_ids', [])
 
 
     def _is_bot_in_private_channel(self, record):
