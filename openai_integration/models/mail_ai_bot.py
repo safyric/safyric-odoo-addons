@@ -17,7 +17,11 @@ class MailBot(models.AbstractModel):
 
         if self._is_bot_in_private_channel(record):
             body = values.get("body", "")
-            answer = self._get_answer(record, body, values)
+            try:
+                answer = self._get_answer(record, body, values)
+            except openai.error.InvalidRequestError as err:
+                answer = ''
+                _logger.error(err)
             if answer:
                 message_type = 'comment'
                 subtype_id = self.env['ir.model.data'].xmlid_to_res_id('mail.mt_comment')
