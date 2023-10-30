@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_brand_form_brand_type">
+	<field name="name">product.brand.form.brand.type</field>
+	<field name="model">product.brand</field>
+	<field name="inherit_id" ref="product_brands.view_product_brand_form"/>
+	<field name="arch" type="xml">
+	    <field name="partner_id" position="before">
+		<field name="brand_type"/>
+	    </field>
+	</field>
+    </record>
+</odoo>

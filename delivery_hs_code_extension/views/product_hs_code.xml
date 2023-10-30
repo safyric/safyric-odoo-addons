@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_hs_code_form" model="ir.ui.view">
+        <field name="name">product.hs.code.form</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                            <label for="name" string="HS Code" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+			    <field name="commodity_name"/>
+			    <field name="commodity_usage"/>
+			    <field name="duty"/>
+			    <field name="rebate"/>
+                        </group>
+		 	<group>
+			    <field name="inspection_cat"/>
+			    <field name="primary_uom"/>
+			    <field name="secondary_uom"/>
+			</group>
+                    </group>
+                    <group string="Description">
+                        <field name="commodity_description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_tree" model="ir.ui.view">
+        <field name="name">product.hs.code.tree</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <tree string="Product HS Code">
+                <field name="name"/>
+                <field name="commodity_name"/>
+                <field name="commodity_usage"/>
+		<field name="duty"/>
+		<field name="rebate"/>
+		<field name="inspection_cat"/>
+		<field name="primary_uom"/>
+		<field name="secondary_uom"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_product_hs_code">
+        <field name="name">HS Code</field>
+        <field name="res_model">product.hs.code</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        name="HS Code"
+        id="menu_product_hs_code"
+        action="action_product_hs_code"
+        parent="stock.menu_stock_inventory_control"/>
+</odoo>

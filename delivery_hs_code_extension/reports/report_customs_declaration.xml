@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_declaration_document">
+	<t t-call="web.html_container">
+	    <t t-call="web.external_layout">
+		<t t-set="o" t-value="o.with_context(lang='zh_CN')"/>
+		<div class="page">
+		    <h2>
+			<span>Customs Declaration</span>
+		    </h2>
+		</div>
+		<table class="table table-borderless" width="100%">
+		    <t t-set="hs_code" t-value="[]"/>
+		    <t t-foreach="o.move_lines" t-as="line">
+			<t t-set="hs_code" t-value="hs_code+[line.product_id.hs_code]"/>
+		    </t>
+		    <t t-foreach="set(hs_code)" t-as="code">
+			<tr>
+			    <td>
+				<div><span t-esc="code"/></div>
+			    </td>
+			</tr>
+		    </t>
+		</table>
+	    </t>
+	</t>
+    </template>
+
+    <template id="report_declaration">
+	<t t-foreach="docs" t-as="o">
+	    <t t-call="delivery_hs_code_extension.report_declaration_document" t-lang="zh_CN"/>
+	</t>
+    </template>
+
+    <report
+	string="Customs Declaration"
+	id="action_report_customs_declaration"
+	model="stock.picking"
+	report_type="qweb-pdf"
+	name="delivery_hs_code_extension.report_declaration"
+	file="delivery_hs_code_extension.report_declaration"
+	print_report_name="'Customs Declaration - %s' %(object.name)"
+    />
+
+</odoo>
