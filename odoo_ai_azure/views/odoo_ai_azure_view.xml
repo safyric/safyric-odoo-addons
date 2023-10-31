@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+	<record id="view_ai_form_azure" model="ir.ui.view">
+	    <field name="name">odoo.ai.form</field>
+	    <field name="model">odoo.ai</field>
+	    <field name="inherit_id" ref="odoo_ai.view_ai_form"/>
+	    <field name="arch" type="xml">
+		<field name="api_base" position="after">
+		    <field name="api_version" attrs="{'invisible': [('service', '!=', 'azure')]}"/>
+		    <field name="api_type" attrs="{'invisible': [('service', '!=', 'azure')]}"/>
+		</field>
+	    </field>
+	</record>
+    </data>
+</odoo>

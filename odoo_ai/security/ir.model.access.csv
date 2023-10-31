@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_odoo_ai","odoo_ai_system","model_odoo_ai","base.group_system",1,1,1,1
+"access_odoo_ai_bot","odoo_ai_bot_system","model_odoo_ai_bot","base.group_system",1,1,1,1

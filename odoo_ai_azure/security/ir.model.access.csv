@@ -1,0 +1,2 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_odoo_ai_azure_bot","odoo_ai_azure_bot_system","model_odoo_ai_azure_bot","base.group_system",1,1,1,1

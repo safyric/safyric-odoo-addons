@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+	<menuitem
+	    id="menu_ai_root"
+	    name="AI"
+	    web_icon="odoo_ai,static/description/icon.png"
+	    groups="base.group_system"
+	    sequence="85"
+	/>
+
+	<menuitem
+	    id="menu_ai_main"
+	    name="Odoo AI"
+	    parent="menu_ai_root"
+	    sequence="0"
+	/>
+
+	<record id="view_ai_form" model="ir.ui.view">
+	    <field name="name">odoo.ai.form</field>
+	    <field name="model">odoo.ai</field>
+	    <field name="arch" type="xml">
+		<form string="AI">
+		    <sheet>
+			<div class="oe_button_box" name="button_box">
+			    <button name="toggle_active" type="object" groups="base.group_system"
+				    class="oe_stat_button" icon="fa-archive">
+			        <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/> 
+			    </button>
+			</div>
+			<field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+			<div class="oe_title">
+			    <lable for="name" string="Name"/>
+			    <h1>
+				<field name="name"/>
+			    </h1>
+			</div>
+			<group name="options">
+			    <group>
+				<field name="service"/>
+				<field name="ai_model"/>
+				<field name="api_key"/>
+				<field name="api_base"/>
+			    </group>
+			    <group>
+				<field name="company_id"/>
+			    </group>
+			</group>
+			<notebook>
+			    <page string="Description">
+				<field name="description" placeholder="Description ..."/>
+			    </page>
+			    <page string="Parameters">
+				<group>
+				    <group>
+					<field name="max_tokens"/>
+					<field name="temperature"/>
+					<field name="top_p"/>
+					<field name="top_k"/>
+				    </group>
+				    <group>
+					<field name="frequency_penalty"/>
+					<field name="presence_penalty"/>
+					<field name="repetition_penalty"/>
+				    </group>
+				</group>
+			    </page>
+			</notebook>
+		    </sheet>
+		</form>
+	    </field>
+	</record>
+
+	<record id="view_odoo_ai_tree" model="ir.ui.view">
+	    <field name="name">odoo.ai.tree</field>
+	    <field name="model">odoo.ai</field>
+	    <field name="arch" type="xml">
+		<tree string="Odoo AI">
+		    <field name="name"/>
+		    <field name="service"/>
+		    <field name="ai_model"/>
+		    <field name="api_key"/>
+		    <field name="api_base"/>
+		</tree>
+	    </field>
+	</record>
+
+	<record id="odoo_ai_kanban_view" model="ir.ui.view">
+	    <field name="name">odoo.ai.kanban</field>
+	    <field name="model">odoo.ai</field>
+	    <field name="arch" type="xml">
+		<kanban>
+		    <field name="id"/>
+		    <templates>
+			<t t-name="kanban_box">
+			    <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+				<div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('odoo.ai', 'image_medium', record.id.raw_value)})" role="img"/>
+				<div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('odoo.ai', 'image_small', record.id.raw_value)})" role="img"/>
+				<div class="oe_kanban_details">
+				    <div class="o_kanban_record_top">
+					<div class="o_kanban_record_headings">
+					    <strong class="o_kanban_record_title">
+						<field name="name"/>
+					    </strong>
+					    <span class="o_kanban_record_subtitle"><field name="service"/></span>
+					</div>
+				    </div>
+				    <field name="ai_model"/>
+				    <ul>
+					<li t-if="record.api_key"><field name="api_key"/></li>
+					<li t-if="record.api_base"><field name="api_base"/></li>
+				    </ul>
+				</div>
+			    </div>
+			</t>
+		    </templates>
+		</kanban>
+	    </field>
+	</record>
+
+	<record id="view_odoo_ai_filter" model="ir.ui.view">
+	    <field name="name">odoo.ai.search</field>
+	    <field name="model">odoo.ai</field>
+	    <field name="arch" type="xml">
+		<search string="Odoo AI">
+		    <field name="name" filter_domain="['|',('service', 'ilike', self),('name', 'ilike', self)]"/>
+		    <field name="service"/>
+		    <field name="ai_model"/>
+		    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+		    <group expand="0" string="Group By">
+			<filter name="group_service" string="Provider" domain="[]" context="{'group_by': 'service'}"/>
+			<filter name="group_model" string="AI Model" domain="[]" context="{'group_by': 'ai_model'}"/>
+			<filter name="group_company" string="Company" domain="[]" context="{'group_by': 'company_id'}"/>
+		    </group>
+		</search>
+	    </field>
+	</record>
+
+	<record id="open_odoo_ai_tree" model="ir.actions.act_window">
+	    <field name="name">Service Provider</field>
+	    <field name="res_model">odoo.ai</field>
+	    <field name="view_type">tree</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="view_odoo_ai_tree"/>
+	    <field name="domain">[('active', '=', True)]</field>
+	    <field name="search_view_id" ref="view_odoo_ai_filter"/>
+	</record>
+
+        <record id="open_odoo_ai_list" model="ir.actions.act_window">
+            <field name="name">Service Provider</field>
+            <field name="res_model">odoo.ai</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_odoo_ai_filter"/>
+        </record>
+ 
+        <record id="open_odoo_ai_list_my" model="ir.actions.act_window">
+            <field name="name">Service Provider</field>
+            <field name="res_model">odoo.ai</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+	    <field name="domain">[]</field>
+	    <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_odoo_ai_filter"/>
+	    <field name="help" type="html">
+		<p class="o_view_nocontent_simling_face">
+		    Add a service provider
+		</p>
+	    </field>
+        </record>
+       
+
+	<menuitem
+	    id="menu_open_odoo_ai_list_my"
+	    action="open_odoo_ai_list_my"
+	    parent="menu_ai_root"
+	/>
+    </data>
+</odoo>
