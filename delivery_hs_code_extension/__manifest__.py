@@ -18,6 +18,7 @@
     'license': 'AGPL-3',
     'depends': [
         'delivery_hs_code',
+	'product_brands',
 	'stock'
     ],
     'data': [
