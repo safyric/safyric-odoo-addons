@@ -92,7 +92,7 @@
 		<kanban>
 		    <field name="id"/>
 		    <templates>
-			<t t-name="kanban_box">
+			<t t-name="kanban-box">
 			    <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
 				<div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('odoo.ai', 'image_medium', record.id.raw_value)})" role="img"/>
 				<div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('odoo.ai', 'image_small', record.id.raw_value)})" role="img"/>
