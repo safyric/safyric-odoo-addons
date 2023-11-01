@@ -66,24 +66,24 @@ class OdooAi(models.Model):
         return super(OdooAi, self).write(vals)
 
     def _connect_api(self):
-        api_key = self.api_key
-        if api_key:
-            openai.api_key = api_key
-        else:
-            raise UserError(_('API key is required.'))
-
-        api_base = self.api_base
-        if api_base:
-            openai.api_base = api_base
-        elif self.service == 'llama2':
-            raise UserError(_('API Base for locally running AI is required.'))
+        if self.service == 'llama2':
+            api_key = self.api_key
+            if api_key:
+                openai.api_key = api_key
+            else:
+                raise UserError(_('API key is required.'))
+            api_base = self.api_base
+            if api_base:
+                openai.api_base = api_base
+            elif self.service == 'llama2':
+                raise UserError(_('API Base for locally running AI is required.'))
 
 
     def create_chat_completion(self, model, prompt):
         if not model:
             model = 'x'
         self._connect_api()
-        if self.service == 'llama':
+        if self.service == 'llama2':
             response = openai.ChatCompletion.create(
                 model = model,
                 messages = [

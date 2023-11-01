@@ -10,6 +10,13 @@
 		    <field name="api_version" attrs="{'invisible': [('service', '!=', 'azure')]}"/>
 		    <field name="api_type" attrs="{'invisible': [('service', '!=', 'azure')]}"/>
 		</field>
+		<field name="ai_model" position="attributes">
+		    <attribute name="string">AI Model</attribute>
+		    <attribute name="attrs">{'invisible': [('service', '=', 'azure')]}</attribute>
+		</field>
+		<field name="service" position="after">
+		    <field name="ai_model" string="Delopyment ID" attrs="{'invisible': [('service', '!=', 'azure')]}"/>
+		</field>
 	    </field>
 	</record>
     </data>
