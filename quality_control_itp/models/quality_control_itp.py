@@ -43,7 +43,8 @@ class QcItpLine(models.Model):
     attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
     state = fields.Selection([
         ('draft', 'To Submit'),
-        ('cancel', 'Refused'),
+        ('submitted', 'Submitted'),
+        ('rejected', 'Rejected'),
         ('approved', 'Approved'),
         ('done', 'Done')
     ], compute='_compute_state', string='Status', copy=False, index=True, readonly=True, store=True, help="Status of the plan")
@@ -54,9 +55,11 @@ class QcItpLine(models.Model):
         for line in self:
             if not line.plan_id or line.plan_id.state == 'draft':
                 line.state = "draft"
-            elif line.plan_id.state == "cancel":
-                line.state = "cancel"
-            elif line.plan_id.state == "approve":
+            elif line.plan_id.state == "rejected":
+                line.state = "rejected"
+            elif line.plan_id.state == 'submitted':
+                line.state = 'submitted'
+            elif line.plan_id.state == "approved":
                 line.state = "approved"
             else:
                 line.state = "done"
@@ -121,12 +124,14 @@ class QcItp(models.Model):
     project_name = fields.Char('Project Name', translate=True)
     contractor_id = fields.Many2one('res.partner', string='Contractor')
     enduser_id = fields.Many2one('res.partner', string='End-user')
+    tpi_id = fields.Many2one('res.partner', string="TPIA")
     plan_line_ids = fields.One2many('qc.itp.line', 'plan_id', string='Plan Lines', states={'approve': [('readonly', True)]}, copy=False)
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('submit', 'Submitted'),
-        ('approve', 'Approved'),
-        ('cancel', 'Refused')
+        ('submitted', 'In review'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('done', 'Completed')
     ], string='Status', index=True, readonly=True, track_visibility='onchange', copy=False, default='draft', required=True, help='Plan Lines')
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True, readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1))
     user_id = fields.Many2one('res.users', 'Manager', readonly=True, copy=False, states={'draft': [('readonly', False)]}, track_visibility='onchange', oldname='responsible_id')

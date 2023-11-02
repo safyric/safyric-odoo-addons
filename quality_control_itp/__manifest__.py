@@ -12,7 +12,9 @@
     'data': [
         'security/ir.model.access.csv',
         'views/quality_control_itp_views.xml',
-        'report/quality_control_itp_report.xml',
+	'report/qc_itp_report.xml',
+        'report/qc_itp_report_layout.xml',
+	'report/qc_itp_report_template.xml',
     ],
     'installable': True,
     'license': 'LGPL-3',

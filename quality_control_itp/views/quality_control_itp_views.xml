@@ -87,6 +87,7 @@
 			    <field name="insp_level3_id" widget="selection"/>
 			    <field name="insp_level4_id" widget="selection"/>
 			    <field name="insp_level5_id" widget="selection"/>
+                            <field name="insp_level6_id" widget="selection"/>
                         </group>
 			<group>
 			    <field name="state" invisible="1"/>
@@ -99,9 +100,6 @@
                         </group>
 
                     </group>
-                    <div>
-                        <field name="description" class="oe_inline" placeholder="Notes..."/>
-                    </div>
                 </sheet>
                 <div class="o_attachment_preview"/>
                 <div class="oe_chatter">
@@ -257,6 +255,7 @@
             <field name="arch" type="xml">
                 <form string="Plan">
                 <header>
+		    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,rejected,approved,done"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box">
@@ -283,9 +282,9 @@
 			    <field name="partner_id"/>
 			    <field name="sale_order_ids" widget="many2many_tags" domain="[('state', 'in', ('sale', 'done')), '|', ('partner_id', '=', partner_id), ('partner_id.parent_id', '=', partner_id)]"/>
 			    <field name="purchase_order_ids" widget="many2many_tags" domain="[('state', 'in', ('done', 'purchase'))]"/>
-			    <field name="contractor_id"/>
-			    <field name="enduser_id"/>
-			    <field name="state" invisible="1"/>
+			    <field name="contractor_id" domain="[('company_type', '=', 'company')]"/>
+			    <field name="enduser_id" domain="[('company_type', '=', 'company')]"/>
+			    <field name="tpi_id" domain="[('company_type', '=', 'company')]"/>
 			</group>
 			<group>
 			    <field name="date"/> 
