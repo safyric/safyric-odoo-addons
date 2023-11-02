@@ -12,6 +12,9 @@ class OdooAiBot(models.AbstractModel):
 
     def _apply_logic(self, record, values):
         ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id('odoo_ai.partner_ai')
+        partner_id = self.env['res.partner'].search([('id', '=', ai_bot_id)])
+        if partner_id.im_status != 'online':
+            raise UserError(_('AI Bot is currently down'))
         if len(record) != 1 or values.get("author_id") == ai_bot_id:
             return
 
