@@ -1,4 +1,3 @@
-import requests
 from odoo import models, fields, api, _
 import logging
 
@@ -19,12 +18,4 @@ class ResUsers(models.Model):
         channel_info = self.env['mail.channel'].channel_get([ai_bot_partner_id, self.partner_id.id])
         channel = self.env['mail.channel'].browse(channel_info['id'])
         return channel
-
-
-    def _compute_im_status(self):
-        super(ResUsers, self)._compute_im_status()
-        service = self.env['odoo.ai'].sudo().search([('service', '=', 'openai')], limit=1)
-        ai_bot_user_id = self.env['ir.model.data'].xmlid_to_res_id('odoo_ai_openai.user_ai')
-        for user in self.filtered(lambda u: u.id == ai_bot_user_id):
-            user.im_status = 'online'
 
