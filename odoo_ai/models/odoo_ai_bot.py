@@ -13,17 +13,18 @@ class OdooAiBot(models.AbstractModel):
     def _apply_logic(self, record, values):
         ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id('odoo_ai.partner_ai')
         partner_id = self.env['res.partner'].search([('id', '=', ai_bot_id)])
-        if partner_id.im_status != 'online':
-            raise UserError(_('AI Bot is currently down'))
         if len(record) != 1 or values.get("author_id") == ai_bot_id:
             return
 
         if self._is_bot_pinged(values) or self._is_bot_in_private_channel(record):
             body = values.get("body", "")
-            try:
-                answer = self._get_answer(record, body, values)
-            except:
-                answer = ''
+            if partner_id.im_status != 'online':
+                answer = "I'm currently down for maintenance, please check back later!"
+            else:
+                try:
+                    answer = self._get_answer(record, body, values)
+                except:
+                    answer = ''
             if answer:
                 message_type = 'comment'
                 subtype_id = self.env['ir.model.data'].xmlid_to_res_id('mail.mt_comment')
