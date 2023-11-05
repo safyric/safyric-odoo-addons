@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_wiki_form_dynamic_content" model="ir.ui.view">
+	<field name="name">document.page.form.dynamic.content</field>
+	<field name="model">document.page</field>
+	<field name="inherit_id" ref="document_page.view_wiki_form"/>
+	<field name="arch" type="xml">
+	    <xpath expr="//page[@name='info']" position="before">
+		<page string="Content Structure">
+		    <field name="content_ids" default_order='id, sequence' nolabel="1" context="{'default_document_page_id': active_id}"/>
+		</page>
+	    </xpath>
+	</field>
+    </record>
+</odoo>
