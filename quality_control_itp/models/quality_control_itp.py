@@ -157,4 +157,3 @@ class QcItp(models.Model):
     def _compute_attachment_number(self):
         for plan in self:
             plan.attachment_number = sum(plan.plan_line_ids.mapped('attachment_number'))
-
