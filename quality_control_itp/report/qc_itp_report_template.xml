@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_qc_itp_document">
+    <t t-call="quality_control_itp.external_layout">
+      <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+      <div class="page">
+        <div class="oe_structure"/>
+        <table class="table-sm table-borderless" width="100%">
+          <tr>
+            <td width="40%">
+              <div class="container">
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L1) Subvendor:
+                  </div>
+                  <div class="col-9">
+                    <span t-esc="', '.join(doc.purchase_order_ids.mapped('partner_id.name'))"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L2) Vendor:
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.company_id"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L3) Customer: 
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.partner_id"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L4) Contractor: 
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.contractor_id"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L5) End User: 
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.enduser_id"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    (L6) TPIA:
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.tpi_id"/>
+                  </div>
+                </div>
+
+              </div>
+            </td>
+            <td width="40%">
+              <div class="container">
+                <div class="row" t-if="doc.project_name">
+                  <div class="col-3 p-0">
+                    Project Name:
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.project_name"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    Customer PO(s):
+                  </div>
+                  <div class="col-9">
+                    <span t-esc="', '.join(doc.sale_order_ids.mapped('client_order_ref'))"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 p-0">
+                    Vendor SO(s):
+                  </div>
+                  <div class="col-9">
+                    <span t-field="doc.sale_order_ids"/>
+                  </div>
+                </div>
+
+                <div class="row" t-if="doc.purchase_order_ids">
+                  <div class="col-3 p-0">
+                    Vendor PO(s):
+                  </div>
+                  <div class="col-9">
+                    <span t-esc="', '.join(doc.purchase_order_ids.mapped('name'))"/>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td width="20%">
+              <div class="container">
+                <div class="row">
+                  <div class="col-5 p-0">
+                    Issue Date:
+                  </div>
+                  <div class="col-7">
+                    <span t-field="doc.date"/>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table class="table table-sm o_main_table">
+          <thead class="thead-dark">
+            <tr>
+              <th rowspan="2" class="align-top text-left">Seq.</th>
+	      <th rowspan="2" width="30%" class="align-top text-left">Activity</th>
+              <th rowspan="2" width="20%" class="align-top text-left">Reference</th>
+              <th rowspan="2" width="20%" class="align-top text-left">Acceptance Criteria</th>
+              <th rowspan="2" class="align-top text-left">Verifying Docs</th>
+              <th colspan="6" class="text-center">Inspection Level</th>
+            </tr>
+            <tr>
+              <th class="text-left">L1</th>
+              <th class="text-left">L2</th>
+              <th class="text-left">L3</th>
+              <th class="text-left">L4</th>
+              <th class="text-left">L5</th>
+              <th class="text-left">L6</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <t t-set="process" t-value="[]"/>
+            <t t-foreach="doc.plan_line_ids" t-as="line">
+              <t t-set="process" t-value="process+[line.process_id]"/>
+            </t>
+            <t t-foreach="sorted(set(process), key=lambda p: p.sequence)" t-as="category">
+              <tr>
+                <td colspan="999"><strong><span t-esc="category.name"/></strong></td>
+              </tr>
+              <t t-foreach="doc.plan_line_ids.sorted(lambda r: r.sequence)" t-as="line">
+                <tr t-if="category.id == line.process_id.id">
+                  <td><span t-esc="line_index+1"/></td>
+                  <td>
+                    <span t-field="line.name"/>
+                    <t t-if="line.description"><br/><span t-field="line.description"/></t>
+                  </td>
+                  <td><span t-field="line.reference_ids"/></td>
+                  <td><span t-field="line.acc_criteria_ids"/></td>
+                  <td><span t-field="line.verify_doc_ids"/></td>
+                  <td><span t-field="line.insp_level1_id" class="text-nowrap"/></td>
+                  <td><span t-field="line.insp_level2_id" class="text-nowrap"/></td>
+                  <td><span t-field="line.insp_level3_id" class="text-nowrap"/></td>
+                  <td><span t-field="line.insp_level4_id" class="text-nowrap"/></td>
+                  <td><span t-field="line.insp_level5_id" class="text-nowrap"/></td>
+                  <td><span t-field="line.insp_level6_id" class="text-nowrap"/></td>
+                </tr>
+              </t>
+            </t>
+          </tbody>
+        </table>      
+      </div>      
+    </t>
+  </template>
+
+  <template id="report_qc_itp">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+	<t t-call="quality_control_itp.report_qc_itp_document" t-lang="doc.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+</odoo>
+

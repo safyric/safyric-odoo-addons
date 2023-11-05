@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="action_report_qc_itp"
+            string="ITP"
+            model="qc.itp" 
+            report_type="qweb-pdf"
+            file="quality_control_itp.report_qc_itp" 
+            name="quality_control_itp.report_qc_itp"
+            print_report_name="'ITP  %s' % (object.name)"
+        />
+
+    </data>
+</odoo>

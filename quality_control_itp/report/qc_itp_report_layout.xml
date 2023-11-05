@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="external_layout_itp" inherit_id="web.external_layout_background" primary="True">
+    <xpath expr="//img" position="after">
+      <div class="W-25 float-right text-right text-nowrap">
+        <h3>
+	  <t>
+            <span>INSPECTION AND TEST PLAN<br/></span>
+            <span class="text-muted" t-field="doc.name"/>
+	  </t>
+        </h3>
+      </div>
+    </xpath>
+    <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
+      <div class="float-left text-muted" style="font-size: 8px;">
+        <small>REPORT-Q1 (v.231102)</small>
+      </div>
+    </xpath>
+  </template>
+  <template id="external_layout">
+    <t t-if="not o" t-set="o" t-value="doc"/>
+    <t t-if="not company">
+      <!-- Multicompany -->
+      <t t-if="company_id">
+        <t t-set="company" t-value="company_id"/>
+      </t>
+      <t t-elif="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+      </t>
+      <t t-else="else">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+    </t>
+    <t t-call="quality_control_itp.external_layout_itp"><t t-raw="0"/></t>
+  </template>
+</odoo>
