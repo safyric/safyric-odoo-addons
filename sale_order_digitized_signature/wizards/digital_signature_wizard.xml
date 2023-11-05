@@ -8,9 +8,11 @@
         <field name="arch" type="xml">
             <form string="Digital Signature Wizard">
                 <group class="oe_title">
-		    <field name="signature_id" domain="['|', ('user_id', '=', uid), ('user_id', '=', False)]"/>
-		    <label for="signature" string="Signature Image"/>
-		    <field name="signature" widget="image" nolabel="1"/>
+                    <field name="signature_type" widget="radio" options="{'horizontal': true}"/>
+		    <field name="signature_id" domain="['|', ('user_id', '=', uid), ('user_id', '=', False)]" attrs="{'invisible': [('signature_type', '=', 'draw')]}"/>
+		    <label for="signature" string="Preview/Upload" attrs="{'invisible': [('signature_type', '=', 'draw')]}"/>
+		    <field name="signature" widget="image" nolabel="1" attrs="{'invisible': [('signature_type', '=', 'draw')]}"/>
+                    <field name="signature_draw" widget="signature" nolabel="1" attrs="{'invisible': [('signature_type', '!=', 'draw')]}"/>
                     <field name="signature_keyword"/>
                     <field name="signature_width"/>
                     <field name="signature_height"/>
