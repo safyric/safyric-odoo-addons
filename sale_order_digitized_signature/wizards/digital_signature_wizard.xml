@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="digital_signature_wizard" model="ir.ui.view">
+        <field name="name">sale.order.signature.wizard.form</field>
+        <field name="model">sale.order.digital.signature</field>
+        <field name="arch" type="xml">
+            <form string="Digital Signature Wizard">
+                <group class="oe_title">
+		    <field name="signature_id" domain="['|', ('user_id', '=', uid), ('user_id', '=', False)]"/>
+		    <label for="signature" string="Signature Image"/>
+		    <field name="signature" widget="image" nolabel="1"/>
+                    <field name="signature_keyword"/>
+                    <field name="signature_width"/>
+                    <field name="signature_height"/>
+                </group>
+                <footer>
+                    <button name="sale_order_digital_signature" string="Sign" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="digital_signature_action" model="ir.actions.act_window">
+        <field name="name">Digital Signature</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.digital.signature</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="digital_signature_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
