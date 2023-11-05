@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_purchase_clause_search" model="ir.ui.view">
+            <field name="name">purchase.clause.search</field>
+            <field name="model">purchase.clause</field>
+            <field name="arch" type="xml">
+		<search string="Purchase Clause">
+		    <field name="name"/>
+		    <field name="company_id" groups="base.group_multi_company"/>
+		</search>
+	    </field>
+	</record>
+
+        <record id="view_purchase_clause_form" model="ir.ui.view">
+            <field name="name">purchase.clause.form</field>
+            <field name="model">purchase.clause</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Clause">
+		    <sheet>
+			<div class="oe_button_box" name="button_box">
+			    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+				<field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+			    </button>
+			</div>
+			<div class="oe_title">
+			    <h1>
+				<field name="name" placeholder="name"/>
+			    </h1>
+			</div>
+			<group>
+			    <group>
+			    </group>
+			    <group>
+				<field name="company_id" groups="base.group_multi_company"/>
+			    </group>
+			</group>
+			<notebook>
+			    <page name="content" string="Content">
+				<field name="content"/>
+			    </page>
+			</notebook>
+		    </sheet>
+		</form>
+	    </field>
+	</record>
+
+	<record id="view_purchase_clause_tree" model="ir.ui.view">
+	    <field name="name">purchase.clause.tree</field>
+	    <field name="model">purchase.clause</field>
+	    <field name="arch" type="xml">
+		<tree string="Purchase Clause">
+		    <field name="name"/>
+		    <field name="company_id" groups="base.group_multi_company"/>
+		</tree>
+	    </field>
+	</record>
+
+	<record id="action_purchase_clause" model="ir.actions.act_window">
+	    <field name="name">Purchase Clauses</field>
+ 	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">purchase.clause</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="view_purchase_clause_tree"/>
+	</record>
+
+	<menuitem
+	    id="menu_purchase_clause"
+	    name="Purchase Clause"
+	    parent="purchase.menu_purchase_config"
+	    action="action_purchase_clause"
+	/>
+    </data>
+</odoo>

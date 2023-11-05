@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_clauses" model="ir.ui.view">
+	<field name="name">purchase.order.form.clause</field>
+	<field name="model">purchase.order</field>
+	<field name="inherit_id" ref="purchase.purchase_order_form"/>
+	<field name="arch" type="xml">
+	    <xpath expr="//notebook" position="inside">
+		<page string="Clauses">
+		    <group>
+			<field name="purchase_clause_id" string="Load a template"/>
+			<field name="content" nolabel="1" colspan="2"/>
+		    </group>
+		    <group class="oe_edit_only">
+			<field name="field_domain" widget="domain" nolabel="1" options="{'model': 'purchase.order'}"/>
+			<group>
+			    <field name="default_value"/>
+			    <field name="copyvalue"/>
+			</group>
+			<p>
+                            This section (on the left) allows you to add dynamic fields inside the content.
+                            <ol>
+                                <li>Select the field using the popup</li>
+                                <li>Enter the default value if the field is empty</li>
+                                <li>Copy and paste the placeholder expression in the content</li>
+                            </ol>
+                        </p>
+		    </group>
+		</page>
+	    </xpath>
+	</field>
+    </record>
+</odoo>
