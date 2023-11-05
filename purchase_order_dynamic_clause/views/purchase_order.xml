@@ -8,7 +8,7 @@
 	    <xpath expr="//notebook" position="inside">
 		<page string="Clauses">
 		    <group>
-			<field name="purchase_clause_id" string="Load a template"/>
+			<field name="purchase_clause_id" string="Load a template" domain="[('company_id', '=', company_id)]"/>
 			<field name="content" nolabel="1" colspan="2"/>
 		    </group>
 		    <group class="oe_edit_only">

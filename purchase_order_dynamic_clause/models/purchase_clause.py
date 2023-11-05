@@ -12,5 +12,5 @@ class PurchaseClause(models.Model):
         default=True,
         help="If unchecked, it will allow you to hide the agreement without "
         "removing it.")
-    company_id = fields.Many2one('res.company', string='Company', readonly=True,  default=lambda self: self.env.user.company_id)
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
 
