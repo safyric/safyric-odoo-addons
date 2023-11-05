@@ -120,7 +120,7 @@ class IrActionsReport(models.Model):
         jar = '{}/../static/jar/jPdfSign.jar'.format(me)
         return '%s %s %s %s' % (java_bin, java_param, jar, opts)
 
-    def pdf_sign(self, pdf, certificate):
+    def pdf_sign(self, pdf, certificate, data):
         pdfsigned = pdf + '.signed.pdf'
         p12 = _normalize_filepath(certificate.path)
         passwd = _normalize_filepath(certificate.password_file)
@@ -139,20 +139,20 @@ class IrActionsReport(models.Model):
             search_countersign = []
             on_page = 0
             countersign_on_page = 0
-            if certificate.keyword:
-                search_rects = page.search_for(certificate.keyword)
+            if data['keyword']:
+                search_rects = page.search_for(data['keyword'])
 
             if len(search_rects) > 0:
                 on_page = -1
                 rect = search_rects[0]
                 if rect:
-                    x1,y1 = rect.x0, page.rect.y1 - rect.y1 - certificate.signature_height - rect.height
+                    x1,y1 = rect.x0, page.rect.y1 - rect.y1 - data['height'] - rect.height
 
-            if certificate.signature_width > 1:
-                x2 = x1 + certificate.signature_width
+            if data['width'] > 1:
+                x2 = x1 + data['width']
 
-            if certificate.signature_height > 1:
-                y2 = y1 + certificate.signature_height
+            if data['height'] > 1:
+                y2 = y1 + data['height']
 
             if certificate.counter_sign:
                 search_countersign = page.search_for(certificate.counter_sign)
@@ -166,8 +166,8 @@ class IrActionsReport(models.Model):
         me = os.path.dirname(__file__)
         background = '{}/../static/src/image/stamp.png'.format(me)
 
-        if certificate.stamp:
-            image = base64.b64decode(certificate.stamp)
+        if data['sig_img']:
+            image = base64.b64decode(data['sig_img'])
             fd, background = tempfile.mkstemp()
             with closing(os.fdopen(fd, 'wb')) as f:
                 f.write(image)
@@ -211,7 +211,7 @@ class IrActionsReport(models.Model):
             with open(pdfsigned, 'wb') as outf:
                 pdf_signer.sign_pdf(w, output=outf)
 
-        if certificate.stamp:
+        if data['sig_img']:
             try:
                 os.unlink(background)
             except (OSError, IOError):
@@ -230,6 +230,8 @@ class IrActionsReport(models.Model):
 
     @api.multi
     def render_qweb_pdf(self, res_ids=None, data=None):
+        if not res_ids and data['res_ids']:
+            res_ids = data['res_ids']
         certificate = self._certificate_get(res_ids)
         if certificate and certificate.attachment:
             signed_content = self._attach_signed_read(res_ids, certificate)
@@ -242,6 +244,14 @@ class IrActionsReport(models.Model):
         content, ext = super(IrActionsReport, self).render_qweb_pdf(res_ids,
                                                                     data)
         if certificate:
+            if data['sig_img'] == False:
+                data.update({'sig_img': certificate.stamp})
+            if data['keyword'] == False:
+                data.update({'keywrod': certificate.keyword})
+            if data['width'] == False:
+                data.update({'width': certificate.signature_width})
+            if data['height'] == False:
+                data.update({'height': certificate.signature_height})
             # Creating temporary origin PDF
             pdf_fd, pdf = tempfile.mkstemp(
                 suffix='.pdf', prefix='report.tmp.')
@@ -251,7 +261,7 @@ class IrActionsReport(models.Model):
                 "Signing PDF document '%s' for IDs %s with certificate '%s'",
                 self.report_name, res_ids, certificate.name,
             )
-            signed = self.pdf_sign(pdf, certificate)
+            signed = self.pdf_sign(pdf, certificate, data)
             # Read signed PDF
             if os.path.exists(signed):
                 with open(signed, 'rb') as pf:
