@@ -47,7 +47,7 @@
                                         <t t-set="address_block" t-value="doc.bank_id.state.name, doc.bank_id.city, doc.bank_id.street, doc.bank_id.street2"/>
                                         <t t-set="address_cn" t-value="''.join([x for x in address_block if x])"/>
                                         <t t-set="city_block" t-value="doc.bank_id.city, doc.bank_id.state.name"/>
-                                        <t t-if="doc.partner_id.lang=='zh_CN'">
+                                        <t t-if="lang=='zh_CN'">
                                             <div class="row">
                                                 <span t-esc="address_cn"/>
                                             </div>
