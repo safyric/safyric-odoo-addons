@@ -244,13 +244,20 @@ class IrActionsReport(models.Model):
         content, ext = super(IrActionsReport, self).render_qweb_pdf(res_ids,
                                                                     data)
         if certificate:
-            if data['sig_img'] == False:
+            if not data:
+                data.update({
+                    'sig_img': certificate.stamp,
+                    'keyword': certificate.keyword,
+                    'width': certificate.signature_width,
+                    'height': certificate.signature_height
+                })
+            elif data['sig_img'] == False:
                 data.update({'sig_img': certificate.stamp})
-            if data['keyword'] == False:
+            elif data['keyword'] == False:
                 data.update({'keywrod': certificate.keyword})
-            if data['width'] == False:
+            elif data['width'] == False:
                 data.update({'width': certificate.signature_width})
-            if data['height'] == False:
+            elif data['height'] == False:
                 data.update({'height': certificate.signature_height})
             # Creating temporary origin PDF
             pdf_fd, pdf = tempfile.mkstemp(
