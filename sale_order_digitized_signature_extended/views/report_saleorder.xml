@@ -11,7 +11,7 @@
                   <td><strong>Customer acceptance</strong></td>
                 </tr>
                 <tr>
-                  <td class="bg-light" style="height: 120px">
+                  <td class="bg-light" style="height: 160px">
                     <div class="container">
                       <div>
                         <span t-if="doc.customer_signature">

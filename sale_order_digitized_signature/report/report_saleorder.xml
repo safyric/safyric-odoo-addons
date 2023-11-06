@@ -9,7 +9,7 @@
                 <span t-if="doc.customer_signature">
                     <img class="image"
                          t-att-src="'data:image/png;base64,%s' % to_text(doc.customer_signature)"
-                         style="border:auto;"/>
+                         style="border:auto"/>
                 </span>
             </p>
         </xpath>
