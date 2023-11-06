@@ -11,7 +11,7 @@
                   <td><strong>Seller acceptance</strong></td>
                 </tr>
                 <tr>
-                  <td class="bg-light" style="height: 120px">
+                  <td class="bg-light" style="height: 160px">
                     <div class="container">
                       <div>
                         <span t-if="o.seller_signature">
@@ -30,7 +30,7 @@
                   <td class="bg-light"><strong>Buyer signature</strong></td>
                 </tr>
                 <tr>
-                  <td class="bg-light" style="height: 120px">
+                  <td class="bg-light" style="height: 160px">
                     <div class="container">
                       <div>
                         <!--<t t-if="o.user_id.digital_signature">
