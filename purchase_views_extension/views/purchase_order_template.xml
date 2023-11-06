@@ -24,6 +24,10 @@
 			<span>Contact: </span>
 			<span t-field="o.partner_id.name"/>
 		    </div>
+		    <div class="row" t-if="o.partner_id.child_ids.filtered(lambda r: r.type == 'legal')">
+			<span>Legal Rep: </span>
+			<span t-esc="o.partner_id.child_ids.filtered(lambda r: r.type == 'legal').name"/>
+		    </div>
                     <div class="row" t-if="o.partner_id.vat">
                       <span>
                         <t if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"/> 
@@ -100,9 +104,9 @@
                     <div t-field="o.company_id.partner_id"
                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
                   </div>
-                  <div class="row">
-                    <span>Contact: </span>
-                    <span t-field="o.user_id.partner_id.name"/>
+                  <div class="row" t-if="o.company_id.partner_id.child_ids.filtered(lambda r: r.type == 'legal')">
+                    <span>Legal Rep: </span>
+                    <span t-esc="o.company_id.partner_id.child_ids.filtered(lambda r: r.type == 'legal').name"/>
                   </div>
                   <div class="row" t-if="o.company_id.partner_id.vat">
                     <span>
@@ -147,7 +151,10 @@
     <xpath expr="//div[@class='page']/h2[2]" position="replace"/>
     <xpath expr="//div[@class='page']/h2[1]" position="replace"/>
     <xpath expr="//div[@id='informations']" position="replace"/>
-    
+
+    <xpath expr="//table[hasclass('o_main_table')]" position="before">
+      <div class="container"><div class="row pt-1 pb-1 pl-1 bg-light"><span>Purchase Order Lines</span></div></div>
+    </xpath>    
     <xpath expr="//span[@t-field='line.date_planned']" position="attributes">
       <attribute name="t-options">{"widget": "date"}</attribute>
     </xpath>
