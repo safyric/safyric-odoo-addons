@@ -7,8 +7,8 @@
     <xpath expr="//span[@t-field='move_line.lot_name']/.." position="attributes">
       <attribute name="t-if" add="and o.show_serial" separator=" "/>
     </xpath>
-    <xpath expr="//span[@t-field='move_line.lot_id.name']/.." position="attributes">
+    <!--<xpath expr="//span[@t-field='move_line.lot_id.name']/.." position="attributes">
       <attribute name="t-elif" add="and o.show_serial" separator=" "/>
-    </xpath>
+    </xpath>-->
   </template>
 </odoo>
