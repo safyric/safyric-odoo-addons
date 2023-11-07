@@ -22,8 +22,14 @@
                                             <span t-field="doc.acc_holder_name" class="bg-warning"/>
                                         </div>
                                         <div class="row">
-                                            <span t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                            <span t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'/>
                                         </div>
+					<div class="row" t-if="doc.partner_id.vat">
+					    <span>VAT: <span t-field="doc.partner_id.vat"/></span>
+					</div>
+					<div class="row" t-if="lang == 'zh_CN' and doc.company_id.email_invoicing">
+					    <span>Email: <span t-field="doc.company_id.email_invoicing"/></span>
+					</div>
                                     </div>
                                 </div>
                             </td>
@@ -67,19 +73,19 @@
                                                 <span t-field="doc.bank_id.country"/>
                                             </div>
                                         </t>
-                                        <div t-if="doc.bank_id.bic" class="row">
+                                        <div t-if="lang != 'zh_CN' and doc.bank_id.bic" class="row" name="bic">
                                             <span>BIC/SWIFT: </span>
                                             <span t-field="doc.bank_id.bic" class="m-0 bg-warning"/>
                                         </div>
-                                        <div t-if="doc.bank_id.code" class="row">
+                                        <div t-if="lang != 'zh_CN' and doc.bank_id.code" class="row" name="iban">
                                             <span>IBAN: </span>
                                             <span t-field="doc.bank_id.code" class="m-0 bg-warning"/>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" name="account">
                                             <span>Account #: </span>
                                             <span t-field="doc.acc_number" class="m-0 bg-warning"/>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" name="currency">
                                             <span>Currency: </span>
                                             <span t-field="doc.currency_id" class="m-0"/>
                                         </div>
