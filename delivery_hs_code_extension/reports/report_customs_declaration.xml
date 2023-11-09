@@ -18,6 +18,7 @@
 			<tr>
 			    <td>
 				<div><span t-esc="code"/></div>
+				<t t-foreach="request.env['']"
 			    </td>
 			</tr>
 		    </t>
