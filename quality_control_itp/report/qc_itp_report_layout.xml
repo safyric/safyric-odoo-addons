@@ -2,13 +2,13 @@
 <odoo>
   <template id="external_layout_itp" inherit_id="web.external_layout_background" primary="True">
     <xpath expr="//img" position="after">
-      <div class="W-25 float-right text-right text-nowrap">
-        <h3>
-	  <t>
-            <span>INSPECTION AND TEST PLAN<br/></span>
-            <span class="text-muted" t-field="doc.name"/>
-	  </t>
-        </h3>
+      <div class="container">
+        <div class="float-right text-right text-nowrap w-25">
+	  <h3>
+            <div>INSPECTION AND TEST PLAN</div>
+            <div class="text-muted"><span t-field="doc.name"/></div>
+	  </h3>
+        </div>
       </div>
     </xpath>
     <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
