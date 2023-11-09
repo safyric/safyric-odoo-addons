@@ -9,7 +9,7 @@
           <tr>
             <td width="40%">
               <div class="container">
-                <div class="row">
+                <div class="row" t-if="doc.purchase_order_ids">
                   <div class="col-3 p-0">
                     (L1) Subvendor:
                   </div>
@@ -33,7 +33,7 @@
                     <span t-field="doc.partner_id"/>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row" t-if="doc.contractor_id">
                   <div class="col-3 p-0">
                     (L4) Contractor: 
                   </div>
@@ -41,7 +41,7 @@
                     <span t-field="doc.contractor_id"/>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row" t-if="doc.enduser_id">
                   <div class="col-3 p-0">
                     (L5) End User: 
                   </div>
@@ -123,11 +123,11 @@
               <th colspan="6" class="text-center">Inspection Level</th>
             </tr>
             <tr>
-              <th class="text-left">L1</th>
+              <th class="text-left"><span t-if="doc.purchase_order_ids">L1</span></th>
               <th class="text-left">L2</th>
               <th class="text-left">L3</th>
-              <th class="text-left">L4</th>
-              <th class="text-left">L5</th>
+              <th class="text-left"><span t-if="doc.contractor_id">L4</span></th>
+              <th class="text-left"><span t-if="doc.enduser_id">L5</span></th>
               <th class="text-left">L6</th>
 
             </tr>
@@ -146,22 +146,45 @@
                   <td><span t-esc="line_index+1"/></td>
                   <td>
                     <span t-field="line.name"/>
-                    <t t-if="line.description"><br/><span t-field="line.description"/></t>
+                    <t t-if="line.description"><br/><span class="font-italic text-muted" t-field="line.description"/></t>
                   </td>
                   <td><span t-field="line.reference_ids"/></td>
                   <td><span t-field="line.acc_criteria_ids"/></td>
                   <td><span t-field="line.verify_doc_ids"/></td>
-                  <td><span t-field="line.insp_level1_id" class="text-nowrap"/></td>
+                  <td><span t-if="doc.purchase_order_ids" t-field="line.insp_level1_id" class="text-nowrap"/></td>
                   <td><span t-field="line.insp_level2_id" class="text-nowrap"/></td>
                   <td><span t-field="line.insp_level3_id" class="text-nowrap"/></td>
-                  <td><span t-field="line.insp_level4_id" class="text-nowrap"/></td>
-                  <td><span t-field="line.insp_level5_id" class="text-nowrap"/></td>
+                  <td><span t-if="doc.contractor_id" t-field="line.insp_level4_id" class="text-nowrap"/></td>
+                  <td><span t-if="doc.enduser_id" t-field="line.insp_level5_id" class="text-nowrap"/></td>
                   <td><span t-field="line.insp_level6_id" class="text-nowrap"/></td>
                 </tr>
               </t>
             </t>
           </tbody>
         </table>      
+	<div class="container">
+	    <div class="row">
+		<t t-set="level1" t-value="doc.plan_line_ids.mapped('insp_level1_id.name')"/>
+		<t t-set="level2" t-value="doc.plan_line_ids.mapped('insp_level2_id.name')"/>
+		<t t-set="level3" t-value="doc.plan_line_ids.mapped('insp_level3_id.name')"/>
+		<t t-set="level4" t-value="doc.plan_line_ids.mapped('insp_level4_id.name')"/>
+		<t t-set="level5" t-value="doc.plan_line_ids.mapped('insp_level5_id.name')"/>
+		<t t-set="level6" t-value="doc.plan_line_ids.mapped('insp_level6_id.name')"/>
+		<t t-set="levels" t-value="level1+level2+level3+level5+level6"/>
+		<t t-foreach="request.env['qc.itp.insp.level'].sudo().search([('name', 'in', levels)])" t-as="l">
+		    <div t-if="l.description">
+			<div class="card bg-light" style="width: 16rem; height:10rem">
+			    <div class="card-header">
+				<span t-esc="l.name"/>
+			    </div>
+			    <div class="card-body">
+				<span class="text-muted" t-esc="l.description"/>
+			    </div>
+			</div>
+		    </div>
+		</t>
+	    </div>
+	</div>
       </div>      
     </t>
   </template>
