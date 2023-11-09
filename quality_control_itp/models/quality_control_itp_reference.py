@@ -46,6 +46,7 @@ class QcItpInspLevel(models.Model):
     name = fields.Char('Name', required=True)
     frequency = fields.Char('Frequency')
     sequence = fields.Integer('Sequence', default=1)
+    description = fields.Char('Description')
 
     @api.multi
     def name_get(self):
