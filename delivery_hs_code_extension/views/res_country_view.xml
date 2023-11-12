@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_country_group_form_type" model="ir.ui.view">
+	<field name="name">res.country.group.form.type</field>
+	<field name="model">res.country.group</field>
+	<field name="inherit_id" ref="base.view_country_group_form"/>
+	<field name="arch" type="xml">
+	    <field name="country_ids" position="before">
+		<field name="type" widget='radio' options="{'horizontal': true}"/>
+	    </field>
+	</field>
+    </record>
+
+    <record id="view_country_group_tree_type" model="ir.ui.view">
+        <field name="name">res.country.group.tree.type</field>
+	<field name="model">res.country.group</field>
+        <field name="inherit_id" ref="base.view_country_group_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="type"/>
+            </field>
+        </field>
+    </record>
+</odoo>
