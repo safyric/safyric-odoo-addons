@@ -5,31 +5,60 @@
 	    <t t-call="web.external_layout">
 		<t t-set="o" t-value="o.with_context(lang='zh_CN')"/>
 		<div class="page">
-		    <h2>
+		    <h2 class="text-center">
 			<span>Customs Declaration</span>
 		    </h2>
+		    <table class="table table-borderless" width="100%">
+			<t t-set="hs_code" t-value="[]"/>
+			<t t-foreach="o.move_lines" t-as="line">
+			    <t t-set="hs_code" t-value="hs_code+[line.product_id.hs_code]"/>
+			</t>
+			<t t-foreach="set(hs_code)" t-as="code">
+			    <t t-foreach="request.env['product.hs.code'].search([('name', '=', code)])" t-as="hs">
+				<tr>
+				    <td>
+					<div><h3>HS Code: <span t-esc="code"/></h3></div>
+					<div t-if="hs.commodity_name">Commodity Name: <span t-field="hs.commodity_name"/></div>
+					<div t-if="hs.commodity_usage">Commodity Usage: <span t-field="hs.commodity_usage"/></div>
+					<div t-if="hs.commodity_description">Commodity Description: <span t-field="hs.commodity_description"/></div>
+					<div t-if="hs.gtin">GTIN: <span t-field="hs.gtin"/></div>
+					<div t-if="hs.cas">CAS: <span t-field="hs.cas"/></div>
+					<div t-if="hs.parameter1">Parameter 1: <span t-field="hs.parameter1"/></div>
+					<div t-if="hs.parameter2">Parameter 2: <span t-field="hs.parameter2"/></div>
+					<div t-if="hs.parameter3">Parameter 3: <span t-field="hs.parameter3"/></div>
+					<div t-if="hs.parameter4">Parameter 4: <span t-field="hs.parameter4"/></div>
+					<t t-foreach="o.move_lines.mapped('sale_line_id.brand_id')" t-as="brand">
+					    <t t-if="brand">
+						<div>Brand: <span t-field="brand.name"/></div>
+						<div>Brand Type: <span t-field="brand.brand_type"/></div>
+					    </t>
+					    <t t-else="">
+						<div>品牌: 无品牌</div>
+					    </t>
+					</t>
+					<t t-set="products" t-value="o.move_lines.filtered(lambda r: r.product_id.hs_code == code).mapped('product_id')"/>
+					<div>Models: <span t-esc="', '.join(product.default_code for product in products)"/></div>
+					<t t-set="is_duty_preferred" t-value="o.partner_id.country_id in request.env['res.country.group'].search([('type', '=', 'trade')]).mapped('country_ids')"/>
+					<t t-if="is_duty_preferred">
+					    <div t-if="o.is_preferential_duty">出口享惠情况: 出口货物在最终目的国（地区）享受优惠关税</div>
+					    <div t-else="">出口享惠情况: 出口货物不能确定在最终目的国（地区）享受优惠关税</div>
+					</t>
+					<t t-else="">
+					    <div>出口享惠情况: 出口货物在最终目的国（地区）不享受优惠关税</div>
+					</t>
+				    </td>
+				</tr>
+			    </t>
+			</t>
+		    </table>
 		</div>
-		<table class="table table-borderless" width="100%">
-		    <t t-set="hs_code" t-value="[]"/>
-		    <t t-foreach="o.move_lines" t-as="line">
-			<t t-set="hs_code" t-value="hs_code+[line.product_id.hs_code]"/>
-		    </t>
-		    <t t-foreach="set(hs_code)" t-as="code">
-			<tr>
-			    <td>
-				<div><span t-esc="code"/></div>
-				<t t-foreach="request.env['']"
-			    </td>
-			</tr>
-		    </t>
-		</table>
 	    </t>
 	</t>
     </template>
 
     <template id="report_declaration">
 	<t t-foreach="docs" t-as="o">
-	    <t t-call="delivery_hs_code_extension.report_declaration_document" t-lang="zh_CN"/>
+	    <t t-call="delivery_hs_code_extension.report_declaration_document" t-lang="'zh_CN'"/>
 	</t>
     </template>
 
