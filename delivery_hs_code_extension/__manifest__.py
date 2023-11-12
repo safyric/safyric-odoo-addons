@@ -17,6 +17,7 @@
     'website': 'https://github.com/safyric/safyric-odoo-addons',
     'license': 'AGPL-3',
     'depends': [
+	'base',
         'delivery_hs_code',
 	'product_brands',
 	'stock'
@@ -25,6 +26,8 @@
         'security/ir.model.access.csv',
         'views/product_hs_code.xml',
 	'views/product_brand.xml',
+	'views/res_country_view.xml',
+	'views/stock_picking.xml',
 	'reports/report_customs_declaration.xml',
     ],
     'installable': True
