@@ -16,7 +16,7 @@
                       <div>
                         <span t-if="o.seller_signature">
                           <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.seller_signature)" style="border:auto;max-width:300px"/>
-                          <p t-field="o.seller_sign_date" class="oe_inline"/>
+                          <!--<p t-field="o.seller_sign_date" class="oe_inline"/>-->
                         </span>
                       </div>
                     </div>
@@ -40,7 +40,7 @@
                         <t>
                           <span t-if="o.buyer_signature">
                             <img class="image" t-att-src="'data:image/png;base64,%s' % to_text(o.buyer_signature)" style="border:auto;height:40mm;max-width:300px"/>
-                            <p t-field="o.buyer_sign_date" class="oe_inline"/>
+                            <!--<p t-field="o.buyer_sign_date" class="oe_inline"/>-->
                           </span>
                         </t>
                       </div>
