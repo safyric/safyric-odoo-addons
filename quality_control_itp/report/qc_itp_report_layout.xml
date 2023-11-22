@@ -5,7 +5,7 @@
       <div class="container">
         <div class="float-right text-right text-nowrap w-25">
 	  <h3>
-            <div>INSPECTION AND TEST PLAN</div>
+            <div>INSPECTION & TEST PLAN</div>
             <div class="text-muted"><span t-field="doc.name"/></div>
 	  </h3>
         </div>
