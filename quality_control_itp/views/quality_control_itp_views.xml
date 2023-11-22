@@ -279,7 +279,7 @@
                     </div>
                     <group>
                         <group>
-			    <field name="partner_id"/>
+			    <field name="partner_id" domain="[('is_company', '=', True)]"/>
 			    <field name="sale_order_ids" widget="many2many_tags" domain="[('state', 'in', ('sale', 'done')), '|', ('partner_id', '=', partner_id), ('partner_id.parent_id', '=', partner_id)]"/>
 			    <field name="purchase_order_ids" widget="many2many_tags" domain="[('state', 'in', ('done', 'purchase'))]"/>
 			    <field name="contractor_id" domain="[('company_type', '=', 'company')]"/>
