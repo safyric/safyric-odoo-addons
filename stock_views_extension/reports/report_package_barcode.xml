@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	<template id="report_package_barcode_inherit" inherit_id="stock.report_package_barcode">
+	    <xpath expr="//p[@t-field='o.name']" position="attributes">
+		<attribute name="style">display:none;</attribute>
+	    </xpath>
+
+	    <xpath expr="//t[@t-as='o']/t" position="after">
+		<div t-if="len(docs) > 1" style="page-break-after: always;"/>
+	    </xpath>
+
+	    <xpath expr="//thead/tr/th[3]" position="replace"/>
+	    <xpath expr="//thead/tr/th[1]" position="before">
+		<th>Item</th>
+	    </xpath>
+
+            <xpath expr="//tbody" position="replace">
+		<t t-set="move_lines" t-value="request.env['stock.move.line'].search([('result_package_id', '=', o.id), ('location_dest_id', '=', o.location_id.id)])"/>
+		<t t-set="product" t-value="[]"/>
+		<t t-foreach="move_lines" t-as="ml">
+		    <t t-set="product" t-value="product+[ml.product_id]"/>
+		</t>
+		<tbody>
+		    <tr t-foreach="sorted(set(product), key=lambda p: p.name)" t-as="p">
+			<td>
+			    <t t-set="move" t-value="move_lines.mapped('move_id').filtered(lambda m: m.location_dest_id.id == o.location_id.id and m.product_id.id == p.id)"/>
+			    <span t-esc="', '.join(m.item for m in move)"/>
+			</td>
+			<td>
+			    <span t-field="p.display_name"/>
+			</td>
+			<td class="text-nowrap text-right">
+			    <span t-esc="sum(l.quantity for l in o.quant_ids.filtered(lambda r: r.product_id.id == p.id))"/>
+			    <span t-esc="p.uom_id.name"/>
+			</td>
+		    </tr>
+		</tbody>
+	    </xpath>
+
+	    <xpath expr="//div[@class='row']/div[@class='col-8']" position="attributes">
+		<attribute name="class">col-12</attribute>
+	    </xpath>
+	</template>
+    </data>
+</odoo>

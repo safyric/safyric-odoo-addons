@@ -17,6 +17,7 @@
         "reports/report_deliveryslip.xml",
         "reports/report_picking.xml",
 	"reports/report_packinglist.xml",
+	"reports/report_package_barcode.xml",
         "views/stock_move_view.xml",
         "views/stock_picking_view.xml",
     ],
