@@ -10,6 +10,15 @@
 		<div t-if="len(docs) > 1" style="page-break-after: always;"/>
 	    </xpath>
 
+
+	    <xpath expr="//th/h1" position="attributes">
+		<attribute name="style">display:none;</attribute>
+	    </xpath>
+
+            <xpath expr="//th/h1" position="after">
+		<h1><span t-esc="o_index+1"/>#<span t-field="o.name"/></h1>
+	    </xpath>
+
 	    <xpath expr="//thead/tr/th[3]" position="replace"/>
 	    <xpath expr="//thead/tr/th[1]" position="before">
 		<th>Item</th>
@@ -40,6 +49,12 @@
 
 	    <xpath expr="//div[@class='row']/div[@class='col-8']" position="attributes">
 		<attribute name="class">col-12</attribute>
+	    </xpath>
+	</template>
+
+	<template id="report_package_barcode_delivery_inherit" inherit_id="delivery.report_package_barcode_delivery">
+	    <xpath expr="//span[@t-field='o.shipping_weight']" position="replace">
+		<span t-esc="o.shipping_weight+o.weight"/>
 	    </xpath>
 	</template>
     </data>
