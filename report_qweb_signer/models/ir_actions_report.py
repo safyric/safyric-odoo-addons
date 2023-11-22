@@ -230,8 +230,6 @@ class IrActionsReport(models.Model):
 
     @api.multi
     def render_qweb_pdf(self, res_ids=None, data=None):
-        if not res_ids and data['res_ids']:
-            res_ids = data['res_ids']
         certificate = self._certificate_get(res_ids)
         if certificate and certificate.attachment:
             signed_content = self._attach_signed_read(res_ids, certificate)
