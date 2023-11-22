@@ -67,6 +67,28 @@
 		    </tr>
 		</table>
 	    </xpath>
+	    <xpath expr="//t[@t-as='line']" position="attributes">
+		<attribute name="t-foreach">o.invoice_line_ids.filtered(lambda l: l.quantity > 0)</attribute>
+	    </xpath>
+	    <xpath expr="//span[@t-field='o.amount_untaxed']" position="replace">
+		<span t-esc="current_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+	    </xpath>
+	    <xpath expr="//t[@t-as='amount_by_group']" position="after">
+		<t t-set="total_paid" t-value="0"/>
+		<t t-foreach="o.invoice_line_ids.filtered(lambda l: l.quantity < 0 and l.product_id.type == 'service')" t-as="line">
+		    <t t-set="total_paid" t-value="total_paid + line.price_subtotal"/>
+		</t>
+		<tr class="border-black o_subtotal" style="">
+		    <td><strong>Paid</strong></td>
+		    <td class="text-right">
+			<span t-esc="abs(total_paid)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+		    </td>
+		</tr>
+	    </xpath>
+	    <xpath expr="//tr[@class='border-black o_total']/td/strong" position="replace">
+		<strong>Total Due</strong>
+	    </xpath>
+
 	    <xpath expr="//table[@name='beneficiary']" position="attributes">
 		<attribute name="t-att-style">'display: none;'</attribute>
 	    </xpath>
