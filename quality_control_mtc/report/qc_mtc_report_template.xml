@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_qc_mtc_document">
+    <t t-call="quality_control_mtc.external_layout">
+      <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+      <div class="page">
+        <div class="oe_structure"/>
+        <table class="table-sm table-borderless" width="100%">
+          <tr>
+            <td width="40%">
+              <div class="container">
+
+              </div>
+            </td>
+            <td width="40%">
+              <div class="container">
+
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table class="table table-sm o_main_table">
+          <thead class="thead-dark">
+            <tr>
+
+            </tr>
+            <tr>
+
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>      
+	<div class="container">
+	    <div class="row">
+
+	    </div>
+	</div>
+      </div>      
+    </t>
+  </template>
+
+  <template id="report_qc_mtc">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+	<t t-call="quality_control_mtc.report_qc_mtc_document" t-lang="doc.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+</odoo>
+

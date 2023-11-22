@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_qc_mtc_line_tree" model="ir.ui.view">
+            <field name="name">qc.mtc.line.tree</field>
+            <field name="model">qc.mtc.line</field>
+            <field name="arch" type="xml">
+                <tree string="MTC Lines">
+		    <field name="sequence" widget="handle"/>
+		    <field name="name"/>
+                    <field name="mtc_id"/>
+                    <field name="inspection_id"/>
+                    <field name="c"/>
+		    <field name="mn"/>
+                    <field name="p"/>
+                    <field name="s"/>
+                    <field name="si"/>
+                    <field name="cu"/>
+                    <field name="ni"/>
+                    <field name="cr"/>
+                    <field name="mo"/>
+                    <field name="v"/>
+                    <field name="nb"/>
+                    <field name="n"/>
+                    <field name="ti"/>
+                    <field name="co"/>
+                    <field name="al"/>
+                    <field name="ce"/>
+		    <field name="tensile_strength"/>
+                    <field name="yield_strength"/>
+                    <field name="elongation"/>
+                    <field name="reduction_of_area"/>
+                    <field name="impact_energy_1"/>
+                    <field name="impact_energy_2"/>
+                    <field name="impact_energy_3"/>
+                    <field name="impact_temperature"/>
+                    <field name="heat_treatment"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_mtc_line_tree_for_mtc" model="ir.ui.view">
+            <field name="name">qc.mtc.line.tree</field>
+            <field name="model">qc.mtc.line</field>
+	    <field name="inherit_id" ref="quality_control_mtc.view_qc_mtc_line_tree"/>
+	    <field name="mode">primary</field>
+            <field name="arch" type="xml">
+		<xpath expr="//field[@name='mtc_id']" position="attributes">
+		    <attribute name="invisible">1</attribute>
+		</xpath>
+            </field>
+        </record>
+
+
+        <record id="qc_mtc_line_view_form" model="ir.ui.view">
+            <field name="name">qc.mtc.line.view.form</field>
+            <field name="model">qc.mtc.line</field>
+            <field name="arch" type="xml">
+                <form string="MTC Lines">
+		    <header>
+		    </header>
+		    <sheet>
+			<div class="oe_button_box">
+
+			</div>
+			<div class="oe_title">
+			    <label for="name" string="Heat Code"/>
+			    <h1>
+				<field name="name"/>
+			    </h1>
+			    <label for="mtc_id" string="MTC"/>
+			    <h1>
+				<field name="mtc_id"/>
+			    </h1>
+			    <label for="inspection_id" string="Inspection Line"/>
+			    <h1>
+				<field name="inspection_id"/>
+			    </h1>
+			</div>
+			<group>
+			    <group string="Chemical">
+				<field name="c"/>
+				<field name="mn"/>
+				<field name="p"/>
+				<field name="s"/>
+				<field name="si"/>
+				<field name="cu"/>
+				<field name="ni"/>
+				<field name="cr"/>
+				<field name="mo"/>
+				<field name="v"/>
+				<field name="nb"/>
+				<field name="v"/>
+				<field name="n"/>
+				<field name="ti"/>
+				<field name="co"/>
+				<field name="al"/>
+			    </group>
+			    <group string="Mechanical">
+				<field name="tensile_strength"/>
+				<field name="yield_strength"/>
+				<field name="elongation"/>
+				<field name="reduction_of_area"/>
+                                <field name="hardness"/>
+                                <field name="heat_treatment"/>
+			    </group>
+			    <group string="Impact Test">
+				<field name="impact_energy_1"/>
+				<field name="impact_energy_2"/>
+				<field name="impact_energy_3"/>
+				<field name="impact_temperature"/>
+			    </group>
+			</group>
+		    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qc_mtc_line_view_form_without_header" model="ir.ui.view">
+            <field name="name">qc.mtc.line.view.form</field>
+            <field name="model">qc.mtc.line</field>
+            <field name="inherit_id" ref="quality_control_mtc.qc_mtc_line_view_form"/>
+            <field eval="35" name="priority"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="/form/sheet/div[hasclass('oe_button_box')]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='mtc_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='mtc_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="qc_mtc_line_kanban_view" model="ir.ui.view">
+            <field name="name">qc.mtc.line.kanban</field>
+            <field name="model">qc.mtc.line</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+		    <field name="mtc_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-6 text-muted">
+                                        <span><t t-esc="record.mtc_id.value"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_qc_mtc_line_filter" model="ir.ui.view">
+            <field name="name">qc.mtc.line.filter</field>
+            <field name="model">qc.mtc.line</field>
+            <field name="arch" type="xml">
+                <search string="MTC Lines">
+                    <field name="name" string="MTC Lines" filter_domain="[('name','ilike',self)]"/>
+                    <field name="mtc_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="MTC" name="mtc" domain="[]" context="{'group_by': 'mtc_id'}"/>
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="qc_mtc_line_actions_all" model="ir.actions.act_window">
+            <field name="name">All Lines</field>
+            <field name="res_model">qc.mtc.line</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_qc_mtc_line_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new line
+              </p>
+            </field>
+        </record>
+
+
+
+
+        <record id="view_qc_mtc_tree" model="ir.ui.view">
+            <field name="name">qc.mtc.tree</field>
+            <field name="model">qc.mtc</field>
+            <field name="arch" type="xml">
+                <tree string="MTC" decoration-warning="state=='draft'">
+                    <field name="name" string="MTC"/>
+		    <field name="partner_id"/>
+		    <field name="sale_order_id"/>
+		    <field name="sale_line_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_mtc_form" model="ir.ui.view">
+            <field name="name">qc.mtc.form</field>
+            <field name="model">qc.mtc</field>
+            <field eval="25" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="MTC">
+                <header>
+		    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,rejected,approved,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Cert #"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <label for="project_name" string="Project Name"/>
+                        <h2>
+                            <field name="project_name"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+			    <field name="partner_id" domain="[('is_company', '=', True)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+			    <field name="sale_order_id" domain="[('state', 'in', ('sale', 'done')), '|', ('partner_id', '=', partner_id), ('partner_id.parent_id', '=', partner_id)]"
+				options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+			    <field name="sale_line_id"  domain="[('order_id', '=', sale_order_id), ('product_id.type', '!=', 'service')]" attrs="{'invisible': [('sale_order_id', '=', False)]}"
+				options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+			    <field name="description"/>
+			    <field name="item_tag"/>
+			    <field name="quantity"/>
+			</group>
+			<group>
+			    <field name="date"/> 
+                            <field name="user_id" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+			<page string="Lot/Serial Number">
+			    <field name="lot_ids" nolabel="1" widget="many2many" domain="[('mtc_id', '=', False)]">
+				<tree>
+				    <field name="name"/>
+				</tree>
+			    </field>
+			</page>
+			<page string="Parts and Materials">
+			    <field name="mtc_mat_config_ids" nolabel="1" widget="one2many"
+				context="{'form_view_ref': 'quality_control_mtc.view_qc_mtc_mat_config_form_for_mtc', 'default_mtc_id': active_id, 'default_lot_ids': lot_ids}">
+				<tree>
+				    <field name="mtc_id" invisible="1"/>
+				    <field name="lot_ids" widget="many2many_tags"/>
+				    <field name="name"/>
+				    <field name="heat_code"/>
+				</tree>
+			    </field>
+			</page>
+			<page string="Inspection and Tests">
+			    <group>
+				<group>
+				    <field name="insp_visual" widget="radio" options="{'horizontal': True}"/>
+				    <field name="insp_dimensional" widget="radio" options="{'horizontal': True}"/>
+				</group>
+				<group>
+				    <label for="insp_marking"/>
+				    <div><field name="insp_marking_std" nolabel="1"/><field name="insp_marking" nolabel="1" widget="radio" options="{'horizontal': True}"/></div>
+				    <field name="insp_functional" widget="radio" options="{'horizontal': True}"/>
+				</group>
+			    </group>
+			    <group>
+				<field name="test_std"/>
+				<field name="test_ids" nolabel="1" colspan="2" widget="one2many" context="{'default_mtc_id': active_id}">
+				    <tree>
+					<field name="name"/>
+					<field name="pressure"/>
+					<field name="duration"/>
+					<field name="result"/>
+				    </tree>
+				</field>
+			    </group>
+			</page>
+                        <page string="Chemical and Mechanical">
+			    <field name="mtc_line_ids" nolabel="1" widget="one2many" options="{'reload_on_button': True}" 
+				context="{'form_view_ref' : 'quality_control_mtc.qc_mtc_line_view_form_without_header', 'default_mtc_id': active_id}">
+                        	<tree>
+                            	    <field name="sequence" widget="handle"/>
+                            	    <field name="name"/>
+				    <field name="c"/>
+				    <field name="mn"/>
+				    <field name="p"/>
+				    <field name="s"/>
+				    <field name="si"/>
+				    <field name="cu"/>
+				    <field name="ni"/>
+				    <field name="mo"/>
+				    <field name="tensile_strength"/>
+				    <field name="yield_strength"/>
+				    <field name="elongation"/>
+				    <field name="reduction_of_area"/>
+				    <field name="hardness"/>
+                        	</tree>
+                            </field>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <group>
+                                </group>
+                                <group>
+                                </group>
+                        </group>
+                        </page>
+                     </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qc_mtc_kanban" model="ir.ui.view">
+            <field name="name">qc.mtc.kanban</field>
+            <field name="model">qc.mtc</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-6 text-muted">
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right text-right">
+                                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'submit': 'default', 'cancel': 'danger', 'done': 'success'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_qc_mtc_filter" model="ir.ui.view">
+            <field name="name">qc.mtc.filter</field>
+            <field name="model">qc.mtc</field>
+            <field name="arch" type="xml">
+                <search string="MTC">
+                    <field name="name" string="Plan"/>
+                    <field name="state"/>
+                    <separator />
+                    <filter domain="[('state', '=', 'draft')]" string="Draft" name="draft" help="Draft Plans"/>
+                    <filter domain="[('state', '=', 'submit')]" string="To Approve" name="submit" help="Submitted Plans"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="State" domain="[]" context="{'group_by': 'state'}" name="state"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_qc_mtc_all_all" model="ir.actions.act_window">
+            <field name="name">All MTC</field>
+            <field name="res_model">qc.mtc</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_qc_mtc_filter"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new plan
+              </p>
+            </field>
+        </record>
+
+
+        <record id="view_qc_mtc_test_tree" model="ir.ui.view">
+            <field name="name">qc.mtc.test.tree</field>
+            <field name="model">qc.mtc.test</field>
+            <field name="arch" type="xml">
+		<tree string="Tests">
+		    <field name="name"/>
+		    <field name="pressure"/>
+		    <field name="duration"/>
+		    <field name="result"/>
+		</tree>
+	    </field>
+	</record>
+
+        <record id="view_qc_mtc_test_form" model="ir.ui.view">
+            <field name="name">qc.mtc.test.form</field>
+            <field name="model">qc.mtc.test</field>
+            <field name="arch" type="xml">
+                <form string="Tests">
+		    <sheet>
+			<group>
+			    <field name="mtc_id" invisible="1"/>
+                	    <field name="name"/>
+			    <label for="pressure"/>
+			    <div><field name="pressure" nolabel="1"/><field name="pressure_uom" nolabel="1" options="{'no_quick_create': True, 'no_create_edit' : True}"/></div>
+			    <label for="duration"/>
+			    <div><field name="duration" nolabel="1"/><field name="duration_uom" nolabel="1" options="{'no_quick_create': True, 'no_create_edit' : True}"/></div>
+			    <field name="result" widget="radio" options="{'horizontal': True}"/>
+			</group>
+		    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_qc_mtc_test" model="ir.actions.act_window">
+            <field name="name">Tests</field>
+            <field name="res_model">qc.mtc.test</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="view_qc_mtc_mat_config_tree" model="ir.ui.view">
+            <field name="name">qc.mtc.mat.config.tree</field>
+            <field name="model">qc.mtc.mat.config</field>
+            <field name="arch" type="xml">
+		<tree string="Materials">
+                    <field name="name"/>
+		</tree>
+            </field>
+        </record>
+
+
+        <record id="view_qc_mtc_mat_config_form" model="ir.ui.view">
+            <field name="name">qc.mtc.mat.config.form</field>
+            <field name="model">qc.mtc.mat.config</field>
+            <field name="arch" type="xml">
+		<form string="Materials">
+ 		    <sheet>
+			<group>
+			    <group>
+				<field name="mtc_id"/>
+				<field name="name"/>
+		               	<field name="heat_code"/>
+			    </group>
+			    <group>
+			    </group>
+			</group>
+			<group string="Lot/Serial Number">
+			    <field name="lot_ids" nolable="1" colspan="2" widget="many2many">
+				<tree>
+				    <field name="name"/>
+				</tree>
+			    </field>
+			</group>
+		    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qc_mtc_mat_config_form_for_mtc" model="ir.ui.view">
+            <field name="name">qc.mtc.mat.config.form.mtc</field>
+            <field name="model">qc.mtc.mat.config</field>
+	    <field name="inherit_id" ref="quality_control_mtc.view_qc_mtc_mat_config_form"/>
+	    <field name="mode">primary</field>
+            <field name="arch" type="xml">
+		<field name="mtc_id" position="attributes">
+		    <attribute name="invisible">1</attribute>
+		</field>
+            </field>
+        </record>
+
+
+        <record id="action_qc_mtc_mat_config" model="ir.actions.act_window">
+            <field name="name">Materials</field>
+            <field name="res_model">qc.mtc.mat.config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+	<menuitem id="menu_qc_mtc"
+	    parent="quality_control.qc_menu"
+	    sequence="6" name="MTC"/>
+
+	<menuitem id="menu_qc_mtc_child"
+	    parent="quality_control_mtc.menu_qc_mtc"
+	    action="action_qc_mtc_all_all"
+	    sequence="10" name="MTC"/>
+
+	<menuitem id="menu_qc_mtc_line"
+	    parent="quality_control_mtc.menu_qc_mtc"
+	    action="qc_mtc_line_actions_all"
+	    sequence="20" name="MTC Lines"/>
+
+        <menuitem id="menu_qc_mtc_test"
+            parent="quality_control_mtc.menu_qc_mtc"
+            action="action_qc_mtc_test"
+            sequence="30" name="Tests"/>
+
+
+	<menuitem id="menu_qc_mtc_mat_config"
+	    parent="quality_control_mtc.menu_qc_mtc"
+	    action="action_qc_mtc_mat_config"
+	    sequence="90" name="Materials"/>
+
+</odoo>
+

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_qc_mtc,qc.mtc.user,model_qc_mtc,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_mtc,qc.mtc.manager,model_qc_mtc,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_mtc_line,qc.mtc.user,model_qc_mtc_line,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_mtc_line,qc.mtc.manager,model_qc_mtc_line,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_mtc_test,qc.mtc.user,model_qc_mtc_test,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_mtc_test,qc.mtc.manager,model_qc_mtc_test,quality_control.group_quality_control_manager,1,1,1,1
+access_user_qc_mtc_mat_config,qc.mtc.user,model_qc_mtc_mat_config,quality_control.group_quality_control_user,1,1,1,0
+access_manager_qc_mtc_mat_config,qc.mtc.manager,model_qc_mtc_mat_config,quality_control.group_quality_control_manager,1,1,1,1
