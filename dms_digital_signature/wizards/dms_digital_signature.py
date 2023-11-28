@@ -43,6 +43,35 @@ class DmsDigitalSignature(models.TransientModel):
     signature_height = fields.Integer('Signature Height', help="Height of the signature area")
 
 
+    def _certificate_get(self, doc_ids):
+        """Obtain the proper certificate for the report and the conditions."""
+        certificates = self.env['report.certificate'].search([
+            ('company_id', '=', self.env.user.company_id.id),
+            ('model_id', '=', 'dms.file'),
+        ])
+        if not certificates:
+            return False
+        for cert in certificates:
+            # Check allow only one document
+            if cert.allow_only_one and len(self) > 1:
+                _logger.debug(
+                    "Certificate '%s' allows only one document, "
+                    "but printing %d documents",
+                    cert.name, len(doc_ids))
+                continue
+            # Check domain
+            if cert.domain:
+                domain = [('id', 'in', tuple(doc_ids))]
+                domain = domain + safe_eval(cert.domain)
+                docs = self.env[cert.model_id.model].search(domain)
+                if not docs:
+                    _logger.debug(
+                        "Certificate '%s' domain not satisfied", cert.name)
+                    continue
+            # Certificate match!
+            return cert
+        return False
+
     @api.onchange('signature_id')
     def _onchange_signature_id(self):
         if self.signature_id:
@@ -62,25 +91,7 @@ class DmsDigitalSignature(models.TransientModel):
         doc_ids = self._context.get('active_ids')
         doc_id = self.env['dms.file'].browse(doc_ids)
 
-        # Ger pkcs#12 pfx file
-        certificates = self.env['report.certificate'].search([
-            ('company_id', '=', self.env.user.company_id.id),
-            ('model_id.model', '=', 'dms.file')
-        ])
-        if not certificates:
-            return False
-
-        for certificate in certificates:
-            if certificate.allow_only_one and len(self) >1:
-                continue
-            if certificate.domain:
-                domain = safe_eval(certificate.domain)
-                docs = self.env[certificate.model_id.model].search(domain)
-                if not docs:
-                    _logger.exception(
-                        "Certificate '%s' domain not satisfied", certificate.name)
-                    continue
-
+        certificate = self._certificate_get(doc_ids)
         if certificate:
             p12 = _normalize_filepath(certificate.path)
             passwd = _normalize_filepath(certificate.password_file)
