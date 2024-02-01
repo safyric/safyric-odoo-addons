@@ -8,6 +8,7 @@
                 <tree string="MTC Lines">
 		    <field name="sequence" widget="handle"/>
 		    <field name="name"/>
+		    <field name="material"/>
                     <field name="mtc_id"/>
                     <field name="inspection_id"/>
                     <field name="c"/>
@@ -67,6 +68,10 @@
 			    <label for="name" string="Heat Code"/>
 			    <h1>
 				<field name="name"/>
+			    </h1>
+			    <label for="material" stsring="Material"/>
+			    <h1>
+				<field name="material"/>
 			    </h1>
 			    <label for="mtc_id" string="MTC"/>
 			    <h1>
@@ -253,20 +258,24 @@
                     </group>
                     <notebook>
 			<page string="Lot/Serial Number">
-			    <field name="lot_ids" nolabel="1" widget="many2many" domain="[('mtc_id', '=', False)]">
+			    <field name="product_id" invisible="1"/>
+			    <field name="lot_ids" nolabel="1" widget="many2many">
 				<tree>
 				    <field name="name"/>
 				</tree>
 			    </field>
 			</page>
-			<page string="Parts and Materials">
-			    <field name="mtc_mat_config_ids" nolabel="1" widget="one2many"
-				context="{'form_view_ref': 'quality_control_mtc.view_qc_mtc_mat_config_form_for_mtc', 'default_mtc_id': active_id, 'default_lot_ids': lot_ids}">
+			<page string="Heat Codes">
+			    <field name="mtc_heat_code_ids" nolabel="1" widget="one2many"
+				context="{'form_view_ref': 'quality_control_mtc.view_qc_mtc_heat_code_form_for_mtc', 'default_mtc_id': active_id, 'default_lot_ids': lot_ids}">
 				<tree>
 				    <field name="mtc_id" invisible="1"/>
 				    <field name="lot_ids" widget="many2many_tags"/>
-				    <field name="name"/>
-				    <field name="heat_code"/>
+				    <field name="body"/>
+				    <field name="bonnet_cover"/>
+				    <field name="disc_ball_gate"/>
+				    <field name="seat"/>
+				    <field name="stem"/>
 				</tree>
 			    </field>
 			</page>
@@ -300,6 +309,7 @@
                         	<tree>
                             	    <field name="sequence" widget="handle"/>
                             	    <field name="name"/>
+				    <field name="material"/>
 				    <field name="c"/>
 				    <field name="mn"/>
 				    <field name="p"/>
@@ -446,28 +456,56 @@
         </record>
 
 
-        <record id="view_qc_mtc_mat_config_tree" model="ir.ui.view">
-            <field name="name">qc.mtc.mat.config.tree</field>
-            <field name="model">qc.mtc.mat.config</field>
+        <record id="view_qc_mtc_materials_tree" model="ir.ui.view">
+            <field name="name">qc.mtc.materials.tree</field>
+            <field name="model">qc.mtc.materials</field>
             <field name="arch" type="xml">
 		<tree string="Materials">
                     <field name="name"/>
+		    <field name="impact_test"/>
 		</tree>
             </field>
         </record>
+        <record id="view_qc_mtc_materials" model="ir.ui.view">
+            <field name="name">qc.mtc.materials.form</field>
+            <field name="model">qc.mtc.materials</field>
+            <field name="arch" type="xml">
+                <form string="Materials">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="impact_test"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_qc_mtc_materials" model="ir.actions.act_window">
+            <field name="name">Materials</field>
+            <field name="res_model">qc.mtc.materials</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
 
-        <record id="view_qc_mtc_mat_config_form" model="ir.ui.view">
-            <field name="name">qc.mtc.mat.config.form</field>
-            <field name="model">qc.mtc.mat.config</field>
+        <record id="view_qc_mtc_heat_code_form" model="ir.ui.view">
+            <field name="name">qc.mtc.heat.code.form</field>
+            <field name="model">qc.mtc.heat.code</field>
             <field name="arch" type="xml">
 		<form string="Materials">
  		    <sheet>
 			<group>
 			    <group>
 				<field name="mtc_id"/>
-				<field name="name"/>
-		               	<field name="heat_code"/>
+				<field name="body"/>
+		               	<field name="bonnet_cover"/>
+				<field name="disc_ball_gate"/>
+				<field name="seat"/>
+				<field name="stem"/>
 			    </group>
 			    <group>
 			    </group>
@@ -484,10 +522,10 @@
             </field>
         </record>
 
-        <record id="view_qc_mtc_mat_config_form_for_mtc" model="ir.ui.view">
-            <field name="name">qc.mtc.mat.config.form.mtc</field>
-            <field name="model">qc.mtc.mat.config</field>
-	    <field name="inherit_id" ref="quality_control_mtc.view_qc_mtc_mat_config_form"/>
+        <record id="view_qc_mtc_heat_code_form_for_mtc" model="ir.ui.view">
+            <field name="name">qc.mtc.heat.code.form.mtc</field>
+            <field name="model">qc.mtc.heat.code</field>
+	    <field name="inherit_id" ref="quality_control_mtc.view_qc_mtc_heat_code_form"/>
 	    <field name="mode">primary</field>
             <field name="arch" type="xml">
 		<field name="mtc_id" position="attributes">
@@ -497,9 +535,9 @@
         </record>
 
 
-        <record id="action_qc_mtc_mat_config" model="ir.actions.act_window">
-            <field name="name">Materials</field>
-            <field name="res_model">qc.mtc.mat.config</field>
+        <record id="action_qc_mtc_heat_code" model="ir.actions.act_window">
+            <field name="name">Heat Code</field>
+            <field name="res_model">qc.mtc.heat.code</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -525,11 +563,15 @@
             action="action_qc_mtc_test"
             sequence="30" name="Tests"/>
 
+        <menuitem id="menu_qc_mtc_materials"
+            parent="quality_control_mtc.menu_qc_mtc"
+            action="action_qc_mtc_materials"
+            sequence="40" name="Materials List"/>
 
-	<menuitem id="menu_qc_mtc_mat_config"
+	<menuitem id="menu_qc_mtc_heat_code"
 	    parent="quality_control_mtc.menu_qc_mtc"
-	    action="action_qc_mtc_mat_config"
-	    sequence="90" name="Materials"/>
+	    action="action_qc_mtc_heat_code"
+	    sequence="90" name="Heat Code"/>
 
 </odoo>
 

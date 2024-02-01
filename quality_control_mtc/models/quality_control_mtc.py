@@ -20,6 +20,7 @@ class QcMtcLine(models.Model):
 
     sequence = fields.Integer('Sequence', help="Determine the display order", default=1, index=True)
     name = fields.Char('Heat Code', required=True)
+    material = fields.Many2one('qc.mtc.materials', string='Material', required=True)
     mtc_id = fields.Many2one('qc.mtc', string="MTC")
     company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
     inspection_id = fields.Many2one('qc.inspection', string='Inspection')
@@ -60,6 +61,13 @@ class QcMtcLine(models.Model):
     heat_treatment = fields.Char('Heat Treatment')
 
 
+class QcMtcMaterials(models.Model):
+    _name = "qc.mtc.materials"
+    _description = "Materials"
+
+    name = fields.Char('Material')
+    impact_test = fields.Boolean('Impact Test', default=False)
+
 class QcMtcTest(models.Model):
     _name = "qc.mtc.test"
     _description = "Tests"
@@ -80,27 +88,22 @@ class QcMtcTest(models.Model):
 
 
 class QcMtcMatConfig(models.Model):
-    _name = "qc.mtc.mat.config"
-    _description = "MTC Mat Config"
+    _name = "qc.mtc.heat.code"
+    _description = "MTC Heat Code"
 
+    body = fields.Char('Body', required=True)
+    bonnet_cover = fields.Char('Bonnet/Cover')
+    disc_ball_gate = fields.Char('Disc/Ball/Gate')
+    seat = fields.Char('Seat')
+    stem = fields.Char('Stem')
     lot_ids = fields.Many2many('stock.production.lot', 'stock_prod_lot_mtc_mat_rel', string='Lot/Serial Number')
+    product_id = fields.Many2one('product.product', string='Product', related='mtc_id.product_id')
     mtc_id = fields.Many2one('qc.mtc', string='MTC')
-    name = fields.Selection([
-        ('body', 'Body'),
-        ('bonnet', 'Bonnet'),
-        ('cover', 'Cover'),
-        ('ball', 'Ball'),
-        ('disc', 'Disc'),
-        ('gate', 'Gate'),
-        ('seat', 'Seat'),
-        ('stem', 'Stem')
-    ], default='body', string='Part Name')
-    heat_code = fields.Char('Heat Code', required=True)
 
     def name_get(self):
         result = []
         for record in self:
-            result.append((record.id, '%s - %s' % (record.name, record.heat_code)))
+            result.append((record.id, '%s - %s' % (record.lot_ids[0], record.body)))
         return result
 
 
@@ -126,7 +129,7 @@ class QcItp(models.Model):
     project_name = fields.Char('Project Name', translate=True)
     test_ids = fields.One2many('qc.mtc.test', 'mtc_id', string='Test')
     test_std = fields.Selection([('598', 'API Std 598'), ('6d', 'API Spec 6D')], default='598', string='Test Std')
-    mtc_mat_config_ids = fields.One2many('qc.mtc.mat.config', 'mtc_id', string='MTC Mat Config', copy=False)
+    mtc_heat_code_ids = fields.One2many('qc.mtc.heat.code', 'mtc_id', string='Heat Code', copy=False)
     mtc_line_ids = fields.One2many('qc.mtc.line', 'mtc_id', string='MTC Lines', copy=False)
     insp_visual = fields.Selection([('acc', 'Acceptable'), ('rej', 'Rejected')], default='acc', string='Visual')
     insp_dimensional = fields.Selection([('acc', 'Acceptable'), ('rej', 'Rejected')], default='acc', string='Dimensional')
@@ -158,6 +161,7 @@ class QcItp(models.Model):
     def sale_line_id_change(self):
         vals = {}
         if self.sale_line_id:
+            product_id = self.product_id
             description = self.product_id.display_name
             quantity = self.sale_line_id.product_uom_qty
             lot_ids = self.env['stock.production.lot'].search([('product_id', '=', self.product_id.id), ('sale_order_ids', 'in', [self.sale_order_id.id])])
@@ -165,9 +169,18 @@ class QcItp(models.Model):
             if self.sale_line_id.item:
                 item_tag += '/' + self.sale_line_id.item
         else:
+            product_id = False
             description = False
             quantity = False
             lot_ids = False
             item_tag = False
-        vals.update({'description': description, 'quantity': quantity, 'lot_ids': lot_ids, 'item_tag': item_tag})
+        vals.update({'product_id': product_id, 'description': description, 'quantity': quantity, 'lot_ids': lot_ids, 'item_tag': item_tag})
         self.update(vals)
+
+
+    @api.multi
+    @api.onchange('lot_ids')
+    def lot_ids_onchange(self):
+        quantity = len(self.lot_ids)
+        if self.quantity != quantity:
+            self.update({'quantity': quantity})

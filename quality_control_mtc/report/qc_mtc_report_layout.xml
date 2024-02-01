@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="external_layout_mtc" inherit_id="web.external_layout_background" primary="True">
-    <xpath expr="//img" position="after">
-      <div class="container">
-        <div class="float-right text-right text-nowrap w-25">
-	  <h3>
-            <div>INSPECTION AND TEST CERTIFICATE</div>
-            <div class="text-muted"><span t-field="doc.name"/></div>
-	  </h3>
+    <xpath expr="//div[@class='header']" position="replace">
+      <div class="header" t-att-style="report_header_style">
+        <div class="o_background_header">
+          <table class="table table-sm table-bordered p-0 m-0" width="100%">
+            <tr>
+              <td colspan="999">
+                <table class="table-borderless p-0 m-0" width="100%">
+                  <tr>
+                    <td with="25%" class="align-middle">
+                      <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" style="height:50px;" alt="Logo"/>
+                      <div class="pull-left" t-if="company.report_header_name">
+                        <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
+                      </div>
+                    </td>
+                    <td class="text-center" width="50%">
+                      <strong>MATERIAL AND TEST CERTIFICATE<br/>EN10204 TYPE 3.1</strong>
+                    </td>
+                    <td width="25%">
+                      <div class="float-right text-right company_address" style="font-size:10px;">
+                        <div><strong t-field="company.partner_id.name"/></div>
+                        <span class="text-nowrap" t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': true}"/>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
         </div>
-      </div>
-    </xpath>
-    <xpath expr="//div[hasclass('footer')]/div/div[last()]" position="after">
-      <div class="float-left text-muted" style="font-size: 8px;">
-        <small>REPORT-Q3 (v.231117)</small>
       </div>
     </xpath>
   </template>
