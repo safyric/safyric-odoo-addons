@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_picking_form_mts" model="ir.ui.view">
+        <field name="name">view_picking_form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+		<button name="update_mts" attrs="{'invisible': [('state', 'in', ('cancel','done'))]}" string="Update MTS" type="object" class="oe_highlight" groups="stock.group_stock_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
