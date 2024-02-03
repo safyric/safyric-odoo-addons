@@ -156,7 +156,7 @@ class DmsDigitalSignature(models.TransientModel):
             pdfsigned = pdf + '-signed.pdf'
             signer = signers.SimpleSigner.load_pkcs12(pfx_file=p12, passphrase=passphrase)
             with open(pdf, 'rb') as inf:
-                w = IncrementalPdfFileWriter(inf)
+                w = IncrementalPdfFileWriter(inf, strict=False)
                 field.append_signature_field(
                     w, sig_field_spec = field.SigFieldSpec('Signature', on_page = on_page, box=(x1,y1,x2,y2))
                 )
