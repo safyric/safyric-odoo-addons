@@ -18,6 +18,7 @@
                     <field name="signature_keyword"/>
                     <field name="signature_width"/>
                     <field name="signature_height"/>
+                    <field name="show_signer"/>
                 </group>
                 <footer>
                     <button name="dms_digital_signature" string="Sign" type="object" class="btn-primary"/>

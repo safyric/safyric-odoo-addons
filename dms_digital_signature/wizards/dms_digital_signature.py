@@ -41,7 +41,7 @@ class DmsDigitalSignature(models.TransientModel):
     signature_keyword = fields.Char('Signature Area', help="Keyword to identify the signature area to attach digital signature")
     signature_width = fields.Integer('Signature Width', help="Width of the signature area")
     signature_height = fields.Integer('Signature Height', help="Height of the signature area")
-
+    show_signer = fields.Boolean('Show Signer', default=False)
 
     def _certificate_get(self, doc_ids):
         """Obtain the proper certificate for the report and the conditions."""
@@ -152,6 +152,11 @@ class DmsDigitalSignature(models.TransientModel):
                 with closing(os.fdopen(fd, 'wb')) as f:
                    f.write(image)
 
+            if self.show_signer:
+                stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s'
+            else:
+                stamp_text = ''
+
             # Start signing
             pdfsigned = pdf + '-signed.pdf'
             signer = signers.SimpleSigner.load_pkcs12(pfx_file=p12, passphrase=passphrase)
@@ -163,7 +168,7 @@ class DmsDigitalSignature(models.TransientModel):
                 meta = signers.PdfSignatureMetadata(field_name='Signature')
                 pdf_signer = signers.PdfSigner(
                     meta, signer=signer, stamp_style = stamp.TextStampStyle(
-                        stamp_text = 'Digitally signed by: %(signer)s\nDate: %(ts)s',
+                        stamp_text = stamp_text,
                         background = images.PdfImage(background),
                         background_layout = layout.SimpleBoxLayoutRule(
                             x_align=layout.AxisAlignment(2),
