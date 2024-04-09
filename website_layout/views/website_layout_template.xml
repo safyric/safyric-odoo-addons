@@ -1,8 +1,10 @@
-<odoo>https://github.com/safyric/safyric-odoo-addons/tree/12.0/website_layout/views
+<odoo>
     <data>
         <template id="assets_frontend" inherit_id="website.assets_frontend">
             <xpath expr="//link[last()]" position="after">
-                <link rel="stylesheet" type="text/less" href="/website_layout/static/src/css/style.scss"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="1"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@200"/>
             </xpath>
         </template>
 
