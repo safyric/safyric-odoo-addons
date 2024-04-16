@@ -9,7 +9,20 @@
             <button name="action_invoice_draft" position="after">
                 <button name="recalculate_names" class="ml-2 btn btn-default"
                         string="Reset descriptions" Help="Erase custom descriptions of all lines"
-                        type="object" attrs="{'invisible':[('state', 'in', ('open','in_payment','paid'))]}"/>
+                        type="object" attrs="{'invisible':[('state', '=', 'paid')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="invoice_supplier_form_recalc_desc" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_draft" position="after">
+                <button name="recalculate_names" class="ml-2 btn btn-default"
+                        string="Reset descriptions" Help="Erase custom descriptions of all lines"
+                        type="object" attrs="{'invisible':[('state', '=', 'paid')]}"/>
             </button>
         </field>
     </record>
