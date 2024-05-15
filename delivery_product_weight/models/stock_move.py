@@ -18,7 +18,7 @@ class StockMove(models.Model):
     def _update_shipping_weight(self):
         for move in self:
             for line in move.move_line_ids:
-                for quant in line.result_package_id.quant_ids:
+                for quant in line.result_package_id.quant_ids.filtered(lambda x: x.product_id == line.product_id):
                     quant.product_weight = move.product_weight
 
     def _action_assign(self):
