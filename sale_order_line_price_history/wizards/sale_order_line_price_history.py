@@ -106,6 +106,9 @@ class SaleOrderLinePriceHistoryline(models.TransientModel):
     discount = fields.Float(
         related="sale_order_line_id.discount",
     )
+    currency_id = fields.Many2one("res.currency",
+        related="sale_order_line_id.currency_id"
+    )
 
     def _prepare_set_price_history_vals(self):
         """ Hook method to prepare the values to update the
