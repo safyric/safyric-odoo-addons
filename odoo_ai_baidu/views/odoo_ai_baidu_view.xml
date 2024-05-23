@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_ai_form_baidu" model="ir.ui.view">
+            <field name="name">odoo.ai.form</field>
+            <field name="model">odoo.ai</field>
+            <field name="inherit_id" ref="odoo_ai.view_ai_form"/>
+            <field name="arch" type="xml">
+                <field name="api_base" position="after">
+                    <field name="access_key" attrs="{'invisible': [('service', '!=', 'baidu')]}"/>
+                    <field name="secret_key" attrs="{'invisible': [('service', '!=', 'baidu')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+
