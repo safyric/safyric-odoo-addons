@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='validity_date']" position="before">
-                    <field name="incoterm" widget="selection" groups="sale_stock.group_display_incoterm"/>
-                    <field name="delivery_place" widget="selection" groups="sale_stock.group_display_incoterm"/>
+                    <field name="incoterm" groups="sale_stock.group_display_incoterm"/>
+                    <field name="delivery_place" groups="sale_stock.group_display_incoterm"/>
                 </xpath>
             </field>
         </record>
