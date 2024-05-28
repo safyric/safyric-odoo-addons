@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 import logging
 
 from odoo import models, fields, api, _
@@ -27,10 +27,15 @@ class OdooAi(models.Model):
     image_medium = fields.Binary("Medium-sized Photo", attachment=True)
     image_small = fields.Binary("Small-sized Photo", attachment=True)
 
+    model_id = fields.Many2one(
+        string="Model", required=True,
+        comodel_name='ir.model'
+    )
+
     service = fields.Selection(
         string='Service Provider',
-        selection=[('llama2', 'Local Llama 2')],
-        required=True,
+        selection=[('openai', 'OpenAI')],
+        required=True
     )
 
     api_key = fields.Char('API Key')
@@ -66,32 +71,38 @@ class OdooAi(models.Model):
         return super(OdooAi, self).write(vals)
 
     def _connect_api(self):
-        if self.service == 'llama2':
-            api_key = self.api_key
-            if api_key:
-                openai.api_key = api_key
+        if self.service == 'openai':
+            if self.api_key:
+                api_key = self.api_key
             else:
-                raise UserError(_('API key is required.'))
-            api_base = self.api_base
-            if api_base:
-                openai.api_base = api_base
-            elif self.service == 'llama2':
-                raise UserError(_('API Base for locally running AI is required.'))
+                raise UserError(_('API Key is required.'))
 
+            if self.api_base:
+                api_base = self.api_base
+            elif self.service == 'openai':
+                raise UserError(_('API Base is required.'))
+
+            client = OpenAI(base_url=api_base, api_key=api_key)
+            return client
 
     def create_chat_completion(self, model, prompt):
         if not model:
             model = 'x'
-        self._connect_api()
-        if self.service == 'llama2':
-            response = openai.ChatCompletion.create(
+
+        if self.service == 'openai':
+            openai = self._connect_api()
+            response = openai.chat.completions.create(
                 model = model,
                 messages = [
-                    {"role": "user", "content": prompt}
-                ]
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                stream=False
             )
 
-            res = response['choices'][0]['message']['content']
+            res = response.model_dump()['choices'][0]['message']['content']
             return res
 
 

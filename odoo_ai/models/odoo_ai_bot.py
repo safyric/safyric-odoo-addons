@@ -35,7 +35,7 @@ class OdooAiBot(models.AbstractModel):
         if not body:
             return
         prompt = body
-        service = self.env['odoo.ai'].sudo().search([('service', '=', 'llama2')], limit=1)
+        service = self.env['odoo.ai'].sudo().search(['&', ('service', '=', 'openai'), ('model_id', '=', 'odoo.ai.bot')], limit=1)
         model = service.ai_model
         if not model:
             model = 'x'

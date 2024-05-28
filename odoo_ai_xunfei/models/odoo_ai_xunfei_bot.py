@@ -5,13 +5,13 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class OdooAiOpenaiBot(models.Model):
-    _name = 'odoo.ai.azure.bot'
-    _description = 'Odoo AI - Azure Bot'
+class OdooAiXunfeiBot(models.Model):
+    _name = 'odoo.ai.xunfei.bot'
+    _description = 'Odoo AI - Xunfei Bot'
 
 
     def _apply_logic(self, record, values):
-        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id('odoo_ai_azure.partner_ai')
+        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id('odoo_ai_xunfei.partner_ai')
         if len(record) != 1 or values.get("author_id") == ai_bot_id:
             return
 
@@ -31,19 +31,21 @@ class OdooAiOpenaiBot(models.Model):
         if not body:
             return
         prompt = body
-        service = self.env['odoo.ai'].sudo().search(['&', ('service', '=', 'azure'), ('model_id', '=', 'odoo.ai.azure.bot')], limit=1)
+        service = self.env['odoo.ai'].sudo().search(['&', ('service', '=', 'openai'), ('model_id', '=', 'odoo.ai.xunfei.bot')], limit=1)
         model = service.ai_model
+        if not model:
+            model = 'general'
         res = service.create_chat_completion(model, prompt)
         if res:
             return res
 
     def _is_bot_pinged(self, values):
-        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id("odoo_ai_azure.partner_ai")
+        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id("odoo_ai_xunfei.partner_ai")
         return (4, ai_bot_id) in values.get('partner_ids', [])
 
 
     def _is_bot_in_private_channel(self, record):
-        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id("odoo_ai_azure.partner_ai")
+        ai_bot_id = self.env['ir.model.data'].xmlid_to_res_id("odoo_ai_xunfei.partner_ai")
         if record._name == 'mail.channel' and record.channel_type == 'chat':
             return ai_bot_id in record.with_context(active_test=False).channel_partner_ids.ids
         return False

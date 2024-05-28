@@ -31,7 +31,7 @@ class OdooAiBaiduBot(models.Model):
         if not body:
             return
         prompt = body
-        service = self.env['odoo.ai'].sudo().search([('service', '=', 'baidu')], limit=1)
+        service = self.env['odoo.ai'].sudo().search(['&', ('service', '=', 'baidu'), ('model_id', '=', 'odoo.ai.baidu.bot')], limit=1)
         model = service.ai_model
         if not model:
             model = 'x'
