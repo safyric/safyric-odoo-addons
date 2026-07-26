@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="external_layout_mtc" inherit_id="web.external_layout_background" primary="True">
+    <xpath expr="//div[@class='header']" position="replace">
+      <div class="header" t-att-style="report_header_style">
+        <div class="o_background_header">
+          <table class="table table-sm table-bordered p-0 m-0" width="100%">
+            <tr>
+              <td colspan="999">
+                <table class="table-borderless p-0 m-0" width="100%">
+                  <tr>
+                    <td with="25%" class="align-middle">
+                      <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" style="height:50px;" alt="Logo"/>
+                      <div class="pull-left" t-if="company.report_header_name">
+                        <span style="font-family: 'Prompt' sans-serif; font-weight: 200; font-size: 30px; whitespace: nowrap;" t-field="company.report_header_name"/>
+                      </div>
+                    </td>
+                    <td class="text-center" width="50%">
+                      <strong>MATERIAL &amp; TEST CERTIFICATE<br/>EN10204 TYPE 3.1</strong>
+                    </td>
+                    <td width="25%">
+                      <div class="float-right text-right company_address" style="font-size:10px;">
+                        <div class="text-uppercase text-nowrap"><strong t-field="company.partner_id.name"/></div>
+                        <span class="text-nowrap" t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': true}"/>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </xpath>
+
+    <xpath expr="//div[hasclass('footer')]" position="replace">
+      <div class="footer o_background_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-2">
+              <div class="text-muted"><small>Report v250618</small></div>
+            </div>
+            <div class="col-8 text-center">
+              <ul class="list-inline border-0">
+                <li t-if="company.phone" class="list-inline-item"><small><i class="fas fa-phone-square" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></small></li>
+                <li t-if="company.email_quality" class="list-inline-item"><small><i class="fas fa-envelope" role="img" aria-label="Email" title="Email"/> <span t-field="company.email_quality"/></small></li>
+                <li t-if="company.website" class="list-inline-item"><small><i class="fas fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></small></li>
+              </ul>
+            </div>
+            <div class="col-2 text-right">
+              <div t-if="report_type == 'pdf'" class="text-muted">
+                <small>
+                  Page
+                  <span class="page"/>
+                  of
+                  <span class="topage"/>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </xpath>
+  </template>
+  <template id="external_layout">
+    <t t-if="not o" t-set="o" t-value="doc"/>
+    <t t-if="not company">
+      <!-- Multicompany -->
+      <t t-if="company_id">
+        <t t-set="company" t-value="company_id"/>
+      </t>
+      <t t-elif="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+      </t>
+      <t t-else="else">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+    </t>
+    <t t-call="quality_control_mtc.external_layout_mtc"><t t-raw="0"/></t>
+  </template>
+</odoo>

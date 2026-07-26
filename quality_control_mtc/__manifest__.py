@@ -1,0 +1,27 @@
+{
+    'name': 'Quality Control MTC',
+    'version': '2.0',
+    'category': 'Quality control',
+    'summary': 'Mill Test Certificate',
+    'website': 'https://www.github.com/safyric/safyric-odoo-addons',
+    'depends': [
+        'quality_control',
+       	'base_email_address',
+      	'sale',
+      	'sale_stock',
+        'product',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+      	'wizard/qc_mtc_add_heat_views.xml',
+        'views/qc_mtc_views.xml',
+      	'views/qc_inspection_views.xml',
+      	'views/res_config_settings.xml',
+        'views/product_attribute_views.xml',
+	      'report/qc_mtc_report.xml',
+        'report/qc_mtc_report_layout.xml',
+      	'report/qc_mtc_report_template.xml',
+    ],
+    'installable': True,
+    'license': 'LGPL-3',
+}

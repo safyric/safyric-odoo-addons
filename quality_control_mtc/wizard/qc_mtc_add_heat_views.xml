@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="qc_mtc_add_heat_form" model="ir.ui.view">
+	  <field name="name">qc.mtc.add.heat.form</field>
+	  <field name="model">qc.mtc.add.heat</field>
+	  <field name="arch" type="xml">
+	    <form string="Add Heat Code">
+		    <group>
+          <field name="mtc_id" invisible="1"/>
+          <field name="lot_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+          <field name="part_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+          <field name="mtc_line_id" domain="[('mtc_id', '=', mtc_id)]" options="{'no_create': True, 'no_create_edit': True}"/>
+        </group>
+        <footer>
+          <button name="add_heat" string="Add" type="object" class="btn-primary"/>
+          <button string="Cancel" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_mtc_add_heat">
+    <field name="name">Add Heat Codes</field>
+    <field name="res_model">qc.mtc.add.heat</field>
+    <field name="view_mode">form</field>
+    <field name="view_type">form</field>
+    <field name="target">new</field>
+  </record>
+</odoo>
