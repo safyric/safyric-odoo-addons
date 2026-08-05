@@ -7,14 +7,13 @@ class QcInspection(models.Model):
 
     material_id = fields.Many2one('qc.mtc.material', string='Material')
     heat_code = fields.Char('Heat Code')
-    inspection_type = fields.Selection(selection_add=[('material', 'Material')])
 
     _sql_constraints = [('unique_heat_code', 'unique(heat_code)', 'Heat code already exists!')]
 
     def name_get(self):
         res = []
         for rec in self:
-            if (rec.inspection_type == 'material'):
+            if hasattr(rec, 'inspection_type') and (rec.inspection_type == 'material'):
                 res.append((rec.id, '%s - %s' % (rec.name, rec.heat_code or '')))
             else:
                 res.append((rec.id, '%s' % rec.name))
