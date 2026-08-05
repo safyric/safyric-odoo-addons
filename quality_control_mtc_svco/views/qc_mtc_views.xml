@@ -4,13 +4,13 @@
     <field name="name">qc.mtc.line.tree</field>
     <field name="model">qc.mtc.line</field>
     <field name="arch" type="xml">
-      <tree string="MTC Lines">
+      <list string="MTC Lines">
 		    <field name="sequence" widget="handle"/>
 		    <field name="name"/>
 		    <field name="material_id"/>
         <field name="mtc_id"/>
         <field name="inspection_id"/>
-      </tree>
+      </list>
     </field>
   </record>
 
@@ -139,7 +139,7 @@
     <field name="name">qc.mtc.tree</field>
     <field name="model">qc.mtc</field>
     <field name="arch" type="xml">
-      <tree string="MTC" decoration-warning="state=='draft'">
+      <list string="MTC" decoration-warning="state=='draft'">
         <field name="name" string="MTC"/>
 		    <field name="partner_id"/>
 		    <field name="sale_order_id"/>
@@ -148,7 +148,7 @@
         <field name="quantity"/>
         <field name="date"/>
         <field name="state"/>
-      </tree>
+      </list>
     </field>
   </record>
 
@@ -198,42 +198,42 @@
             <page string="Lot/Serial Number">
               <field name="product_id" invisible="1"/>
               <field name="lot_ids" nolabel="1" widget="many2many" domain="[('product_id', '=', product_id), ('mtc_id', '=', False)]" options="{'reload_on_button': True}">
-                <tree>
+                <list>
                   <field name="name"/>
                   <field name="use_date"/>
                   <field name="life_date"/>
-                </tree>
+                </list>
               </field>
             </page>
             <page string="Heat Codes">
               <field name="mtc_line_ids" nolabel="1" widget="one2many" options="{'reload_on_button': True}"
                      context="{'form_view_ref' : 'quality_control_mtc_svco.qc_mtc_line_view_form_without_header', 'default_mtc_id': active_id}">
-                <tree>
+                <list>
                   <field name="sequence" widget="handle"/>
                   <field name="name"/>
                   <field name="material_id"/>
                   <field name="inspection_id"/>
-                </tree>
+                </list>
               </field>
             </page>
 			      <page string="Traceability">
               <button name="%(action_mtc_add_heat)d" type="action" string="Batch Add" class="btn-primary oe_edit_only"/>
                 <field name="mtc_heat_ids" nolabel="1" widget="one2many" options="{'reload_on_button': True}"
 				               context="{'form_view_ref': 'quality_control_mtc_svco.view_qc_mtc_heat_form_for_mtc'}">
-                  <tree create="0">
+                  <list create="0">
 				            <field name="lot_name"/>
                     <field name="part_id"/>
                     <field name="material_id"/>
                     <field name="mtc_line_id"/>
-                  </tree>
+                  </list>
                 </field>
               </page>
               <page string="Inspection and Tests">
                 <field name="inspection_ids" nolabel="1" widget="many2many">
-                  <tree>
+                  <list>
                     <field name="name"/>
                     <field name="test" widget="many2many_tags"/>
-                  </tree>
+                  </list>
                 </field>
            	  </page>
               <page string="Other Info">
@@ -330,11 +330,11 @@
     <field name="name">qc.mtc.material.tree</field>
     <field name="model">qc.mtc.material</field>
     <field name="arch" type="xml">
-      <tree string="Materials">
+      <list string="Materials">
         <field name="name"/>
         <field name="short_name"/>
         <field name="impact_test"/>
-      </tree>
+      </list>
     </field>
   </record>
 
@@ -392,9 +392,9 @@
     <field name="name">qc.mtc.part.tree</field>
     <field name="model">qc.mtc.part</field>
     <field name="arch" type="xml">
-      <tree string="Part List">
+      <list string="Part List">
         <field name="name"/>
-      </tree>
+      </list>
     </field>
   </record>
 
@@ -410,9 +410,9 @@
               <field name="name"/>
               <field name="part_id" options="{'no_create': True, 'no_create_edit': True}"/>
               <field name="lot_ids" widget="many2many" options="{'no_create': True, 'no_create_edit': True}">
-                <tree>
+                <list>
                   <field name="name"/>
-                </tree>
+                </list>
               </field>
 			      </group>
             <group>
@@ -427,11 +427,11 @@
     <field name="name">qc.mtc.heat.tree</field>
     <field name="model">qc.mtc.heat</field>
     <field name="arch" type="xml">
-      <tree string="Heat Codes">
+      <list string="Heat Codes">
         <field name="name"/>
         <field name="part_id"/>
         <field name="lot_ids"/>
-      </tree>
+      </list>
     </field>
   </record>
 
