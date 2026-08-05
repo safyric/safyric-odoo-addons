@@ -6,4 +6,3 @@ from . import stock_lot
 from . import product
 from . import qc_mtc
 from . import qc_inspection
-from . import qc_test
