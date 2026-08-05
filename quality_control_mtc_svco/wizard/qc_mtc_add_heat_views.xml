@@ -23,7 +23,6 @@
     <field name="name">Add Heat Codes</field>
     <field name="res_model">qc.mtc.add.heat</field>
     <field name="view_mode">form</field>
-    <field name="view_type">form</field>
     <field name="target">new</field>
   </record>
 </odoo>

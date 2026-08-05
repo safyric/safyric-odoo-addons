@@ -9,10 +9,8 @@ class QcInspection(models.Model):
     heat_code = fields.Char('Heat Code')
     inspection_type = fields.Selection(selection_add=[('material', 'Material')])
 
-
     _sql_constraints = [('unique_heat_code', 'unique(heat_code)', 'Heat code already exists!')]
 
-    @api.multi
     def name_get(self):
         res = []
         for rec in self:

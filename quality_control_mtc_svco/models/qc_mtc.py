@@ -7,8 +7,6 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import email_split, float_is_zero
 from odoo.tools.safe_eval import safe_eval
-from odoo.addons import decimal_precision as dp
-
 
 
 class QcMtcLine(models.Model):
@@ -22,7 +20,7 @@ class QcMtcLine(models.Model):
     name = fields.Char('Heat Code', required=True)
     material_id = fields.Many2one('qc.mtc.material', string='Material', required=True)
     mtc_id = fields.Many2one('qc.mtc', string="MTC", ondelete='cascade')
-    company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
+    company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.company)
     inspection_id = fields.Many2one('qc.inspection', string='Inspection')
     notes = fields.Text('Notes', translate=True)
 
@@ -52,7 +50,7 @@ class QcMtcHeat(models.Model):
     _description = "MTC Heat Code"
 
     name = fields.Char('Heat Code', required=True)
-    lot_ids = fields.Many2many('stock.production.lot', string='Lot/Serial Numbers',  required=True)
+    lot_ids = fields.Many2many('stock.lot', string='Lot/Serial Numbers',  required=True)
     lot_name = fields.Char('Lot/Serial Numbers')
     part_id = fields.Many2one('qc.mtc.part', string='Part Name', required=True)
     mtc_line_id = fields.Many2one('qc.mtc.line', string='MTC Line', required=True)
@@ -123,7 +121,7 @@ class QcMtc(models.Model):
     item_tag = fields.Char('Line Item/Tag Number')
     description = fields.Text('Description', required=True)
     quantity = fields.Integer('Quantity', required=True)
-    lot_ids = fields.One2many('stock.production.lot', 'mtc_id', string='Lot/Serial Number')
+    lot_ids = fields.One2many('stock.lot', 'mtc_id', string='Lot/Serial Number')
     lot_name = fields.Char('Lot/Serial Number')
     project_name = fields.Char('Project Name', translate=True)
     report_show_vendor = fields.Boolean('Show Vendor in Report?', default=False)
@@ -138,9 +136,9 @@ class QcMtc(models.Model):
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
         ('done', 'Completed')
-    ], string='Status', index=True, readonly=True, track_visibility='onchange', copy=False, default='draft', required=True, help='Plan Lines')
-    user_id = fields.Many2one('res.users', 'User', default=lambda self: self.env.user, track_visibility='onchange')
-    company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.user.company_id)
+    ], string='Status', index=True, readonly=True, tracking=True, copy=False, default='draft', required=True, help='Plan Lines')
+    user_id = fields.Many2one('res.users', 'User', default=lambda self: self.env.user, tracking=True)
+    company_id = fields.Many2one('res.company', string='Company', readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self.env.company)
 
 
     vendor_id = fields.Many2one('res.partner', string='Vendor')
@@ -158,7 +156,6 @@ class QcMtc(models.Model):
             'qc.mtc') or ''
         return super(QcMtc, self).create(vals)
 
-    @api.multi
     @api.onchange('sale_line_id')
     def sale_line_id_change(self):
         vals = {}
@@ -170,7 +167,7 @@ class QcMtc(models.Model):
             product_id = self.product_id
             description = self.product_id.display_name
             quantity = self.sale_line_id.product_uom_qty
-            lot_ids = self.env['stock.production.lot'].search([('product_id', '=', self.product_id.id), ('sale_order_ids', 'in', [self.sale_order_id.id])])
+            lot_ids = self.env['stock.lot'].search([('product_id', '=', self.product_id.id), ('sale_order_ids', 'in', [self.sale_order_id.id])])
             item_tag = str(self.sale_line_id.sequence)
             if self.sale_line_id.item:
                 item_tag += '/' + self.sale_line_id.item
@@ -197,7 +194,6 @@ class QcMtc(models.Model):
         self.update(vals)
 
 
-    @api.multi
     @api.onchange('lot_ids')
     def lot_ids_onchange(self):
         quantity = len(self.lot_ids)

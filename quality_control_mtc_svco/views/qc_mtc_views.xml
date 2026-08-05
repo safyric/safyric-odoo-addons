@@ -17,7 +17,7 @@
   <record id="view_qc_mtc_line_tree_for_mtc" model="ir.ui.view">
     <field name="name">qc.mtc.line.tree</field>
     <field name="model">qc.mtc.line</field>
-    <field name="inherit_id" ref="quality_control_mtc.view_qc_mtc_line_tree"/>
+    <field name="inherit_id" ref="quality_control_mtc_svco.view_qc_mtc_line_tree"/>
 	  <field name="mode">primary</field>
     <field name="arch" type="xml">
 		  <xpath expr="//field[@name='mtc_id']" position="attributes">
@@ -62,7 +62,7 @@
   <record id="qc_mtc_line_view_form_without_header" model="ir.ui.view">
     <field name="name">qc.mtc.line.view.form</field>
     <field name="model">qc.mtc.line</field>
-    <field name="inherit_id" ref="quality_control_mtc.qc_mtc_line_view_form"/>
+    <field name="inherit_id" ref="quality_control_mtc_svco.qc_mtc_line_view_form"/>
     <field eval="35" name="priority"/>
     <field name="mode">primary</field>
     <field name="arch" type="xml">
@@ -207,7 +207,7 @@
             </page>
             <page string="Heat Codes">
               <field name="mtc_line_ids" nolabel="1" widget="one2many" options="{'reload_on_button': True}"
-                     context="{'form_view_ref' : 'quality_control_mtc.qc_mtc_line_view_form_without_header', 'default_mtc_id': active_id}">
+                     context="{'form_view_ref' : 'quality_control_mtc_svco.qc_mtc_line_view_form_without_header', 'default_mtc_id': active_id}">
                 <tree>
                   <field name="sequence" widget="handle"/>
                   <field name="name"/>
@@ -219,7 +219,7 @@
 			      <page string="Traceability">
               <button name="%(action_mtc_add_heat)d" type="action" string="Batch Add" class="btn-primary oe_edit_only"/>
                 <field name="mtc_heat_ids" nolabel="1" widget="one2many" options="{'reload_on_button': True}"
-				               context="{'form_view_ref': 'quality_control_mtc.view_qc_mtc_heat_form_for_mtc'}">
+				               context="{'form_view_ref': 'quality_control_mtc_svco.view_qc_mtc_heat_form_for_mtc'}">
                   <tree create="0">
 				            <field name="lot_name"/>
                     <field name="part_id"/>
@@ -360,7 +360,6 @@
     <field name="name">Material</field>
     <field name="res_model">qc.mtc.material</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
 
@@ -368,7 +367,6 @@
     <field name="name">Part</field>
     <field name="res_model">qc.mtc.part</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
 
@@ -441,7 +439,6 @@
     <field name="name">Heat Code</field>
     <field name="res_model">qc.mtc.heat</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
 
@@ -451,28 +448,28 @@
 	    sequence="6" name="MTC"/>
 
 	<menuitem id="menu_qc_mtc_child"
-	    parent="quality_control_mtc.menu_qc_mtc"
+	    parent="quality_control_mtc_svco.menu_qc_mtc"
 	    action="action_qc_mtc_all_all"
 	    sequence="10" name="MTC"/>
 
 	<menuitem id="menu_qc_mtc_line"
-	    parent="quality_control_mtc.menu_qc_mtc"
+	    parent="quality_control_mtc_svco.menu_qc_mtc"
 	    action="qc_mtc_line_actions_all"
 	    sequence="20" name="MTC Lines"/>
 
         <menuitem id="menu_qc_mtc_material"
-            parent="quality_control_mtc.menu_qc_mtc"
+            parent="quality_control_mtc_svco.menu_qc_mtc"
             action="action_qc_mtc_material"
             sequence="40" name="Material List"/>
 
         <menuitem id="menu_qc_mtc_part"
-            parent="quality_control_mtc.menu_qc_mtc"
+            parent="quality_control_mtc_svco.menu_qc_mtc"
             action="action_qc_mtc_part"
             sequence="40" name="Part List"/>
 
 
 	<menuitem id="menu_qc_mtc_heat"
-	    parent="quality_control_mtc.menu_qc_mtc"
+	    parent="quality_control_mtc_svco.menu_qc_mtc"
 	    action="action_qc_mtc_heat"
 	    sequence="90" name="Heat Code"/>
 

@@ -5,8 +5,8 @@
             string="MTC"
             model="qc.mtc" 
             report_type="qweb-pdf"
-            file="quality_control_mtc.report_qc_mtc" 
-            name="quality_control_mtc.report_qc_mtc"
+            file="quality_control_mtc_svco.report_qc_mtc" 
+            name="quality_control_mtc_svco.report_qc_mtc"
             print_report_name="'MTC  %s' % (object.name)"/>
   </data>
 </odoo>

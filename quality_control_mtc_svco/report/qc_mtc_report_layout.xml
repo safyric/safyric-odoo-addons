@@ -73,9 +73,9 @@
         <t t-set="company" t-value="o.company_id.sudo()"/>
       </t>
       <t t-else="else">
-        <t t-set="company" t-value="res_company"/>
+        <t t-set="company" t-value="env.company"/>
       </t>
     </t>
-    <t t-call="quality_control_mtc.external_layout_mtc"><t t-raw="0"/></t>
+    <t t-call="quality_control_mtc_svco.external_layout_mtc"><t t-raw="0"/></t>
   </template>
 </odoo>
