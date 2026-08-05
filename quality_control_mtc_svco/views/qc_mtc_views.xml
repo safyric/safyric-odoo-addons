@@ -39,7 +39,7 @@
           <div class="oe_title">
             <label for="inspection_id" string="Inspection"/>
             <h1>
-              <field name="inspection_id" domain="[('inspection_type', '=', 'material')]"/>
+              <field name="inspection_id"/>
             </h1>
 			      <label for="name" string="Heat Code"/>
 			      <h1>
